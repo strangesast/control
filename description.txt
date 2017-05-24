@@ -1,0 +1,154 @@
+attributeDef:
+  is: the definition of an attribute required (or allowed) by a component definition
+  has:
+    name: input name
+    type: type of input
+  examples:
+    { name: 'background-color', type: 'string' }
+
+
+component
+  is: a definition of and code for a representation of one or more values
+  has:
+    name: unique name also used as class name for code
+    requiredAttributes: attributes that are required for this component to be valid
+      [<attributeDef>,...]
+    optionalAttributes?: component is valid with or without these attributes
+      [<attributeDef>,...]
+    defaultAttributes?: attributes included by default with component instances
+      [<attribute>,...]
+  examples:
+    {
+      name: 'triggerButton',
+      requiredAttributes: [{ name: 'trigger', type: 'boolean' }],
+      optionalAttributes: [{ name: 'color', type: 'string' }],
+      defaultAttributes: [{ name: 'color', value: 'blue', type: 'string' }]
+    }
+
+
+component instance:
+  is: an instance of a component
+  has:
+    name: unique name of the instance
+    type: the name of the component
+    attributes?: an array of attributes
+  examples:
+    {
+      name: 'triggerButton1',
+      type: 'triggerButton',
+      attributes: [
+        {
+          name: 'trigger', id: '123123', type: 'boolean',
+          read: false, write: true, value: true
+        },
+        { name: 'color', type: 'string', value: '#fff' }
+      ]
+    },
+    {
+      name: 'rangeValueInput1',
+      type: 'rangeValueInput',
+      attributes: [
+        { name: 'value', type: number, write: true, default: 12, min: 0, max: 20 }
+      ]
+    },
+    {
+      name: 'dialInput42',
+      type: 'dialInput',
+      attributes: [
+        {
+          name: 'value', id: 'abc', type: number, write: true,
+          default: 0, min: 0, max: 100
+        }
+      ]
+    }
+
+
+attribute:
+  is: a description of a value
+  has:
+    name:   the name of the attribute to be matched with a component
+    type:   the type of primitive or 'id'
+    id?:    the id of the referenced value
+    value?: default value (first value until update, if id included),
+              primitive (number, text, boolean, ...)
+    read?:  read-able (by the component instance) default true
+    write?: write-able (by the component instance) default false
+    min?:
+    max?:
+
+  examples:
+    { name: 'background-color', value: 'blue', type: 'string' (or 'color') }
+    # the 'background color' of the parent component instance.  the value is
+    # permanantly 'blue'
+
+    { name: 'temperature', value: 'abcd123', type: 'id', min: 60, max: 90, write: true }
+    # the 'temperature' input value of the parent component instance.  the value
+    # is determined by the value with <id>. the user may set the temperature
+    # between <min> and <max>
+
+    { name: 'rows', value: 1, type: 'number', min: 60, max: 90, write: true }
+    # the 'rows' input of the parent component instance.  the value is currently
+    # '1' and may be set by the component. it is not referenced to a value-map
+    # id so changes are only reflected within the component
+
+value-map:
+  is: a map between a value id to a set of read and write methods or values
+  has:
+    [key]: <value>
+  examples:
+    { '123123': { write: '/buildingA/roomB/bomb/explode' }}
+    { 'abc': { write: '/buildingA/roomB/temperature', read: '/buildingA/roomB/temperature', value: 10 }}
+
+
+example:
+{
+  'components': {
+    'root': {
+      name: 'root',
+      type: 'group',
+      attributes: [
+        { name: 'layout', type: 'string', value: 'vertical-rows' },
+        { name: 'children', type: 'array', value: [ 'group0', 'group1' ]}
+      ]
+    },
+    'group0': {
+      name: 'group0',
+      type: 'group',
+      attributes: [
+        { name: 'layout', type: 'string', value: 'vertical-rows' },
+        { name: 'background-color': type: 'string', value: 'blue', id: 'themePrimaryColor' },
+        { name: 'children', type: 'array', value: [ 'toggleButtonComponent0', 'component1' ]}
+      ]
+    },
+    'toggleButtonComponent0': {
+      name: 'toggleButtonComponent0',
+      type: 'toggleButton',
+      attributes: [
+        { name: 'label', type: 'string', value: 'Toggle Light in Room B' },
+        { name: 'value', type: 'boolean', value: false, id: 'lightOn' },
+        { name: 'color', type: 'string', value: 'purple' },
+        { name: 'background-color', type: 'string', value: 'white', write: true }
+      ]
+    },
+    'numberInputComponent0': {
+      name: 'numberInputComponent0',
+      type: 'numberInput',
+      attributes: [
+        { name: 'label', type: 'string', value: 'Set temperature in Room B' },
+        { name: 'value', type: 'number', id: 'roomBTemp', write: true }
+      ]
+    },
+    'group1': {
+      name: 'group1',
+      type: 'group',
+      attributes: [
+        { name: 'background-color', type: 'string', value: 'white' }
+      ]
+    }
+  },
+  'values': {
+    'themePrimaryColor': { value: 'green' },
+    'lightOn': { value: false, write: '/buildingA/roomB/light20', read: '/buildingA/roomB/light20' }
+    'roomBTemp': { value: 0.0, write: '/buildingA/roomB/temp112', read: '/buildingA/roomB/temp112' }
+  }
+}

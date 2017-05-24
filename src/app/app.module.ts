@@ -4,10 +4,20 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { JsonInputComponent } from './json-input/json-input.component';
+import { GroupComponent } from './group/group.component';
+import { FactoryComponent } from './factory/factory.component';
+import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
+import { GroupDirective } from './group.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    JsonInputComponent,
+    GroupComponent,
+    FactoryComponent,
+    ToggleButtonComponent,
+    GroupDirective
   ],
   imports: [
     BrowserModule,
@@ -15,6 +25,7 @@ import { AppComponent } from './app.component';
     HttpModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [GroupComponent, ToggleButtonComponent]
 })
 export class AppModule { }
