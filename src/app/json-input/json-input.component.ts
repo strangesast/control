@@ -2,8 +2,7 @@ import { SimpleChange, Component, Output } from '@angular/core';
 
 const INIT = JSON.stringify({
   "root": {
-    "name": "test",
-    "type": "group",
+    "type": "tabGroup",
     "attributes": [
       {
         "name": "backgroundColor",
@@ -14,19 +13,20 @@ const INIT = JSON.stringify({
     ]
   },
   "group0": {
-    "name": "group0",
     "type": "group",
     "attributes": [
+      { "name": "name", "type": "string", "value": "Group 1" },
       { "name": "children", "type": "array", "value": [ "toggleButton0" ]}
     ]
   },
   "group1": {
-    "name": "group1",
     "type": "group",
-    "attributes": []
+    "attributes": [
+      { "name": "name", "type": "string", "value": "Group 2" }
+    ]
   },
   "toggleButton0": {
-    "name": "toggleButton0",
+    "id": "toggleButton0",
     "type": "toggleButton",
     "attributes": [
       { "name": "label", "type": "string", "value": "Toggle Light in Room B" },

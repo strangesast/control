@@ -10,6 +10,8 @@ import { FactoryComponent } from './factory/factory.component';
 import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 import { GroupDirective } from './group.directive';
 import { GenericComponent } from './generic/generic.component';
+import { TabGroupComponent } from './tab-group/tab-group.component';
+import { NameFromAttrPipe } from './name-from-attr.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { GenericComponent } from './generic/generic.component';
     FactoryComponent,
     ToggleButtonComponent,
     GroupDirective,
-    GenericComponent
+    GenericComponent,
+    TabGroupComponent,
+    NameFromAttrPipe
   ],
   imports: [
     BrowserModule,
@@ -28,6 +32,6 @@ import { GenericComponent } from './generic/generic.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [GroupComponent, ToggleButtonComponent]
+  entryComponents: [GroupComponent, ToggleButtonComponent, TabGroupComponent]
 })
 export class AppModule { }

@@ -1,0 +1,10 @@
+<p>
+  tab-group works!
+</p>
+<div class="tabs">
+  <div *ngFor="let child of children; let i = index" class="tab" (click)="setTab(i)">
+    <span [class.active]="activeTabIndex == i">{{ child | nameFromAttr }}</span>
+  </div>
+</div>
+<ng-template appGroup></ng-template>
+<ng-content></ng-content>

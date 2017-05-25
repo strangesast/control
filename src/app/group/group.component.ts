@@ -1,12 +1,17 @@
-import { ComponentFactoryResolver, ViewChild, Input, Component, OnInit, AfterViewInit, ViewContainerRef, SimpleChange } from '@angular/core';
+import {
+  Input,
+  OnInit,
+  ViewChild,
+  Component,
+  SimpleChange,
+  ViewContainerRef,
+  ComponentFactoryResolver
+} from '@angular/core';
 import { GroupDirective } from '../group.directive';
 import { GenericComponent } from '../generic/generic.component';
 
+import { TabGroupComponent } from '../tab-group/tab-group.component';
 import { ToggleButtonComponent } from '../toggle-button/toggle-button.component';
-
-const componentNameMap = {
-  'toggleButton': ToggleButtonComponent
-}
 
 @Component({
   selector: 'app-group',
@@ -17,23 +22,21 @@ const componentNameMap = {
     '[style.color]': 'color'
   }
 })
-export class GroupComponent implements OnInit, AfterViewInit, GenericComponent {
+export class GroupComponent extends GenericComponent implements OnInit {
   @ViewChild(GroupDirective) host: GroupDirective;
   @Input() layout: string;
-  @Input() backgroundColor: string;
-  @Input() color: string = '#000';
   @Input() children: any[];
+  @Input() name: string;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
+  constructor(private componentFactoryResolver: ComponentFactoryResolver) {
+    super()
+  }
 
   ngOnInit() {
-    componentNameMap['group'] = this.constructor;
     if (this.children) {
       this.buildAll(this.children);
     }
   }
-
-  ngAfterViewInit() {}
 
   buildAll(arr) {
     this.host.viewContainerRef.clear();
@@ -43,9 +46,7 @@ export class GroupComponent implements OnInit, AfterViewInit, GenericComponent {
   }
 
   build(obj) {
-    let { name, type, attributes } = obj;
-    let Component = componentNameMap[type];
-    if (!Component) throw new Error(`unrecognized type (${ type })`);
+    let { id, name, type: Component, attributes } = obj;
     let factory = this.componentFactoryResolver.resolveComponentFactory(Component);
     let { viewContainerRef } = this.host;
     let componentRef = viewContainerRef.createComponent(factory);

@@ -1,5 +1,4 @@
 import {
-  ElementRef,
   Input,
   Component,
   OnInit,
@@ -10,42 +9,40 @@ import {
   SimpleChange
 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+
 import { GroupComponent } from '../group/group.component';
 import { ToggleButtonComponent } from '../toggle-button/toggle-button.component';
 import { GroupDirective } from '../group.directive';
 import { GenericComponent } from '../generic/generic.component';
+import { TabGroupComponent } from '../tab-group/tab-group.component';
 
 const componentNameMap = {
   'group': GroupComponent,
+  'tabGroup': TabGroupComponent,
   'toggleButton': ToggleButtonComponent
 }
 
-const validAttributes = {
-  'group': ['backgroundColor', 'color'],
-  'toggleButton': ['backgroundColor', 'color', 'label', 'value']
-}
-
-function expandChildren (obj, json, parents=[]) {
-  let { name, type, attributes } = obj;
+function expandChildren (obj, json, parents=['root']) {
+  let { type, attributes } = obj;
+  obj.type = componentNameMap[type];
   for (let attr of attributes) {
     if (attr.name == 'children') {
       attr.value = attr.value.map(childId => {
+        if (parents.indexOf(childId) > -1) throw new Error(`parent-child loop ${ childId }`);
         let child = json[childId];
         if (!child) throw new Error(`invalid child reference (${ childId })`);
-        expandChildren(child, json, parents.concat(name));
+        expandChildren(child, json, parents.concat(childId));
         return child;
       });
     }
   }
 }
 
-
 @Component({
   selector: 'app-factory',
   templateUrl: './factory.component.html',
   styleUrls: ['./factory.component.css']
 })
-
 export class FactoryComponent implements OnInit {
   @Input() json;
   @ViewChild(GroupDirective) host: GroupDirective;
@@ -59,7 +56,6 @@ export class FactoryComponent implements OnInit {
         let root = json.root;
         expandChildren(root, json)
         this.build(root);
-        console.log('root', root);
 
       }, (err) => console.error(err))
   }
@@ -71,9 +67,7 @@ export class FactoryComponent implements OnInit {
   }
 
   build(obj) {
-    let { name, type, attributes } = obj;
-    let Component = componentNameMap[type];
-    if (!Component) throw new Error(`unrecognized type (${ type })`);
+    let { type: Component, attributes } = obj;
     let factory = this.componentFactoryResolver.resolveComponentFactory(Component);
     let { viewContainerRef } = this.host;
     viewContainerRef.clear();

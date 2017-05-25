@@ -1,0 +1,15 @@
+:host {
+  display: block;
+}
+.active {
+  font-weight: bold;
+}
+
+.tabs {
+}
+
+.tabs > .tab {
+  display: inline-block;
+  cursor: pointer;
+  padding: 8px;
+}
