@@ -43,8 +43,9 @@ const INIT = JSON.stringify({
   styleUrls: ['./json-input.component.css']
 })
 export class JsonInputComponent {
-  public text: string = INIT;
   @Output() public json: any = {};
+  public text: string = INIT;
+  public valid: boolean = true;
 
   constructor() { }
 
@@ -55,6 +56,9 @@ export class JsonInputComponent {
   change() {
     try {
       this.json = JSON.parse(this.text)
-    } catch (e) {}
+      this.valid = true;
+    } catch (e) {
+      this.valid = false;
+    }
   }
 }
