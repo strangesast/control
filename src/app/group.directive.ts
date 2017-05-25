@@ -1,10 +1,10 @@
-import { Directive } from '@angular/core';
+import { ViewContainerRef, Directive } from '@angular/core';
 
 @Directive({
   selector: '[appGroup]'
 })
 export class GroupDirective {
 
-  constructor() { }
+  constructor(public viewContainerRef: ViewContainerRef) { }
 
 }

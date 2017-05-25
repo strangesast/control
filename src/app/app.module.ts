@@ -9,6 +9,7 @@ import { GroupComponent } from './group/group.component';
 import { FactoryComponent } from './factory/factory.component';
 import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 import { GroupDirective } from './group.directive';
+import { GenericComponent } from './generic/generic.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { GroupDirective } from './group.directive';
     GroupComponent,
     FactoryComponent,
     ToggleButtonComponent,
-    GroupDirective
+    GroupDirective,
+    GenericComponent
   ],
   imports: [
     BrowserModule,
