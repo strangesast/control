@@ -11,7 +11,7 @@ import {
   SimpleChange
 } from '@angular/core';
 import diff from 'deep-diff';
-import { BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 import { GroupComponent } from '../group/group.component';
 import { ToggleButtonComponent } from '../toggle-button/toggle-button.component';
@@ -67,7 +67,6 @@ export class FactoryComponent extends GroupComponent implements OnInit {
     this.jsonChange.emit(this.jsonValue = val);
   }
   @ViewChild(GroupDirective) host: GroupDirective;
-  root;
   registered: boolean = false;
   valid: boolean = false;
 
@@ -76,33 +75,35 @@ export class FactoryComponent extends GroupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.registration.init().subscribe(template => {
+    this.registration.init().flatMap(template => {
       this.registered = true;
       this.json = template || this.json;
 
       this.stream = this.jsonChange.asObservable().startWith(this.json);
 
-      filterDuplicateObjects(this.stream).subscribe(config => {
+      let refresh = filterDuplicateObjects(this.stream).switchMap(config => {
         console.log('registering...')
-        this.registration.register(config);
+        return this.registration.register(config);
       });
 
-      filterDuplicateObjects(this.stream.pluck('components')).subscribe((components: {[propKey: string]: ComponentDescription}) => {
+      let redraw = filterDuplicateObjects(this.stream.pluck('components')).flatMap((components: {[propKey: string]: ComponentDescription}) => {
         let root = components.root;
         try {
           expandChildren(root, components);
-          this.root = root;
-          this.buildAll();
+          this.buildAll(root);
           this.valid = true;
         } catch (e) {
           this.valid = false;
         }
+        return Observable.empty();
       });
-    });
+
+      return Observable.merge(redraw, refresh);
+    }).subscribe((message) => console.log('message', message), (err) => console.error(err));
   }
 
-  buildAll() {
+  buildAll(root) {
     this.host.viewContainerRef.clear();
-    this.build(this.root)
+    this.build(root)
   }
 }

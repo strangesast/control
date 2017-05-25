@@ -8,7 +8,7 @@ import { EventEmitter, SimpleChange, Component, Input, Output } from '@angular/c
 export class JsonInputComponent {
   jsonValue;
   text: string;
-  public valid: boolean = false;
+  public valid: boolean = true;
   @Output() jsonChange = new EventEmitter();
   @Input() get json(): any {
     return this.jsonValue;
