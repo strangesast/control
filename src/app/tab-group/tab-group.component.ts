@@ -4,7 +4,11 @@ import { GroupComponent } from '../group/group.component';
 @Component({
   selector: 'app-tab-group',
   templateUrl: './tab-group.component.html',
-  styleUrls: ['./tab-group.component.css']
+  styleUrls: ['./tab-group.component.css'],
+  host: {
+    '[style.background-color]': 'backgroundColor',
+    '[style.color]': 'color'
+  }
 })
 export class TabGroupComponent extends GroupComponent implements OnInit {
   public activeTabIndex = 0;
@@ -12,7 +16,6 @@ export class TabGroupComponent extends GroupComponent implements OnInit {
     super(componentFactoryResolver);
   }
   buildAll() {
-    console.log(this.activeTabIndex);
     this.host.viewContainerRef.clear();
     this.build(this.children[this.activeTabIndex]);
   }

@@ -1,13 +1,16 @@
 import {
   Input,
+  Output,
   Component,
   OnInit,
   ViewChild,
+  EventEmitter,
   ViewContainerRef,
   ComponentFactory,
   ComponentFactoryResolver,
   SimpleChange
 } from '@angular/core';
+import diff from 'deep-diff';
 import { BehaviorSubject } from 'rxjs';
 
 import { GroupComponent } from '../group/group.component';
@@ -16,15 +19,23 @@ import { GroupDirective } from '../group.directive';
 import { GenericComponent } from '../generic/generic.component';
 import { TabGroupComponent } from '../tab-group/tab-group.component';
 
+import { RegistrationService } from '../registration.service';
+
 const componentNameMap = {
   'group': GroupComponent,
   'tabGroup': TabGroupComponent,
   'toggleButton': ToggleButtonComponent
 }
 
+function filterDuplicateObjects(stream) {
+  return stream.startWith({}).map(v => JSON.stringify(v)).pairwise().filter(([a, b]) => {
+    return b && a != b;
+  }).map(([_, v]) => JSON.parse(v));
+}
+
 function expandChildren (obj, json, parents=['root']) {
   let { type, attributes } = obj;
-  obj.type = componentNameMap[type];
+  obj.Component = componentNameMap[type];
   for (let attr of attributes) {
     if (attr.name == 'children') {
       attr.value = attr.value.map(childId => {
@@ -38,44 +49,60 @@ function expandChildren (obj, json, parents=['root']) {
   }
 }
 
+type ComponentDescription = { type: string, attributes: any[] }
+
 @Component({
   selector: 'app-factory',
   templateUrl: './factory.component.html',
   styleUrls: ['./factory.component.css']
 })
-export class FactoryComponent implements OnInit {
-  @Input() json;
+export class FactoryComponent extends GroupComponent implements OnInit {
+  stream;
+  jsonValue: any;
+  @Output() jsonChange = new EventEmitter();
+  @Input() get json() {
+    return this.jsonValue;
+  }
+  set json(val) {
+    this.jsonChange.emit(this.jsonValue = val);
+  }
   @ViewChild(GroupDirective) host: GroupDirective;
-  private stream = new BehaviorSubject<any>(this.json);
+  root;
+  registered: boolean = false;
+  valid: boolean = false;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
+  constructor(componentFactoryResolver: ComponentFactoryResolver, private registration: RegistrationService) {
+    super(componentFactoryResolver);
+  }
 
   ngOnInit() {
-    this.stream.filter(value => value && value.root)
-      .subscribe(json => {
-        let root = json.root;
-        expandChildren(root, json)
-        this.build(root);
+    this.registration.init().subscribe(template => {
+      this.registered = true;
+      this.json = template || this.json;
 
-      }, (err) => console.error(err))
+      this.stream = this.jsonChange.asObservable().startWith(this.json);
+
+      filterDuplicateObjects(this.stream).subscribe(config => {
+        console.log('registering...')
+        this.registration.register(config);
+      });
+
+      filterDuplicateObjects(this.stream.pluck('components')).subscribe((components: {[propKey: string]: ComponentDescription}) => {
+        let root = components.root;
+        try {
+          expandChildren(root, components);
+          this.root = root;
+          this.buildAll();
+          this.valid = true;
+        } catch (e) {
+          this.valid = false;
+        }
+      });
+    });
   }
 
-  ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-    if (changes.json) {
-      this.stream.next(changes.json.currentValue)
-    }
-  }
-
-  build(obj) {
-    let { type: Component, attributes } = obj;
-    let factory = this.componentFactoryResolver.resolveComponentFactory(Component);
-    let { viewContainerRef } = this.host;
-    viewContainerRef.clear();
-    let componentRef = viewContainerRef.createComponent(factory);
-    for (let attr of attributes) {
-      // assert correct type for attribute
-      (<GenericComponent>componentRef.instance)[attr.name] = attr.value;
-    }
-    return componentRef;
+  buildAll() {
+    this.host.viewContainerRef.clear();
+    this.build(this.root)
   }
 }

@@ -13,6 +13,8 @@ import { GenericComponent } from './generic/generic.component';
 import { TabGroupComponent } from './tab-group/tab-group.component';
 import { NameFromAttrPipe } from './name-from-attr.pipe';
 
+import { RegistrationService } from './registration.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +32,7 @@ import { NameFromAttrPipe } from './name-from-attr.pipe';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [RegistrationService],
   bootstrap: [AppComponent],
   entryComponents: [GroupComponent, ToggleButtonComponent, TabGroupComponent]
 })

@@ -46,7 +46,7 @@ export class GroupComponent extends GenericComponent implements OnInit {
   }
 
   build(obj) {
-    let { id, name, type: Component, attributes } = obj;
+    let { id, name, Component, attributes } = obj;
     let factory = this.componentFactoryResolver.resolveComponentFactory(Component);
     let { viewContainerRef } = this.host;
     let componentRef = viewContainerRef.createComponent(factory);
