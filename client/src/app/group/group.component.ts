@@ -35,13 +35,13 @@ export class GroupComponent extends GenericComponent implements OnInit {
 
   ngOnInit() {
     if (this.children) {
-      this.buildAll(this.children);
+      this.buildAll();
     }
   }
 
-  buildAll(arr) {
+  buildAll() {
     this.host.viewContainerRef.clear();
-    for (let child of arr) {
+    for (let child of this.children) {
       this.build(child);
     }
   }
@@ -60,7 +60,11 @@ export class GroupComponent extends GenericComponent implements OnInit {
 
   ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
     if (changes.children) {
-      this.buildAll(this.children);
+      this.buildAll();
     }
+  }
+
+  static toJSON() {
+    return 'group';
   }
 }

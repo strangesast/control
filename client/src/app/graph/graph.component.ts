@@ -1,4 +1,11 @@
-import { Input, Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import {
+  Input,
+  OnInit,
+  Component,
+  ViewChild,
+  ElementRef,
+  AfterViewInit
+} from '@angular/core';
 import { GenericComponent } from '../generic/generic.component';
 import * as d3 from 'd3';
 

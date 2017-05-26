@@ -4,7 +4,7 @@ import { JsonInputComponent } from './json-input/json-input.component';
 const INIT = {
   components: {
     root: {
-      type: 'tabGroup',
+      type: 'TabGroupComponent',
       attributes: [
         {
           name: 'backgroundColor',
@@ -15,21 +15,21 @@ const INIT = {
       ]
     },
     group0: {
-      type: 'group',
+      type: 'GroupComponent',
       attributes: [
         { name: 'name', type: 'string', value: 'Group 1' },
         { name: 'children', type: 'array', value: [ 'numericInput0', 'numericInput1' ]}
       ]
     },
     group1: {
-      type: 'group',
+      type: 'GroupComponent',
       attributes: [
         { name: 'name', type: 'string', value: 'Group 2' },
-        { name: 'children', type: 'array', value: ['graphComponent0'] }
+        { name: 'children', type: 'array', value: ['gaugeComponent0', 'graphComponent0', 'numericInput1'] }
       ]
     },
     numericInput0: {
-      type: 'numericInput',
+      type: 'NumericInputComponent',
       attributes: [
         { name: 'label', type: 'string', value: 'Temperature in Room B' },
         { name: 'value', type: 'number', id: 'temperature' },
@@ -38,7 +38,7 @@ const INIT = {
       ]
     },
     numericInput1: {
-      type: 'numericInput',
+      type: 'NumericInputComponent',
       attributes: [
         { name: 'label', type: 'string', value: 'Set Point 1' },
         { name: 'value', type: 'number', id: 'setPoint' },
@@ -48,11 +48,18 @@ const INIT = {
       ]
     },
     graphComponent0: {
-      type: 'graphComponent',
+      type: 'GraphComponent',
+      attributes: [
+        { name: 'value', type: 'number', id: 'temperature' }
+      ]
+    },
+    gaugeComponent0: {
+      type: 'GaugeComponent',
       attributes: [
         { name: 'value', type: 'number', id: 'temperature' }
       ]
     }
+
   },
   values: {
     temperature: {

@@ -13,22 +13,10 @@ import {
 import { ReplaySubject, Observable, BehaviorSubject } from 'rxjs';
 
 import { GroupComponent } from '../group/group.component';
-import { ToggleButtonComponent } from '../toggle-button/toggle-button.component';
 import { GroupDirective } from '../group.directive';
-import { GenericComponent } from '../generic/generic.component';
-import { TabGroupComponent } from '../tab-group/tab-group.component';
-import { NumericInputComponent } from '../numeric-input/numeric-input.component';
-import { GraphComponent } from '../graph/graph.component';
-
 import { RegistrationService } from '../registration.service';
 
-const componentNameMap = {
-  'group': GroupComponent,
-  'tabGroup': TabGroupComponent,
-  'toggleButton': ToggleButtonComponent,
-  'numericInput': NumericInputComponent,
-  'graphComponent': GraphComponent
-}
+import { componentNameMap } from '../entry-components';
 
 function filterDuplicateObjects(stream) {
   return stream.startWith({}).map(v => JSON.stringify(v)).pairwise().filter(([a, b]) => {
@@ -36,7 +24,7 @@ function filterDuplicateObjects(stream) {
   }).map(([_, v]) => JSON.parse(v));
 }
 
-function expand(object, json, parents=['root']) {
+function expandTemplate(object, json, parents=['root']) {
   let { type, attributes } = object;
   let Component = componentNameMap[type];
   if (!Component) throw new Error(`invalid type "${ type }"`);
@@ -48,7 +36,7 @@ function expand(object, json, parents=['root']) {
         let child = json[childId];
         if (parents.indexOf(childId) > -1) throw new Error(`parent-child loop ${ childId }`);
         if (!child) throw new Error(`invalid child reference "${ childId }"`);
-        return expand(child, json, parents.concat(childId));
+        return expandTemplate(child, json, parents.concat(childId));
       });
     }
     return Object.assign({}, attr, { value });
@@ -88,16 +76,17 @@ export class FactoryComponent extends GroupComponent implements OnInit {
     })).map(template => {
       this.json = template;
       try {
-        this.buildAll(this.json.components.root);
+        this.buildAll();
         this.valid = true;
       } catch (e) {
+        console.error(e);
         this.valid = false;
       }
     }).subscribe();
   }
 
-  buildAll(root) {
-    let expanded = expand(root, this.json.components);
+  buildAll() {
+    let expanded = expandTemplate(this.json.components.root, this.json.components);
     this.registration.template = this.json;
     this.host.viewContainerRef.clear();
     this.build(expanded);

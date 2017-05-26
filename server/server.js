@@ -44,6 +44,7 @@ var measurements = {
 let interval = Observable.interval(500).share();
 interval.subscribe((t) => {
   measurements.temperature += 2*Math.random()*Math.sign(measurements.setPoint-measurements.temperature)*Math.pow(Math.abs(measurements.setPoint - measurements.temperature), 0.5)*0.5
+  measurements.temperature = Math.floor(measurements.temperature*1000)/1000;
 });
 
 var setSession = Observable.bindNodeCallback(sessionStore.set.bind(sessionStore));
@@ -81,7 +82,7 @@ var groups = connectionStream.flatMap(({ ws, req }) => {
   });
 });
 
-var updateInterval = Observable.interval(500).share();
+var updateInterval = Observable.interval(1000).share();
 groups.groupBy(({ id }) => id).flatMap((stream) => {
   let id = stream.key;
   let clients = [];
