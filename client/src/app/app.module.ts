@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { JsonInputComponent } from './json-input/json-input.component';
@@ -14,6 +15,8 @@ import { TabGroupComponent } from './tab-group/tab-group.component';
 import { NameFromAttrPipe } from './name-from-attr.pipe';
 
 import { RegistrationService } from './registration.service';
+
+const routes: Routes = [];
 
 @NgModule({
   declarations: [
@@ -30,7 +33,8 @@ import { RegistrationService } from './registration.service';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [RegistrationService],
   bootstrap: [AppComponent],

@@ -10,8 +10,7 @@ import {
   ComponentFactoryResolver,
   SimpleChange
 } from '@angular/core';
-import diff from 'deep-diff';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { ReplaySubject, Observable, BehaviorSubject } from 'rxjs';
 
 import { GroupComponent } from '../group/group.component';
 import { ToggleButtonComponent } from '../toggle-button/toggle-button.component';
@@ -33,20 +32,24 @@ function filterDuplicateObjects(stream) {
   }).map(([_, v]) => JSON.parse(v));
 }
 
-function expandChildren (obj, json, parents=['root']) {
-  let { type, attributes } = obj;
-  obj.Component = componentNameMap[type];
-  for (let attr of attributes) {
-    if (attr.name == 'children') {
-      attr.value = attr.value.map(childId => {
-        if (parents.indexOf(childId) > -1) throw new Error(`parent-child loop ${ childId }`);
+function expand(object, json, parents=['root']) {
+  let { type, attributes } = object;
+  let Component = componentNameMap[type];
+  if (!Component) throw new Error(`invalid type "${ type }"`);
+  attributes = attributes.map(attr => {
+    let { name, value, type: attrType } = attr;
+    // should verify correct type, value for name+component
+    if (name == 'children') {
+      value = value.map(childId => {
         let child = json[childId];
-        if (!child) throw new Error(`invalid child reference (${ childId })`);
-        expandChildren(child, json, parents.concat(childId));
-        return child;
+        if (parents.indexOf(childId) > -1) throw new Error(`parent-child loop ${ childId }`);
+        if (!child) throw new Error(`invalid child reference "${ childId }"`);
+        return expand(child, json, parents.concat(childId));
       });
     }
-  }
+    return Object.assign({}, attr, { value });
+  });
+  return { Component, attributes };
 }
 
 type ComponentDescription = { type: string, attributes: any[] }
@@ -69,41 +72,36 @@ export class FactoryComponent extends GroupComponent implements OnInit {
   @ViewChild(GroupDirective) host: GroupDirective;
   registered: boolean = false;
   valid: boolean = false;
+  pending = new ReplaySubject(1);
 
   constructor(componentFactoryResolver: ComponentFactoryResolver, private registration: RegistrationService) {
     super(componentFactoryResolver);
   }
 
   ngOnInit() {
-    this.registration.init().flatMap(template => {
-      this.registered = true;
-      this.json = template || this.json;
-
-      this.stream = this.jsonChange.asObservable().startWith(this.json);
-
-      let refresh = filterDuplicateObjects(this.stream).switchMap(config => {
-        console.log('registering...')
-        return this.registration.register(config);
-      });
-
-      let redraw = filterDuplicateObjects(this.stream.pluck('components')).flatMap((components: {[propKey: string]: ComponentDescription}) => {
-        let root = components.root;
-        try {
-          expandChildren(root, components);
-          this.buildAll(root);
-          this.valid = true;
-        } catch (e) {
-          this.valid = false;
-        }
-        return Observable.empty();
-      });
-
-      return Observable.merge(redraw, refresh);
-    }).subscribe((message) => console.log('message', message), (err) => console.error(err));
+    filterDuplicateObjects(this.registration.init().flatMap(() => {
+      return Observable.merge(this.registration.registeredTemplate, this.pending);
+    })).map(template => {
+      this.json = template;
+      try {
+        this.buildAll(this.json.components.root);
+        this.valid = true;
+      } catch (e) {
+        this.valid = false;
+      }
+    }).subscribe();
   }
 
   buildAll(root) {
+    let expanded = expand(root, this.json.components);
+    this.registration.template = this.json;
     this.host.viewContainerRef.clear();
-    this.build(root)
+    this.build(expanded);
+  }
+
+  ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
+    if (changes['json']) {
+      this.pending.next(this.json);
+    }
   }
 }

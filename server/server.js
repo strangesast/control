@@ -80,9 +80,24 @@ interval.delay(100).map(() => Object.keys(sessionValues)).subscribe((ids) => {
 var activeConnections = {};
 var sessionValues = {};
 
+var connectionStream = Observable.fromEvent(wss, 'connection', 'data', (ws, req) => ({ ws, req }));
+
+var groups = connectionStream.flatMap(({ ws, req }) => {
+  let cookies = req.headers.cookie && cookie.parse(req.headers.cookie);
+  let validCookie = cookies && cookies['connect.sid'] && cookieParser.signedCookie(cookies['connect.sid'], secret);
+  let sessionStream = validCookie ? Observable.bindNodeCallback(sessionStore.get.bind(sessionStore))(validCookie) : Observable.empty();
+  return sessionStream.finally(() => ws.terminate()).map(session => ({ session, ws, id: validCookie }));
+});
+
+groups.groupBy(({ id }) => id).flatMap((stream, id) => {
+  let clients = stream.scan((a, b) => a.concat(b), []);
+
+}).subscribe(console.log.bind(console));
+
+/*
 wss.on('connection', function(ws, req) {
-  let cookies = cookie.parse(req.headers.cookie);
-  let sid = cookies['connect.sid']
+  let cookies = req.headers.cookie && cookie.parse(req.headers.cookie);
+  let sid = cookies && cookies['connect.sid']
   let c = sid && cookieParser.signedCookie(sid, secret);
   if (!c) {
     console.log('no session');
@@ -144,6 +159,7 @@ wss.on('connection', function(ws, req) {
     ws.send(JSON.stringify({ command: { type: 'template', data: session.template }}));
   });
 });
+*/
 
 const keepAliveInterval = setInterval(function() {
   wss.clients.forEach(function(ws) {
