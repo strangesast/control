@@ -11,7 +11,7 @@ import { Observable, Subscription } from 'rxjs';
     '[style.color]': 'color'
   }
 })
-export class NumericInputComponent extends GenericComponent implements OnInit {
+export class NumericInputComponent extends GenericComponent {
   @Input() read: boolean = true;
   @Input() write: boolean = false;
   @Input() label: string;

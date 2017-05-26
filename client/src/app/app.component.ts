@@ -18,7 +18,7 @@ const INIT = {
       type: 'group',
       attributes: [
         { name: 'name', type: 'string', value: 'Group 1' },
-        { name: 'children', type: 'array', value: [ 'numericInput0' ]}
+        { name: 'children', type: 'array', value: [ 'numericInput0', 'numericInput1' ]}
       ]
     },
     group1: {
@@ -32,9 +32,19 @@ const INIT = {
       type: 'numericInput',
       attributes: [
         { name: 'label', type: 'string', value: 'Temperature in Room B' },
-        { name: 'value', type: 'number', value: 0, id: 'temperature' },
+        { name: 'value', type: 'number', id: 'temperature' },
         { name: 'color', type: 'string', value: 'purple' },
         { name: 'backgroundColor', type: 'string', value: 'white', write: true }
+      ]
+    },
+    numericInput1: {
+      type: 'numericInput',
+      attributes: [
+        { name: 'label', type: 'string', value: 'Set Point 1' },
+        { name: 'value', type: 'number', id: 'setPoint' },
+        { name: 'color', type: 'string', value: 'purple' },
+        { name: 'backgroundColor', type: 'string', value: 'white' },
+        { name: 'write', type: 'boolean', value: true }
       ]
     },
     graphComponent0: {
@@ -48,6 +58,10 @@ const INIT = {
     temperature: {
       type: 'number',
       name: 'Temperature Monitor 1'
+    },
+    setPoint: {
+      type: 'number',
+      name: 'Set Point 1'
     }
   }
 }

@@ -1,7 +1,7 @@
 import { Input, Output, EventEmitter, Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 import { Http } from '@angular/http';
-import { Observable, ReplaySubject } from 'rxjs';
+import { Observer, Subject, Observable, ReplaySubject } from 'rxjs';
 
 var lastMessageId = 0;
 
@@ -49,6 +49,11 @@ export class RegistrationService implements Resolve<Observable<null>> {
   register(attr) {
     let stream = this.updates.pluck(attr.id).filter(v => v != null);
     if (attr.value != null) stream = stream.startWith(attr.value);
-    return stream;
+    let sink = new ReplaySubject(1);
+    sink.subscribe(value => {
+      console.log(`updating to ${ value }`);
+      this.send({ update: { values: [ { name: attr.id, value } ]}});
+    });
+    return Subject.create(sink, stream);
   }
 }

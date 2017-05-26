@@ -7,7 +7,7 @@ import * as d3 from 'd3';
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.css']
 })
-export class GraphComponent extends GenericComponent implements OnInit, AfterViewInit {
+export class GraphComponent extends GenericComponent implements AfterViewInit {
   @ViewChild('graph') graphElement: ElementRef;
   @Input() keepCount: number = 100;
   values;
@@ -18,7 +18,7 @@ export class GraphComponent extends GenericComponent implements OnInit, AfterVie
 
   ngAfterViewInit() {
     this.setup();
-    this.valueStream.switchMap(stream => stream).scan((a, value) => a.concat({ value, date: new Date() }).slice(-this.keepCount), []).subscribe(values => {
+    this.valueSubject.asObservable().scan((a:any[], value) => a.concat({ value, date: new Date() }).slice(-this.keepCount), []).subscribe(values => {
       this.redraw(values);
       this.values = values;
     });

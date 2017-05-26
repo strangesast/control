@@ -1,5 +1,5 @@
 import { Input, Output, Component, OnInit, EventEmitter } from '@angular/core';
-import { Observable, Subscription, ReplaySubject } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-generic',
@@ -13,17 +13,18 @@ import { Observable, Subscription, ReplaySubject } from 'rxjs';
 export class GenericComponent {
   @Input() backgroundColor: string;
   @Input() color: string = '#000';
-  valueStream = new ReplaySubject<Observable<any>>(1);
-  currentValue: any;
   valueSubscription: Subscription;
-  @Output() valueChange = new EventEmitter();
+  valueSubject: Subject<any>;
+  currentValue: any;
   @Input() get value() {
     return this.currentValue;
   }
   set value(value) {
-    this.valueStream.next(value instanceof Observable ? value : Observable.of(this.currentValue))
-  }
-  ngOnInit() {
-    this.valueSubscription = this.valueStream.switchMap(stream => stream).subscribe(val => this.currentValue = val);
+    if (value instanceof Subject) {
+      if (this.valueSubscription) this.valueSubscription.unsubscribe();
+      this.valueSubscription = (this.valueSubject = value).subscribe(val => this.currentValue = val)
+    } else {
+      this.valueSubject.next(value);
+    }
   }
 }

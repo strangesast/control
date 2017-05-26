@@ -81,7 +81,7 @@ var groups = connectionStream.flatMap(({ ws, req }) => {
   });
 });
 
-var updateInterval = Observable.interval(1000).share();
+var updateInterval = Observable.interval(500).share();
 groups.groupBy(({ id }) => id).flatMap((stream) => {
   let id = stream.key;
   let clients = [];
@@ -98,8 +98,6 @@ groups.groupBy(({ id }) => id).flatMap((stream) => {
   }
 
   let values = {};
-
-  let updateInterval = Observable.interval(1000).share();
 
   return stream.flatMap(({ ws, session, messages }) => {
     let clientIndex = clients.push(ws) - 1;
@@ -120,6 +118,13 @@ groups.groupBy(({ id }) => id).flatMap((stream) => {
           default:
             return Observable.empty();
         }
+      } else if (update) {
+        for (let { name, value } of update.values) {
+          if (name == 'setPoint') {
+            measurements[name] = value;
+          }
+        }
+        return Observable.empty();
       } else {
         return Observable.empty();
       }
@@ -139,7 +144,7 @@ groups.groupBy(({ id }) => id).flatMap((stream) => {
     return Observable.merge(incoming, outgoing);
   });
 
-}).subscribe(console.log.bind(console));
+}).subscribe();
 
 /*
 wss.on('connection', function(ws, req) {
