@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { GroupDirective } from '../group.directive';
 import { GenericComponent } from '../generic/generic.component';
+import { RegistrationService } from '../registration.service';
 
 import { TabGroupComponent } from '../tab-group/tab-group.component';
 import { ToggleButtonComponent } from '../toggle-button/toggle-button.component';
@@ -28,7 +29,7 @@ export class GroupComponent extends GenericComponent implements OnInit {
   @Input() children: any[];
   @Input() name: string;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) {
+  constructor(private componentFactoryResolver: ComponentFactoryResolver, public registration: RegistrationService) {
     super()
   }
 
@@ -52,7 +53,7 @@ export class GroupComponent extends GenericComponent implements OnInit {
     let componentRef = viewContainerRef.createComponent(factory);
     for (let attr of attributes) {
       // assert correct type for attribute
-      (<GenericComponent>componentRef.instance)[attr.name] = attr.value;
+      (<GenericComponent>componentRef.instance)[attr.name] = attr.id ? this.registration.register(attr) : attr.value;
     }
     return componentRef;
   }

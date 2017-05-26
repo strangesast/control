@@ -15,6 +15,7 @@ import { TabGroupComponent } from './tab-group/tab-group.component';
 import { NameFromAttrPipe } from './name-from-attr.pipe';
 
 import { RegistrationService } from './registration.service';
+import { NumericInputComponent } from './numeric-input/numeric-input.component';
 
 const routes: Routes = [];
 
@@ -28,7 +29,8 @@ const routes: Routes = [];
     GroupDirective,
     GenericComponent,
     TabGroupComponent,
-    NameFromAttrPipe
+    NameFromAttrPipe,
+    NumericInputComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +40,6 @@ const routes: Routes = [];
   ],
   providers: [RegistrationService],
   bootstrap: [AppComponent],
-  entryComponents: [GroupComponent, ToggleButtonComponent, TabGroupComponent]
+  entryComponents: [GroupComponent, ToggleButtonComponent, TabGroupComponent, NumericInputComponent]
 })
 export class AppModule { }

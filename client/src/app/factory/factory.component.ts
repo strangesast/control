@@ -17,13 +17,15 @@ import { ToggleButtonComponent } from '../toggle-button/toggle-button.component'
 import { GroupDirective } from '../group.directive';
 import { GenericComponent } from '../generic/generic.component';
 import { TabGroupComponent } from '../tab-group/tab-group.component';
+import { NumericInputComponent } from '../numeric-input/numeric-input.component';
 
 import { RegistrationService } from '../registration.service';
 
 const componentNameMap = {
   'group': GroupComponent,
   'tabGroup': TabGroupComponent,
-  'toggleButton': ToggleButtonComponent
+  'toggleButton': ToggleButtonComponent,
+  'numericInput': NumericInputComponent
 }
 
 function filterDuplicateObjects(stream) {
@@ -74,8 +76,8 @@ export class FactoryComponent extends GroupComponent implements OnInit {
   valid: boolean = false;
   pending = new ReplaySubject(1);
 
-  constructor(componentFactoryResolver: ComponentFactoryResolver, private registration: RegistrationService) {
-    super(componentFactoryResolver);
+  constructor(componentFactoryResolver: ComponentFactoryResolver, registration: RegistrationService) {
+    super(componentFactoryResolver, registration);
   }
 
   ngOnInit() {

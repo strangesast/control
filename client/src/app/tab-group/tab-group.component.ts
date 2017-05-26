@@ -1,5 +1,6 @@
 import { Component, OnInit, ComponentFactoryResolver } from '@angular/core';
 import { GroupComponent } from '../group/group.component';
+import { RegistrationService } from '../registration.service';
 
 @Component({
   selector: 'app-tab-group',
@@ -12,8 +13,8 @@ import { GroupComponent } from '../group/group.component';
 })
 export class TabGroupComponent extends GroupComponent implements OnInit {
   public activeTabIndex = 0;
-  constructor(componentFactoryResolver: ComponentFactoryResolver) {
-    super(componentFactoryResolver);
+  constructor(componentFactoryResolver: ComponentFactoryResolver, registration: RegistrationService) {
+    super(componentFactoryResolver, registration);
   }
   buildAll() {
     this.host.viewContainerRef.clear();

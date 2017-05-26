@@ -18,7 +18,7 @@ const INIT = {
       type: 'group',
       attributes: [
         { name: 'name', type: 'string', value: 'Group 1' },
-        { name: 'children', type: 'array', value: [ 'toggleButton0' ]}
+        { name: 'children', type: 'array', value: [ 'numericInput0' ]}
       ]
     },
     group1: {
@@ -27,18 +27,18 @@ const INIT = {
         { name: 'name', type: 'string', value: 'Group 2' }
       ]
     },
-    toggleButton0: {
-      type: 'toggleButton',
+    numericInput0: {
+      type: 'numericInput',
       attributes: [
-        { name: 'label', type: 'string', value: 'Toggle Light in Room B' },
-        { name: 'value', type: 'boolean', value: false, id: 'lightOn' },
+        { name: 'label', type: 'string', value: 'Temperature in Room B' },
+        { name: 'value', type: 'number', value: 0, id: 'temperature' },
         { name: 'color', type: 'string', value: 'purple' },
         { name: 'backgroundColor', type: 'string', value: 'white', write: true }
       ]
     }
   },
   values: {
-    temperature0: {
+    temperature: {
       type: 'number',
       name: 'Temperature Monitor 1'
     }

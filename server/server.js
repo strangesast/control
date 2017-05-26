@@ -35,62 +35,109 @@ var server = app.listen(8080)
 var WebSocketServer = require('ws').Server,
     wss = new WebSocketServer({ server });
 
-function heartbeat() {
-  this.isAlive = true;
-}
-
 var connections = [];
 
-var temperature = 0;
-var setPoint = 10;
-
+var measurements = {
+  temperature: 0,
+  setPoint: 10
+};
 let interval = Observable.interval(500).share();
 interval.subscribe((t) => {
-  temperature += 2*Math.random()*Math.sign(setPoint-temperature)*Math.pow(Math.abs(setPoint - temperature), 0.5)*0.5
+  measurements.temperature += 2*Math.random()*Math.sign(measurements.setPoint-measurements.temperature)*Math.pow(Math.abs(measurements.setPoint - measurements.temperature), 0.5)*0.5
 });
 
-interval.delay(100).map(() => Object.keys(sessionValues)).subscribe((ids) => {
-  let sessions = Object.keys(activeConnections).filter(id => ids.indexOf(id) > -1);
-  sessions.map(session => {
-    let ws = activeConnections[session];
-    let values = sessionValues[session];
-    let ret = {};
-    for (let value in values) {
-      if (value.indexOf('temp') > -1) {
-        ret[value] = temperature;
-      } else if (value.indexOf('set') > -1) {
-        ret[value] = setPoint;
-      } else {
-        ret[value] = null;
-      }
-    }
-    ws.map(ws => {
-      try {
-        ws.send(JSON.stringify({ update: { data: ret }}))
-      } catch (e) {
-        let found = Object.keys(activeConnections).find(sessionId => activeConnections[sessionId].indexOf(ws) > -1);
-        if (found) {
-          activeConnections[found].splice(activeConnections[found].indexOf(ws), 1);
-        }
-      }
+var setSession = Observable.bindNodeCallback(sessionStore.set.bind(sessionStore));
+var getSession = Observable.bindNodeCallback(sessionStore.get.bind(sessionStore));
+
+var heartbeatInterval = Observable.interval(10000);
+var connectionStream = Observable.fromEvent(wss, 'connection', 'data', (ws, req) => ({ ws, req }));
+var groups = connectionStream.flatMap(({ ws, req }) => {
+  let cookies = req.headers.cookie && cookie.parse(req.headers.cookie);
+  let id = cookies && cookies['connect.sid'] && cookieParser.signedCookie(cookies['connect.sid'], secret);
+
+  let sessionStream = id ? getSession(id) : Observable.of(null);
+
+  let ping = heartbeatInterval.map(() => ws.ping('', false, true));
+  let pong = Observable.fromEvent(ws, 'pong').map(() => true);
+  let close = Observable.fromEvent(ws, 'close');
+  let hb = Observable.merge(ping, pong).pairwise().filter(([a, b]) => !a && !b);
+  let dead = Observable.merge(close, hb);
+  let messages = Observable.fromEvent(ws, 'message')
+    .pluck('data')
+    .map(text => JSON.parse(text))
+    .takeUntil(dead)
+    .finally(() => {
+      console.log('closed: dead');
+      ws.terminate()
     });
+
+  return sessionStream.map(session => {
+    if (session) {
+      return { id, session, ws, messages };
+    } else {
+      console.log('closed: no session');
+      ws.terminate();
+    }
   });
 });
 
-var activeConnections = {};
-var sessionValues = {};
+var updateInterval = Observable.interval(1000).share();
+groups.groupBy(({ id }) => id).flatMap((stream) => {
+  let id = stream.key;
+  let clients = [];
+  let lastSession;
 
-var connectionStream = Observable.fromEvent(wss, 'connection', 'data', (ws, req) => ({ ws, req }));
+  function sendAll(message, except) {
+    clients.filter(_ws => _ws != except).forEach(_ws => {
+      try {
+        _ws.send(JSON.stringify(message));
+      } catch (e) {
 
-var groups = connectionStream.flatMap(({ ws, req }) => {
-  let cookies = req.headers.cookie && cookie.parse(req.headers.cookie);
-  let validCookie = cookies && cookies['connect.sid'] && cookieParser.signedCookie(cookies['connect.sid'], secret);
-  let sessionStream = validCookie ? Observable.bindNodeCallback(sessionStore.get.bind(sessionStore))(validCookie) : Observable.empty();
-  return sessionStream.finally(() => ws.terminate()).map(session => ({ session, ws, id: validCookie }));
-});
+      }
+    });
+  }
 
-groups.groupBy(({ id }) => id).flatMap((stream, id) => {
-  let clients = stream.scan((a, b) => a.concat(b), []);
+  let values = {};
+
+  let updateInterval = Observable.interval(1000).share();
+
+  return stream.flatMap(({ ws, session, messages }) => {
+    let clientIndex = clients.push(ws) - 1;
+    lastSession = session;
+    let incoming = messages.flatMap(message => {
+      let { command, update } = message;
+      if (command) {
+        let type = command.type;
+        switch (type) {
+          case 'template':
+            // validate template
+            let template = command.data;
+            lastSession.template = template
+            return setSession(id, lastSession).map(() => {
+              sendAll({ command: { type: 'template', data: template }});
+              values = template.values
+            }).catch(err => console.log(err));
+          default:
+            return Observable.empty();
+        }
+      } else {
+        return Observable.empty();
+      }
+    }).finally(() => {
+      clients.splice(clients.indexOf(ws), 1)
+    });
+
+    let outgoing = updateInterval.map(() => {
+      let message = { update: { values: Object.keys(values).filter(val => measurements[val] != null).reduce((a, key) => Object.assign(a, { [key]: measurements[key] }), {}) }};
+      ws.send(JSON.stringify(message));
+      return message;
+
+    }).catch(() => Observable.empty()).takeUntil(incoming.ignoreElements());
+
+    return outgoing;
+
+    return Observable.merge(incoming, outgoing);
+  });
 
 }).subscribe(console.log.bind(console));
 
@@ -160,18 +207,3 @@ wss.on('connection', function(ws, req) {
   });
 });
 */
-
-const keepAliveInterval = setInterval(function() {
-  wss.clients.forEach(function(ws) {
-    if (ws.isAlive === false) {
-      let found = Object.keys(activeConnections).find(sessionId => activeConnections[sessionId].indexOf(ws) > -1);
-      if (found) {
-        activeConnections[found].splice(activeConnections[found].indexOf(ws), 1);
-      }
-      return ws.terminate();
-    }
-
-    ws.isAlive = false;
-    ws.ping('', false, true);
-  });
-}, 30000);
