@@ -16,6 +16,7 @@ import { NameFromAttrPipe } from './name-from-attr.pipe';
 
 import { RegistrationService } from './registration.service';
 import { NumericInputComponent } from './numeric-input/numeric-input.component';
+import { GraphComponent } from './graph/graph.component';
 
 const routes: Routes = [];
 
@@ -30,7 +31,8 @@ const routes: Routes = [];
     GenericComponent,
     TabGroupComponent,
     NameFromAttrPipe,
-    NumericInputComponent
+    NumericInputComponent,
+    GraphComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +42,6 @@ const routes: Routes = [];
   ],
   providers: [RegistrationService],
   bootstrap: [AppComponent],
-  entryComponents: [GroupComponent, ToggleButtonComponent, TabGroupComponent, NumericInputComponent]
+  entryComponents: [GroupComponent, ToggleButtonComponent, TabGroupComponent, NumericInputComponent, GraphComponent]
 })
 export class AppModule { }

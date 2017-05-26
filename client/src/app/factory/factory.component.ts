@@ -18,6 +18,7 @@ import { GroupDirective } from '../group.directive';
 import { GenericComponent } from '../generic/generic.component';
 import { TabGroupComponent } from '../tab-group/tab-group.component';
 import { NumericInputComponent } from '../numeric-input/numeric-input.component';
+import { GraphComponent } from '../graph/graph.component';
 
 import { RegistrationService } from '../registration.service';
 
@@ -25,7 +26,8 @@ const componentNameMap = {
   'group': GroupComponent,
   'tabGroup': TabGroupComponent,
   'toggleButton': ToggleButtonComponent,
-  'numericInput': NumericInputComponent
+  'numericInput': NumericInputComponent,
+  'graphComponent': GraphComponent
 }
 
 function filterDuplicateObjects(stream) {

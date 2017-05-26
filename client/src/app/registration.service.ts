@@ -47,6 +47,8 @@ export class RegistrationService implements Resolve<Observable<null>> {
   }
 
   register(attr) {
-    return this.updates.pluck(attr.id).filter(v => v != null).startWith(attr.value);
+    let stream = this.updates.pluck(attr.id).filter(v => v != null);
+    if (attr.value != null) stream = stream.startWith(attr.value);
+    return stream;
   }
 }

@@ -24,7 +24,8 @@ const INIT = {
     group1: {
       type: 'group',
       attributes: [
-        { name: 'name', type: 'string', value: 'Group 2' }
+        { name: 'name', type: 'string', value: 'Group 2' },
+        { name: 'children', type: 'array', value: ['graphComponent0'] }
       ]
     },
     numericInput0: {
@@ -34,6 +35,12 @@ const INIT = {
         { name: 'value', type: 'number', value: 0, id: 'temperature' },
         { name: 'color', type: 'string', value: 'purple' },
         { name: 'backgroundColor', type: 'string', value: 'white', write: true }
+      ]
+    },
+    graphComponent0: {
+      type: 'graphComponent',
+      attributes: [
+        { name: 'value', type: 'number', id: 'temperature' }
       ]
     }
   },
