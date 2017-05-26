@@ -18,10 +18,18 @@ import { RegistrationService } from './registration.service';
 import { NumericInputComponent } from './numeric-input/numeric-input.component';
 import { GraphComponent } from './graph/graph.component';
 import { GaugeComponent } from './gauge/gauge.component';
+import { ListGroupComponent } from './list-group/list-group.component';
 
 import entryComponents from './entry-components';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', resolve: { registration: RegistrationService }, children:
+    [
+      { path: '', component: FactoryComponent },
+      { path: 'configure', component: JsonInputComponent }
+    ]
+  }
+];
 
 @NgModule({
   declarations: [
@@ -36,7 +44,8 @@ const routes: Routes = [];
     NameFromAttrPipe,
     NumericInputComponent,
     GraphComponent,
-    GaugeComponent
+    GaugeComponent,
+    ListGroupComponent
   ],
   imports: [
     BrowserModule,

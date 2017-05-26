@@ -13,3 +13,11 @@
   cursor: pointer;
   padding: 8px;
 }
+
+.tabs > .tab.active {
+  background-color: #eee;
+}
+
+.tabs > .tab:hover {
+  background-color: #e6e6e6;
+}

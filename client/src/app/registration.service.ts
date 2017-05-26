@@ -9,14 +9,14 @@ var lastMessageId = 0;
 export class RegistrationService implements Resolve<Observable<null>> {
   socket;
   SOCKET_URL = `ws:${ location.origin.substring(location.protocol.length) }/socket`;
-  registeredTemplate = new ReplaySubject(1);
+  registeredTemplate: Subject<any>;
   updates = new ReplaySubject(1);
 
   get template() {
     return this.registeredTemplate.take(1)
   }
   set template(template) {
-    this.send({ command: { type: 'template', data: template }});
+    this.registeredTemplate.next(template);
   }
 
   constructor(private http: Http) { }
@@ -30,11 +30,19 @@ export class RegistrationService implements Resolve<Observable<null>> {
       .map((res) => {
         if (res.status === 200) {
           this.socket = Observable.webSocket(this.SOCKET_URL)
+          this.send({ command: { type: 'currentTemplate' }});
           let validCommands = this.socket.filter(message => message.command && message.command.type);
-          validCommands.pluck('command')
+
+          let templateStream = validCommands.pluck('command')
             .filter(({ type }) => type == 'template')
             .pluck('data')
-            .subscribe(this.registeredTemplate);
+
+          let sink = new ReplaySubject(1);
+          sink.throttleTime(100).subscribe(template => {
+            this.send({ command: { type: 'template', data: template }});
+          });
+
+          this.registeredTemplate = Subject.create(sink, templateStream);
 
           let updates = this.socket.filter(message => message.update).pluck('update', 'values');
           updates.subscribe(this.updates);

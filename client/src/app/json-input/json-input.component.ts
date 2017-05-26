@@ -1,4 +1,5 @@
 import { EventEmitter, SimpleChange, Component, Input, Output } from '@angular/core';
+import { RegistrationService } from '../registration.service';
 
 @Component({
   selector: 'app-json-input',
@@ -18,9 +19,16 @@ export class JsonInputComponent {
     this.jsonValue = val;
     this.text = JSON.stringify(this.jsonValue, null, 2);
     this.jsonChange.emit(this.jsonValue);
+    this.registration.template = this.jsonValue;
   }
 
-  constructor() { }
+  constructor(private registration: RegistrationService) { }
+
+  ngOnInit() {
+    this.registration.registeredTemplate.subscribe(template => {
+      this.json = template;
+    });
+  }
 
   change() {
     try {

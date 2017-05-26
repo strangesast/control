@@ -1,0 +1,9 @@
+<div class="side">
+  <div class="title-block">
+    <span class="title">List Group</span>
+  </div>
+  <div *ngFor="let child of children; let i = index" class="item" (click)="setActiveListItem(i)">
+    <span>{{ child | nameFromAttr }}</span>
+    <ng-template *ngIf="activeListItem == i" appGroup></ng-template>
+  </div>
+</div>

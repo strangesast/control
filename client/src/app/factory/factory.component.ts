@@ -10,6 +10,7 @@ import {
   ComponentFactoryResolver,
   SimpleChange
 } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ReplaySubject, Observable, BehaviorSubject } from 'rxjs';
 
 import { GroupComponent } from '../group/group.component';
