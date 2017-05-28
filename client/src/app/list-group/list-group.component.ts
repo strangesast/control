@@ -22,9 +22,11 @@ export class ListGroupComponent extends GroupComponent {
   }
 
   buildAll() {
-    this.host.viewContainerRef.clear();
-    let child = this.children[this.activeListItem];
-    this.build(child);
+    if (this.activeListItem != null) {
+      this.host.viewContainerRef.clear();
+      let child = this.children[this.activeListItem];
+      this.build(child);
+    }
   }
 
   setActiveListItem(index) {

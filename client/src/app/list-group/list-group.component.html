@@ -4,6 +4,12 @@
   </div>
   <div *ngFor="let child of children; let i = index" class="item" (click)="setActiveListItem(i)">
     <span>{{ child | nameFromAttr }}</span>
-    <ng-template *ngIf="activeListItem == i" appGroup></ng-template>
   </div>
+</div>
+<div class="main">
+  <div class="title-bar">
+    <span class="fa fa-fw fa-angle-left icon"></span>
+    <span>{{ activeListItem != null ? (children[activeListItem] | nameFromAttr) : "toast" }}</span>
+  </div>
+  <ng-template appGroup></ng-template>
 </div>
