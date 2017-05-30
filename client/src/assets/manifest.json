@@ -1,0 +1,9 @@
+{
+  "name": "control",
+  "description": "control",
+  "version": "0.0.0.1",
+  "manifest_version": 2,
+  "display": "standalone",
+  "orientation": "portrait",
+  "start_url": "/"
+}
