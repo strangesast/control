@@ -214,8 +214,18 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
 
     let max = this.max;
     let min = this.min;
+
+    let element = this.graphElement.nativeElement;
+    let svg = d3.select(element);
+ 
+    let bbox = svg.node().getBoundingClientRect();
+    console.log(bbox);
+    let { width, height } = bbox;
+
+    let size = 400,
+        g = svg.append('g').attr('transform', 'translate(' + size / 2 + ',' + size / 2 + ')');
+
     let range = max - min;
-    let size = this.size;
     var barc = d3.arc()
         .innerRadius(size/2 - 64)
         .outerRadius(size/2)
@@ -229,13 +239,8 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
         .startAngle(Math.PI*1.2);
 
     
-    let element = this.graphElement.nativeElement;
-    let svg = d3.select(element);
-    svg.attr('width', size).attr('height', size)
+   //svg.attr('size', size).attr('height', size)
 
-    let width = +svg.attr('width'),
-        height = +svg.attr('height'),
-        g = svg.append('g').attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
     
     g.append('circle')
       .style('fill', backgroundbrighter)
@@ -255,6 +260,7 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
     }
     let drag = d3.drag()
       .on('drag', (d) => {
+        console.log('drag');
         this.redraw(calc(), undefined, false);
       })
       .on('end', (d) => {

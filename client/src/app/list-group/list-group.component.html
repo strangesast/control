@@ -1,15 +1,15 @@
+<div class="main">
+  <ng-template appGroup></ng-template>
+</div>
 <div class="side">
   <div class="title-block">
     <span class="title">List Group</span>
   </div>
-  <div *ngFor="let child of children; let i = index" class="item" (click)="setActiveListItem(i)">
-    <span>{{ child | nameFromAttr }}</span>
+  <div *ngFor="let child of children; let i = index" class="item" [class.active]="activeListItem == i">
+    <span (click)="setActiveListItem(i-1)" class="fa fa-fw fa-angle-left icon"></span>
+    <span (click)="setActiveListItem(i)">{{ child | nameFromAttr }}</span>
+    <span class="spacer"></span>
+    <span (click)="setActiveListItem(i+1)" *ngIf="i < children.length - 1" class="fa fa-fw fa-angle-right icon"></span>
   </div>
-</div>
-<div class="main">
-  <div class="title-bar">
-    <span class="fa fa-fw fa-angle-left icon"></span>
-    <span>{{ activeListItem != null ? (children[activeListItem] | nameFromAttr) : "toast" }}</span>
-  </div>
-  <ng-template appGroup></ng-template>
+  <div class="item"></div>
 </div>

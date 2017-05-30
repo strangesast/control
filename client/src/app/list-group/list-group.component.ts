@@ -8,11 +8,12 @@ import { RegistrationService } from '../registration.service';
   styleUrls: ['./list-group.component.less'],
   host: {
     '[style.background-color]': 'backgroundColor',
-    '[style.color]': 'color'
+    '[style.color]': 'color',
+    '[class.child-active]': 'activeListItem > -1'
   }
 })
 export class ListGroupComponent extends GroupComponent {
-  activeListItem: number;
+  activeListItem: number = -1;
 
   constructor(componentFactoryResolver: ComponentFactoryResolver, registration: RegistrationService) {
     super(componentFactoryResolver, registration);
@@ -22,7 +23,7 @@ export class ListGroupComponent extends GroupComponent {
   }
 
   buildAll() {
-    if (this.activeListItem != null) {
+    if (this.activeListItem > -1) {
       this.host.viewContainerRef.clear();
       let child = this.children[this.activeListItem];
       this.build(child);
@@ -30,7 +31,7 @@ export class ListGroupComponent extends GroupComponent {
   }
 
   setActiveListItem(index) {
-    this.activeListItem = index;
+    this.activeListItem = this.activeListItem != index ? index : -1;
     this.buildAll()
   }
 }
