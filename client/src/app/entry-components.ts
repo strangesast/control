@@ -5,6 +5,7 @@ import { NumericInputComponent } from './numeric-input/numeric-input.component';
 import { GraphComponent } from './graph/graph.component';
 import { GaugeComponent } from './gauge/gauge.component';
 import { ListGroupComponent } from './list-group/list-group.component';
+import { ThermostatComponent } from './thermostat/thermostat.component';
 
 const entryComponents = [
   GroupComponent,
@@ -13,7 +14,8 @@ const entryComponents = [
   NumericInputComponent,
   GraphComponent,
   GaugeComponent,
-  ListGroupComponent
+  ListGroupComponent,
+  ThermostatComponent
 ];
 export const componentNameMap = entryComponents.reduce((a, Component) => Object.assign(a, {[Component.name]: Component }), {});
 export default entryComponents;

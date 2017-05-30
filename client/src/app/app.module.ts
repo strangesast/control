@@ -21,6 +21,7 @@ import { GaugeComponent } from './gauge/gauge.component';
 import { ListGroupComponent } from './list-group/list-group.component';
 
 import entryComponents from './entry-components';
+import { ThermostatComponent } from './thermostat/thermostat.component';
 
 const routes: Routes = [
   { path: '', resolve: { registration: RegistrationService }, children:
@@ -45,7 +46,8 @@ const routes: Routes = [
     NumericInputComponent,
     GraphComponent,
     GaugeComponent,
-    ListGroupComponent
+    ListGroupComponent,
+    ThermostatComponent
   ],
   imports: [
     BrowserModule,

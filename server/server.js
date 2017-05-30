@@ -113,10 +113,15 @@ var measurements = {
   temperature: 0,
   setPoint: 10
 };
+var rates = {
+  temperature: 0
+}
 let interval = Observable.interval(500).share();
 interval.subscribe((t) => {
-  measurements.temperature += 2*Math.random()*Math.sign(measurements.setPoint-measurements.temperature)*Math.pow(Math.abs(measurements.setPoint - measurements.temperature), 0.5)*0.5
+  rates.temperature = ((measurements.setPoint - measurements.temperature)*Math.random() + rates.temperature)/2;
+  measurements.temperature += rates.temperature*0.1;
   measurements.temperature = Math.floor(measurements.temperature*1000)/1000;
+  //measurements.temperature += 2*Math.random()*Math.sign(measurements.setPoint-measurements.temperature)*Math.pow(Math.abs(measurements.setPoint - measurements.temperature), 0.5)*0.5
 });
 
 var setSession = Observable.bindNodeCallback(sessionStore.set.bind(sessionStore));
