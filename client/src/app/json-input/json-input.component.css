@@ -1,0 +1,20 @@
+:host {
+  display: block;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+}
+.list-item {
+  margin-bottom: 10px;
+}
+.list-item > * {
+  display: inline-block;
+}
+.list-item > label {
+  width: 60%;
+}
+.list-item > button {
+  width: 10%;
+}

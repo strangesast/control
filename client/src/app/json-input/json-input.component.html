@@ -1,2 +1,18 @@
+<div>
+  <label>
+    Template Name:
+    <input #name [(ngModel)]="templateName">
+  </label>
+  <button (click)="saveTemplate(name.value)">Save</button>
+</div>
 <textarea [(ngModel)]="text" (input)="change()" rows="50" cols="80"></textarea>
-<span *ngIf="!valid">Invalid JSON</span>
+<div>
+  <span *ngIf="!valid">Invalid JSON</span>
+</div>
+<div class="list">
+  <div *ngFor="let template of templates; let i = index" class="list-item">
+    <label>{{ template.name }}</label>
+    <button (click)="removeTemplate(i)">Remove</button>
+    <button (click)="loadTemplate(i)">Load</button>
+  </div>
+</div>
