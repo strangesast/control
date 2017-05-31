@@ -22,9 +22,11 @@ export class GenericComponent {
   set value(value) {
     if (value instanceof Subject) {
       if (this.valueSubscription) this.valueSubscription.unsubscribe();
-      this.valueSubscription = (this.valueSubject = value).subscribe(val => this.currentValue = val)
+      this.valueSubscription = (this.valueSubject = value).subscribe(val => {
+        this.currentValue = val;
+      })
     } else {
-      this.valueSubject.next(value);
+      this.valueSubject.next(this.currentValue = value);
     }
   }
 }

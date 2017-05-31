@@ -32,8 +32,6 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
   ngAfterViewInit() {
     this.setup();
     this.valueSubject.asObservable().distinctUntilChanged().map((value, i) => {
-      value = Math.round(value);
-      console.log('got', value);
       this.redraw(value, 75);
     }).subscribe();
   }
@@ -291,8 +289,8 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
       .attr('class', 'control')
       .attr('transform', (d) => `translate(${ d*size/10 }, ${ ir })`)
     e.on('click', (d) => {
-      this.value = this.value + d
-      this.redraw(this.value, undefined, 0);
+      this.value = this.value + d;
+      this.redraw(this.value, undefined, 100);
     });
     e.append('circle').attr('r', size/20).attr('opacity', 0.0)
     e.append('text')
@@ -306,7 +304,6 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
 
     let lastCurrent;
     this.redraw = function(value, current=lastCurrent, animate=500) {
-      console.log('drawing', value);
       lastCurrent = current;
       let a = transform(value, min, max);
       let b = transform(current, min, max);

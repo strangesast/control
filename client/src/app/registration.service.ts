@@ -55,11 +55,10 @@ export class RegistrationService implements Resolve<Observable<null>> {
   }
 
   register(attr) {
-    let stream = this.updates.pluck(attr.id).filter(v => v != null);
+    let stream = this.updates.pluck(attr.id).filter(v => v != null).distinctUntilChanged();
     if (attr.value != null) stream = stream.startWith(attr.value);
     let sink = new ReplaySubject(1);
     sink.debounceTime(1000).subscribe(value => {
-      console.log('sending', value);
       this.send({ update: { values: [ { name: attr.id, value } ]}});
     });
     return Subject.create(sink, stream);
