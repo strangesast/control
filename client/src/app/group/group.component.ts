@@ -51,10 +51,16 @@ export class GroupComponent extends GenericComponent implements OnInit {
     let factory = this.componentFactoryResolver.resolveComponentFactory(Component);
     let { viewContainerRef } = this.host;
     let componentRef = viewContainerRef.createComponent(factory, index);
+    let toRegister = {};
     for (let attr of attributes) {
       // assert correct type for attribute
-      (<GenericComponent>componentRef.instance)[attr.name] = attr.id ? this.registration.register(attr) : attr.value;
+      if (attr.id) {
+        toRegister[attr.name] = { id: attr.id, value: attr.value };
+      } else {
+        (<GenericComponent>componentRef.instance)[attr.name] = attr.value;
+      }
     }
+    (<GenericComponent>componentRef.instance).value = this.registration.register(toRegister);
     return componentRef;
   }
 

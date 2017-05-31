@@ -7,7 +7,7 @@ import {
   AfterViewInit
 } from '@angular/core';
 import { GenericComponent } from '../generic/generic.component';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import * as d3 from 'd3';
 
 @Component({
@@ -24,6 +24,7 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
   @Input() setPoint: number = 50;
   @Input() backgroundColor: string = '#e1ecff';
   @Input() color: string = '#4279da';//'#5EA3F4';
+  private userInput = new Subject();
 
   constructor() {
     super();
@@ -31,8 +32,12 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
 
   ngAfterViewInit() {
     this.setup();
-    this.valueSubject.asObservable().distinctUntilChanged().map((value, i) => {
-      this.redraw(value, 75);
+    this.userInput.mapTo(null).startWith(null).switchMap(() => {
+      return Observable.of(null).delay(1000).flatMap((a) => {
+        return this.valueSubject.asObservable().map((value, i) => {
+          this.redraw(value.setPoint, value.temperature);
+        });
+      });
     }).subscribe();
   }
 
@@ -234,7 +239,7 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
     var larc = d3.arc()
         .innerRadius(ir)
         .outerRadius(or)
-        .startAngle(Math.PI*1.2);
+        //.startAngle(Math.PI*1.2);
 
     
     g.append('circle')
@@ -242,7 +247,7 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
       .attr('r', size/2)
 
     var foreground = g.append('path')
-        .datum({endAngle: Math.PI*2 })
+        .datum({ startAngle: 0, endAngle: Math.PI*2 })
         .style('fill', color)
         .attr('d', larc);
 
@@ -256,9 +261,11 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
     let drag = d3.drag()
       .on('drag', (d) => {
         this.redraw(calc(), undefined, 0);
+        this.userInput.next(this.value);
       })
       .on('end', (d) => {
-        this.value = Math.round(calc());
+        this.value = { setPoint: Math.round(calc()) };
+        this.userInput.next(this.value);
       });
 
     let sw = 2;
@@ -266,13 +273,22 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
 
     g.append('path')
       .attr('class', 'drag')
-      .datum({ endAngle: Math.PI*2.8 })
+      .datum({ startAngle: 0, endAngle: Math.PI*2.8 })
       .attr('d', barc)
       .attr('opacity', 0.0)
       .call(drag)
 
+    let setPointGroup = g.append('g');
+    let tempGroup = g.append('g').attr('opacity', 0);
     let setPointFontSize = Math.round(this.size / 3);
-    var tempText = g.append('text')
+    var setPointText = setPointGroup.append('text')
+      .attr('dy', setPointFontSize / 3)
+      .attr('text-anchor', 'middle')
+      .style('font-size', setPointFontSize + 'px')
+      .style('fill', color)
+      .style('stroke-width', '0px')
+
+    var tempText = tempGroup.append('text')
       .attr('dy', setPointFontSize / 3)
       .attr('text-anchor', 'middle')
       .style('font-size', setPointFontSize + 'px')
@@ -282,9 +298,26 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
     let coolingStateFontSize = Math.round(size / 22);
     let coolingStateText = g.append('text')
       .attr('y', -setPointFontSize/2)
+      .attr('dy', -coolingStateFontSize/2)
       .attr('text-anchor', 'middle')
       .style('font-size', coolingStateFontSize + 'px')
       .style('fill', color)
+
+    tempGroup.append('text')
+      .attr('y', setPointFontSize/2)
+      .attr('dy', coolingStateFontSize)
+      .attr('text-anchor', 'middle')
+      .style('font-size', coolingStateFontSize + 'px')
+      .style('fill', color)
+      .text('TEMPERATURE')
+
+    setPointGroup.append('text')
+      .attr('y', setPointFontSize/2)
+      .attr('dy', coolingStateFontSize)
+      .attr('text-anchor', 'middle')
+      .style('font-size', coolingStateFontSize + 'px')
+      .style('fill', color)
+      .text('SET POINT')
 
     let controlFontSize = 20;
     let e = g.selectAll('.control').data([-1, 1]).enter()
@@ -292,8 +325,10 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
       .attr('class', 'control')
       .attr('transform', (d) => `translate(${ d*size/10 }, ${ ir })`)
     e.on('click', (d) => {
-      this.value = this.value + d;
-      this.redraw(this.value, undefined, 100);
+      let setPoint = this.value.setPoint + d;
+      this.value = { setPoint };
+      this.redraw(this.value.setPoint, this.value.temperature, 100);
+      this.userInput.next(this.value);
     });
     e.append('circle').attr('r', size/20).attr('opacity', 0.0)
     e.append('text')
@@ -309,9 +344,9 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
       angle *= -1
       angle += Math.PI;
       let l1 = or + sw/2;
-      let l2 = or - (or-ir)*1.5;
+      let l2 = or - (or-ir)*3.0;
 
-      let s = Math.PI/200;
+      let s = Math.PI/100;
       let pts = [
         { x: Math.sin(angle-s)*l1, y: Math.cos(angle-s)*l1 },
         { x: Math.sin(angle)*l1, y: Math.cos(angle)*l1 },
@@ -329,33 +364,36 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
       lastCurrent = current;
       let a = transform(value, min, max);
       let b = transform(current, min, max);
-      larc.startAngle(b);
+      let steady = Math.abs(value - current) < 0.1;
+      //larc.startAngle(b);
 
       if (animate) {
         let t = d3.transition().duration(animate);
-        foreground.transition(t).attrTween('d', arcTween(a));
+        foreground.transition(t).attrTween('d', arcTween(b, a));
         pointer.transition(t).attrTween('d', lineTween(a));
-        tempText.transition(t).tween('text', function() {
-          var that = d3.select(this);
-          let i = d3.interpolateNumber(that.text(), Math.round(value))
-          return function(t) {
-            that.text(Math.round(i(t)));
-          }
-        });
+        setPointText.transition(t).tween('text', textTweener(value));
+        tempText.transition(t).tween('text', textTweener(current));
+
+        setPointGroup.transition(t).attr('transform', `translate(${ steady ? 0 : size/8 }, 0) scale(${ steady ? 1 : 0.5 })`);
+        tempGroup.transition(t).attr('transform', `translate(${ steady ? 0 : -size/8 }, 0) scale(${ steady ? 1 : 0.5 })`).attr('opacity', steady ? 0.0 : 1.0);
 
       } else {
-        tempText.text(Math.round(value))
-        foreground.attr('d', (d) => larc(Object.assign(d, { endAngle: a })));
+        setPointText.text(Math.round(value))
+        tempText.text(Math.round(current))
+        foreground.attr('d', (d) => larc(Object.assign(d, { startAngle: b, endAngle: a })));
         pointer.datum({ angle: a}).attr('d', (d) => drawPointer(d));
       }
-      coolingStateText.text(Math.abs(value - current) < 1 ? 'STEADY' : value > current ? 'HEATING' : 'COOLING')
+      coolingStateText.text(steady ? 'STEADY' : value > current ? 'HEATING' : 'COOLING')
+
     }
     
-    function arcTween(newAngle) {
+    function arcTween(newStart, newEnd) {
       return function(d) {
-        var interpolate = d3.interpolate(d.endAngle, newAngle);
+        var end = d3.interpolate(d.endAngle, newEnd);
+        var start = d3.interpolate(d.startAngle, newStart);
         return function(t) {
-          d.endAngle = interpolate(t);
+          d.endAngle = end(t);
+          d.startAngle = start(t);
           return larc(d);
         };
       };
@@ -380,4 +418,14 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
 function transform(value, min, max) {
   let range = max - min;
   return (Math.max(min, Math.min(max, value)) - min)/range*1.6*Math.PI + 1.2*Math.PI;
+}
+
+function textTweener(value) {
+  return function() {
+    var that = d3.select(this);
+    let i = d3.interpolateNumber(that.text(), Math.round(value))
+    return function(t) {
+      that.text(Math.round(i(t)));
+    }
+  }
 }

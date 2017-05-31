@@ -54,12 +54,28 @@ export class RegistrationService implements Resolve<Observable<null>> {
     this.socket.next(JSON.stringify(message));
   }
 
-  register(attr) {
-    let stream = this.updates.pluck(attr.id).filter(v => v != null).distinctUntilChanged();
-    if (attr.value != null) stream = stream.startWith(attr.value);
+  register(attributes) {
+    let stream = Observable.combineLatest(...Object.keys(attributes).map(name => {
+      let { id, value } = attributes[name];
+      let stream = this.updates.pluck(id).filter(v => v != null);
+      if (value) stream = stream.startWith(value);
+      return stream.distinctUntilChanged().map(v => ({ [name]: v }));
+    })).scan((a, b: any[]) => {
+      // always returns the last value for each attribute
+      return Object.assign(a, b.reduce((c, d) => Object.assign(c, d), {}));
+    }, {}).debounceTime(100);
+
+    //let stream = this.updates.pluck(attr.id).filter(v => v != null).distinctUntilChanged();
     let sink = new ReplaySubject(1);
     sink.debounceTime(1000).subscribe(value => {
-      this.send({ update: { values: [ { name: attr.id, value } ]}});
+      console.log('update', value);
+      let updates = [];
+      for (let prop in value) {
+        // check that prop is 'writable'
+        updates.push({ name: prop, value: value[prop] });
+      }
+      console.log(updates);
+      this.send({ update: { values: updates }});
     });
     return Subject.create(sink, stream);
   }

@@ -126,7 +126,7 @@ export class JsonInputComponent {
               "name": "children",
               "type": "array",
               "value": [
-                "gaugeComponent0",
+                "thermostatComponent0",
                 "graphComponent0",
                 "numericInput1"
               ]
@@ -145,7 +145,7 @@ export class JsonInputComponent {
               "name": "children",
               "type": "array",
               "value": [
-                "gaugeComponent0",
+                "thermostatComponent0",
                 "numericInput1"
               ]
             }
@@ -227,13 +227,18 @@ export class JsonInputComponent {
             }
           ]
         },
-        "gaugeComponent0": {
+        "thermostatComponent0": {
           "type": "ThermostatComponent",
           "attributes": [
             {
-              "name": "value",
+              "name": "setPoint",
               "type": "number",
               "id": "setPoint"
+            },
+            {
+              "name": "temperature",
+              "type": "number",
+              "id": "temperature"
             }
           ]
         }

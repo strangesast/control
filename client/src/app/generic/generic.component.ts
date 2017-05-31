@@ -26,7 +26,8 @@ export class GenericComponent {
         this.currentValue = val;
       })
     } else {
-      this.valueSubject.next(this.currentValue = value);
+      this.valueSubject.next(value);
+      Object.assign(this.currentValue, value);
     }
   }
 }
