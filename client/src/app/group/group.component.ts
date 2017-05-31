@@ -39,29 +39,23 @@ export class GroupComponent extends GenericComponent implements OnInit {
     }
   }
 
-  buildAll() {
+  buildAll(...args) {
     this.host.viewContainerRef.clear();
     for (let child of this.children) {
       this.build(child);
     }
   }
 
-  build(obj) {
+  build(obj, index?) {
     let { Component, attributes } = obj;
     let factory = this.componentFactoryResolver.resolveComponentFactory(Component);
     let { viewContainerRef } = this.host;
-    let componentRef = viewContainerRef.createComponent(factory);
+    let componentRef = viewContainerRef.createComponent(factory, index);
     for (let attr of attributes) {
       // assert correct type for attribute
       (<GenericComponent>componentRef.instance)[attr.name] = attr.id ? this.registration.register(attr) : attr.value;
     }
     return componentRef;
-  }
-
-  ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-    if (changes.children) {
-      this.buildAll();
-    }
   }
 
   static toJSON() {

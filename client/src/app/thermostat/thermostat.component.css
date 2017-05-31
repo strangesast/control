@@ -1,5 +1,7 @@
 :host {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 :host /deep/ svg text {
   cursor: default;
@@ -27,4 +29,5 @@
   padding: 10px;
   box-sizing: border-box;
   width: 100%;
+  max-width: calc(100vh - 50px);
 }

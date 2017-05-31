@@ -33,7 +33,8 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
     this.setup();
     this.valueSubject.asObservable().distinctUntilChanged().map((value, i) => {
       value = Math.round(value);
-      this.redraw(value, 75, true);
+      console.log('got', value);
+      this.redraw(value, 75);
     }).subscribe();
   }
 
@@ -219,7 +220,6 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
     let svg = d3.select(element);
  
     let bbox = svg.node().getBoundingClientRect();
-    console.log(bbox);
     let { width, height } = bbox;
 
     let size = 400,
@@ -237,9 +237,6 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
         .innerRadius(ir)
         .outerRadius(or)
         .startAngle(Math.PI*1.2);
-
-    
-   //svg.attr('size', size).attr('height', size)
 
     
     g.append('circle')
@@ -260,8 +257,7 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
     }
     let drag = d3.drag()
       .on('drag', (d) => {
-        console.log('drag');
-        this.redraw(calc(), undefined, false);
+        this.redraw(calc(), undefined, 0);
       })
       .on('end', (d) => {
         this.value = Math.round(calc());
@@ -295,7 +291,8 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
       .attr('class', 'control')
       .attr('transform', (d) => `translate(${ d*size/10 }, ${ ir })`)
     e.on('click', (d) => {
-      this.redraw(this.value += d, undefined, true);
+      this.value = this.value + d
+      this.redraw(this.value, undefined, 0);
     });
     e.append('circle').attr('r', size/20).attr('opacity', 0.0)
     e.append('text')
@@ -305,10 +302,11 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
       .attr('text-anchor', 'middle')
       .text((d) => d == 1 ? '▲' : '▼')
     
-    this.redraw(min, undefined, true);
+    this.redraw(min, undefined);
 
     let lastCurrent;
-    this.redraw = function(value, current=lastCurrent, animate=true) {
+    this.redraw = function(value, current=lastCurrent, animate=500) {
+      console.log('drawing', value);
       lastCurrent = current;
       let a = transform(value, min, max);
       let b = transform(current, min, max);
@@ -316,7 +314,7 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
       larc.startAngle(b);
 
       if (animate) {
-        let t = d3.transition().duration(500);
+        let t = d3.transition().duration(animate);
         foreground.transition(t).attrTween('d', arcTween(a+pad));
         tempText.transition(t).tween('text', function() {
           var that = d3.select(this);
@@ -344,7 +342,7 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
     }
   }
     
-  redraw(setPoint, current, animate) {
+  redraw(setPoint, current, animate?:number) {
   }
 }
 

@@ -38,7 +38,7 @@ export class RegistrationService implements Resolve<Observable<null>> {
             .pluck('data')
 
           let sink = new ReplaySubject(1);
-          sink.throttleTime(100).subscribe(template => {
+          sink.debounceTime(1000).subscribe(template => {
             this.send({ command: { type: 'template', data: template }});
           });
 
@@ -58,7 +58,8 @@ export class RegistrationService implements Resolve<Observable<null>> {
     let stream = this.updates.pluck(attr.id).filter(v => v != null);
     if (attr.value != null) stream = stream.startWith(attr.value);
     let sink = new ReplaySubject(1);
-    sink.throttleTime(100).subscribe(value => {
+    sink.debounceTime(1000).subscribe(value => {
+      console.log('sending', value);
       this.send({ update: { values: [ { name: attr.id, value } ]}});
     });
     return Subject.create(sink, stream);
