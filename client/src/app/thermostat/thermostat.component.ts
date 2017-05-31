@@ -65,7 +65,7 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
   //    .attr('width', size)
   //    .attr('height', size);
 
-  //  function calc() {
+  //  function mouseAngle() {
   //    let dx = d3.event.x-size/2;
   //    let dy = d3.event.y-size/2;
   //    let a = Math.atan2(dy, dx);
@@ -78,10 +78,10 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
   //  }
   //  let drag = d3.drag()
   //    .on('drag', (d) => {
-  //      this.redraw(calc(), undefined, true)
+  //      this.redraw(mouseAngle(), undefined, true)
   //    })
   //    .on('end', (d) => {
-  //      this.value = calc();
+  //      this.value = mouseAngle();
   //    });
 
   //  // background circle
@@ -212,9 +212,7 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
 
   setup() {
     let background = this.backgroundColor;
-    let backgroundbrighter = d3.hsl(this.backgroundColor).brighter(0.15);
     let color = this.color;
-    let colormuted = d3.hsl(this.color);
 
     let max = this.max;
     let min = this.min;
@@ -222,15 +220,13 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
     let element = this.graphElement.nativeElement;
     let svg = d3.select(element);
  
-    let bbox = svg.node().getBoundingClientRect();
-    let { width, height } = bbox;
-
-    let size = 400,
-        g = svg.append('g').attr('transform', 'translate(' + size / 2 + ',' + size / 2 + ')');
+    let { width, height } = svg.node().getBoundingClientRect();
+    let size = 400;
+    let g = svg.append('g').attr('transform', 'translate(' + size / 2 + ',' + size / 2 + ')');
 
     let range = max - min;
     var barc = d3.arc()
-        .innerRadius(size/2 - 64)
+        .innerRadius(size/2 - 100)
         .outerRadius(size/2)
         .startAngle(Math.PI*1.2);
 
@@ -239,48 +235,36 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
     var larc = d3.arc()
         .innerRadius(ir)
         .outerRadius(or)
-        //.startAngle(Math.PI*1.2);
-
     
-    g.append('circle')
-      .style('fill', backgroundbrighter)
-      .attr('r', size/2)
-
     var foreground = g.append('path')
-        .datum({ startAngle: 0, endAngle: Math.PI*2 })
-        .style('fill', color)
-        .attr('d', larc);
+      .datum({ startAngle: 0, endAngle: 0 })
+      .style('fill', color)
+      .attr('d', larc);
 
-    function calc() {
-      let { x, y } = d3.event;
-      let a = Math.atan2(y, x) - Math.PI/2;
-      a = a < 0 ? a + Math.PI*2 : a;
-      return Math.max(0, Math.min(1, (a-Math.PI*0.2)/(Math.PI*1.6)))*range + min;
-      //a = Math.min(max, Math.max(min, a));
-    }
     let drag = d3.drag()
       .on('drag', (d) => {
-        this.redraw(calc(), undefined, 0);
+        this.redraw(mouseAngle(range, min), undefined, 0);
         this.userInput.next(this.value);
       })
       .on('end', (d) => {
-        this.value = { setPoint: Math.round(calc()) };
+        this.value = { setPoint: Math.round(mouseAngle(range, min)) };
         this.userInput.next(this.value);
       });
 
     let sw = 2;
-    let pointer = g.append('path').datum({ angle: 0 }).attr('class', 'pointer').attr('stroke', 'white').attr('stroke-width', `${sw}px`).attr('fill', color)
-
-    g.append('path')
-      .attr('class', 'drag')
-      .datum({ startAngle: 0, endAngle: Math.PI*2.8 })
-      .attr('d', barc)
-      .attr('opacity', 0.0)
-      .call(drag)
+    let pointer = g.append('path')
+      .datum({ angle: Math.PI*2 })
+      .attr('class', 'pointer')
+      .attr('stroke', background)
+      .attr('stroke-width', `${sw}px`)
+      .attr('fill', color)
 
     let setPointGroup = g.append('g');
     let tempGroup = g.append('g').attr('opacity', 0);
-    let setPointFontSize = Math.round(this.size / 3);
+    let setPointFontSize = this.size / 3;
+    let coolingStateFontSize = size / 22;
+    let controlFontSize = size/20;
+
     var setPointText = setPointGroup.append('text')
       .attr('dy', setPointFontSize / 3)
       .attr('text-anchor', 'middle')
@@ -295,7 +279,6 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
       .style('fill', color)
       .style('stroke-width', '0px')
 
-    let coolingStateFontSize = Math.round(size / 22);
     let coolingStateText = g.append('text')
       .attr('y', -setPointFontSize/2)
       .attr('dy', -coolingStateFontSize/2)
@@ -319,7 +302,6 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
       .style('fill', color)
       .text('SET POINT')
 
-    let controlFontSize = 20;
     let e = g.selectAll('.control').data([-1, 1]).enter()
       .append('g')
       .attr('class', 'control')
@@ -337,27 +319,14 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
       .attr('dy', controlFontSize/4)
       .attr('text-anchor', 'middle')
       .text((d) => d == 1 ? '▲' : '▼')
-    
+    g.append('path')
+      .attr('class', 'drag')
+      .datum({ startAngle: 0, endAngle: Math.PI*2.8 })
+      .attr('d', barc)
+      .attr('opacity', 0.0)
+      .call(drag)
+
     this.redraw(min, undefined);
-
-    function drawPointer({ angle }) {
-      angle *= -1
-      angle += Math.PI;
-      let l1 = or + sw/2;
-      let l2 = or - (or-ir)*3.0;
-
-      let s = Math.PI/100;
-      let pts = [
-        { x: Math.sin(angle-s)*l1, y: Math.cos(angle-s)*l1 },
-        { x: Math.sin(angle)*l1, y: Math.cos(angle)*l1 },
-        { x: Math.sin(angle+s)*l1, y: Math.cos(angle+s)*l1 },
-        { x: Math.sin(angle+s)*l2, y: Math.cos(angle+s)*l2 },
-        { x: Math.sin(angle)*l2, y: Math.cos(angle)*l2 },
-        { x: Math.sin(angle-s)*l2, y: Math.cos(angle-s)*l2 },
-      ].map(({ x, y}) => [x, y]);
-      let str = 'M ' + pts[0].join(' ') + pts.slice(1).map(p => 'L ' + p.join(' ')).join(' ') + 'Z'
-      return str;
-    }
 
     let lastCurrent;
     this.redraw = function(value, current=lastCurrent, animate=500) {
@@ -381,7 +350,7 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
         setPointText.text(Math.round(value))
         tempText.text(Math.round(current))
         foreground.attr('d', (d) => larc(Object.assign(d, { startAngle: b, endAngle: a })));
-        pointer.datum({ angle: a}).attr('d', (d) => drawPointer(d));
+        pointer.datum({ angle: a}).attr('d', (d) => drawPointer(d, or+sw/2, ir));
       }
       coolingStateText.text(steady ? 'STEADY' : value > current ? 'HEATING' : 'COOLING')
 
@@ -402,10 +371,17 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
     function lineTween(newAngle) {
       return function(d) {
         var interpolate = d3.interpolate(d.angle, newAngle);
-        return function(t) {
-          d.angle = interpolate(t)
-          return drawPointer(d);
-        };
+        if (d.angle == newAngle) {
+          let str = drawPointer(d, or+sw/2, ir);
+          return function() {
+            return str;
+          }
+        } else {
+          return function(t) {
+            d.angle = interpolate(t)
+            return drawPointer(d, or+sw/2, ir);
+          };
+        }
       };
     }
 
@@ -428,4 +404,30 @@ function textTweener(value) {
       that.text(Math.round(i(t)));
     }
   }
+}
+
+function drawPointer({ angle }, or, ir) {
+  angle *= -1
+  angle += Math.PI;
+  let l1 = or;
+  let l2 = or - (or-ir)*3.0;
+
+  let s = Math.PI/100;
+  let pts = [
+    { x: Math.sin(angle-s)*l1, y: Math.cos(angle-s)*l1 },
+    { x: Math.sin(angle)*l1, y: Math.cos(angle)*l1 },
+    { x: Math.sin(angle+s)*l1, y: Math.cos(angle+s)*l1 },
+    { x: Math.sin(angle+s)*l2, y: Math.cos(angle+s)*l2 },
+    { x: Math.sin(angle)*l2, y: Math.cos(angle)*l2 },
+    { x: Math.sin(angle-s)*l2, y: Math.cos(angle-s)*l2 },
+  ].map(({ x, y}) => [x, y]);
+  let str = 'M ' + pts[0].join(' ') + pts.slice(1).map(p => 'L ' + p.join(' ')).join(' ') + 'Z'
+  return str;
+}
+
+function mouseAngle(range, min) {
+  let { x, y } = d3.event;
+  let a = Math.atan2(y, x) - Math.PI/2;
+  a = a < 0 ? a + Math.PI*2 : a;
+  return Math.max(0, Math.min(1, (a-Math.PI*0.2)/(Math.PI*1.6)))*range + min;
 }

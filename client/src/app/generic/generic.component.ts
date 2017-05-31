@@ -1,4 +1,4 @@
-import { Input, Output, Component, OnInit, EventEmitter } from '@angular/core';
+import { Input, Output, Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
 
 @Component({
@@ -10,7 +10,7 @@ import { Observable, Subject, Subscription } from 'rxjs';
     '[style.color]': 'color'
   }
 })
-export class GenericComponent {
+export class GenericComponent implements OnDestroy {
   @Input() backgroundColor: string;
   @Input() color: string = '#000';
   valueSubscription: Subscription;
@@ -29,5 +29,9 @@ export class GenericComponent {
       this.valueSubject.next(value);
       Object.assign(this.currentValue, value);
     }
+  }
+
+  ngOnDestroy() {
+    if (this.valueSubscription) this.valueSubscription.unsubscribe();
   }
 }
