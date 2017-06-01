@@ -57,7 +57,7 @@ const routes: Routes = [
     HttpModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [RegistrationService],
+  providers: [ RegistrationService ],
   bootstrap: [AppComponent],
   entryComponents
 })

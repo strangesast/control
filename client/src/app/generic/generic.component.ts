@@ -27,7 +27,7 @@ export class GenericComponent implements OnDestroy {
       })
     } else {
       this.valueSubject.next(value);
-      Object.assign(this.currentValue, value);
+      Object.assign(this.currentValue, value); // not ideal
     }
   }
 

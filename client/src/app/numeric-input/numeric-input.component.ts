@@ -1,6 +1,6 @@
 import { Input, Output, Component, OnInit, SimpleChange, EventEmitter } from '@angular/core';
 import { GenericComponent } from '../generic/generic.component';
-import { Observable, Subscription } from 'rxjs';
+import { Subject, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-numeric-input',
@@ -18,5 +18,21 @@ export class NumericInputComponent extends GenericComponent {
 
   constructor() {
     super();
+  }
+
+  @Input() get value() {
+    return this.currentValue;
+  }
+  set value(value) {
+    if (value instanceof Subject) {
+      if (this.valueSubscription) this.valueSubscription.unsubscribe();
+      this.valueSubscription = (this.valueSubject = value).subscribe(val => {
+        this.currentValue = val.value;
+      })
+    } else {
+      this.valueSubject.next({ value });
+      this.currentValue = value;
+      //Object.assign(this.currentValue, value); // not ideal
+    }
   }
 }

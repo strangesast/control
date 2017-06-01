@@ -65,21 +65,20 @@ export class FactoryComponent extends GroupComponent implements OnInit {
   @ViewChild(GroupDirective) host: GroupDirective;
   registered: boolean = false;
   valid: boolean = false;
-  pending = new ReplaySubject(1);
 
   constructor(componentFactoryResolver: ComponentFactoryResolver, registration: RegistrationService) {
     super(componentFactoryResolver, registration);
   }
 
   ngOnInit() {
-    filterDuplicateObjects(this.registration.init().flatMap(() => {
-      return Observable.merge(this.registration.registeredTemplate, this.pending);
-    })).map(template => {
+    this.registration.registeredTemplate.map(template => {
+      console.log('factory: new template');
       this.json = template;
       try {
         this.buildAll();
         this.valid = true;
       } catch (e) {
+        console.log('json', this.json);
         console.error(e);
         this.valid = false;
       }
@@ -88,14 +87,8 @@ export class FactoryComponent extends GroupComponent implements OnInit {
 
   buildAll() {
     let expanded = expandTemplate(this.json.components.root, this.json.components);
-    this.registration.template = this.json;
+    //this.registration.template = this.json;
     this.host.viewContainerRef.clear();
     this.build(expanded);
-  }
-
-  ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-    if (changes['json']) {
-      this.pending.next(this.json);
-    }
   }
 }

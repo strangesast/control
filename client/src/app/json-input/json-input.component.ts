@@ -18,12 +18,16 @@ export class JsonInputComponent {
 
   set json(val) {
     this.jsonValue = val;
-    this.text = JSON.stringify(this.jsonValue, null, 2);
+    this.setText(val);
     this.jsonChange.emit(this.jsonValue);
     this.registration.template = this.jsonValue;
   }
 
   constructor(private registration: RegistrationService) { }
+
+  setText(json) {
+    this.text = JSON.stringify(json, null, 2);
+  }
 
   ngOnInit() {
     try {
@@ -32,7 +36,9 @@ export class JsonInputComponent {
       this.templates = [];
     }
     this.registration.registeredTemplate.subscribe(template => {
-      this.json = template;
+      console.log('got template');
+      this.jsonValue = template;
+      this.setText(template);
     });
   }
 
