@@ -1,4 +1,2 @@
-<label>
-  {{ label }}
-  <input [(ngModel)]="value" type="number" [disabled]="!write">
-</label>
+<!--<label>{{ label }}<input [(ngModel)]="value" (change)="change($event.target.value)" type="number" [disabled]="!writable"></label>-->
+<label>{{ label }}<input [ngModel]="value" (ngModelChange)="change($event)" type="number" [disabled]="!writable"></label>

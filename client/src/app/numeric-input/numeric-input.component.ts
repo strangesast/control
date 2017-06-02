@@ -1,4 +1,4 @@
-import { Input, Output, Component, OnInit, SimpleChange, EventEmitter } from '@angular/core';
+import { Input, Output, Component, OnInit, EventEmitter } from '@angular/core';
 import { GenericComponent } from '../generic/generic.component';
 import { Subject, Observable, Subscription } from 'rxjs';
 
@@ -12,27 +12,21 @@ import { Subject, Observable, Subscription } from 'rxjs';
   }
 })
 export class NumericInputComponent extends GenericComponent {
-  @Input() read: boolean = true;
-  @Input() write: boolean = false;
+  @Input() writable: boolean = false;
+
+  // label
   @Input() label: string;
+
+  // value
+  @Input() value: number;
+  @Output() valueChange: EventEmitter<number> = new EventEmitter();
+
+  change(value) {
+    this.value = value;
+    this.valueChange.emit(value);
+  }
 
   constructor() {
     super();
-  }
-
-  @Input() get value() {
-    return this.currentValue;
-  }
-  set value(value) {
-    if (value instanceof Subject) {
-      if (this.valueSubscription) this.valueSubscription.unsubscribe();
-      this.valueSubscription = (this.valueSubject = value).subscribe(val => {
-        this.currentValue = val.value;
-      })
-    } else {
-      this.valueSubject.next({ value });
-      this.currentValue = value;
-      //Object.assign(this.currentValue, value); // not ideal
-    }
   }
 }

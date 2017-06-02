@@ -9,7 +9,7 @@ var lastMessageId = 0;
 export class RegistrationService implements Resolve<any> {
   socket;
   SOCKET_URL = `ws:${ location.origin.substring(location.protocol.length) }/socket`;
-  registeredTemplate: Subject<any>;
+  registeredTemplate: ReplaySubject<any>;
   updates: ReplaySubject<any>;
 
   get template() {
@@ -26,6 +26,8 @@ export class RegistrationService implements Resolve<any> {
   }
 
   init() {
+    return Promise.resolve();
+    /*
     return this.http.get(`${ location.origin }/socket/session`).flatMap(res => {
       if (res.status === 200) {
         return createSocketSubject(this.SOCKET_URL).map(socket => {
@@ -59,7 +61,18 @@ export class RegistrationService implements Resolve<any> {
       }
       return Observable.of(null);
     });
+    */
   }
+
+
+  // attribute
+  // {
+  //   read: <boolean>
+  //     probably always true
+  //   write: <boolean>
+  //     attach listener to "(name)Change" event
+  //   type: <string, number, ...>
+  // }
 
   register(attributes) {
     let ids = Object.keys(attributes).map(name => attributes[name].id);

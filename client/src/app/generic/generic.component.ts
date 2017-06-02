@@ -11,27 +11,11 @@ import { Observable, Subject, Subscription } from 'rxjs';
   }
 })
 export class GenericComponent implements OnDestroy {
-  @Input() backgroundColor: string;
-  @Input() color: string = '#000';
-  valueSubscription: Subscription;
-  valueSubject: Subject<any>;
-  currentValue: any;
-  @Input() get value() {
-    return this.currentValue;
-  }
-  set value(value) {
-    if (value instanceof Subject) {
-      if (this.valueSubscription) this.valueSubscription.unsubscribe();
-      this.valueSubscription = (this.valueSubject = value).subscribe(val => {
-        this.currentValue = val;
-      })
-    } else {
-      this.valueSubject.next(value);
-      Object.assign(this.currentValue, value); // not ideal
-    }
-  }
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   ngOnDestroy() {
-    if (this.valueSubscription) this.valueSubscription.unsubscribe();
+    // from https://stackoverflow.com/a/41177163
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

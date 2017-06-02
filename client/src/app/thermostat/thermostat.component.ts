@@ -1,10 +1,11 @@
 import {
   Input,
+  Output,
   OnInit,
   Component,
   ViewChild,
   ElementRef,
-  AfterViewInit
+  EventEmitter,
 } from '@angular/core';
 import { GenericComponent } from '../generic/generic.component';
 import { Observable, Subject } from 'rxjs';
@@ -15,37 +16,52 @@ import * as d3 from 'd3';
   templateUrl: './thermostat.component.html',
   styleUrls: ['./thermostat.component.css']
 })
-export class ThermostatComponent extends GenericComponent implements AfterViewInit {
+export class ThermostatComponent extends GenericComponent implements OnInit {
   @ViewChild('graph') graphElement: ElementRef;
-  @Input() size: number = 400;
+
+
   @Input() min: number = 60;
   @Input() max: number = 85;
   @Input() label: string;
-  @Input() setPoint: number = 50;
-  @Input() backgroundColor: string = '#e1ecff';
-  @Input() color: string = '#4279da';//'#5EA3F4';
-  private userInput = new Subject();
+
+  //@Input() color: string = '#4279da';//'#5EA3F4';
+  //@Input() color: string = '#5EA3F4';
+  @Input() color: string = '#000';
+  //@Input() backgroundColor: string = '#e1ecff';
+  //@Input() backgroundColor: string = '#f6f9ff';
+  @Input() backgroundColor: string = '#fff';
+
+  // temperature
+  @Input() temperature: number;
+
+  // setPoint
+  setPointValue: number;
+  @Input() get setPoint() {
+    return this.setPointValue;
+  }
+  @Output() setPointChange: EventEmitter<number> = new EventEmitter();
+  set setPoint(setPoint) {
+    this.setPointValue = setPoint;
+    this.setPointChange.emit(this.setPointValue);
+  }
 
   constructor() {
     super();
   }
 
-  ngAfterViewInit() {
+  ngOnInit() {
     this.setup();
-    this.userInput.mapTo(null).startWith(null).switchMap(() => {
-      return Observable.of(null).delay(1000).flatMap((a) => {
-        return this.valueSubject.asObservable().map((value, i) => {
-          this.redraw(value.setPoint, value.temperature);
-        });
-      });
-    }).subscribe();
+  }
+
+  ngOnChanges(changes) {
+    this.redraw(1000);
   }
 
   //setup() {
   //  let element = this.graphElement.nativeElement;
   //  let svg = d3.select(element);
 
-  //  let background = this.backgroundColor;
+  //  let backgroundColor = this.backgroundColor;
   //  let backgroundbrighter = d3.hsl(this.backgroundColor).brighter(0.15);
   //  let color = this.color;
   //  let colormuted = d3.hsl(this.color);
@@ -89,7 +105,7 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
   //      .attr('cx', cx)
   //      .attr('cy', cy)
   //      .attr('r', radius)
-  //      .style('fill', background)
+  //      .style('fill', backgroundColor)
   //      .call(drag)
   //  
   //  // foreground circle
@@ -211,7 +227,7 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
   //}
 
   setup() {
-    let background = this.backgroundColor;
+    let backgroundColor = this.backgroundColor;
     let color = this.color;
 
     let max = this.max;
@@ -230,38 +246,45 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
         .outerRadius(size/2)
         .startAngle(Math.PI*1.2);
 
-    let ir = size/2 - 30;
     let or = size/2 - 4;
+    let ir = size/2 - 30;
     var larc = d3.arc()
         .innerRadius(ir)
         .outerRadius(or)
     
+    //g.append('circle')
+    //  .attr('r', size/2)
+    //  .style('fill', backgroundColor)
+
+    g.append('path').datum({ innerRadius: size/2-34, outerRadius: size/2, startAngle: 0, endAngle: Math.PI*2 }).attr('d', d3.arc()).style('fill', backgroundColor);
+
     var foreground = g.append('path')
-      .datum({ startAngle: 0, endAngle: 0 })
+      .datum({ startAngle: 2*Math.PI, endAngle: 2*Math.PI })
       .style('fill', color)
       .attr('d', larc);
 
     let drag = d3.drag()
       .on('drag', (d) => {
-        this.redraw(mouseAngle(range, min), undefined, 0);
-        this.userInput.next(this.value);
+        let setPoint = mouseAngle(range, min);
+        this.setPoint = setPoint;
+        this.redraw(0);
       })
-      .on('end', (d) => {
-        this.value = { setPoint: Math.round(mouseAngle(range, min)) };
-        this.userInput.next(this.value);
-      });
+      //.on('end', (d) => {
+      //  let setPoint = mouseAngle(range, min);
+      //  this.setPoint = setPoint;
+      //});
 
     let sw = 2;
     let pointer = g.append('path')
       .datum({ angle: Math.PI*2 })
       .attr('class', 'pointer')
-      .attr('stroke', background)
+      .attr('stroke', backgroundColor)
       .attr('stroke-width', `${sw}px`)
       .attr('fill', color)
 
     let setPointGroup = g.append('g');
     let tempGroup = g.append('g').attr('opacity', 0);
-    let setPointFontSize = this.size / 3;
+    let setPointFontSize = size / 3;
     let coolingStateFontSize = size / 22;
     let controlFontSize = size/20;
 
@@ -305,14 +328,13 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
     let e = g.selectAll('.control').data([-1, 1]).enter()
       .append('g')
       .attr('class', 'control')
-      .attr('transform', (d) => `translate(${ d*size/10 }, ${ ir })`)
+      .attr('transform', (d, i) => `translate(${ (i == 0 ? 1 : -1 )*Math.sin(Math.PI/12)*(or+ir)/2 }, ${ Math.cos(Math.PI/12)*(or+ir)/2 })`)
     e.on('click', (d) => {
-      let setPoint = this.value.setPoint + d;
-      this.value = { setPoint };
-      this.redraw(this.value.setPoint, this.value.temperature, 100);
-      this.userInput.next(this.value);
+      let setPoint = this.setPoint + d;
+      this.setPoint = setPoint;
+      this.redraw(0);
     });
-    e.append('circle').attr('r', size/20).attr('opacity', 0.0)
+    e.append('circle').attr('r', size/30).attr('opacity', 0.0)
     e.append('text')
       .attr('font-size', controlFontSize)
       .attr('fill', color)
@@ -326,40 +348,52 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
       .attr('opacity', 0.0)
       .call(drag)
 
-    this.redraw(min, undefined);
+    this.redraw(1000);
 
-    let lastCurrent;
-    this.redraw = function(value, current=lastCurrent, animate=500) {
-      lastCurrent = current;
-      let a = transform(value, min, max);
-      let b = transform(current, min, max);
-      let steady = Math.abs(value - current) < 0.1;
-      //larc.startAngle(b);
+    var end;
+    var start;
+    var sp;
+
+    let lastState = true;
+    this.redraw = function(animate=500) {
+      let setPoint = this.setPoint;
+      let temperature = this.temperature;
+      let a = transform(setPoint, min, max);
+      let b = transform(temperature, min, max);
+      let steady = Math.abs(setPoint - temperature) < 0.1;
+      if (lastState != steady) {
+        lastState = steady;
+        let t = d3.transition().duration(500);
+        setPointGroup.transition(t).attr('transform', `translate(${ steady ? 0 : size/8 }, 0) scale(${ steady ? 1 : 0.5 })`);
+        tempGroup.transition(t).attr('transform', `translate(${ steady ? 0 : -size/8 }, 0) scale(${ steady ? 1 : 0.5 })`).attr('opacity', steady ? 0.0 : 1.0);
+        coolingStateText.text(steady ? 'STEADY' : setPoint > temperature ? 'HEATING' : 'COOLING')
+      }
 
       if (animate) {
         let t = d3.transition().duration(animate);
         foreground.transition(t).attrTween('d', arcTween(b, a));
         pointer.transition(t).attrTween('d', lineTween(a));
-        setPointText.transition(t).tween('text', textTweener(value));
-        tempText.transition(t).tween('text', textTweener(current));
+        setPointText.transition(t).tween('text', setPointTweener(setPoint));
+        tempText.transition(t).tween('text', textTweener(temperature));
 
-        setPointGroup.transition(t).attr('transform', `translate(${ steady ? 0 : size/8 }, 0) scale(${ steady ? 1 : 0.5 })`);
-        tempGroup.transition(t).attr('transform', `translate(${ steady ? 0 : -size/8 }, 0) scale(${ steady ? 1 : 0.5 })`).attr('opacity', steady ? 0.0 : 1.0);
 
       } else {
-        setPointText.text(Math.round(value))
-        tempText.text(Math.round(current))
-        foreground.attr('d', (d) => larc(Object.assign(d, { startAngle: b, endAngle: a })));
+        end = () => a;
+        sp = () => Math.round(setPoint);
+        setPointText.text(Math.round(setPoint))
+        tempText.text(Math.round(temperature))
+        foreground.attr('d', (d) => {
+          return larc({ startAngle: b, endAngle: a })
+        })
         pointer.datum({ angle: a}).attr('d', (d) => drawPointer(d, or+sw/2, ir));
       }
-      coolingStateText.text(steady ? 'STEADY' : value > current ? 'HEATING' : 'COOLING')
 
     }
     
     function arcTween(newStart, newEnd) {
       return function(d) {
-        var end = d3.interpolate(d.endAngle, newEnd);
-        var start = d3.interpolate(d.startAngle, newStart);
+        end = d3.interpolate(d.endAngle, newEnd);
+        start = d3.interpolate(d.startAngle, newStart);
         return function(t) {
           d.endAngle = end(t);
           d.startAngle = start(t);
@@ -385,9 +419,18 @@ export class ThermostatComponent extends GenericComponent implements AfterViewIn
       };
     }
 
+    function setPointTweener(value) {
+      return function() {
+        var that = d3.select(this);
+        sp = d3.interpolateNumber(that.text(), Math.round(value))
+        return function(t) {
+          that.text(Math.round(sp(t)));
+        }
+      }
+    }
   }
     
-  redraw(setPoint, current, animate?:number) {
+  redraw(animate?:number) {
   }
 }
 
@@ -406,23 +449,20 @@ function textTweener(value) {
   }
 }
 
+
+
 function drawPointer({ angle }, or, ir) {
-  angle *= -1
-  angle += Math.PI;
+  let _angle = angle*-1 + Math.PI;
   let l1 = or;
   let l2 = or - (or-ir)*3.0;
 
   let s = Math.PI/100;
-  let pts = [
-    { x: Math.sin(angle-s)*l1, y: Math.cos(angle-s)*l1 },
-    { x: Math.sin(angle)*l1, y: Math.cos(angle)*l1 },
-    { x: Math.sin(angle+s)*l1, y: Math.cos(angle+s)*l1 },
-    { x: Math.sin(angle+s)*l2, y: Math.cos(angle+s)*l2 },
-    { x: Math.sin(angle)*l2, y: Math.cos(angle)*l2 },
-    { x: Math.sin(angle-s)*l2, y: Math.cos(angle-s)*l2 },
-  ].map(({ x, y}) => [x, y]);
-  let str = 'M ' + pts[0].join(' ') + pts.slice(1).map(p => 'L ' + p.join(' ')).join(' ') + 'Z'
-  return str;
+  let pts = [-1, 0, 1, 1, 0, -1].map((j, i) => [_angle + s*j, i < 3 ? l1 : l2]).map(([a, b]) => [Math.sin(a)*b, Math.cos(a)*b]);
+  return ptsToPoly(pts);
+}
+
+function ptsToPoly(pts) {
+  return 'M ' + pts[0].join(' ') + pts.slice(1).map(p => 'L ' + p.join(' ')).join(' ') + 'Z';
 }
 
 function mouseAngle(range, min) {

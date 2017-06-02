@@ -25,7 +25,7 @@ import entryComponents from './entry-components';
 import { ThermostatComponent } from './thermostat/thermostat.component';
 
 const routes: Routes = [
-  { path: '', resolve: { registration: RegistrationService }, children:
+  { path: 'factory', resolve: { registration: RegistrationService }, children:
     [
       { path: '', component: FactoryComponent },
       { path: 'configure', component: JsonInputComponent }

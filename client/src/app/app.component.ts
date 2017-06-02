@@ -7,4 +7,14 @@ import { JsonInputComponent } from './json-input/json-input.component';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
+  setPoint = 70
+  temperature = 75
+
+  ngOnInit() {
+    setInterval(() => {
+      if (Math.abs(this.temperature - this.setPoint) > 0.01) {
+        this.temperature += (this.setPoint - this.temperature)*0.5;
+      }
+    }, 1000);
+  }
 }

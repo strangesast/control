@@ -46,6 +46,7 @@ function expandTemplate(object, json, parents=['root']) {
 }
 
 type ComponentDescription = { type: string, attributes: any[] }
+type Template = any;
 
 @Component({
   selector: 'app-factory',
@@ -53,41 +54,46 @@ type ComponentDescription = { type: string, attributes: any[] }
   styleUrls: ['./factory.component.css']
 })
 export class FactoryComponent extends GroupComponent implements OnInit {
-  stream;
-  jsonValue: any;
-  @Output() jsonChange = new EventEmitter();
-  @Input() get json() {
-    return this.jsonValue;
-  }
-  set json(val) {
-    this.jsonChange.emit(this.jsonValue = val);
-  }
   @ViewChild(GroupDirective) host: GroupDirective;
-  registered: boolean = false;
-  valid: boolean = false;
+  
+  // template, input/output
+  templateValue: Template;
+  @Input()
+  get template() {
+    return this.templateValue;
+  }
+  @Output() templateChange = new EventEmitter();
+  set template(template) {
+    this.templateValue = template;
+    this.templateChange.emit(this.templateValue);
+    this.buildAll();
+  }
+
+  // valid, output only
+  validValue: boolean;
+  get valid() {
+    return this.validValue;
+  }
+  @Output() validChange = new EventEmitter();
+  set valid(valid) {
+    this.validValue = valid;
+    this.validChange.emit(this.validValue);
+  }
 
   constructor(componentFactoryResolver: ComponentFactoryResolver, registration: RegistrationService) {
     super(componentFactoryResolver, registration);
   }
 
   ngOnInit() {
-    this.registration.registeredTemplate.map(template => {
-      console.log('factory: new template');
-      this.json = template;
-      try {
-        this.buildAll();
-        this.valid = true;
-      } catch (e) {
-        console.log('json', this.json);
-        console.error(e);
-        this.valid = false;
-      }
-    }).subscribe();
+    this.registration.registeredTemplate.subscribe(template => {
+      this.template = template;
+    });
   }
 
   buildAll() {
-    let expanded = expandTemplate(this.json.components.root, this.json.components);
-    //this.registration.template = this.json;
+    let { components } = this.template;
+    let { root } = components;
+    let expanded = expandTemplate(root, components);
     this.host.viewContainerRef.clear();
     this.build(expanded);
   }
