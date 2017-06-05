@@ -4,7 +4,8 @@ import {
   Component,
   ViewChild,
   ElementRef,
-  AfterViewInit
+  AfterViewInit,
+  ComponentFactoryResolver
 } from '@angular/core';
 import { GenericComponent } from '../generic/generic.component';
 import { Observable } from 'rxjs';
@@ -19,15 +20,12 @@ export class GaugeComponent extends GenericComponent implements AfterViewInit{
   @ViewChild('graph') graphElement: ElementRef;
   @Input() label: string;
 
-  constructor() {
-    super();
+  constructor(componentFactoryResolver: ComponentFactoryResolver) {
+    super(componentFactoryResolver);
   }
 
   ngAfterViewInit() {
     this.setup();
-    this.valueSubject.asObservable().distinctUntilChanged().subscribe(value => {
-      this.redraw(value);
-    });
   }
 
   setup() {

@@ -20,11 +20,15 @@ import { NumericInputComponent } from './numeric-input/numeric-input.component';
 import { GraphComponent } from './graph/graph.component';
 import { GaugeComponent } from './gauge/gauge.component';
 import { ListGroupComponent } from './list-group/list-group.component';
+import { ThermostatComponent } from './thermostat/thermostat.component';
+import { ExampleComponent } from './example/example.component';
 
 import entryComponents from './entry-components';
-import { ThermostatComponent } from './thermostat/thermostat.component';
+import { MapComponent } from './map/map.component';
 
 const routes: Routes = [
+  { path: 'examples', component: ExampleComponent },
+  { path: 'examples/:example', component: ExampleComponent },
   { path: 'factory', resolve: { registration: RegistrationService }, children:
     [
       { path: '', component: FactoryComponent },
@@ -48,7 +52,9 @@ const routes: Routes = [
     GraphComponent,
     GaugeComponent,
     ListGroupComponent,
-    ThermostatComponent
+    ThermostatComponent,
+    ExampleComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,

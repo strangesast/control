@@ -6,6 +6,7 @@ import {
   ViewChild,
   ElementRef,
   EventEmitter,
+  ComponentFactoryResolver
 } from '@angular/core';
 import { GenericComponent } from '../generic/generic.component';
 import { Observable, Subject } from 'rxjs';
@@ -43,10 +44,6 @@ export class ThermostatComponent extends GenericComponent implements OnInit {
   set setPoint(setPoint) {
     this.setPointValue = setPoint;
     this.setPointChange.emit(this.setPointValue);
-  }
-
-  constructor() {
-    super();
   }
 
   ngOnInit() {

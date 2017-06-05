@@ -1,5 +1,14 @@
-import { Input, Output, Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
+import {
+  Input,
+  Output,
+  Component,
+  OnInit,
+  EventEmitter,
+  OnDestroy,
+  ComponentFactoryResolver
+} from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
+import { RegistrationService } from '../registration.service';
 
 @Component({
   selector: 'app-generic',
@@ -12,6 +21,8 @@ import { Observable, Subject, Subscription } from 'rxjs';
 })
 export class GenericComponent implements OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
+
+  constructor() {}
 
   ngOnDestroy() {
     // from https://stackoverflow.com/a/41177163

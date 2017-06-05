@@ -3,6 +3,7 @@ import {
   OnInit,
   ViewChild,
   Component,
+  HostBinding,
   SimpleChange,
   ViewContainerRef,
   ComponentFactoryResolver
@@ -20,23 +21,22 @@ import { ToggleButtonComponent } from '../toggle-button/toggle-button.component'
   styleUrls: ['./group.component.css'],
   host: {
     '[style.background-color]': 'backgroundColor',
-    '[style.color]': 'color'
+    '[style.color]': 'color',
+    '[style.flex-direction]': 'layout == "vertical" ? "column" : "row"'
   }
 })
 export class GroupComponent extends GenericComponent implements OnInit {
   @ViewChild(GroupDirective) host: GroupDirective;
   @Input() layout: string;
-  @Input() children: any[];
-  @Input() name: string;
+  @Input() children: any[] = [];
+  @HostBinding('attr.name') @Input() name: string = Math.floor(Math.random()*100000).toString();
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver, public registration: RegistrationService) {
-    super()
+  constructor(public componentFactoryResolver: ComponentFactoryResolver, public registration: RegistrationService) {
+    super();
   }
 
   ngOnInit() {
-    if (this.children) {
-      this.buildAll();
-    }
+    this.buildAll();
   }
 
   buildAll(...args) {
@@ -51,20 +51,16 @@ export class GroupComponent extends GenericComponent implements OnInit {
     let factory = this.componentFactoryResolver.resolveComponentFactory(Component);
     let { viewContainerRef } = this.host;
     let componentRef = viewContainerRef.createComponent(factory, index);
-    let toRegister = {};
-    for (let attr of attributes) {
-      // assert correct type for attribute
-      if (attr.id) {
-        toRegister[attr.name] = { id: attr.id, value: attr.value };
-      } else {
-        (<GenericComponent>componentRef.instance)[attr.name] = attr.value;
-      }
+    let attributeStreams = this.registration.register(attributes);
+    for (let { name } of attributes) {
+      (<GenericComponent>componentRef.instance)[name] = attributeStreams[name];
     }
-    (<GenericComponent>componentRef.instance).value = this.registration.register(toRegister);
     return componentRef;
   }
 
-  static toJSON() {
-    return 'group';
+  ngOnChanges(changes) {
+    if (changes.children) {
+      this.buildAll();
+    }
   }
 }

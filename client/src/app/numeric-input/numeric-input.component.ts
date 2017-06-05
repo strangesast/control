@@ -1,4 +1,4 @@
-import { Input, Output, Component, OnInit, EventEmitter } from '@angular/core';
+import { Input, Output, Component, OnInit, EventEmitter, ComponentFactoryResolver } from '@angular/core';
 import { GenericComponent } from '../generic/generic.component';
 import { Subject, Observable, Subscription } from 'rxjs';
 
@@ -26,7 +26,7 @@ export class NumericInputComponent extends GenericComponent {
     this.valueChange.emit(value);
   }
 
-  constructor() {
-    super();
+  constructor(componentFactoryResolver: ComponentFactoryResolver) {
+    super(componentFactoryResolver);
   }
 }

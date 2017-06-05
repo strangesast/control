@@ -4,7 +4,8 @@ import {
   Component,
   ViewChild,
   ElementRef,
-  AfterViewInit
+  AfterViewInit,
+  ComponentFactoryResolver
 } from '@angular/core';
 import { GenericComponent } from '../generic/generic.component';
 import * as d3 from 'd3';
@@ -19,16 +20,12 @@ export class GraphComponent extends GenericComponent implements AfterViewInit {
   @Input() keepCount: number = 100;
   values;
 
-  constructor() {
-    super();
+  constructor(componentFactoryResolver: ComponentFactoryResolver) {
+    super(componentFactoryResolver);
   }
 
   ngAfterViewInit() {
     this.setup();
-    this.valueSubject.asObservable().scan((a:any[], value) => a.concat({ value, date: new Date() }).slice(-this.keepCount), []).subscribe(values => {
-      this.redraw(values);
-      this.values = values;
-    });
   }
 
   setup() {

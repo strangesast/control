@@ -1,4 +1,4 @@
-import { Input, Component, OnInit } from '@angular/core';
+import { Input, Component, OnInit, ComponentFactoryResolver } from '@angular/core';
 import { GenericComponent } from '../generic/generic.component';
 
 @Component({
@@ -14,8 +14,8 @@ export class ToggleButtonComponent extends GenericComponent implements OnInit {
   @Input() label: string;
   @Input() value: any;
 
-  constructor() {
-    super();
+  constructor(componentFactoryResolver: ComponentFactoryResolver) {
+    super(componentFactoryResolver);
   }
 
   ngOnInit() {

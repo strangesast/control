@@ -1,0 +1,25 @@
+<div class="example" name="thermostat" *ngIf="currentExample == null || currentExample == 'thermostat'">
+  <h1>thermostat</h1>
+  <a routerLink="/examples/thermostat">thermostat</a>
+  <app-thermostat [temperature]="temperature" [(setPoint)]="setPoint"></app-thermostat>
+</div>
+<div class="example" name="numeric" *ngIf="currentExample == null || currentExample == 'numeric'">
+  <h1>numeric</h1>
+  <a routerLink="/examples/numeric">numeric</a>
+  <app-numeric-input [value]="temperature"></app-numeric-input>
+</div>
+<div class="example" name="group" *ngIf="currentExample == null || currentExample == 'group'">
+  <h1>group</h1>
+  <a routerLink="/examples/group">group</a>
+  <app-group [layout]="groupLayout" [children]="groupChildren" [name]="groupName"></app-group>
+  <button (click)="addGroupChild()">Add Child</button>
+  <div>
+    <label>Horizontal<input name="groupLayout" type="radio" [(ngModel)]="groupLayout" [value]="'horizontal'"></label>
+    <label>Vertical<input name="groupLayout" type="radio" [(ngModel)]="groupLayout" [value]="'vertical'"></label>
+  </div>
+</div>
+<div class="example" name="map" *ngIf="currentExample == null || currentExample == 'map'">
+  <h1>map</h1>
+  <a routerLink="/examples/map">map</a>
+  <app-map></app-map>
+</div>

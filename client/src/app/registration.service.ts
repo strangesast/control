@@ -74,22 +74,27 @@ export class RegistrationService implements Resolve<any> {
   //   type: <string, number, ...>
   // }
 
-  register(attributes) {
-    let ids = Object.keys(attributes).map(name => attributes[name].id);
+  register(attributes: { name: string, value?:any, id?:string }[]) {
+    let ret = {};
+    for (let { name, value, id } of attributes) {
+      ret[name] = value;
+    }
+    return ret;
+    //let ids = Object.keys(attributes).map(name => attributes[name].id);
 
-    let objects = this.updates.map(arr => arr.filter(({ name }) => ids.indexOf(name) > -1).reduce((acc, { name, value, by }) => Object.assign(acc, { [name]: { value, by } }), {}));
+    //let objects = this.updates.map(arr => arr.filter(({ name }) => ids.indexOf(name) > -1).reduce((acc, { name, value, by }) => Object.assign(acc, { [name]: { value, by } }), {}));
 
-    let stream = objects.take(1).flatMap(_objects => objects.pairwise().map(diff).startWith(_objects).filter(obj => Object.keys(obj).length > 0));
+    //let stream = objects.take(1).flatMap(_objects => objects.pairwise().map(diff).startWith(_objects).filter(obj => Object.keys(obj).length > 0));
 
-    this.updates.map(obj => {
-      let copy = {};
-      for (let name in attributes) {
-        let { id } = attributes[name];
-        copy[id] = obj[id]
-      }
-    });
+    //this.updates.map(obj => {
+    //  let copy = {};
+    //  for (let name in attributes) {
+    //    let { id } = attributes[name];
+    //    copy[id] = obj[id]
+    //  }
+    //});
 
-    return communicate(Subject.create(this.updates, stream), this.socket)
+    //return communicate(Subject.create(this.updates, stream), this.socket)
   }
 }
 
