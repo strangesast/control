@@ -1,6 +1,6 @@
 import { Input, Output, EventEmitter, Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
-import { Http } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observer, Subject, Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 
 var lastMessageId = 0;
@@ -15,9 +15,6 @@ export class RegistrationService implements Resolve<any> {
   get template() {
     return this.registeredTemplate.take(1)
   }
-  set template(template) {
-    this.registeredTemplate.next(template);
-  }
 
   constructor(private http: Http) { }
 
@@ -26,18 +23,25 @@ export class RegistrationService implements Resolve<any> {
   }
 
   init() {
-    return Promise.resolve();
+    return this.getTemplate().flatMap((template) => {
+      return createSocketSubject(this.SOCKET_URL).map(socket => {
+        this.socket = socket;
+        console.log('template', template);
+
+        let notNull = socket.filter(x => x != null);
+        let errors = notNull.filter(({ error }) => error != null);
+        let commands = socket.filter(({ command }) => command && command.type ).pluck('command');
+
+        this.registeredTemplate = commands.filter(({ type }) => type == 'template')
+          .pluck('data')
+          .startWith(template)
+          .publishReplay(1)
+          .refCount()
+
+        return null;
+      });
+    });
     /*
-    return this.http.get(`${ location.origin }/socket/session`).flatMap(res => {
-      if (res.status === 200) {
-        return createSocketSubject(this.SOCKET_URL).map(socket => {
-          this.socket = socket;
-
-          socket.filter(message => message.error).subscribe(console.error.bind(console));
-          
-          // should check locally too
-          socket.next({ command: { type: 'currentTemplate' }});
-
           let validCommands = socket.filter(message => message.command && message.command.type);
           
           let templateStream = validCommands.pluck('command')
@@ -64,6 +68,20 @@ export class RegistrationService implements Resolve<any> {
     */
   }
 
+  getTemplate() {
+    return this.http.get(`${ location.origin }/socket/session/template`).map(res => {
+      if (res.status < 400 && res.status >= 200 ) {
+        return res.json();
+      }
+      throw new Error('failed to get session');
+    });
+  }
+
+  setTemplate(template) {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers });
+    return this.http.post(`${ location.origin }/socket/session/template`, { template }, options).flatMap(res => res.json());
+  }
 
   // attribute
   // {
@@ -243,7 +261,9 @@ function createSocketSubject (address) {
       }
     })
 
-    return Subject.create(observer, observable);
+    let subject =  Subject.create(observer, observable);
+    subject.socket = socket;
+    return subject;
   });
 }
 

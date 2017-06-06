@@ -16,15 +16,11 @@ import * as d3 from 'd3';
   templateUrl: './gauge.component.html',
   styleUrls: ['./gauge.component.css']
 })
-export class GaugeComponent extends GenericComponent implements AfterViewInit{
+export class GaugeComponent extends GenericComponent implements OnInit {
   @ViewChild('graph') graphElement: ElementRef;
   @Input() label: string;
 
-  constructor(componentFactoryResolver: ComponentFactoryResolver) {
-    super(componentFactoryResolver);
-  }
-
-  ngAfterViewInit() {
+  ngOnInit() {
     this.setup();
   }
 

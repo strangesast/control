@@ -15,16 +15,12 @@ import * as d3 from 'd3';
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.css']
 })
-export class GraphComponent extends GenericComponent implements AfterViewInit {
+export class GraphComponent extends GenericComponent implements OnInit {
   @ViewChild('graph') graphElement: ElementRef;
   @Input() keepCount: number = 100;
   values;
 
-  constructor(componentFactoryResolver: ComponentFactoryResolver) {
-    super(componentFactoryResolver);
-  }
-
-  ngAfterViewInit() {
+  ngOnInit() {
     this.setup();
   }
 

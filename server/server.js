@@ -1,11 +1,16 @@
 var express = require('express');
 var session = require('express-session');
+var bodyParser = require('body-parser');
+var multer = require('multer');
+var upload = multer();
 var cookie = require('cookie');
 var cookieParser = require('cookie-parser');
 var RedisStore = require('connect-redis')(session);
 var sessionStore = new RedisStore({ host: 'localhost', port: 6379 });
 var app = express()
 var { Observable, Subject, BehaviorSubject, ReplaySubject } = require('rxjs');
+
+const INIT = require('../templates/list.json');
 
 const secret = 'toastToastTOAST';
 app.use(session({
@@ -15,13 +20,42 @@ app.use(session({
   cookie: { secure: false },
   store: sessionStore
 }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/session', function(req, res, next) {
+var sessionRouter = express.Router();
+sessionRouter.get('/', function(req, res, next) {
   res.send();
 });
 
-app.get('/session/logout', function(req, res, next) {
-  if (res.session) {
+sessionRouter.use(function(req, res, next) {
+  if (req.session) {
+    return next();
+  }
+  next(new Error('no session'));
+});
+
+sessionRouter.route('/template')
+.get(function(req, res, next) {
+  console.log('template', req.session.template);
+  if (!req.session.template) {
+    req.session.template = INIT;
+  }
+  res.json(req.session.template);
+})
+.post(upload.array(), function(req, res, next) {
+  let body = req.body;
+  if (body.template) {
+    req.session.template = body;
+    res.send();
+  }
+  let err = new Error('no template');
+  err.status = 400;
+  next(err);
+});
+
+sessionRouter.get('/logout', function(req, res, next) {
+  if (req.session) {
     req.session.destroy(function(err) {
       res.send();
     });
@@ -30,84 +64,71 @@ app.get('/session/logout', function(req, res, next) {
   }
 });
 
+
+var pointsRouter = express.Router();
+
+pointsRouter.use('/:name', function(req, res, next) {
+  let { name } = req.params;
+  let template = req.session.template;
+  if (!template) {
+    next(new Error('no template registered'));
+  } else if (name && template.values.hasOwnProperty(name)) {
+    next();
+  } else {
+    next(new Error('invalid name'));
+  }
+});
+
+pointsRouter.get('/:name', function(req, res, next) {
+  // describe
+  let template = req.session.template;
+  res.json(req.session.template.values[req.params.name]);
+});
+
+pointsRouter.route('/:name/current')
+.get(function(req, res, next) {
+  res.json(measurements[req.params.name]);
+})
+.post(function(req, res, next) {
+  let template = req.session.template;
+  let values = template.values;
+  let name = req.params.name;
+  let body = req.body;
+
+  if (values.hasOwnProperty(name) && values[name].write) {
+    if (body.value && !isNaN(body.value)) {
+      measurements[name] = { value: body.value, by: id() };
+    } else {
+      next(new Error('invalid set value'));
+    }
+  } else {
+    next(new Error('point does not exist or you do not have write permission'));
+  }
+});
+
+pointsRouter.get('/:name/history', function(req, res, next) {
+  res.send('toast');
+});
+
+sessionRouter.use('/points', pointsRouter);
+app.use('/session', sessionRouter);
+
+app.use(function(err, req, res, next) {
+  //res.status(400)
+  res.status(err.status || 500).json({ error: { message: err.message, stack: err.stack } });
+});
+
+// id generator, 9 digits
+function id() {
+  return ('0'.repeat(9) + Math.floor(Math.random()*1e9)).slice(-9);
+}
+
 var server = app.listen(8080)
 
 var WebSocketServer = require('ws').Server,
     wss = new WebSocketServer({ server });
 
 var connections = [];
-
-const INIT = {
-  components: {
-    root: {
-      type: 'ListGroupComponent',
-      attributes: [
-        {
-          name: 'backgroundColor',
-          type: 'string',
-          value: '#eee'
-        },
-        { name: 'children', type: 'array', value: [ 'group0', 'group1' ]}
-      ]
-    },
-    group0: {
-      type: 'GroupComponent',
-      attributes: [
-        { name: 'name', type: 'string', value: 'Group 1' },
-        { name: 'children', type: 'array', value: [ 'numericInput0', 'numericInput1' ]}
-      ]
-    },
-    group1: {
-      type: 'GroupComponent',
-      attributes: [
-        { name: 'name', type: 'string', value: 'Group 2' },
-        { name: 'children', type: 'array', value: ['gaugeComponent0', 'graphComponent0', 'numericInput1'] }
-      ]
-    },
-    numericInput0: {
-      type: 'NumericInputComponent',
-      attributes: [
-        { name: 'label', type: 'string', value: 'Temperature in Room B' },
-        { name: 'value', type: 'number', id: 'temperature' },
-        { name: 'color', type: 'string', value: 'purple' },
-        { name: 'backgroundColor', type: 'string', value: 'white', write: true }
-      ]
-    },
-    numericInput1: {
-      type: 'NumericInputComponent',
-      attributes: [
-        { name: 'label', type: 'string', value: 'Set Point 1' },
-        { name: 'value', type: 'number', id: 'setPoint' },
-        { name: 'color', type: 'string', value: 'purple' },
-        { name: 'backgroundColor', type: 'string', value: 'white' },
-        { name: 'write', type: 'boolean', value: true }
-      ]
-    },
-    graphComponent0: {
-      type: 'GraphComponent',
-      attributes: [
-        { name: 'value', type: 'number', id: 'temperature' }
-      ]
-    },
-    gaugeComponent0: {
-      type: 'GaugeComponent',
-      attributes: [
-        { name: 'value', type: 'number', id: 'temperature' }
-      ]
-    }
-
-  },
-  values: {
-    temperature: {
-      type: 'number',
-      name: 'Temperature Monitor 1'
-    },
-    setPoint: {
-      type: 'number',
-      name: 'Set Point 1'
-    }
-  }
-}
 
 var measurements = {
   temperature: { value: 0, by: '123123123' },
@@ -192,7 +213,10 @@ groups.groupBy(({ id }) => id).flatMap((stream) => {
       });
     }
 
-    let currentTemplate = new BehaviorSubject(session.template);
+    let currentTemplate = new ReplaySubject();
+    if (session.template) {
+      currentTemplate.next(session.template);
+    }
 
     currentTemplate.switchMap(template => {
       console.log('current template changed');
@@ -253,7 +277,6 @@ groups.groupBy(({ id }) => id).flatMap((stream) => {
 
         if (update) {
           console.log('update', update);
-
         }
 
         if (error) {
@@ -340,8 +363,3 @@ wss.on('connection', function(ws, req) {
   });
 });
 */
-
-// id generator, 9 digits
-function id() {
-  return ('0'.repeat(9) + Math.floor(Math.random()*1e9)).slice(-9);
-}

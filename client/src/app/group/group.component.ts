@@ -29,7 +29,7 @@ export class GroupComponent extends GenericComponent implements OnInit {
   @ViewChild(GroupDirective) host: GroupDirective;
   @Input() layout: string;
   @Input() children: any[] = [];
-  @HostBinding('attr.name') @Input() name: string = Math.floor(Math.random()*100000).toString();
+  @HostBinding('attr.name') @Input() name: string;
 
   constructor(public componentFactoryResolver: ComponentFactoryResolver, public registration: RegistrationService) {
     super();

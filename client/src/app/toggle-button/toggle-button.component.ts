@@ -10,15 +10,7 @@ import { GenericComponent } from '../generic/generic.component';
     '[style.color]': 'color'
   }
 })
-export class ToggleButtonComponent extends GenericComponent implements OnInit {
+export class ToggleButtonComponent extends GenericComponent {
   @Input() label: string;
   @Input() value: any;
-
-  constructor(componentFactoryResolver: ComponentFactoryResolver) {
-    super(componentFactoryResolver);
-  }
-
-  ngOnInit() {
-  }
-
 }

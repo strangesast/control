@@ -19,32 +19,6 @@ import { RegistrationService } from '../registration.service';
 
 import { componentNameMap } from '../entry-components';
 
-function filterDuplicateObjects(stream) {
-  return stream.startWith({}).map(v => JSON.stringify(v)).pairwise().filter(([a, b]) => {
-    return b && a != b;
-  }).map(([_, v]) => JSON.parse(v));
-}
-
-function expandTemplate(object, json, parents=['root']) {
-  let { type, attributes } = object;
-  let Component = componentNameMap[type];
-  if (!Component) throw new Error(`invalid type "${ type }"`);
-  attributes = attributes.map(attr => {
-    let { name, value, type: attrType } = attr;
-    // should verify correct type, value for name+component
-    if (name == 'children') {
-      value = value.map(childId => {
-        let child = json[childId];
-        if (parents.indexOf(childId) > -1) throw new Error(`parent-child loop ${ childId }`);
-        if (!child) throw new Error(`invalid child reference "${ childId }"`);
-        return expandTemplate(child, json, parents.concat(childId));
-      });
-    }
-    return Object.assign({}, attr, { value });
-  });
-  return { Component, attributes };
-}
-
 type ComponentDescription = { type: string, attributes: any[] }
 type Template = any;
 
@@ -97,4 +71,30 @@ export class FactoryComponent extends GroupComponent implements OnInit {
     this.host.viewContainerRef.clear();
     this.build(expanded);
   }
+}
+
+function filterDuplicateObjects(stream) {
+  return stream.startWith({}).map(v => JSON.stringify(v)).pairwise().filter(([a, b]) => {
+    return b && a != b;
+  }).map(([_, v]) => JSON.parse(v));
+}
+
+function expandTemplate(object, json, parents=['root']) {
+  let { type, attributes } = object;
+  let Component = componentNameMap[type];
+  if (!Component) throw new Error(`invalid type "${ type }"`);
+  attributes = attributes.map(attr => {
+    let { name, value, type: attrType } = attr;
+    // should verify correct type, value for name+component
+    if (name == 'children') {
+      value = value.map(childId => {
+        let child = json[childId];
+        if (parents.indexOf(childId) > -1) throw new Error(`parent-child loop ${ childId }`);
+        if (!child) throw new Error(`invalid child reference "${ childId }"`);
+        return expandTemplate(child, json, parents.concat(childId));
+      });
+    }
+    return Object.assign({}, attr, { value });
+  });
+  return { Component, attributes };
 }

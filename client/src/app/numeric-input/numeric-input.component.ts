@@ -25,8 +25,4 @@ export class NumericInputComponent extends GenericComponent {
     this.value = value;
     this.valueChange.emit(value);
   }
-
-  constructor(componentFactoryResolver: ComponentFactoryResolver) {
-    super(componentFactoryResolver);
-  }
 }

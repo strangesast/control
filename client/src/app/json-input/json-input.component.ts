@@ -20,7 +20,7 @@ export class JsonInputComponent {
     this.jsonValue = val;
     this.setText(val);
     this.jsonChange.emit(this.jsonValue);
-    this.registration.template = this.jsonValue;
+    //this.registration.template = this.jsonValue;
   }
 
   constructor(private registration: RegistrationService) { }
