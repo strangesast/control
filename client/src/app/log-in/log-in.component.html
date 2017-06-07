@@ -1,26 +1,28 @@
-<span class="title">Log In</span>
-<form [formGroup]="credentials">
+<div class="box">
+  <span class="title">Log In</span>
+  <form [formGroup]="credentials" (submit)="login()">
+    <div>
+      <label>Username</label>
+      <input formControlName="username" type="username">
+    </div>
+    <div>
+      <label>Password</label>
+      <input formControlName="password" type="password">
+    </div>
+    <div>
+      <button>Submit</button>
+    </div>
+  </form>
+  <pre>{{ credentials.value | json }}</pre>
   <div>
-    <label>Username</label>
-    <input formControlName="username" type="username">
+    <label>Choose credentials</label>
+    <select [formControl]="defaults">
+      <option value="guest">Guest</option>
+      <option value="user">User</option>
+      <option value="admin">Admin</option>
+    </select>
   </div>
   <div>
-    <label>Password</label>
-    <input formControlName="password" type="password">
+    <a [routerLink]="['/register']">Register</a>
   </div>
-  <div>
-    <button>Submit</button>
-  </div>
-</form>
-<pre>{{ credentials.value | json }}</pre>
-<div>
-  <label>Choose credentials</label>
-  <select [formControl]="defaults">
-    <option value="guest">Guest</option>
-    <option value="user">User</option>
-    <option value="admin">Admin</option>
-  </select>
-</div>
-<div>
-  <a [routerLink]="['/register']">Register</a>
 </div>

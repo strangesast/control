@@ -168,7 +168,7 @@ app.get('/', function(req, res, next) {
 
 app.route('/login')
 .post(passport.authenticate('local'), function(req, res, next) {
-  res.send();
+  res.json(req.user);
 })
 
 app.route('/register')
