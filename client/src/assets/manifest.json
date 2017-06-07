@@ -5,5 +5,29 @@
   "manifest_version": 2,
   "display": "standalone",
   "orientation": "portrait",
-  "start_url": "/"
+  "start_url": "/",
+  "background": {
+    "scripts": ["assets/background.js"]
+  },
+  "browser_action": {
+    "default_title": "control"
+  },
+  "permissions": ["activeTab"],
+  "icons": [
+    {
+      "src": "/assets/icon128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icon48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icon16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    }
+  ]
 }

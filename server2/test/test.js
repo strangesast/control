@@ -30,8 +30,10 @@ describe('users', () => {
   }));
 
   describe('user actions', () => {
+    let currentUserId;
     beforeEach(test(async() => {
-      await send('/register', { method: 'POST', body: JSON.stringify(userParams) });
+      let res = await send('/register', { method: 'POST', body: JSON.stringify(userParams) });
+      ({ _id: currentUserId } = await res.json());
     }));
 
     afterEach(test(async() => {
@@ -85,17 +87,20 @@ describe('users', () => {
         let users = await res.json();
         expect(users.length).toBeGreaterThan(0);
 
-        let userId = users[0]['_id'];
-
         let asubset = applicationIds.slice(0, 1);
-        let gsubset = groupIds.slice(0, 1);
-        res = await send(`/users/${ userId }`, { method: 'PUT', body: JSON.stringify({ applications: asubset, groups: gsubset }) });
+        let gsubset = groupIds.slice(0, 2);
+        res = await send(`/users/${ currentUserId }`, { method: 'PUT', body: JSON.stringify({ applications: asubset, groups: gsubset }) });
 
-        res = await send(`/users/${ userId }`);
+        res = await send(`/users/${ currentUserId }`);
         expect(await res.text()).toEqual(JSON.stringify(Object.assign({}, users[0], { applications: asubset, groups: gsubset })));
 
-        res = await send(`/users/${ userId }/applications`);
-        console.log(await res.json());
+        res = await send(`/users/${ currentUserId }/applications`);
+        let a1 = await res.json();
+
+        res = await send(`/user/applications`);
+        let a2 = await res.json();
+
+        expect(a1).toEqual(a2);
 
         await send('/applications', { method: 'DELETE' });
         await send('/groups', { method: 'DELETE' });

@@ -172,13 +172,6 @@ app.route('/login')
 })
 
 app.route('/register')
-.get(function(req, res, next) {
-  if (req.user) {
-    res.send();
-  } else {
-    res.send('registration page');
-  }
-})
 .post(upload.array(), async function(req, res, next) {
   let body = req.body;
   let users = mongo.collection('users');
@@ -189,7 +182,7 @@ app.route('/register')
       return next(err);
     }
     passport.authenticate('local')(req, res, function() {
-      res.send();
+      res.json({ _id: body._id });
     });
   });
 });
@@ -264,6 +257,16 @@ userRoute.route('/defaultTemplate')
   res.json(user);
 })
 .post(function(req, res, next) {})
+userRoute.get('/applications', async function(req, res, next) {
+  let user = await mongo.collection('users').findOne({ username: req.user.username });
+  let ua = user.applications || [];
+  let ug = user.groups || [];
+  let applications = await expandGroups(ug, ua);
+
+  res.json(applications);
+});
+
+
 
 app.use('/user', userRoute);
 
@@ -309,7 +312,7 @@ app.route('/:name/:id?')
   let collection = mongo.collection(req.params.name);
   let { id } = req.params;
   if (id != null) {
-    let result = await collection.findOneAndDelete({ _id: id });
+    let result = await collection.findOneAndDelete({ _id: ObjectID.createFromHexString(id) });
     res.json(result);
   } else {
     let result = await collection.remove();
@@ -317,14 +320,38 @@ app.route('/:name/:id?')
   }
 });
 
-app.route('/users/:userId/applications/:appId')
-.get(function(req, res, next) {
+app.route('/users/:userId/applications/:appId?')
+.get(async function(req, res, next) {
+  let { userId, appId } = req.params;
+  let users = mongo.collection('users')
+  let user = await users.findOne({ _id: ObjectID.createFromHexString(userId) })
+  if (!user) return next(new Error('no user with that id'));
+
+  let ua = user.applications || [];
+  let ug = user.groups || [];
+  let applications = await expandGroups(ug, ua);
+
+  return res.json(applications);
+
   // here
   next()
 })
 .post(function(req, res, next) {
   next()
 });
+
+async function expandGroups(groupIds, applicationIds=[]) {
+  let { applications: appIds } = await mongo.collection('groups').aggregate([
+    {'$match': { _id: { $in: groupIds.map(ObjectID.createFromHexString.bind(ObjectID)) }}},
+    {'$unwind': '$applications'},
+    {'$group': { '_id': null, 'applications': { '$addToSet': '$applications' } }}
+  ]).next();
+  let applications = await mongo.collection('applications')
+    .find({ '_id': { '$in': appIds.concat(applicationIds).map(ObjectID.createFromHexString.bind(ObjectID)) }})
+    .sort({ '_id': 1 })
+    .toArray();
+  return applications;
+}
 
 // points management
 
