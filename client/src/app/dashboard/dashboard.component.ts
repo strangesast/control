@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { ConfigurationService } from '../configuration.service';
 import { routerTransition } from '../router.animations';
 
@@ -15,11 +15,12 @@ import { routerTransition } from '../router.animations';
 export class DashboardComponent implements OnInit {
   title: string;
 
-  constructor(private route: ActivatedRoute, private configuration: ConfigurationService) { }
+  constructor(private router: Router, private configuration: ConfigurationService) { }
 
   ngOnInit() {}
 
   logout() {
     this.configuration.logout();
+    this.router.navigate(['/login']);
   }
 }

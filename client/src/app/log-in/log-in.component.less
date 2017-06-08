@@ -1,17 +1,18 @@
 @border-color: #bdbdbd;
 :host {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
   height: 100%;
   overflow: auto;
-  margin: 0 auto;
-  max-width: 380px;
 
   & > div {
     padding: 12px;
     margin: 8px;
     box-sizing: border-box;
-    max-width: 400px;
     max-height: 500px;
+    width: 300px;
     margin-top: 20%;
     top: 0;
     left: 0;
