@@ -1,3 +1,57 @@
-<p>
-  object-table works!
-</p>
+<div *ngIf="!objectType || objectType == 'users'" class="box">
+  <span class="title">Users</span>
+  <div class="options">
+    <label>Sort By</label>
+    <select>
+      <option>Name</option>
+    </select>
+  </div>
+  <div class="box-shadow table">
+    <div class="row">
+      <img class="profile" src="/assets/placeholder.png">
+      <div>
+        <span class="name">Name</span>
+        <span class="username">Username</span>
+        <span class="groups">Groups</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!objectType || objectType == 'groups'" class="box">
+  <span class="title">Groups</span>
+  <div class="options">
+    <label>Sort By</label>
+    <select>
+      <option>Name</option>
+    </select>
+  </div>
+  <div class="box-shadow table">
+    <div class="row">
+      <img class="profile" src="/assets/placeholder.png">
+      <div>
+        <span class="name">Name</span>
+        <span class="username">Username</span>
+        <span class="groups">Groups</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!objectType || objectType == 'applications'" class="box">
+  <span class="title">Applications</span>
+  <div class="options">
+    <label>Sort By</label>
+    <select>
+      <option>Name</option>
+    </select>
+  </div>
+  <div class="box-shadow table">
+    <div class="row">
+      <img class="profile" src="/assets/placeholder.png">
+      <div>
+        <span class="name">Name</span>
+        <span class="username">Username</span>
+        <span class="groups">Groups</span>
+      </div>
+    </div>
+  </div>
+</div>

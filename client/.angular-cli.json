@@ -20,6 +20,8 @@
       "prefix": "app",
       "styles": [
         "styles.css",
+        "dropdown.less",
+        "tree.less",
         "../node_modules/font-awesome/css/font-awesome.min.css"
       ],
       "scripts": [],
@@ -52,7 +54,7 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
+    "styleExt": "less",
     "component": {}
   }
 }

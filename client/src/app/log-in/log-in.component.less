@@ -6,6 +6,7 @@
 
   & > div {
     padding: 12px;
+    margin: 8px;
     box-sizing: border-box;
     max-width: 400px;
     max-height: 500px;
@@ -14,9 +15,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    border: 1px solid @border-color;
 
     .title {
       font-size: 1.75em;
@@ -47,4 +45,9 @@
       }
     }
   }
+}
+
+.box-shadow {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  border: 1px solid @border-color;
 }

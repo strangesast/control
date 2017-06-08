@@ -15,7 +15,7 @@ import { GroupComponent } from '../group/group.component';
 @Component({
   selector: 'app-example',
   templateUrl: './example.component.html',
-  styleUrls: ['./example.component.css']
+  styleUrls: ['./example.component.less']
 })
 export class ExampleComponent implements OnInit {
   currentExample = null;

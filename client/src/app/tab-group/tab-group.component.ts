@@ -5,7 +5,7 @@ import { RegistrationService } from '../registration.service';
 @Component({
   selector: 'app-tab-group',
   templateUrl: './tab-group.component.html',
-  styleUrls: ['./tab-group.component.css'],
+  styleUrls: ['./tab-group.component.less'],
   host: {
     '[style.background-color]': 'backgroundColor',
     '[style.color]': 'color'

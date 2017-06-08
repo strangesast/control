@@ -5,7 +5,7 @@ import { Subject, Observable, Subscription } from 'rxjs';
 @Component({
   selector: 'app-numeric-input',
   templateUrl: './numeric-input.component.html',
-  styleUrls: ['./numeric-input.component.css'],
+  styleUrls: ['./numeric-input.component.less'],
   host: {
     '[style.background-color]': 'backgroundColor',
     '[style.color]': 'color'

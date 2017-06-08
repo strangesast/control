@@ -13,7 +13,7 @@ import * as d3 from 'd3';
 @Component({
   selector: 'app-graph',
   templateUrl: './graph.component.html',
-  styleUrls: ['./graph.component.css']
+  styleUrls: ['./graph.component.less']
 })
 export class GraphComponent extends GenericComponent implements OnInit {
   @ViewChild('graph') graphElement: ElementRef;

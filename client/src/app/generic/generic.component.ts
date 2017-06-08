@@ -13,7 +13,7 @@ import { RegistrationService } from '../registration.service';
 @Component({
   selector: 'app-generic',
   templateUrl: './generic.component.html',
-  styleUrls: ['./generic.component.css'],
+  styleUrls: ['./generic.component.less'],
   host: {
     '[style.background-color]': 'backgroundColor',
     '[style.color]': 'color'

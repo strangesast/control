@@ -18,7 +18,7 @@ import { ToggleButtonComponent } from '../toggle-button/toggle-button.component'
 @Component({
   selector: 'app-group',
   templateUrl: './group.component.html',
-  styleUrls: ['./group.component.css'],
+  styleUrls: ['./group.component.less'],
   host: {
     '[style.background-color]': 'backgroundColor',
     '[style.color]': 'color',

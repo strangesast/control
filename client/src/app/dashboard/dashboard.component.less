@@ -2,268 +2,125 @@
 @active-color: rgba(0, 0, 0, 0.05);
 @border-color: #bdbdbd;
 @side-width: 280px;
-
-@keyframes fadein {
-  from {
-    background: rgba(0, 0, 0, 0.0);
-  }
-  to {
-    background: rgba(0, 0, 0, 0.5);
-  }
-}
+@header-height: 60px;
 
 :host {
   display: block;
   position: relative;
   height: 100%;
 
-  & > .side {
-    width: @side-width;
-    left: -@side-width;
-    display: flex;
-    flex-direction: column;
-    & > .content {
-      flex-grow: 1;
-    }
-    position: absolute;
-    height: 100%;
-    top: 0;
-    transition: left 0.2s ease;
-    & > header {
-      position: absolute;
-      transition: left 0.2s ease;
-      width: @side-width;
-      left: 100%;
-    }
-    & > .content {
-      overflow: auto;
-      margin-top: @header-height;
-    }
-  }
-  & > .main {
-    transition: margin-left 0.2s ease;
-    margin-left: 0;
-    height: 100%;
-  }
-  &.side {
-    @media(max-width: (@side-width*2)) {
-      & > .side {
-        z-index: 2;
-        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-        left: 0;
-        background-color: white;
-        & > header {
-          left: 0;
-        }
-      }
-      // shadow on slide out
-      & > .main:before {
-        position: absolute;
-        content: '';
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        animation-name: fadein;
-        animation-duration: 0.2s;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 1;
-      }
-    }
-    @media(min-width: (@side-width*2)) {
-      & > .side {
-        left: 0;
-        & > header {
-          left: 0;
-        }
-      }
-      & > .main {
-        margin-left: @side-width;
-      }
-    }
-  }
-}
-
-@header-height: 60px;
-:host > .side, :host > .main {
   & > header {
-    .brand {
-      text-decoration: none;
-      color: inherit;
-    }
     display: flex;
+    padding: 0 8px;
+    justify-content: space-between;
     align-items: center;
     height: @header-height;
-    & > .title {
-      font-size: 1.25em;
-      flex-grow: 1;
-      text-align: center;
-    }
-  }
-}
 
-:host > .side > .content {
-  display: flex;
-  flex-direction: column;
-}
-
-// header border
-:host > .side, :host > .main {
-  & > header {
-    border-bottom: 1px solid @border-color;
-  }
-}
-:host > .side > .content {
-  border-right: 1px solid @border-color;
-}
-
-.tree {
-  display: flex;
-  flex-direction: column;
-  // style tree roots, items
-  & > .tree > div, & > span, & > a {
-    height: 40px;
-    display: flex;
-    align-items: center;
-    padding: 8px;
-    box-sizing: border-box;
-    flex-shrink: 0;
-    &:hover {
-      background-color: @hover-color;
-    }
-    &.active {
-      background-color: @active-color;
-      font-style: italic;
-    }
-  }
-  & > a {
-    text-decoration: none;
-    color: inherit;
-  }
-  & > .tree {
-    & > div {
-      // style tree root node
-      display: flex;
-      & > *:first-child {
-        flex-grow: 1;
-        &.active {
-          font-style: italic;
-        }
-      }
-      // root node might also be a link
-      & > a:first-child {
-        text-decoration: none;
-        color: inherit;
-      }
-      // dropdown
-      & > .icon {
-        cursor: pointer;
-      }
-      // indent children
-      & ~ * {
-        margin-left: 10px;
-      }
-    }
-    &.collapsed > div {
-      // hide children
-      & ~ * {
-        display: none;
-      }
-      // rotate icon
-      & > .icon {
-        transform: rotate(180deg);
-      }
-    }
-  }
-}
-
-
-
-.dropdown, header {
-  & > .icon {
-    cursor: pointer;
-    border-radius: 14px;
-    padding: 4px;
-    &:hover {
-      background-color: @active-color;
-    }
-    &:focus {
-      outline: none;
-      background-color: @hover-color;
-    }
-    &:active {
-      background-color: @hover-color;
-    }
-  }
-}
-.dropdown {
-  position: relative;
-  & > span {
-    &:hover {
-      background-color: @hover-color;
-    }
-    &:focus {
-      outline: none;
-      background-color: @active-color;
-    }
-    &:focus + div {
-      display: flex;
-    }
-  }
-  & > div {
-    position: absolute;
-    display: none;
-    &:hover {
-      display: flex;
-    }
-    top: ~"calc(100% + 4px)";
-    right: 0;
-    min-width: 120px;
-    background-color: white;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    border: 1px solid @border-color;
-    padding: 8px 0;
-    border-radius: 2px;
-    flex-direction: column;
-    & > * {
-      color: inherit;
+    .side > * {
       text-decoration: none;
-      padding: 8px 12px;
-      cursor: pointer;
-      &:hover {
-        background-color: @hover-color;
-      }
+      color: inherit;
     }
   }
 }
 
-.main .options {
-  border-bottom: 1px solid @border-color;
+:host > header .icon {
+  cursor: pointer;
+  border-radius: 14px;
   padding: 4px;
+  &:hover {
+    background-color: @active-color;
+  }
+  &:focus {
+    outline: none;
+    background-color: @hover-color;
+  }
+  &:active {
+    background-color: @hover-color;
+  }
 }
 
-@profile-size: 60px;
-.table {
+:host > header > .side {
+  z-index: 3;
+}
+
+:host > .shade {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.2s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+
+:host > .side, :host > .main {
+  position: absolute;
   display: flex;
   flex-direction: column;
-  .row {
-    display: flex;
-    padding: 8px;
-    border-bottom: 1px solid @border-color;
-    &:hover {
-      background-color: @hover-color;
+}
+
+:host > .main {
+  top: @header-height;
+}
+
+:host > .side {
+  padding-top: @header-height;
+  width: @side-width;
+  background: white;
+  top: 0;
+  z-index: 3;
+}
+
+@media(min-width: 400px) {
+  .main, .side {
+    bottom: 0;
+    overflow: auto;
+  }
+  .main, .side {
+    transition: left 0.2s ease;
+  }
+  .main {
+    top: @header-height;
+    left: 0;
+    right: 0;
+  }
+  .side {
+    left: -@side-width;
+  }
+  :host.side {
+    & > .side {
+      left: 0;
     }
-    & > div > * {
-      padding: 4px;
-    }
-    .name {
-      display:block;
-      font-size: 1.2em;
+    & > .main {
+      left: @side-width;
     }
   }
 }
-.row > .profile {
-  width: @profile-size;
-  height: @profile-size;
-  border-radius: @profile-size/2;
+
+@media(max-width: 400px) {
+  .main {
+    right: 0;
+  }
+  .side {
+    transition: transform 0.2s ease;
+  }
+  :host > .main, :host > .side {
+    left: 0;
+    bottom: 0;
+  }
+  :host > .side {
+    transform: translate(-100%, 0);
+  }
+  :host.side > .side {
+    transform: translate(0, 0);
+  }
+  :host.side > .shade {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  :host.side > .shade {
+    pointer-events: auto;
+  }
 }

@@ -15,7 +15,7 @@ import * as d3 from 'd3';
 @Component({
   selector: 'app-thermostat',
   templateUrl: './thermostat.component.html',
-  styleUrls: ['./thermostat.component.css']
+  styleUrls: ['./thermostat.component.less']
 })
 export class ThermostatComponent extends GenericComponent implements OnInit {
   @ViewChild('graph') graphElement: ElementRef;

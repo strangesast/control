@@ -1,6 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ConfigurationService } from '../configuration.service';
+import { accounts } from '../../../../defaultAccounts.js';
+
+class User {
+  username: string = '';
+  password: string = '';
+}
+
+class Group {
+  name: string = 'New Group';
+}
+
+class Application {
+  name: string = 'New Application';
+  description: string;
+}
 
 @Component({
   selector: 'app-log-in',
@@ -9,33 +25,36 @@ import { ConfigurationService } from '../configuration.service';
 })
 export class LogInComponent implements OnInit {
   credentials: FormGroup;
+  redirectUrl: string;
   defaults = new FormControl();
+  errors;
 
-  constructor(private configuration: ConfigurationService, private fb: FormBuilder) { }
+  constructor(private configuration: ConfigurationService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.redirectUrl = this.route.snapshot.queryParams.returlUrl;
     this.credentials = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
 
     this.defaults.valueChanges.subscribe(value => {
-      switch (value) {
-        case 'guest':
-          this.credentials.setValue({ username: 'guest', password: 'guest' });
-          break;
-        case 'user':
-          this.credentials.setValue({ username: 'user', password: 'user' });
-          break;
-        case 'admin':
-          this.credentials.setValue({ username: 'admin', password: 'admin' });
-          break;
+      let acc = accounts.find(({ username }) => username == value);
+      if (acc) {
+        this.credentials.setValue(acc);
       }
     });
   }
 
   login() {
-    let { username, password } = this.credentials.value;
-    this.configuration.login(username, password).subscribe(console.log.bind('login'));
+    if (this.credentials.valid) {
+      let { username, password } = this.credentials.value;
+      this.configuration.login(username, password).subscribe(() => {
+        this.router.navigate([this.redirectUrl || 'dashboard']);
+        this.credentials.reset();
+      }, (err) => {
+        this.errors = err;
+      });
+    }
   }
 }

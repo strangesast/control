@@ -4,7 +4,7 @@ import { RegistrationService } from '../registration.service';
 @Component({
   selector: 'app-json-input',
   templateUrl: './json-input.component.html',
-  styleUrls: ['./json-input.component.css']
+  styleUrls: ['./json-input.component.less']
 })
 export class JsonInputComponent {
   jsonValue;

@@ -1,21 +1,27 @@
-<span class="title">Register</span>
-<div>
-  <label>Username</label>
-  <input type="username">
-</div>
-<div>
-  <label>Password</label>
-  <input type="password">
-  <small>This is stored in <i>plain text</i>.</small>
-</div>
-<div>
-  <label>Password</label>
-  <input type="password">
-  <small>(again)</small>
-</div>
-<div>
-  <button>Submit</button>
-</div>
-<div>
-  <a [routerLink]="['/login']">Log In</a>
+<div class="box">
+  <span class="title">Register</span>
+  <form [formGroup]="credentials" (submit)="register()">
+    <div>
+      <label>Username</label>
+      <input formControlName="username" type="username">
+    </div>
+    <div>
+      <label>Password</label>
+      <input formControlName="password" type="password">
+      <small>This is stored in <i>plain text</i>.</small>
+    </div>
+    <div>
+      <label>Password</label>
+      <input formControlName="password-confirm" type="password">
+      <small>(again)</small>
+    </div>
+    <div>
+      <button type="submit" [disabled]="!credentials.valid">Submit</button>
+    </div>
+  </form>
+  <pre>{{ credentials.value | json }}</pre>
+  <div>
+    <a [routerLink]="['/login']">Login</a>
+  </div>
+  <pre>{{ errors | json }}</pre>
 </div>

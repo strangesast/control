@@ -37,18 +37,14 @@ import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'login', component: LogInComponent },
-  { path: 'register', component: RegisterComponent },
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-    resolve: { configuration: ConfigurationService },
-    canActivate: [AuthGuard],
-    children: [
-      { 
-        path: '',
-        canActivateChild: [AuthGuard],
+  { path: '', resolve: { configuration: ConfigurationService }, children: [
+      { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+      { path: 'login', component: LogInComponent },
+      { path: 'register', component: RegisterComponent },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        canActivate: [AuthGuard],
         children: [
           { path: '', redirectTo: 'applications', pathMatch: 'full'},
           { path: 'applications', component: ApplicationTableComponent },

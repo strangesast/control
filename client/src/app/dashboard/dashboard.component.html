@@ -1,62 +1,31 @@
 <div class="side">
-  <header>
-    <span class="fa fa-lg fa-fw fa-bars icon" (click)="side = !side"></span>
-    <a [routerLink]="['applications']" class="brand">Brand</a>
-  </header>
   <div class="content tree">
     <a routerLinkActive="active" [routerLink]="['profile']">User Profile</a>
     <a routerLinkActive="active" [routerLink]="['applications']">Applications</a>
-    <div class="tree" [class.collapsed]="tree">
-      <div><a routerLinkActive="active" [routerLink]="['objects']">Objects</a><span (click)="tree = !tree" class="fa fa-fw fa-angle-up icon"></span></div>
+    <div class="tree collapsed" #tree>
+      <div><a routerLinkActive="active" [routerLink]="['objects']">Objects</a><span (click)="tree.classList.toggle('collapsed')" class="fa fa-fw fa-angle-up icon"></span></div>
       <a routerLinkActive="active" [routerLink]="['objects', 'users']">Users</a>
       <a routerLinkActive="active" [routerLink]="['objects', 'groups']">Groups</a>
       <a routerLinkActive="active" [routerLink]="['objects', 'applications']">Applications</a>
     </div>
   </div>
 </div>
-<div class="main">
-  <header>
-    <span class="title">{{ title || 'Dashboard' }}</span>
-    <!--
-    <div class="dropdown">
-      <span tabindex="-1" class="fa fa-fw fa-cog icon"></span>
-      <div>
-        <a>User Profile</a>
-        <a>Item 2</a>
-        <a>Item 3</a>
-        <a>Item 4</a>
-        <a>Item 5</a>
-      </div>
-    </div>
-    -->
-    <div class="dropdown">
-      <span tabindex="-1" class="fa fa-lg fa-fw fa-user icon"></span>
-      <div>
-        <a routerLinkActive="active" [routerLink]="['profile']">User Profile</a>
-        <a (click)="logout()">Log Out</a>
-      </div>
-    </div>
-  </header>
-  <div class="content">
-    <router-outlet></router-outlet>
-    <!--
-    <div class="options">
-      <label>Sort By</label>
-      <select>
-        <option>Name</option>
-      </select>
-    </div>
-    <div class="table">
-      <div class="row">
-        <img class="profile" src="/assets/placeholder.png">
-        <div>
-          <span class="name">Name</span>
-          <span class="username">Username</span>
-          <span class="groups">Groups</span>
-
-        </div>
-      </div>
-    </div>
-    -->
+<header>
+  <div class="side">
+    <span class="fa fa-lg fa-fw fa-bars icon" (click)="side = !side"></span>
+    <a [routerLink]="['applications']" class="brand">Brand</a>
   </div>
+  <span class="title">{{ title || 'Dashboard' }}</span>
+  <div class="dropdown">
+    <span tabindex="-1" class="fa fa-lg fa-fw fa-user icon"></span>
+    <div>
+      <a routerLinkActive="active" [routerLink]="['profile']">User Profile</a>
+      <a (click)="logout()">Log Out</a>
+    </div>
+  </div>
+</header>
+<div class="shade" (click)="side = false"></div>
+<div class="main">
+  <router-outlet></router-outlet>
+  <ng-content></ng-content>
 </div>

@@ -4,7 +4,7 @@ import { GenericComponent } from '../generic/generic.component';
 @Component({
   selector: 'app-toggle-button',
   templateUrl: './toggle-button.component.html',
-  styleUrls: ['./toggle-button.component.css'],
+  styleUrls: ['./toggle-button.component.less'],
   host: {
     '[style.background-color]': 'backgroundColor',
     '[style.color]': 'color'

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ConfigurationService } from '../configuration.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,14 +13,12 @@ import { ActivatedRoute } from '@angular/router';
 export class DashboardComponent implements OnInit {
   title: string;
   side: boolean = false;
-  tree: boolean = false;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private configuration: ConfigurationService) { }
 
-  ngOnInit() {
-    this.route.params.pluck('subsection').subscribe((subsection: string) => {
-    });
+  ngOnInit() {}
+
+  logout() {
+    this.configuration.logout();
   }
-
-  logout() {}
 }

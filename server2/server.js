@@ -1,26 +1,29 @@
-var express = require('express'),
-    session = require('express-session'),
-    bodyParser = require('body-parser'),
-    multer = require('multer'),
-    cookie = require('cookie'),
-    cookieParser = require('cookie-parser'),
-    passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy,
-    Influx = require('influx'),
-    mongodb = require('mongodb'),
-    MongoClient = mongodb.MongoClient,
-    ObjectID = mongodb.ObjectID,
-    RedisStore = require('connect-redis')(session),
-    sessionStore = new RedisStore({ host: 'localhost', port: 6379 }),
-    app = express(),
-    upload = multer(),
-    ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn,
-    InfluxDB = Influx.InfluxDB
+const express = require('express'),
+      //session = require('express-session'),
+      bodyParser = require('body-parser'),
+      multer = require('multer'),
+      passport = require('passport'),
+      //LocalStrategy = require('passport-local').Strategy,
+      jwt = require('jsonwebtoken'),
+      JwtStrategy = require('passport-jwt').Strategy,
+      ExtractJwt = require('passport-jwt').ExtractJwt;
+      Influx = require('influx'),
+      mongodb = require('mongodb'),
+      MongoClient = mongodb.MongoClient,
+      ObjectID = mongodb.ObjectID,
+      //RedisStore = require('connect-redis')(session),
+      //sessionStore = new RedisStore({ host: 'localhost', port: 6379 }),
+      app = express(),
+      upload = multer(),
+      //ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn,
+      InfluxDB = Influx.InfluxDB,
+      defaultAccounts = require('../defaultAccounts').accounts;
 
 // database configuration
 const host = 'localhost';
 const database = 'topview';
 const { FLOAT, STRING, INTEGER } = Influx.FieldType;
+// influx measurements schema
 const schema = [
   {
     measurement: 'temperatures',
@@ -66,7 +69,10 @@ var mongo, influx;
   let applicationsCollection = await mongo.createCollection('applications');
   let componentsCollection = await mongo.createCollection('components');
   let pointsCollection = await mongo.createCollection('points');
+  // create default objects
+  await usersCollection.insertMany(defaultAccounts)
 
+  
   // influx setup, init
   influx = new InfluxDB({ host, database, schema });
   let names = await influx.getDatabaseNames();
@@ -115,22 +121,22 @@ var mongo, influx;
 
 const secret = 'toastToastTOAST';
 app.set('trust proxy', true);
-app.use(session({
-  secret,
-  resave: false,
-  saveUninitialized: true,
-  proxy: true,
-  store: sessionStore,
-  cookie: { secure: false },
-}));
+//app.use(session({
+//  secret,
+//  resave: false,
+//  saveUninitialized: true,
+//  proxy: true,
+//  store: sessionStore,
+//  cookie: { secure: false },
+//}));
 
 // parse request body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(passport.initialize());
-app.use(passport.session());
+//app.use(passport.session());
 
+/*
 // passport setup
 passport.use(new LocalStrategy(async function(username, password, done) {
   let users = mongo.collection('users');
@@ -151,6 +157,21 @@ passport.use(new LocalStrategy(async function(username, password, done) {
 
   }
 }));
+*/
+passport.use(new JwtStrategy(
+  // use Authorization: Bearer header from request
+  { jwtFromRequest: ExtractJwt.fromAuthHeader(), secretOrKey: secret },
+  async function(payload, next) {
+    let _id;
+    try {
+      _id = ObjectID.createFromHexString(payload.id);
+    } catch (err) {
+      return next(err);
+    }
+    let user = await mongo.collection('users').findOne({ _id });
+    next(null, user || false);
+  }
+));
 
 passport.serializeUser(function(user, done) {
   done(null, user.username);
@@ -161,29 +182,58 @@ passport.deserializeUser(function(username, done) {
   users.findOne({ username }, { password: false, _id: false }, done);
 });
 
+app.use(passport.initialize());
+
 // routes
 app.get('/', function(req, res, next) {
   res.json({ user: req.user, session: req.session, loggedIn: !!req.user });
 });
 
-app.route('/login')
-.post(passport.authenticate('local'), function(req, res, next) {
-  res.json(req.user);
+app.route('/login').post(async function(req, res, next) {
+  let { username, password } = req.body;
+  if (!username || !password) {
+    res.status(400).json({ message: 'missing username or password', body: req.body });
+    return;
+  }
+  let user = await mongo.collection('users').findOne({ username });
+  if (!user) {
+    res.status(401).json({ message: 'invalid username' });
+
+  } else if (user.password == password) {
+    let payload = { id: user['_id'], username };
+    let token = jwt.sign(payload, secret);
+    res.json({ token, user });
+
+  } else {
+    res.status(401).json({ message: 'invalid password' });
+
+  }
 })
 
 app.route('/register')
 .post(upload.array(), async function(req, res, next) {
   let body = req.body;
   let users = mongo.collection('users');
-  let user;
-  users.insertOne(body, function(err, result) {
+  let user = body;
+  let { username, password } = body;
+  if (!username || !password) {
+    res.status(400).json({ message: 'missing username or password' });
+    return;
+  }
+  let existing = await users.findOne({ username: user.username });
+  if (existing) {
+    res.status(409).json({ message: 'username already exists' });
+    return;
+  }
+  users.insertOne(user, function(err, result) {
     if (err) {
       err.status = 400;
       return next(err);
     }
-    passport.authenticate('local')(req, res, function() {
-      res.json({ _id: body._id });
-    });
+    let payload = { id: user['_id'], username: user.username };
+    let token = jwt.sign(payload, secret);
+
+    res.json({ token, user });
   });
 });
 app.delete('/unregister', async function(req, res, next) {
@@ -217,7 +267,8 @@ app.all('/logout', function(req, res, next) {
 // user template, points management
 var userRoute = express.Router();
 
-userRoute.use(ensureLoggedIn('/login'))
+//userRoute.use(ensureLoggedIn('/login'))
+userRoute.use(passport.authenticate('jwt', { session: false }));
 userRoute.get('/', function(req, res, next) {
   res.json({ user: req.user });
 });
@@ -291,6 +342,11 @@ app.route('/:name/:id?')
   } catch (err) {
     next(err);
   }
+})
+.all(function(req, res, next) {
+  // check user, user role for further requests
+  console.log('here');
+  next()
 })
 .post(upload.array(), async function(req, res, next) {
   let collection = mongo.collection(req.params.name);

@@ -1,0 +1,63 @@
+@hover-color: rgba(0, 0, 0, 0.10);
+@active-color: rgba(0, 0, 0, 0.05);
+@border-color: #bdbdbd;
+
+.tree {
+  display: flex;
+  flex-direction: column;
+  // style tree roots, items
+  & > .tree > div, & > span, & > a {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    &:hover {
+      background-color: @hover-color;
+    }
+    &.active {
+      background-color: @active-color;
+      font-style: italic;
+    }
+  }
+  & > a {
+    text-decoration: none;
+    color: inherit;
+  }
+  & > .tree {
+    & > div {
+      // style tree root node
+      display: flex;
+      & > *:first-child {
+        flex-grow: 1;
+        &.active {
+          font-style: italic;
+        }
+      }
+      // root node might also be a link
+      & > a:first-child {
+        text-decoration: none;
+        color: inherit;
+      }
+      // dropdown
+      & > .icon {
+        cursor: pointer;
+      }
+      // indent children
+      & ~ * {
+        margin-left: 10px;
+      }
+    }
+    &.collapsed > div {
+      // hide children
+      & ~ * {
+        display: none;
+      }
+      // rotate icon
+      & > .icon {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}

@@ -25,7 +25,7 @@ type Template = any;
 @Component({
   selector: 'app-factory',
   templateUrl: './factory.component.html',
-  styleUrls: ['./factory.component.css']
+  styleUrls: ['./factory.component.less']
 })
 export class FactoryComponent extends GroupComponent implements OnInit {
   @ViewChild(GroupDirective) host: GroupDirective;

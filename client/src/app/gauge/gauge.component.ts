@@ -14,7 +14,7 @@ import * as d3 from 'd3';
 @Component({
   selector: 'app-gauge',
   templateUrl: './gauge.component.html',
-  styleUrls: ['./gauge.component.css']
+  styleUrls: ['./gauge.component.less']
 })
 export class GaugeComponent extends GenericComponent implements OnInit {
   @ViewChild('graph') graphElement: ElementRef;

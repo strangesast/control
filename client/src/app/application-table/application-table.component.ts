@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-application-table',
   templateUrl: './application-table.component.html',
-  styleUrls: ['./application-table.component.css']
+  styleUrls: ['./application-table.component.less']
 })
 export class ApplicationTableComponent implements OnInit {
 

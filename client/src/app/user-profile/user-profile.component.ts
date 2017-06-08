@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { ConfigurationService } from '../configuration.service';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  styleUrls: ['./user-profile.component.less']
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor() { }
+  constructor(private configuration: ConfigurationService) { }
 
   ngOnInit() {
+    this.configuration.user.subscribe(console.log.bind(console));
   }
 
 }

@@ -9,7 +9,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     let url = state.url;
-
     return this.checkUrl(url);
   }
 
@@ -18,13 +17,10 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   }
 
   checkUrl(url) {
-    return this.configuration.isLoggedIn.take(1).flatMap(loggedIn => {
-      if (loggedIn) return Observable.of(loggedIn);
-
-      this.configuration.redirectUrl = url;
-
-      this.router.navigate(['./login']);
-      return Observable.of(false)
-    });
+    if (localStorage.getItem('currentUser')) {
+      return true;
+    }
+    this.router.navigate(['./login'], { queryParams: { 'redirectUrl': url }});
+    return false;
   }
 }
