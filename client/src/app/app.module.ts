@@ -35,6 +35,7 @@ import { ConfigurationService } from './configuration.service';
 import { LogInComponent } from './log-in/log-in.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './auth.guard';
+import { DrawerComponent } from './drawer/drawer.component';
 
 const routes: Routes = [
   { path: '', resolve: { configuration: ConfigurationService }, children: [
@@ -89,7 +90,8 @@ const routes: Routes = [
     UserProfileComponent,
     ApplicationTableComponent,
     LogInComponent,
-    RegisterComponent
+    RegisterComponent,
+    DrawerComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,21 @@
+<div class="side">
+  <div class="content">
+    <ng-content select="[drawer]"></ng-content>
+  </div>
+</div>
+<header>
+  <div class="side">
+    <span class="fa fa-lg fa-fw fa-bars icon" (click)="side = !side"></span>
+    <div class="brand">
+      <ng-content select="[brand]"></ng-content>
+    </div>
+  </div>
+  <span class="title"><ng-content select="[title]"></ng-content></span>
+  <div class="side">
+    <ng-content select="[right-header]"></ng-content>
+  </div>
+</header>
+<div class="shade" (click)="side = false"></div>
+<div class="main">
+  <ng-content select="[body]"></ng-content>
+</div>
