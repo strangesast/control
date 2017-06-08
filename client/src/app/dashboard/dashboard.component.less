@@ -12,115 +12,129 @@
   & > header {
     display: flex;
     padding: 0 8px;
-    justify-content: space-between;
     align-items: center;
     height: @header-height;
 
-    .side > * {
+    // equal sized
+    & > * {
+      flex-grow: 1;
+      flex-basis: 0;
+    }
+
+    & > .title {
+      text-align: center;
+    }
+
+    // links
+    & > .side > * {
       text-decoration: none;
       color: inherit;
     }
+
+    // groups after title right align
+    & > .title ~ .side {
+      text-align: right;
+    }
+
+    .icon {
+      cursor: pointer;
+      border-radius: 14px;
+      padding: 4px;
+      &:hover {
+        background-color: @active-color;
+      }
+      &:focus {
+        outline: none;
+        background-color: @hover-color;
+      }
+      &:active {
+        background-color: @hover-color;
+      }
+    }
+    // expose this when 'drawer' is exposed
+    & > .side:first-child {
+      z-index: 3;
+    }
   }
-}
 
-:host > header .icon {
-  cursor: pointer;
-  border-radius: 14px;
-  padding: 4px;
-  &:hover {
-    background-color: @active-color;
-  }
-  &:focus {
-    outline: none;
-    background-color: @hover-color;
-  }
-  &:active {
-    background-color: @hover-color;
-  }
-}
-
-:host > header > .side {
-  z-index: 3;
-}
-
-:host > .shade {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0);
-  transition: background 0.2s ease;
-  z-index: 2;
-  pointer-events: none;
-}
-
-:host > .side, :host > .main {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-}
-
-:host > .main {
-  top: @header-height;
-}
-
-:host > .side {
-  padding-top: @header-height;
-  width: @side-width;
-  background: white;
-  top: 0;
-  z-index: 3;
-}
-
-@media(min-width: 400px) {
-  .main, .side {
+  // shade between drawer and main content
+  & > .shade {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
     bottom: 0;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.2s ease;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  & > .side, & > .main {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    bottom: 0;
+  }
+
+  & > .main, & > .side > .content {
     overflow: auto;
   }
-  .main, .side {
-    transition: left 0.2s ease;
-  }
-  .main {
+
+  & > .main {
     top: @header-height;
-    left: 0;
     right: 0;
   }
-  .side {
-    left: -@side-width;
+
+  & > .side {
+    top: 0;
+    padding-top: @header-height;
+    width: @side-width;
+    background: white;
+    z-index: 3;
   }
-  :host.side {
-    & > .side {
-      left: 0;
+
+  @media(min-width: 400px) {
+    // side shouldn't cover header items
+    & > header > * {
+      z-index: 3;
+    }
+
+    & > .main, & > .side {
+      overflow: auto;
+      transition: left 0.2s ease;
     }
     & > .main {
-      left: @side-width;
+      top: @header-height;
+      left: 0;
+    }
+    & > .side {
+      left: -@side-width;
+    }
+    &.side {
+      & > .side {
+        left: 0;
+      }
+      & > .main {
+        left: @side-width;
+      }
     }
   }
-}
-
-@media(max-width: 400px) {
-  .main {
-    right: 0;
-  }
-  .side {
-    transition: transform 0.2s ease;
-  }
-  :host > .main, :host > .side {
-    left: 0;
-    bottom: 0;
-  }
-  :host > .side {
-    transform: translate(-100%, 0);
-  }
-  :host.side > .side {
-    transform: translate(0, 0);
-  }
-  :host.side > .shade {
-    background: rgba(0, 0, 0, 0.5);
-  }
-  :host.side > .shade {
-    pointer-events: auto;
+  @media(max-width: 400px) {
+    & > .main, & > .side {
+      left: 0;
+    }
+    & > .side {
+      transition: transform 0.2s ease;
+      transform: translate(-100%, 0);
+    }
+    &.side > .side {
+      transform: translate(0, 0);
+    }
+    &.side > .shade {
+      background: rgba(0, 0, 0, 0.5);
+      pointer-events: auto; // allow for click away
+    }
   }
 }

@@ -16,11 +16,13 @@
     <a [routerLink]="['applications']" class="brand">Brand</a>
   </div>
   <span class="title">{{ title || 'Dashboard' }}</span>
-  <div class="dropdown">
-    <span tabindex="-1" class="fa fa-lg fa-fw fa-user icon"></span>
-    <div>
-      <a routerLinkActive="active" [routerLink]="['profile']">User Profile</a>
-      <a (click)="logout()">Log Out</a>
+  <div class="side">
+    <div class="dropdown">
+      <span tabindex="-1" class="fa fa-lg fa-fw fa-user icon"></span>
+      <div>
+        <a routerLinkActive="active" [routerLink]="['profile']">User Profile</a>
+        <a (click)="logout()">Log Out</a>
+      </div>
     </div>
   </div>
 </header>
