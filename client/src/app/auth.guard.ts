@@ -8,7 +8,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   constructor(private configuration: ConfigurationService, private router: Router) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    console.log('activate?');
     let url = state.url;
     return this.checkUrl(url);
   }

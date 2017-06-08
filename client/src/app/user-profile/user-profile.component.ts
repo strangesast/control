@@ -10,8 +10,6 @@ export class UserProfileComponent implements OnInit {
 
   constructor(private configuration: ConfigurationService) { }
 
-  ngOnInit() {
-    this.configuration.user.subscribe(console.log.bind(console));
-  }
+  ngOnInit() {}
 
 }

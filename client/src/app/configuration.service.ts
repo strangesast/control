@@ -8,6 +8,12 @@ export class ConfigurationService implements Resolve<any> {
   public isLoggedIn = new ReplaySubject(1);
   public user = new ReplaySubject();
   public redirectUrl: string;
+  applications = [
+    {
+      name: 'Test Application 1',
+      path: 'topview'
+    }
+  ];
 
   constructor(private http: Http) { }
 

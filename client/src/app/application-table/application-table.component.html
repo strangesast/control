@@ -1,9 +1,8 @@
 <div class="box box-shadow">
-  <div>
+  <div *ngFor="let application of applications">
     <img src="/assets/placeholder.png"/>
     <div>
-      <div class="name">Application</div>
-      <div class="description">Description</div>
+      <a routerLink="/{{ application.path }}" class="name">{{ application.name }}</a>
     </div>
   </div>
   <div>
