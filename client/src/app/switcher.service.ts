@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class SwitcherService {
+  hidden = new BehaviorSubject(true);
   expanded = new BehaviorSubject(false);
   applications = new BehaviorSubject([]);
 
