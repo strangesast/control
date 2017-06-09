@@ -1,15 +1,10 @@
 <app-drawer>
   <a brand routerLink="/">Brand</a>
   <div drawer>
-    <div class="tree">
-      <a routerLinkActive="active" [routerLink]="['profile']">User Profile</a>
-      <a routerLinkActive="active" [routerLink]="['applications']">Applications</a>
-      <div class="tree collapsed" #tree>
-        <div><a routerLinkActive="active" [routerLink]="['objects']">Objects</a><span class="icon"><span (click)="tree.classList.toggle('collapsed')" class="fa fa-fw fa-angle-up icon"></span></span></div>
-        <a routerLinkActive="active" [routerLink]="['objects', 'users']">Users</a>
-        <a routerLinkActive="active" [routerLink]="['objects', 'groups']">Groups</a>
-        <a routerLinkActive="active" [routerLink]="['objects', 'applications']">Applications</a>
-      </div>
+    <div class="list">
+      <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['']">Applications</a>
+      <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['objects', 'users']">Users</a>
+      <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['objects', 'groups']">Groups</a>
     </div>
   </div>
   <span title>{{ title || 'Dashboard' }}</span>

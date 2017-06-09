@@ -48,7 +48,7 @@ module.exports = {
           write: true
         },
         {
-          id: 'energy_analysis',
+          id: 'energy-profile',
           write: true
         }
       ]
@@ -67,13 +67,24 @@ module.exports = {
   ],
   applications: [
     {
-      id: 'dashboard'
+      name: 'Dashboard',
+      id: 'dashboard',
+      path: 'dashboard'
     },
     {
-      id: 'thermostat'
+      name: 'Quick View',
+      id: 'topview',
+      path: 'topview'
     },
     {
-      id: 'energy_analysis'
+      name: 'Thermostat',
+      id: 'thermostat',
+      path: 'thermostat'
+    },
+    {
+      name: 'Energy Profile',
+      id: 'energy-profile',
+      path: 'energy-profile'
     }
   ]
 };

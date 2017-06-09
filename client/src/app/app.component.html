@@ -3,10 +3,12 @@
 </div>
 <div (click)="toggle(false)" class="shade"></div>
 <div class="application-container">
-  <div class="title">
+  <div (click)="toggle()" class="title">
     <span>Applications</span>
-    <span (click)="toggle()" class="icon fa fa-fw fa-arrow-up"></span>
+    <span class="icon fa fa-fw fa-arrow-up"></span>
   </div>
   <div><a routerLinkActive="active" routerLink="/dashboard">Dashboard</a></div>
   <div><a routerLinkActive="active" routerLink="/topview">Topview</a></div>
+  <div><a routerLinkActive="active" routerLink="/thermostat">Thermostat</a></div>
+  <div><a routerLinkActive="active" routerLink="/energy-profile">Energy Profile</a></div>
 </div>

@@ -1,0 +1,79 @@
+:host {
+  display: flex;
+  height: 100%;
+  background: white;
+  flex-direction: column;
+
+  & > header {
+    height: 60px;
+  }
+
+  & > .body {
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: row;
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+    }
+
+    & > .side-panel:first-child {
+      flex-basis: 25%;
+      & > * {
+        flex-basis: 50%;
+      }
+      & > .map {
+        flex-grow: 1;
+      }
+      @media(min-width: 1000px) {
+        flex-basis: 480px;
+        & > .small-graph {
+          flex-basis: 480px;
+        }
+      }
+    }
+    & > .side-panel:last-child {
+      flex-basis: 15%;
+
+      & > .current-group {
+        flex-basis: 20%;
+      }
+    }
+    & > .large-graph {
+      flex-basis: 60%;
+    }
+
+    div {
+      display: flex;
+    }
+
+  }
+
+  & > footer {
+    height: 60px;
+  }
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+}
+.map {
+  background: blue;
+}
+.small-graph {
+  background: red;
+}
+.large-graph {
+  background: purple;
+}
+.side-panel {
+  background: cyan;
+}
+.current-group {
+  background: orange;
+}
+.tall-graph {
+  background: green;
+}

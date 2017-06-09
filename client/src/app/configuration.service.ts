@@ -10,8 +10,20 @@ export class ConfigurationService implements Resolve<any> {
   public redirectUrl: string;
   applications = [
     {
-      name: 'Test Application 1',
+      name: 'Dashboard',
+      path: 'dashboard'
+    },
+    {
+      name: 'Quick View',
       path: 'topview'
+    },
+    {
+      name: 'Thermostat',
+      path: 'thermostat'
+    },
+    {
+      name: 'Energy Profile',
+      path: 'energy-profile'
     }
   ];
 
@@ -64,4 +76,3 @@ export class ConfigurationService implements Resolve<any> {
     });
   }
 }
-

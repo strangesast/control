@@ -25,7 +25,7 @@ function slideToLeft() {
     ]),
     transition('void => expanded', [
       left,
-      animate('0.4s ease', centerSmall)
+      animate('0.4s 0.2s ease', centerSmall)
     ]),
     transition('default => void', [
       animate('0.2s ease', centerSmall),

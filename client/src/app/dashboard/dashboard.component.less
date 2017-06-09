@@ -1,5 +1,28 @@
+@hover-color: rgba(0, 0, 0, 0.10);
+@active-color: rgba(0, 0, 0, 0.05);
+@border-color: #bdbdbd;
+@element-height: 40px;
+
 :host {
   display: block;
   height: 100%;
   background: white;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  & > * {
+    flex-basis: @element-height;
+    flex-shrink: 0;
+    padding: 0 8px;
+    line-height: @element-height;
+    text-decoration: none;
+    color: inherit;
+    &:hover {
+      background-color: @hover-color;
+    }
+    &.active {
+      background-color: @active-color;
+    }
+  }
 }

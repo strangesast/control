@@ -41,6 +41,8 @@ import { DrawerComponent } from './drawer/drawer.component';
 import { TopviewComponent } from './topview/topview.component';
 import { TopviewNavComponent } from './topview-nav/topview-nav.component';
 import { TopviewSubsectionComponent } from './topview-subsection/topview-subsection.component';
+import { ThermostatAppComponent } from './thermostat-app/thermostat-app.component';
+import { EnergyProfileComponent } from './energy-profile/energy-profile.component';
 
 const routes: Routes = [
   { path: '', resolve: { configuration: ConfigurationService }, children: [
@@ -52,8 +54,7 @@ const routes: Routes = [
         component: DashboardComponent,
         canActivate: [AuthGuard],
         children: [
-          { path: '', redirectTo: 'applications', pathMatch: 'full'},
-          { path: 'applications', component: ApplicationTableComponent },
+          { path: '', component: ApplicationTableComponent },
           { path: 'profile', component: UserProfileComponent },
           { path: 'objects', component: ObjectTableComponent },
           { path: 'objects/:type', component: ObjectTableComponent }
@@ -67,6 +68,16 @@ const routes: Routes = [
           { path: '', component: TopviewNavComponent },
           { path: ':subsection', component: TopviewSubsectionComponent }
         ]
+      },
+      {
+        path: 'thermostat',
+        component: ThermostatAppComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'energy-profile',
+        component: EnergyProfileComponent,
+        canActivate: [AuthGuard]
       }
     ]
   },
@@ -108,7 +119,9 @@ const routes: Routes = [
     DrawerComponent,
     TopviewComponent,
     TopviewNavComponent,
-    TopviewSubsectionComponent
+    TopviewSubsectionComponent,
+    ThermostatAppComponent,
+    EnergyProfileComponent
   ],
   imports: [
     BrowserModule,

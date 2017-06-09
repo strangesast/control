@@ -1,57 +1,17 @@
-<div *ngIf="!objectType || objectType == 'users'" class="box">
-  <span class="title">Users</span>
-  <div class="options">
-    <label>Sort By</label>
-    <select>
-      <option>Name</option>
-    </select>
-  </div>
-  <div class="box-shadow table">
-    <div class="row">
-      <img class="profile" src="/assets/placeholder.png">
-      <div>
-        <span class="name">Name</span>
-        <span class="username">Username</span>
-        <span class="groups">Groups</span>
-      </div>
-    </div>
-  </div>
+<span class="title">{{ objectType | titleCase }}</span>
+<div class="options">
+  <label>Sort By</label>
+  <select>
+    <option>Name</option>
+  </select>
 </div>
-<div *ngIf="!objectType || objectType == 'groups'" class="box">
-  <span class="title">Groups</span>
-  <div class="options">
-    <label>Sort By</label>
-    <select>
-      <option>Name</option>
-    </select>
-  </div>
-  <div class="box-shadow table">
-    <div class="row">
-      <img class="profile" src="/assets/placeholder.png">
-      <div>
-        <span class="name">Name</span>
-        <span class="username">Username</span>
-        <span class="groups">Groups</span>
-      </div>
-    </div>
-  </div>
-</div>
-<div *ngIf="!objectType || objectType == 'applications'" class="box">
-  <span class="title">Applications</span>
-  <div class="options">
-    <label>Sort By</label>
-    <select>
-      <option>Name</option>
-    </select>
-  </div>
-  <div class="box-shadow table">
-    <div class="row">
-      <img class="profile" src="/assets/placeholder.png">
-      <div>
-        <span class="name">Name</span>
-        <span class="username">Username</span>
-        <span class="groups">Groups</span>
-      </div>
+<div class="box-shadow table">
+  <div *ngFor="let object of objects" class="row">
+    <img class="profile" src="/assets/placeholder.png">
+    <div>
+      <span class="name">{{ object.name }}</span>
+      <span class="username">Username</span>
+      <span class="groups">Groups</span>
     </div>
   </div>
 </div>

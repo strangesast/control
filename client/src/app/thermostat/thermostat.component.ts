@@ -331,7 +331,7 @@ export class ThermostatComponent extends GenericComponent implements OnInit {
       this.setPoint = setPoint;
       this.redraw(0);
     });
-    e.append('circle').attr('r', size/30).attr('opacity', 0.0)
+    e.append('circle').attr('r', size/14).attr('opacity', 0.0)
     e.append('text')
       .attr('font-size', controlFontSize)
       .attr('fill', color)
