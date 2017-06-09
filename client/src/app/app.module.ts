@@ -39,6 +39,8 @@ import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './auth.guard';
 import { DrawerComponent } from './drawer/drawer.component';
 import { TopviewComponent } from './topview/topview.component';
+import { TopviewNavComponent } from './topview-nav/topview-nav.component';
+import { TopviewSubsectionComponent } from './topview-subsection/topview-subsection.component';
 
 const routes: Routes = [
   { path: '', resolve: { configuration: ConfigurationService }, children: [
@@ -60,7 +62,11 @@ const routes: Routes = [
       {
         path: 'topview',
         component: TopviewComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        children: [
+          { path: '', component: TopviewNavComponent },
+          { path: ':subsection', component: TopviewSubsectionComponent }
+        ]
       }
     ]
   },
@@ -100,7 +106,9 @@ const routes: Routes = [
     LogInComponent,
     RegisterComponent,
     DrawerComponent,
-    TopviewComponent
+    TopviewComponent,
+    TopviewNavComponent,
+    TopviewSubsectionComponent
   ],
   imports: [
     BrowserModule,

@@ -8,12 +8,12 @@ const shadow = '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)';
 const right = style({ transform: 'scale(0.9) translate(111%, 5px)', 'box-shadow': shadow });
 const left = style({ transform: 'scale(0.9) translate(-111%, 5px)', 'box-shadow': shadow });
 const centerSmall = style({ transform: 'scale(0.9) translate(0%, 5px)', 'box-shadow': shadow });
-const center = style({ position: 'fixed', width: '100%', transform: 'scale(1.0) translate(0, 0)' });
+const center = style({ position: 'absolute', width: '100%', transform: 'scale(1.0) translate(0, 0)' });
 
 function slideToLeft() {
   return trigger('routerTransition', [
     state('void', style({
-      position: 'fixed',
+      position: 'absolute',
       width: '100%'
     })),
     //state('*', center),

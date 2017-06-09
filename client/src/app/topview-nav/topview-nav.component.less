@@ -1,0 +1,47 @@
+@deep-blue: #185081;
+@light-blue: #0f61a5;
+@border-color: #e4e4e4;
+@border-width: 1px;
+
+:host {
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  & > div {
+    &:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    &:focus {
+      border: 0;
+      outline: none;
+    }
+    padding: 12px;
+    box-sizing: border-box;
+    &:nth-child(odd) {
+      border-right: 1px solid @border-color;
+    }
+    border-bottom: 1px solid @border-color;
+    flex-basis: 50%;
+    flex-grow: 1;
+    color: @light-blue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    & > span {
+      font-size: 1.5em;
+    }
+    & > .background {
+      z-index: -1;
+      fill: fade(@light-blue, 10%);
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+  }
+}
