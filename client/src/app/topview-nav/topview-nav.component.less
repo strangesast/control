@@ -2,46 +2,84 @@
 @light-blue: #0f61a5;
 @border-color: #e4e4e4;
 @border-width: 1px;
+@header-height: 100px;
 
 :host {
-  height: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  & > div {
-    &:hover {
-      background: rgba(0, 0, 0, 0.05);
-    }
-    &:focus {
-      border: 0;
-      outline: none;
-    }
-    padding: 12px;
-    box-sizing: border-box;
-    &:nth-child(odd) {
-      border-right: 1px solid @border-color;
-    }
-    border-bottom: 1px solid @border-color;
-    flex-basis: 50%;
-    flex-grow: 1;
-    color: @light-blue;
+
+  & > header {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    & > span {
-      font-size: 1.5em;
+    position: sticky;
+    background: white;
+    top: 0;
+    height: @header-height;
+    width: 100%;
+    color: @deep-blue;
+    border-bottom: 1px solid @border-color;
+
+    & > img {
+      box-sizing: border-box;
+      padding: 8px;
+      width: 100px;
+      height: 100px;
     }
-    & > .background {
-      z-index: -1;
-      fill: fade(@light-blue, 10%);
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+    & > div {
+      font-size: 1.2em;
+      padding: 12px 0;
+      & > span {
+        display: block;
+      }
+      & > span:last-child {
+        font-size: 2.5em;
+      }
+    }
+  }
+
+  height: 100%;
+
+  & > .nav-items {
+    top: @header-height;
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    & > div {
+      flex-basis: 140px;
+      &:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+      &:focus {
+        border: 0;
+        outline: none;
+      }
+      padding: 12px;
+      box-sizing: border-box;
+      &:nth-child(odd) {
+        border-right: 1px solid @border-color;
+      }
+      border-bottom: 1px solid @border-color;
+      flex-basis: 50%;
+      flex-grow: 1;
+      color: @light-blue;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      & > span {
+        font-size: 1.5em;
+      }
+      & > .background {
+        z-index: -1;
+        fill: fade(@light-blue, 10%);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
     }
   }
 }

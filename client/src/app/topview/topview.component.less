@@ -2,7 +2,6 @@
 @light-blue: #0f61a5;
 @border-color: #e4e4e4;
 @border-width: 1px;
-@header-height: 100px;
 @footer-height: 60px;
 
 :host {
@@ -15,34 +14,8 @@
   overflow: hidden;
   position: relative;
 
-  & > .header {
-    display: flex;
-    position: absolute;
-    height: @header-height;
-    width: 100%;
-    color: @deep-blue;
-    border-bottom: 1px solid @border-color;
-
-    & > img {
-      box-sizing: border-box;
-      padding: 8px;
-      width: 100px;
-      height: 100px;
-    }
-    & > div {
-      font-size: 1.2em;
-      padding: 12px 0;
-      & > span {
-        display: block;
-      }
-      & > span:last-child {
-        font-size: 2.5em;
-      }
-    }
-  }
-
   & > .content {
-    top: @header-height;
+    top: 0;
     position: absolute;
     width: 100%;
     bottom: @footer-height;
