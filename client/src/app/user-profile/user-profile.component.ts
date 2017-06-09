@@ -22,6 +22,7 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     this.configuration.user.flatMap((user: any) => {
+      console.log('user', user);
       let token = user.token;
       let headers = new Headers({'Content-Type': 'application/json', 'Authorization': 'JWT ' + token });
       console.log(headers);

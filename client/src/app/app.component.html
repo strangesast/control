@@ -1,1 +1,10 @@
 <router-outlet></router-outlet>
+<div (click)="toggle(false)" class="shade"></div>
+<div class="application-container">
+  <div class="title">
+    <span>Applications</span>
+    <span (click)="toggle()" class="icon fa fa-fw fa-arrow-up"></span>
+  </div>
+  <div><a routerLink="/dashboard">Dashboard</a></div>
+  <div><a routerLink="/topview">Topview</a></div>
+</div>

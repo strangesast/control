@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../router.animations';
+import { SwitcherService } from '../switcher.service';
 
 @Component({
   selector: 'app-topview',
@@ -7,14 +8,16 @@ import { routerTransition } from '../router.animations';
   styleUrls: ['./topview.component.less'],
   animations: [routerTransition()],
   host: {
-    '[@routerTransition]': ''
+    '[@routerTransition]': 'expanded ? "expanded" : "default"'
   }
 })
 export class TopviewComponent implements OnInit {
+  expanded = false;
 
-  constructor() { }
+  constructor(private s: SwitcherService) { }
 
   ngOnInit() {
+    this.s.expanded.subscribe(e => this.expanded = e);
   }
 
 }

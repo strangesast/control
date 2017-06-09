@@ -16,6 +16,7 @@ import { GenericComponent } from './generic/generic.component';
 import { TabGroupComponent } from './tab-group/tab-group.component';
 import { NameFromAttrPipe } from './name-from-attr.pipe';
 
+import { SwitcherService } from './switcher.service';
 import { RegistrationService } from './registration.service';
 import { NumericInputComponent } from './numeric-input/numeric-input.component';
 import { GraphComponent } from './graph/graph.component';
@@ -26,12 +27,13 @@ import { ExampleComponent } from './example/example.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MapComponent } from './map/map.component';
 
+import { ConfigurationService } from './configuration.service';
+
 import entryComponents from './entry-components';
 import { TitleCasePipe } from './title-case.pipe';
 import { ObjectTableComponent } from './object-table/object-table.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ApplicationTableComponent } from './application-table/application-table.component';
-import { ConfigurationService } from './configuration.service';
 import { LogInComponent } from './log-in/log-in.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './auth.guard';
@@ -108,7 +110,7 @@ const routes: Routes = [
     HttpModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [ RegistrationService, ConfigurationService, AuthGuard ],
+  providers: [ SwitcherService, RegistrationService, ConfigurationService, AuthGuard ],
   bootstrap: [AppComponent],
   entryComponents
 })

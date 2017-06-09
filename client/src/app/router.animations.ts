@@ -4,25 +4,38 @@ export function routerTransition() {
   return slideToLeft();
 }
 
+const shadow = '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)';
+const right = style({ transform: 'scale(0.9) translate(111%, 5px)', 'box-shadow': shadow });
+const left = style({ transform: 'scale(0.9) translate(-111%, 5px)', 'box-shadow': shadow });
+const centerSmall = style({ transform: 'scale(0.9) translate(0%, 5px)', 'box-shadow': shadow });
+const center = style({ position: 'fixed', width: '100%', transform: 'scale(1.0) translate(0, 0)' });
+
 function slideToLeft() {
   return trigger('routerTransition', [
     state('void', style({
       position: 'fixed',
       width: '100%'
     })),
-    state('*', style({
-      position: 'fixed',
-      width: '100%'
-    })),
-    transition(':enter', [
-      style({ transform: 'scale(0.9) translate(111%, 5px)', 'box-shadow': '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'}),
-      animate('0.5s 0.5s ease', style({ transform: 'scale(0.9) translate(0%)' })),
-      animate('0.4s ease', style({ transform: 'scale(1.0) translate(0%)', 'box-shadow': 'none'}))
+    //state('*', center),
+    state('expanded', centerSmall),
+    state('default', center),
+    transition('default <=> expanded', animate('0.2s ease')),
+    transition('expanded => void', [
+      animate('0.4s ease', right)
     ]),
-    transition(':leave', [
-      style({ transform: 'scale(1.0) translate(0, 0)', 'box-shadow': 'none'}),
-      animate('0.5s ease', style({ transform: 'scale(0.9) translate(0%)', 'box-shadow': '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'})),
-      animate('0.4s ease', style({ transform: 'scale(0.9) translate(-111%, 5px)'}))
+    transition('void => expanded', [
+      left,
+      animate('0.4s ease', centerSmall)
     ]),
+    transition('default => void', [
+      animate('0.2s ease', centerSmall),
+      animate('0.4s ease', right)
+    ]),
+    transition('void => default', [
+      left,
+      animate('0.4s 0.2s ease', centerSmall),
+      animate('0.2s ease', center)
+    ])
+
   ]);
 }

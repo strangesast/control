@@ -6,7 +6,7 @@ import { BehaviorSubject, ReplaySubject, Observable } from 'rxjs';
 @Injectable()
 export class ConfigurationService implements Resolve<any> {
   public isLoggedIn = new ReplaySubject(1);
-  public user = new ReplaySubject();
+  public user = new ReplaySubject(1);
   public redirectUrl: string;
   applications = [
     {
@@ -20,7 +20,9 @@ export class ConfigurationService implements Resolve<any> {
   resolve() {
     try {
       let json = localStorage.getItem('currentUser')
-      this.user.next(JSON.parse(json));
+      if (json) {
+        this.user.next(JSON.parse(json));
+      }
     } catch (e) {}
   }
 
@@ -48,6 +50,7 @@ export class ConfigurationService implements Resolve<any> {
         if (user && token) {
           user.token = token;
           localStorage.setItem('currentUser', JSON.stringify(user));
+          this.user.next(user);
         }
       }
       return;
