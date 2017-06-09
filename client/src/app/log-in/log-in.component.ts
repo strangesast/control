@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ConfigurationService } from '../configuration.service';
-import { accounts } from '../../../../defaultAccounts.js';
+import { users, groups, applications } from '../../../../defaultObjects.js';
 
 class User {
   username: string = '';
@@ -39,9 +39,9 @@ export class LogInComponent implements OnInit {
     });
 
     this.defaults.valueChanges.subscribe(value => {
-      let acc = accounts.find(({ username }) => username == value);
+      let acc = users.find(({ username }) => username == value);
       if (acc) {
-        this.credentials.setValue(acc);
+        this.credentials.setValue({ username: acc.username, password: acc.password });
       }
     });
   }

@@ -17,7 +17,7 @@ const express = require('express'),
       upload = multer(),
       //ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn,
       InfluxDB = Influx.InfluxDB,
-      defaultAccounts = require('../defaultAccounts').accounts;
+      defaultObjects = require('../defaultObjects');
 
 // database configuration
 const host = 'localhost';
@@ -70,7 +70,9 @@ var mongo, influx;
   let componentsCollection = await mongo.createCollection('components');
   let pointsCollection = await mongo.createCollection('points');
   // create default objects
-  await usersCollection.insertMany(defaultAccounts)
+  await usersCollection.insertMany(defaultObjects.users);
+  await groupsCollection.insertMany(defaultObjects.groups);
+  await applicationsCollection.insertMany(defaultObjects.applications);
 
   
   // influx setup, init
@@ -162,6 +164,7 @@ passport.use(new JwtStrategy(
   // use Authorization: Bearer header from request
   { jwtFromRequest: ExtractJwt.fromAuthHeader(), secretOrKey: secret },
   async function(payload, next) {
+    console.log('payload', payload);
     let _id;
     try {
       _id = ObjectID.createFromHexString(payload.id);
