@@ -3,24 +3,20 @@ import { Component, OnInit } from '@angular/core';
 //import { SwitcherService } from '../switcher.service';
 
 @Component({
-  selector: 'app-topview',
-  templateUrl: './topview.component.html',
-  styleUrls: ['./topview.component.less'],
+  selector: 'app-energy',
+  templateUrl: './energy.component.html',
+  styleUrls: ['./energy.component.less'],
   //animations: [routerTransition()],
   host: {
-    //'[@routerTransition]': 'expanded ? "expanded" : "default"',
-    '[class.loading]': 'loading'
+    //'[@routerTransition]': 'expanded ? "expanded" : "default"'
   }
 })
-export class TopviewComponent implements OnInit {
+export class EnergyComponent implements OnInit {
   expanded = false;
-  loading = true;
 
   //constructor(private s: SwitcherService) { }
 
   ngOnInit() {
     //this.s.expanded.subscribe(e => this.expanded = e);
-    setTimeout(() => this.loading = false, 1000);
   }
-
 }

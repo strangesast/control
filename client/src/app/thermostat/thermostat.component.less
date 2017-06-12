@@ -1,33 +1,67 @@
+@footer-height: 100px;
 :host {
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-:host /deep/ svg text {
-  cursor: default;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-:host /deep/ svg text::selection {
-  background: none;
-}
-:host /deep/ svg .drag {
-  cursor: grab;
-}
-:host /deep/ svg .drag:active {
-  cursor: grabbing;
-}
-:host /deep/ svg .control * {
-  cursor: pointer;
-}
-:host /deep/ svg .control:hover > circle {
-  opacity: 0.05;
-}
-:host /deep/ svg {
-  padding: 10px;
-  box-sizing: border-box;
-  width: 100%;
-  //max-width: calc(100vh - 50px);
+
+  height: 100%;
+  background: white;
+
+  & > header {
+    height: 60px;
+    padding: 0 8px;
+    display: flex;
+    flex-shrink: 0;
+    line-height: 60px;
+    justify-content: space-between;
+    & > .title {
+      text-align: center;
+    }
+
+    & > .title ~ * {
+      text-align: right;
+    }
+  }
+
+  & > div {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+    min-height: 0;
+  }
+
+  & > footer {
+    height: @footer-height;
+    display: flex;
+    flex-shrink: 0;
+
+    & > * {
+      flex-basis: 0;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      & > span:first-child {
+        font-size: 2em;
+      }
+      & > *:not(:first-child) {
+        margin-top: 4px;
+      }
+    }
+  }
+
+  //@media not screen and (orientation: landscape) {
+  //  flex-direction: row;
+  //  & > header > .title {
+  //    display: none;
+  //  }
+
+  //  & > header, & > footer {
+  //    flex-direction: column;
+  //    height: 100%;
+  //  }
+  //  & > footer {
+  //    width: @footer-height;
+  //  }
+  //}
 }

@@ -1,0 +1,33 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+:host /deep/ svg text {
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+:host /deep/ svg text::selection {
+  background: none;
+}
+:host /deep/ svg .drag {
+  cursor: grab;
+}
+:host /deep/ svg .drag:active {
+  cursor: grabbing;
+}
+:host /deep/ svg .control * {
+  cursor: pointer;
+}
+:host /deep/ svg .control:hover > circle {
+  opacity: 0.05;
+}
+:host /deep/ svg {
+  padding: 10px;
+  box-sizing: border-box;
+  width: 100%;
+  //max-width: calc(100vh - 50px);
+}

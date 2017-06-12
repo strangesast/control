@@ -1,1 +1,24 @@
-<svg #graph viewBox="0 0 400 400"></svg>
+<header>
+  <div>
+    <span class="fa fa-fw fa-lg fa-chevron-left"></span>
+  </div>
+  <div class="title">
+    <span>Thermostat</span>
+  </div>
+  <div>
+    <span class="fa fa-fw fa-lg fa-cog"></span>
+  </div>
+</header>
+<div>
+  <app-thermostat-gauge [temperature]="temperature" [(setPoint)]="setPoint"></app-thermostat-gauge>
+</div>
+<footer>
+  <div>
+    <span class="fa fa-history"></span>
+    <span>History</span>
+  </div>
+  <div>
+    <span class="fa fa-calendar"></span>
+    <span>Schedule</span>
+  </div>
+</footer>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { SwitcherService } from './switcher.service';
+import { SwitcherService } from './_services/switcher.service';
 
 @Component({
   selector: 'app-root',

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ThermostatAppComponent } from './thermostat-app.component';
+import { ThermostatComponent } from './thermostat.component';
 
-describe('ThermostatAppComponent', () => {
-  let component: ThermostatAppComponent;
-  let fixture: ComponentFixture<ThermostatAppComponent>;
+describe('ThermostatComponent', () => {
+  let component: ThermostatComponent;
+  let fixture: ComponentFixture<ThermostatComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ThermostatAppComponent ]
+      declarations: [ ThermostatComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ThermostatAppComponent);
+    fixture = TestBed.createComponent(ThermostatComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
