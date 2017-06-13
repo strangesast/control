@@ -1,30 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfigurationService } from '../_services/configuration.service';
-//import { routerTransition } from '../router.animations';
-//import { SwitcherService } from '../switcher.service';
+import { routerTransition } from '../catalog/_directives/router.animations';
+import { SwitcherComponent } from '../catalog/_components/switcher/switcher.component';
+import { SwitcherService } from '../catalog/_services/switcher.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.less'],
-  //animations: [routerTransition()],
+  animations: [routerTransition()],
   host: {
-    //'[@routerTransition]': 'expanded ? "expanded" : "default"'
+    '[@routerTransition]': 'expanded ? "expanded" : "default"',
+    '[class.expanded]': 'expanded'
   }
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent extends SwitcherComponent implements OnInit {
   title: string;
-  expanded = false;
 
   constructor(
-    //private s: SwitcherService,
+    s: SwitcherService,
     private router: Router,
     private configuration: ConfigurationService
-  ) { }
-
-  ngOnInit() {
-    //this.s.expanded.subscribe(e => this.expanded = e);
+  ) {
+    super(s);
   }
 
   logout() {

@@ -7,6 +7,8 @@ export class SwitcherService {
   expanded = new BehaviorSubject(false);
   applications = new BehaviorSubject([]);
 
-  constructor() { }
+  constructor() {
+    console.log('new service');
+  }
 
 }

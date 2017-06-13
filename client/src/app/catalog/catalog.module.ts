@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { GroupDirective } from './_directives';
 import { NameFromAttrPipe, TitleCasePipe } from './_pipes';
 import { RegistrationService } from './_services';
+import { SwitcherService } from './_services';
 
 import {
   JsonInputComponent,
@@ -19,7 +20,8 @@ import {
   ListGroupComponent,
   ThermostatGaugeComponent,
   MapComponent,
-  DrawerComponent
+  DrawerComponent,
+  SwitcherComponent
 } from './_components';
 
 import entryComponents from './entry-components';
@@ -33,7 +35,8 @@ import entryComponents from './entry-components';
     ThermostatGaugeComponent,
     DrawerComponent,
     NameFromAttrPipe,
-    TitleCasePipe
+    TitleCasePipe,
+    SwitcherComponent
   ],
   declarations: [
     JsonInputComponent,
@@ -51,7 +54,11 @@ import entryComponents from './entry-components';
     ListGroupComponent,
     ThermostatGaugeComponent,
     DrawerComponent,
-    MapComponent
+    MapComponent,
+    SwitcherComponent
+  ],
+  providers: [
+ //   SwitcherService
   ],
   entryComponents
 })

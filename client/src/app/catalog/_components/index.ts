@@ -11,3 +11,4 @@ export * from './thermostat-gauge/thermostat-gauge.component';
 export * from './toggle-button/toggle-button.component';
 export * from './tab-group/tab-group.component';
 export * from './numeric-input/numeric-input.component';
+export * from './switcher/switcher.component';

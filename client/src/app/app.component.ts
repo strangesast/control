@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { SwitcherService } from './_services/switcher.service';
+import { SwitcherService } from './catalog/_services/switcher.service';
+import { SwitcherComponent } from './catalog/_components';
 
 @Component({
   selector: 'app-root',
@@ -11,26 +12,26 @@ import { SwitcherService } from './_services/switcher.service';
     '[class.hidden]': 'hidden'
   }
 })
-export class AppComponent {
-  constructor(private s: SwitcherService, private router: Router) {}
-  applications = [];
-  expanded = false;
+export class AppComponent extends SwitcherComponent {
+  constructor(s: SwitcherService, private router: Router) {
+    super(s);
+  }
   hidden = false;
 
   ngOnInit() {
-    this.s.applications.subscribe(a => this.applications = a);
-    this.s.expanded.subscribe(a => this.expanded = a);
-    this.s.hidden.subscribe(a => this.hidden = a);
+    super.ngOnInit();
+    this.s.hidden.takeUntil(this.ngUnsubscribe).subscribe(e => this.hidden = e);
     this.router.events.filter(e => e instanceof NavigationEnd).pluck('url').map((url: string) => {
       if (url.startsWith('/login') || url.startsWith('/register')) {
         return true;
       }
       return false;
 
-    }).subscribe(bool => this.hidden = bool);
+    }).takeUntil(this.ngUnsubscribe).subscribe(bool => this.hidden = bool);
   }
 
   toggle(override) {
+    console.log('toggle');
     this.s.expanded.next(this.expanded = override != null ? override : !this.expanded);
   }
 }

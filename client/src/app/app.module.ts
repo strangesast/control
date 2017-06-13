@@ -10,13 +10,13 @@ import { CatalogModule } from './catalog/catalog.module';
 import { AppComponent } from './app.component';
 
 import { LogInComponent, RegisterComponent } from './_components';
-import { SwitcherService } from './_services/switcher.service';
 import { ConfigurationService } from './_services/configuration.service';
 
 import { AuthGuard } from './_guards/auth.guard';
 
 import { AppRoutingModule } from './app-routing.module';
-import { NotFoundComponent } from './_components/not-found/not-found.component'
+import { NotFoundComponent } from './_components/not-found/not-found.component';
+import { SwitcherService } from './catalog/_services/switcher.service';
 
 @NgModule({
   imports: [

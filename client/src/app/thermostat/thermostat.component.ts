@@ -1,27 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-//import { routerTransition } from '../router.animations';
-//import { SwitcherService } from '../switcher.service';
+import { SwitcherComponent } from '../catalog/_components';
+import { routerTransition } from '../catalog/_directives/router.animations';
 
 @Component({
   selector: 'app-thermostat',
   templateUrl: './thermostat.component.html',
   styleUrls: ['./thermostat.component.less'],
-  //animations: [routerTransition()],
+  animations: [routerTransition()],
   host: {
-    //'[@routerTransition]': 'expanded ? "expanded" : "default"'
+    '[@routerTransition]': 'expanded ? "expanded" : "default"',
+    '[class.expanded]': 'expanded'
   }
 })
-export class ThermostatComponent implements OnInit {
-  expanded = false;
-
+export class ThermostatComponent extends SwitcherComponent implements OnInit {
   // to be removed
   temperature = 70
   setPoint = 75
 
-  //constructor(private s: SwitcherService) { }
-
   ngOnInit() {
-    //this.s.expanded.subscribe(e => this.expanded = e);
+    super.ngOnInit();
 
     setInterval(() => {
       if (Math.abs(this.temperature - this.setPoint) > 0.01) {

@@ -1,22 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-//import { routerTransition } from '../router.animations';
-//import { SwitcherService } from '../switcher.service';
+import { SwitcherComponent } from '../catalog/_components';
+import { routerTransition } from '../catalog/_directives/router.animations';
 
 @Component({
   selector: 'app-energy',
   templateUrl: './energy.component.html',
   styleUrls: ['./energy.component.less'],
-  //animations: [routerTransition()],
+  animations: [routerTransition()],
   host: {
-    //'[@routerTransition]': 'expanded ? "expanded" : "default"'
+    '[@routerTransition]': 'expanded ? "expanded" : "default"'
   }
 })
-export class EnergyComponent implements OnInit {
-  expanded = false;
-
-  //constructor(private s: SwitcherService) { }
-
-  ngOnInit() {
-    //this.s.expanded.subscribe(e => this.expanded = e);
-  }
-}
+export class EnergyComponent extends SwitcherComponent {}
