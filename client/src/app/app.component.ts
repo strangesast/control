@@ -30,8 +30,7 @@ export class AppComponent extends SwitcherComponent {
     }).takeUntil(this.ngUnsubscribe).subscribe(bool => this.hidden = bool);
   }
 
-  toggle(override) {
-    console.log('toggle');
+  toggle(override?:boolean): void {
     this.s.expanded.next(this.expanded = override != null ? override : !this.expanded);
   }
 }

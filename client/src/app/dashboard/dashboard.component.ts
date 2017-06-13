@@ -11,11 +11,10 @@ import { SwitcherService } from '../catalog/_services/switcher.service';
   styleUrls: ['./dashboard.component.less'],
   animations: [routerTransition()],
   host: {
-    '[@routerTransition]': 'expanded ? "expanded" : "default"',
-    '[class.expanded]': 'expanded'
+    '[@routerTransition]': 'expanded ? "expanded" : "default"'
   }
 })
-export class DashboardComponent extends SwitcherComponent implements OnInit {
+export class DashboardComponent extends SwitcherComponent {
   title: string;
 
   constructor(
