@@ -1,9 +1,29 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { SelectivePreloadingStrategy } from './selective-preloading-strategy';
-import { ConfigurationService } from './_services/configuration.service';
-import { LogInComponent, RegisterComponent, NotFoundComponent } from './_components';
-import { AuthGuard } from './_guards/auth.guard';
+import { NgModule, Injectable } from '@angular/core';
+import { Routes, Route, PreloadingStrategy, RouterModule } from '@angular/router';
+import { Observable } from 'rxjs';
+
+@Injectable()
+export class SelectivePreloadingStrategy implements PreloadingStrategy {
+  preloadedModules: string[] = [];
+
+  preload(route: Route, load: () => Observable<any>): Observable<any> {
+    if (route.data && route.data['preload']) {
+      this.preloadedModules.push(route.path);
+      console.log('Preloaded: ' + route.path);
+
+      return load();
+
+    } else {
+      return Observable.of(null);
+
+    }
+  }
+}
+
+import { ConfigurationService } from './services/configuration.service';
+import { LogInComponent, RegisterComponent, NotFoundComponent } from './components';
+import { DummyComponent } from './components/dummy/dummy.component';
+import { AuthGuard, DefaultAppGuard } from './guards';
 
 const routes: Routes = [
   {
@@ -13,22 +33,22 @@ const routes: Routes = [
       { path: 'register', component: RegisterComponent },
       {
         path: 'dashboard',
-        loadChildren: 'app/dashboard/dashboard.module#DashboardModule',
+        loadChildren: 'app/modules/dashboard/dashboard.module#DashboardModule',
         canLoad: [AuthGuard]
       },
       {
         path: 'topview',
-        loadChildren: 'app/topview/topview.module#TopviewModule',
+        loadChildren: 'app/modules/topview/topview.module#TopviewModule',
         canLoad: [AuthGuard]
       },
       {
         path: 'energy',
-        loadChildren: 'app/energy/energy.module#EnergyModule',
+        loadChildren: 'app/modules/energy/energy.module#EnergyModule',
         canLoad: [AuthGuard]
       },
       {
         path: 'thermostat',
-        loadChildren: 'app/thermostat/thermostat.module#ThermostatModule',
+        loadChildren: 'app/modules/thermostat/thermostat.module#ThermostatModule',
         canLoad: [AuthGuard]
       },
       // {
@@ -36,7 +56,7 @@ const routes: Routes = [
       //   loadChildren: '<module_path>,
       //   data: { preload: true }
       // }
-      { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+      { path: '', component: DummyComponent, canActivate: [AuthGuard, DefaultAppGuard] },
       { path: '**', component: NotFoundComponent }
     ]
   }

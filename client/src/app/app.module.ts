@@ -5,18 +5,24 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { CatalogModule } from './catalog/catalog.module';
+import { CatalogModule } from './modules/catalog/catalog.module';
 
-import { AppComponent } from './app.component';
+import { AppComponent } from './components/app.component';
 
-import { LogInComponent, RegisterComponent } from './_components';
-import { ConfigurationService } from './_services/configuration.service';
+import { LogInComponent, RegisterComponent } from './components';
+import { ConfigurationService } from './services/configuration.service';
 
-import { AuthGuard } from './_guards/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 import { AppRoutingModule } from './app-routing.module';
-import { NotFoundComponent } from './_components/not-found/not-found.component';
-import { SwitcherService } from './catalog/_services/switcher.service';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { SwitcherService } from './modules/catalog/services/switcher.service';
+
+import { StoreModule } from '@ngrx/store';
+import { reducers, initialState } from './reducers';
+import { AppEffectsModule } from './app-effects.module';
+import { DummyComponent } from './components/dummy/dummy.component';
+import { DefaultAppGuard } from './guards/default-app.guard';
 
 @NgModule({
   imports: [
@@ -26,15 +32,18 @@ import { SwitcherService } from './catalog/_services/switcher.service';
     ReactiveFormsModule,
     HttpModule,
     AppRoutingModule,
-    CatalogModule
+    CatalogModule,
+    StoreModule.forRoot(reducers),
+    AppEffectsModule
   ],
   declarations: [
     AppComponent,
     LogInComponent,
     RegisterComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    DummyComponent
   ],
-  providers: [ SwitcherService, ConfigurationService, AuthGuard ],
+  providers: [ SwitcherService, ConfigurationService, AuthGuard, DefaultAppGuard ],
   bootstrap: [ AppComponent ],
 })
 export class AppModule { }

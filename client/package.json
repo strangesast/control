@@ -21,15 +21,17 @@
     "@angular/platform-browser": "^4.2.2",
     "@angular/platform-browser-dynamic": "^4.2.2",
     "@angular/router": "^4.2.2",
+    "@ngrx/effects": "github:ngrx/effects-builds",
+    "@ngrx/store": "github:ngrx/store-builds#745395b9775965e1bfcddaabece172f9f556d794",
     "core-js": "^2.4.1",
     "d3": "^4.9.1",
     "deep-diff": "^0.3.8",
     "font-awesome": "^4.7.0",
-    "rxjs": "^5.1.0",
+    "rxjs": "^5.4.2",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
-    "@angular/cli": "1.1.1",
+    "@angular/cli": "^1.2.0",
     "@angular/compiler-cli": "^4.2.2",
     "@types/jasmine": "2.5.52",
     "@types/node": "~7.0.31",
@@ -45,6 +47,6 @@
     "protractor": "~5.1.0",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
-    "typescript": "~2.2.0"
+    "typescript": "~2.4.0"
   }
 }
