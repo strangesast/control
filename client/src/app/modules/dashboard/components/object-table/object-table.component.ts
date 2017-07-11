@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
-import { ConfigurationService } from '../../../../services/configuration.service';
+import { AuthorizationService } from '../../../../services/authorization.service';
+import { Observable } from 'rxjs';
 
 class User {
   name: string;
@@ -29,25 +30,38 @@ const classMap = {'users': User, 'groups': Group, 'applications': Application, '
 
 @Component({
   selector: 'app-object-table',
-  templateUrl: './object-table.component.html',
+  //templateUrl: './object-table.component.html',
+  template: `
+<span class="title">{{ objectType$ | async | titleCase }}</span>
+<div class="options">
+  <label>Sort By</label>
+  <select>
+    <option>Name</option>
+  </select>
+</div>
+<div class="box-shadow table">
+  <div *ngFor="let object of objects$ | async" class="row">
+    <img class="profile" src="/assets/placeholder.png">
+    <div>
+      <span class="name">{{ object.name }}</span>
+      <span class="username">Username</span>
+      <span class="groups">Groups</span>
+    </div>
+  </div>
+</div>
+  `,
   styleUrls: ['./object-table.component.less']
 })
-export class ObjectTableComponent implements OnInit {
-  objectType;
-  objects: any[];
+export class ObjectTableComponent {
+  objectType$: Observable<any>;
+  objects$: Observable<any[]>;
 
-  constructor(private route: ActivatedRoute, private http: Http, private configuration: ConfigurationService) { }
+  constructor(route: ActivatedRoute, private http: Http, private authorization: AuthorizationService) {
+    this.objectType$ = route.params.pluck('type').shareReplay();
 
-  ngOnInit() {
-    let objectType = this.route.params.pluck('type').shareReplay();
-    objectType.subscribe(ot => this.objectType = ot);
-
-    let headers = new Headers({'Content-Type': 'application/json'});
-    let options = new RequestOptions({ headers });
-    objectType.withLatestFrom(this.configuration.user.pluck('token')).switchMap(([type, token]) => {
-      options.headers.set('Authorization', 'JWT ' + token);  
-      return this.http.get(`/api/${ type }/`, options).map(res => res.json());
-    }).subscribe(objects => this.objects = objects);
-
+    this.objects$ = this.objectType$.withLatestFrom(this.authorization.requestOptions)
+       .switchMap(([type, options]) => this.http.get(`/api/${ type }/`, options)
+        .map(res => res.json())
+    );
   }
 }

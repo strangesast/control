@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { ConfigurationService } from '../../../../services/configuration.service';
+import { AuthorizationService } from '../../../../services/authorization.service';
 
 class User {
   name: string;
@@ -18,11 +18,10 @@ class User {
 export class UserProfileComponent implements OnInit {
   user: User;
 
-  constructor(private configuration: ConfigurationService, private http: Http) { }
+  constructor(private authorization: AuthorizationService, private http: Http) { }
 
   ngOnInit() {
-    this.configuration.user.flatMap((user: any) => {
-      let token = user.token;
+    this.authorization.token$.withLatestFrom(this.authorization.user$).flatMap(([token, user]) => {
       let headers = new Headers({'Content-Type': 'application/json', 'Authorization': 'JWT ' + token });
       let options = new RequestOptions({ headers });
       return this.http.get('/api/user', options).map(res => {

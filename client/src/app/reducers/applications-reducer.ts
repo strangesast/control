@@ -10,9 +10,6 @@ export const initialState: State = {};
 export function reducer (state: State = initialState, action: Actions.All): State {
   let { type, payload } = action;
   switch (type) {
-    case Actions.LOADED:
-      return state;
-
     default:
       return state;
   }

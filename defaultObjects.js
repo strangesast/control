@@ -19,71 +19,59 @@ module.exports = {
       username: 'admin',
       password: 'admin',
       groups: ['admin'],
-      applications: []
+      applications: [ 'dashboard' ]
     }
   ],
   groups: [
     {
-      id: 'guest',
+      _id: 'guest',
       name: 'Guest',
       description: 'Guest group with read access to the thermostat application.',
       applications: [
-        {
-          id: 'thermostat',
-          write: false
-        }
-      ]
+        'thermostat'
+      ],
+      defaultApplication: 'thermostat'
     },
     {
-      id: 'user',
+      _id: 'user',
       name: 'User',
       description: 'User group with read/write access to the thermostat application.',
       applications: [
-        {
-          id: 'thermostat',
-          write: true,
-        },
-        {
-          id: 'topview',
-          write: true
-        },
-        {
-          id: 'energy-profile',
-          write: true
-        }
-      ]
+        'thermostat',
+        'topview',
+        'energy-profile'
+      ],
+      defaultApplication: 'topview'
     },
     {
-      id: 'admin',
+      _id: 'admin',
       name: 'Administrator',
       description: 'Admin group with user/group/application control.',
       applications: [
-        {
-          id: 'dashboard',
-          write: true
-        }
-      ]
+        'dashboard'
+      ],
+      defaultApplication: 'dashboard'
     }
   ],
   applications: [
     {
       name: 'Dashboard',
-      id: 'dashboard',
+      _id: 'dashboard',
       path: 'dashboard'
     },
     {
       name: 'Quick View',
-      id: 'topview',
+      _id: 'topview',
       path: 'topview'
     },
     {
       name: 'Thermostat',
-      id: 'thermostat',
+      _id: 'thermostat',
       path: 'thermostat'
     },
     {
       name: 'Energy Profile',
-      id: 'energy-profile',
+      _id: 'energy-profile',
       path: 'energy-profile'
     }
   ]

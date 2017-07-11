@@ -9,10 +9,18 @@ export interface State {
 }
 
 export const initialState: State = {
-  auth: fromAuth.initialState,
+  auth: undefined,
   currentApplication: null,
-  applications: fromApplications.initialState
+  applications: undefined
 };
+
+export function debug(reducer) {
+  return function (state, action) {
+    console.log('action', action);
+
+    return reducer(state, action);
+  }
+}
 
 export const reducers = {
   auth: fromAuth.reducer,
@@ -20,4 +28,7 @@ export const reducers = {
 };
 
 export const selectAuth = createFeatureSelector<fromAuth.State>('auth');
-export const selectAuthUser = createSelector(selectAuth, (state: fromAuth.State) => state.user);
+export const selectAuthUser         = createSelector(selectAuth, (state: fromAuth.State) => state.user);
+export const selectAuthToken        = createSelector(selectAuth, (state: fromAuth.State) => state.token);
+export const selectAuthErrors       = createSelector(selectAuth, (state: fromAuth.State) => state.errors);
+export const selectAuthApplications = createSelector(selectAuth, (state: fromAuth.State) => state.applications);

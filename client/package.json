@@ -22,7 +22,7 @@
     "@angular/platform-browser-dynamic": "^4.2.2",
     "@angular/router": "^4.2.2",
     "@ngrx/effects": "github:ngrx/effects-builds",
-    "@ngrx/store": "github:ngrx/store-builds#745395b9775965e1bfcddaabece172f9f556d794",
+    "@ngrx/store": "github:ngrx/store-builds",
     "core-js": "^2.4.1",
     "d3": "^4.9.1",
     "deep-diff": "^0.3.8",

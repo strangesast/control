@@ -42,7 +42,7 @@ const routes: Routes = [
         canLoad: [AuthGuard]
       },
       {
-        path: 'energy',
+        path: 'energy-profile',
         loadChildren: 'app/modules/energy/energy.module#EnergyModule',
         canLoad: [AuthGuard]
       },

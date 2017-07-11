@@ -8,7 +8,7 @@ export class DefaultAppGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-      console.log(state);
+      console.log('router state', state);
     return true;
   }
 }

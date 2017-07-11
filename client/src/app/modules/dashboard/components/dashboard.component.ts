@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConfigurationService } from '../../../services/configuration.service';
+import { AuthorizationService } from '../../../services/authorization.service';
 import { routerTransition } from '../../catalog/directives/router.animations';
 import { SwitcherComponent } from '../../catalog/components/switcher/switcher.component';
 import { SwitcherService } from '../../catalog/services/switcher.service';
@@ -20,13 +20,12 @@ export class DashboardComponent extends SwitcherComponent {
   constructor(
     s: SwitcherService,
     private router: Router,
-    private configuration: ConfigurationService
+    private authorization: AuthorizationService
   ) {
     super(s);
   }
 
   logout() {
-    this.configuration.logout();
-    this.router.navigate(['/login']);
+    this.authorization.logout().subscribe(() => this.router.navigate(['/login']));
   }
 }

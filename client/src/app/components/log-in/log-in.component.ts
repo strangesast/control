@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { ConfigurationService } from '../../services';
+import { AuthorizationService } from '../../services';
 import { users, groups, applications } from '../../../../../defaultObjects.js';
 
 class User {
@@ -29,7 +29,7 @@ export class LogInComponent implements OnInit {
   defaults = new FormControl();
   errors;
 
-  constructor(private configuration: ConfigurationService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { }
+  constructor(private authorization: AuthorizationService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.redirectUrl = this.route.snapshot.queryParams.returlUrl;
@@ -45,7 +45,7 @@ export class LogInComponent implements OnInit {
       }
     });
 
-    this.configuration.user.do((user) => console.log('got user', user)).filter(user => !!user).take(1).subscribe(() => {
+    this.authorization.loggedIn$.filter(b => b).first().subscribe(() => {
       this.router.navigate([this.redirectUrl || 'dashboard']);
     });
   }
@@ -53,7 +53,7 @@ export class LogInComponent implements OnInit {
   login() {
     if (this.credentials.valid) {
       let { username, password } = this.credentials.value;
-      this.configuration.login(username, password);
+      this.authorization.login(username, password);
     }
   }
 }

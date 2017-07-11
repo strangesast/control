@@ -18,11 +18,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SwitcherService } from './modules/catalog/services/switcher.service';
 
-import { StoreModule } from '@ngrx/store';
-import { reducers, initialState } from './reducers';
-import { AppEffectsModule } from './app-effects.module';
+import { StoreModule, combineReducers, compose } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './effects';
+
+import { reducers, initialState, debug } from './reducers';
 import { DummyComponent } from './components/dummy/dummy.component';
 import { DefaultAppGuard } from './guards/default-app.guard';
+import { AuthorizationService } from './services/authorization.service';
 
 @NgModule({
   imports: [
@@ -34,7 +37,9 @@ import { DefaultAppGuard } from './guards/default-app.guard';
     AppRoutingModule,
     CatalogModule,
     StoreModule.forRoot(reducers),
-    AppEffectsModule
+    EffectsModule.forRoot([
+      AuthEffects
+    ])
   ],
   declarations: [
     AppComponent,
@@ -43,7 +48,13 @@ import { DefaultAppGuard } from './guards/default-app.guard';
     NotFoundComponent,
     DummyComponent
   ],
-  providers: [ SwitcherService, ConfigurationService, AuthGuard, DefaultAppGuard ],
+  providers: [
+    SwitcherService,
+    ConfigurationService, 
+    AuthGuard, 
+    DefaultAppGuard, 
+    AuthorizationService
+  ],
   bootstrap: [ AppComponent ],
 })
 export class AppModule { }

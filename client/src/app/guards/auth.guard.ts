@@ -9,11 +9,11 @@ import {
   RouterStateSnapshot
 } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { ConfigurationService } from '../services/configuration.service';
+import { AuthorizationService } from '../services/authorization.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
-  constructor(private configuration: ConfigurationService, private router: Router) {}
+  constructor(private authorization: AuthorizationService, private router: Router) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     let url = state.url;
@@ -30,13 +30,13 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   checkUrl(url) {
     // should also check if application is granted to user
-    return this.configuration.user.first().map((user) => {
-      if (user) {
+
+    return this.authorization.loggedIn$.first().map((loggedIn) => {
+      if (loggedIn) {
         return true;
-      } else {
-        this.router.navigate(['./login'], { queryParams: { 'redirectUrl': url }});
-        return false;
       }
+      this.router.navigate(['./login'], { queryParams: { 'redirectUrl': url }});
+      return false;
     })
   }
 }
