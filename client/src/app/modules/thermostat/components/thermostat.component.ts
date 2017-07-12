@@ -18,8 +18,6 @@ export class ThermostatComponent extends SwitcherComponent implements OnInit {
   setPoint = 75
 
   ngOnInit() {
-    super.ngOnInit();
-
     setInterval(() => {
       if (Math.abs(this.temperature - this.setPoint) > 0.01) {
         this.temperature += (this.setPoint - this.temperature)*0.5;

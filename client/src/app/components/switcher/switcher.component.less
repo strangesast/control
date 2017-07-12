@@ -1,0 +1,66 @@
+@border-color: #bdbdbd;
+@exposed-height: 40px;
+
+:host {
+  position: relative;
+  display: block;
+  height: 100%;
+
+  overflow: hidden;
+  background: #eeeeee;
+}
+
+:host > .header-container, :host > .footer-container {
+  position: fixed;
+  z-index: 5;
+  right: 0;
+  left: 0;
+}
+
+:host > .header-container {
+  top: 0; 
+  transform: translate(0, -100%);
+}
+
+:host > .footer-container {
+  top: 100%;
+
+  transform: translate(0, -40px);
+  transition: transform 0.2s ease;
+}
+:host.active > .footer-container {
+  transform: translate(0, -100%);
+}
+:host.disabled > .footer-container {
+  transform: translate(0, 0);
+}
+
+
+:host > .window {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 40px;
+}
+:host.disabled > .window {
+  bottom: 0;
+}
+
+:host > .shade {
+  position: absolute;
+  display: block;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.2s ease;
+  pointer-events: none;
+}
+
+:host.active > .shade {
+  background: rgba(0, 0, 0, 0.5);
+  pointer-events: auto; // allow for click away
+}

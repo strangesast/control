@@ -25,10 +25,14 @@ import { LogInComponent, RegisterComponent, NotFoundComponent } from './componen
 import { DummyComponent } from './components/dummy/dummy.component';
 import { AuthGuard, DefaultAppGuard } from './guards';
 
+/*
 const routes: Routes = [
   {
-    path: '', resolve: { configuration: ConfigurationService }, children:
-    [
+    path: '',
+    resolve: {
+      configuration: ConfigurationService
+    },
+    children: [
       { path: 'login', component: LogInComponent },
       { path: 'register', component: RegisterComponent },
       {
@@ -61,10 +65,20 @@ const routes: Routes = [
     ]
   }
 ];
+*/
+
+const routes: Routes = [
+  {
+    path: '',
+    resolve: { config: ConfigurationService },
+    canActivateChild: [ AuthGuard ],
+    children: []
+  }
+];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: SelectivePreloadingStrategy })
+    RouterModule.forRoot(routes) //, { preloadingStrategy: SelectivePreloadingStrategy })
   ],
   exports: [
     RouterModule

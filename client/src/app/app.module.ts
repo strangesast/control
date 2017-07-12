@@ -26,6 +26,7 @@ import { reducers, initialState, debug } from './reducers';
 import { DummyComponent } from './components/dummy/dummy.component';
 import { DefaultAppGuard } from './guards/default-app.guard';
 import { AuthorizationService } from './services/authorization.service';
+import { SwitcherComponent } from './components/switcher/switcher.component';
 
 @NgModule({
   imports: [
@@ -46,7 +47,8 @@ import { AuthorizationService } from './services/authorization.service';
     LogInComponent,
     RegisterComponent,
     NotFoundComponent,
-    DummyComponent
+    DummyComponent,
+    SwitcherComponent
   ],
   providers: [
     SwitcherService,

@@ -39,7 +39,7 @@ module.exports = {
       applications: [
         'thermostat',
         'topview',
-        'energy-profile'
+        'energy'
       ],
       defaultApplication: 'topview'
     },
@@ -56,22 +56,26 @@ module.exports = {
   applications: [
     {
       name: 'Dashboard',
+      modulePath: 'app/modules/dashboard/dashboard.module#DashboardModule',
       _id: 'dashboard',
       path: 'dashboard'
     },
     {
       name: 'Quick View',
+      modulePath: 'app/modules/topview/topview.module#TopviewModule',
       _id: 'topview',
       path: 'topview'
     },
     {
       name: 'Thermostat',
+      modulePath: 'app/modules/thermostat/thermostat.module#ThermostatModule',
       _id: 'thermostat',
       path: 'thermostat'
     },
     {
       name: 'Energy Profile',
-      _id: 'energy-profile',
+      modulePath: 'app/modules/energy/energy.module#EnergyModule',
+      _id: 'energy',
       path: 'energy-profile'
     }
   ]

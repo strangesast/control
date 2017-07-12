@@ -1,0 +1,10 @@
+<div class="window">
+  <ng-content></ng-content>
+</div>
+<div (click)="deactivate()" class="shade"></div>
+<div class="header-container">
+  <ng-content select=".header"></ng-content>
+</div>
+<div class="footer-container">
+  <ng-content select=".footer"></ng-content>
+</div>

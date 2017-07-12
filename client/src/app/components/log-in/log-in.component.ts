@@ -46,7 +46,7 @@ export class LogInComponent implements OnInit {
     });
 
     this.authorization.loggedIn$.filter(b => b).first().subscribe(() => {
-      this.router.navigate([this.redirectUrl || 'dashboard']);
+      this.router.navigate([this.redirectUrl || '']);
     });
   }
 

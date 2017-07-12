@@ -52,7 +52,7 @@ export class ConfigurationService implements Resolve<any> {
         let applications = res.json();
 
         this.store.dispatch(new Auth.Login({ user, token, applications }));
-      }).catch(() => Observable.of([]))
+      });
     }
     return Observable.of(null);
   }
