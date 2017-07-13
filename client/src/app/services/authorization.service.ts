@@ -3,7 +3,7 @@ import { RequestOptions, Headers } from '@angular/http';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { User } from '../models';
+import { User, Application } from '../models';
 import * as Actions from '../actions';
 import * as fromRoot from '../reducers';
 
@@ -13,15 +13,19 @@ import * as fromRoot from '../reducers';
 export class AuthorizationService {
   token$: Observable<string>;
   user$: Observable<User>;
+  applications$: Observable<Application[]>;
   loggedIn$: Observable<boolean>;
 
   requestOptions: Observable<Partial<RequestOptions>>;
   redirectUrl: string;  // temporarily store where the user is headed
 
   constructor(private store: Store<fromRoot.State>) {
-    this.token$ = store.select(fromRoot.selectAuthToken);
-    this.user$ = store.select(fromRoot.selectAuthUser);
-    this.loggedIn$ = this.token$.map(token => !!token);
+    this.token$ =        store.select(fromRoot.selectAuthToken);
+    this.user$ =         store.select(fromRoot.selectAuthUser);
+    this.applications$ = store.select(fromRoot.selectAuthApplications);
+    this.loggedIn$ = this.token$.map(token => !!token)
+      // may be unnecessary
+      .distinctUntilChanged().shareReplay();
 
     this.requestOptions = this.token$.map(token => {
       let headers = new Headers({

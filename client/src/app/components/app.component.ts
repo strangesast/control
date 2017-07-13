@@ -2,15 +2,19 @@ import { Component } from '@angular/core';
 import { Routes, Router, NavigationEnd } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 
-import { LogInComponent } from '../components/log-in/log-in.component';
-import { RegisterComponent } from '../components/register/register.component';
-import { DummyComponent } from '../components/dummy/dummy.component';
-import { NotFoundComponent } from '../components/not-found/not-found.component';
-import { AuthGuard } from '../guards/auth.guard';
-import { DefaultAppGuard } from '../guards/default-app.guard';
+import * as Models from '../models';
+
+import {
+  LogInComponent,
+  RegisterComponent,
+  DummyComponent,
+  NotFoundComponent
+} from '../components';
+
+import { AuthGuard } from '../guards';
 
 import { ConfigurationService } from '../services/configuration.service';
-import * as Models from '../models';
+
 
 @Component({
   selector: 'app-root',
@@ -61,12 +65,12 @@ export class AppComponent {
     let ready$ = this.loading$.ignoreElements().concat(Observable.of(true));
 
     // create new routes each time applications is updated (probably just once)
-    this.routeUpdatesSub = this.applications$
-      .skipUntil(ready$)
-      .map(createRoutesFromApps)
-      .subscribe(routes => {
-        router.resetConfig(routes);
-      });
+    //this.routeUpdatesSub = this.applications$
+    //  .skipUntil(ready$)
+    //  .map(createRoutesFromApps)
+    //  .subscribe(routes => {
+    //    router.resetConfig(routes);
+    //  });
 
     let urls$ = router.events
       // end of router nav
@@ -101,6 +105,7 @@ export class AppComponent {
   }
 }
 
+/*
 function createRoutesFromApps (apps) {
   // parse applications, create route for each
   if (apps.length < 1) throw new Error('at least one application needed');
@@ -126,3 +131,4 @@ function createRoutesFromApps (apps) {
 
   return [{ path: '', resolve: { configuration: ConfigurationService }, children }];
 }
+*/

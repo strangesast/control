@@ -17,7 +17,27 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     let url = state.url;
-    return this.checkUrl(url);
+
+    let loggedIn$ = this.authorization.loggedIn$.first();
+
+    return loggedIn$.withLatestFrom(this.authorization.applications$).map(([loggedIn, apps]) => {
+      let loginUrl = url.startsWith('/login') || url.startsWith('/register');
+      if (!loggedIn && loginUrl) {
+        return true;
+
+      } else if (!loggedIn && !loginUrl) {
+        this.router.navigate(['/login']);
+        return false;
+
+      } else if (loginUrl || url == '/') {
+        console.log('apps', apps);
+        this.router.navigate([apps[0].path]);
+        return false;
+
+      } else {
+        return true;
+      }
+    });
   }
 
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
@@ -25,18 +45,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   canLoad(route: Route): Observable<boolean> | Promise<boolean> | boolean {
-    return Observable.of(true);
-  }
-
-  checkUrl(url) {
-    // should also check if application is granted to user
-
-    return this.authorization.loggedIn$.first().map((loggedIn) => {
-      if (loggedIn) {
-        return true;
-      }
-      this.router.navigate(['./login'], { queryParams: { 'redirectUrl': url }});
-      return false;
-    })
+    let applications$ = this.authorization.applications$.first();
+    return applications$.map(apps => apps.some(app => app.modulePath === route.loadChildren));
   }
 }

@@ -5,11 +5,15 @@ import * as AppActions from '../actions';
 
 import { Observable } from 'rxjs';
 
+export const INIT = '@ngrx/store/init';
+
 @Injectable()
 export class AuthEffects {
   constructor(private actions$: Actions, private http: Http) {}
 
-  readonly defaultOptions: Partial<RequestOptions> = { headers: new Headers({ 'Content-Type': 'application/json' }) };
+  readonly defaultOptions: Partial<RequestOptions> = {
+    headers: new Headers({ 'Content-Type': 'application/json' })
+  };
 
   @Effect() register$ = this.actions$
     .ofType(AppActions.Auth.REGISTER)

@@ -24,7 +24,6 @@ import { AuthEffects } from './effects';
 
 import { reducers, initialState, debug } from './reducers';
 import { DummyComponent } from './components/dummy/dummy.component';
-import { DefaultAppGuard } from './guards/default-app.guard';
 import { AuthorizationService } from './services/authorization.service';
 import { SwitcherComponent } from './components/switcher/switcher.component';
 
@@ -54,7 +53,6 @@ import { SwitcherComponent } from './components/switcher/switcher.component';
     SwitcherService,
     ConfigurationService, 
     AuthGuard, 
-    DefaultAppGuard, 
     AuthorizationService
   ],
   bootstrap: [ AppComponent ],

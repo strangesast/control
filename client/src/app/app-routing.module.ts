@@ -23,56 +23,44 @@ export class SelectivePreloadingStrategy implements PreloadingStrategy {
 import { ConfigurationService } from './services/configuration.service';
 import { LogInComponent, RegisterComponent, NotFoundComponent } from './components';
 import { DummyComponent } from './components/dummy/dummy.component';
-import { AuthGuard, DefaultAppGuard } from './guards';
+import { AuthGuard } from './guards';
 
-/*
 const routes: Routes = [
+  { path: 'login',    component: LogInComponent,    canActivate: [ AuthGuard ] },
+  { path: 'register', component: RegisterComponent, canActivate: [ AuthGuard ] },
   {
     path: '',
-    resolve: {
-      configuration: ConfigurationService
-    },
+    resolve: { configuration: ConfigurationService },
+    canActivate: [ AuthGuard ],
+    canActivateChild: [ AuthGuard ],
     children: [
-      { path: 'login', component: LogInComponent },
-      { path: 'register', component: RegisterComponent },
       {
         path: 'dashboard',
         loadChildren: 'app/modules/dashboard/dashboard.module#DashboardModule',
-        canLoad: [AuthGuard]
+        canLoad: [ AuthGuard ]
       },
       {
         path: 'topview',
         loadChildren: 'app/modules/topview/topview.module#TopviewModule',
-        canLoad: [AuthGuard]
+        canLoad: [ AuthGuard ]
       },
       {
         path: 'energy-profile',
         loadChildren: 'app/modules/energy/energy.module#EnergyModule',
-        canLoad: [AuthGuard]
+        canLoad: [ AuthGuard ]
       },
       {
         path: 'thermostat',
         loadChildren: 'app/modules/thermostat/thermostat.module#ThermostatModule',
-        canLoad: [AuthGuard]
+        canLoad: [ AuthGuard ]
       },
       // {
       //   path: '<path>',
       //   loadChildren: '<module_path>,
       //   data: { preload: true }
       // }
-      { path: '', component: DummyComponent, canActivate: [AuthGuard, DefaultAppGuard] },
       { path: '**', component: NotFoundComponent }
     ]
-  }
-];
-*/
-
-const routes: Routes = [
-  {
-    path: '',
-    resolve: { config: ConfigurationService },
-    canActivateChild: [ AuthGuard ],
-    children: []
   }
 ];
 
