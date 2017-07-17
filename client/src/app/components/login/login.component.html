@@ -16,6 +16,7 @@
     </div>
   </form>
   <pre>{{ credentials.value | json }}</pre>
+  <pre>{{ authorization.user$ | async | json }}</pre>
   <div>
     <label>Choose credentials</label>
     <select [formControl]="defaults">

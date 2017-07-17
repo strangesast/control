@@ -1,8 +1,8 @@
 import * as Models from '../models';
 import BaseAction from './base-action';
 
-export const PREFIX = '[AUTH] ';
-const LOGIN = PREFIX + 'LOGIN';
+export const AUTH_PREFIX = '[AUTH] ';
+const LOGIN = AUTH_PREFIX + 'LOGIN';
 export class Login extends BaseAction {
   static typeString = LOGIN;
   readonly type = LOGIN;
@@ -12,13 +12,13 @@ export class Login extends BaseAction {
   }
 }
 
-const LOGOUT = PREFIX + 'LOGOUT';
+const LOGOUT = AUTH_PREFIX + 'LOGOUT';
 export class Logout extends BaseAction {
   static typeString = LOGOUT;
   readonly type = LOGOUT;
 }
 
-const LOGIN_REQUEST = PREFIX + 'LOGIN REQUEST';
+const LOGIN_REQUEST = AUTH_PREFIX + 'LOGIN REQUEST';
 export class LoginRequest extends BaseAction {
   static typeString = LOGIN_REQUEST;
   readonly type = LOGIN_REQUEST;
@@ -33,7 +33,7 @@ export class LoginRequest extends BaseAction {
   }
 }
 
-const REGISTER_REQUEST = PREFIX + 'REGISTER REQUEST';
+const REGISTER_REQUEST = AUTH_PREFIX + 'REGISTER REQUEST';
 export class RegisterRequest extends BaseAction {
   static typeString = REGISTER_REQUEST;
   readonly type = REGISTER_REQUEST;
@@ -43,7 +43,7 @@ export class RegisterRequest extends BaseAction {
   }
 }
 
-const REGISTER = PREFIX + 'REGISTER';
+const REGISTER = AUTH_PREFIX + 'REGISTER';
 export class Register extends BaseAction {
   static typeString = REGISTER;
   readonly type = REGISTER; 
@@ -59,25 +59,25 @@ export class Register extends BaseAction {
   }
 }
 
-const REGISTER_FAILURE = PREFIX + 'REGISTER FAILURE';
+const REGISTER_FAILURE = AUTH_PREFIX + 'REGISTER FAILURE';
 export class RegisterFailure extends BaseAction {
   static typeString = REGISTER_FAILURE;
   readonly type = REGISTER_FAILURE;
 }
 
-const LOGIN_FAILURE = PREFIX + 'LOGIN FAILURE';
+const LOGIN_FAILURE = AUTH_PREFIX + 'LOGIN FAILURE';
 export class LoginFailure extends BaseAction {
   static typeString = LOGIN_FAILURE;
   readonly type = LOGIN_FAILURE;
 }
 
-const LOGOUT_REQUEST = PREFIX + 'LOGOUT REQUEST';
+const LOGOUT_REQUEST = AUTH_PREFIX + 'LOGOUT REQUEST';
 export class LogoutRequest extends BaseAction {
   static typeString = LOGOUT_REQUEST;
   readonly type = LOGOUT_REQUEST;
 }
 
-const USER_LOAD_SUCCESS = PREFIX + 'USER LOAD SUCCESS';
+const USER_LOAD_SUCCESS = AUTH_PREFIX + 'USER LOAD SUCCESS';
 export class UserLoadSuccess extends BaseAction {
   static typeString = USER_LOAD_SUCCESS;
   readonly type = USER_LOAD_SUCCESS;
@@ -87,7 +87,7 @@ export class UserLoadSuccess extends BaseAction {
   }
 }
 
-const USER_LOAD_FAILURE = PREFIX + 'USER LOAD FAILURE';
+const USER_LOAD_FAILURE = AUTH_PREFIX + 'USER LOAD FAILURE';
 export class UserLoadFailure extends BaseAction {
   static typeString = USER_LOAD_FAILURE;
   readonly type = USER_LOAD_FAILURE;
@@ -97,10 +97,32 @@ export class UserLoadFailure extends BaseAction {
   }
 }
 
-const INIT = PREFIX + 'INIT';
+const INIT = AUTH_PREFIX + 'INIT';
 export class Init extends BaseAction {
   static typeString = INIT;
   readonly type = INIT;
+}
+
+const LOAD_APPLICATIONS = AUTH_PREFIX + 'LOAD APPLICATIONS';
+export class LoadApplications extends BaseAction {
+  static typeString = LOAD_APPLICATIONS;
+  readonly type = LOAD_APPLICATIONS;
+}
+
+const LOAD_APPLICATIONS_SUCCESS = AUTH_PREFIX + 'LOAD APPLICATIONS SUCCESS';
+export class LoadApplicationsSuccess extends BaseAction {
+  static typeString = LOAD_APPLICATIONS_SUCCESS;
+  readonly type = LOAD_APPLICATIONS_SUCCESS;
+
+  constructor(payload: Models.Application[], timestamp?) {
+    super(payload, timestamp);
+  }
+}
+
+const LOAD_APPLICATIONS_FAILURE = AUTH_PREFIX + 'LOAD APPLICATIONS FAILURE';
+export class LoadApplicationsFailure extends BaseAction {
+  static typeString = LOAD_APPLICATIONS_FAILURE;
+  readonly type = LOAD_APPLICATIONS_FAILURE;
 }
 
 export type Actions =
@@ -113,4 +135,5 @@ export type Actions =
   | LoginFailure
   | RegisterFailure
   | UserLoadSuccess
-  | UserLoadFailure;
+  | UserLoadFailure
+  | LoadApplications;

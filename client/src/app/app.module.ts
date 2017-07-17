@@ -16,21 +16,25 @@ import { ConfigurationService } from './services/configuration.service';
 import { AuthGuard } from './guards/auth.guard';
 import { DefaultGuard } from './guards/default.guard';
 import { LoginGuard } from './guards/login.guard';
+import { LoadApplicationsGuard } from './guards/load-applications.guard';
 
 // ngrx
-import { AuthEffects } from './effects';
+import { effects } from './effects';
 import { reducers, initialState } from './reducers';
 
 // components
 import { AppComponent } from './components/app.component';
-import { LogInComponent } from './components/log-in/log-in.component';
+import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { DummyComponent } from './components/dummy/dummy.component';
 import { AuthorizationService } from './services/authorization.service';
 import { SwitcherComponent } from './components/switcher/switcher.component';
 
-import { routes } from './routes'
+// containers
+import { LoginContainerComponent } from './containers/login-container/login-container.component'
+
+import { routes } from './routes';
 
 @NgModule({
   imports: [
@@ -39,28 +43,29 @@ import { routes } from './routes'
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    RouterModule.forRoot(routes),
     CatalogModule,
-    EffectsModule.forRoot([
-      AuthEffects
-    ]),
+    RouterModule.forRoot(routes),
+    EffectsModule.forRoot(effects),
     StoreModule.forRoot(reducers)
   ],
   declarations: [
     AppComponent,
-    LogInComponent,
+    LoginComponent,
     RegisterComponent,
     NotFoundComponent,
     DummyComponent,
-    SwitcherComponent
+    SwitcherComponent,
+    LoginContainerComponent
   ],
   providers: [
     ConfigurationService, 
     AuthorizationService,
     AuthGuard,
     DefaultGuard,
-    LoginGuard
+    LoginGuard,
+    LoadApplicationsGuard
   ],
+  entryComponents: [ NotFoundComponent ],
   bootstrap: [ AppComponent ],
 })
 export class AppModule { }

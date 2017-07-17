@@ -39,6 +39,7 @@ module.exports = {
       applications: [
         'thermostat',
         'topview',
+        'topview-alternate',
         'energy'
       ],
       defaultApplication: 'topview'
@@ -65,6 +66,12 @@ module.exports = {
       modulePath: 'app/modules/topview/topview.module#TopviewModule',
       _id: 'topview',
       path: 'topview'
+    },
+    {
+      name: 'Quick View 2',
+      modulePath: 'app/modules/topview-alternate/topview-alternate.module#TopviewAlternateModule',
+      _id: 'topview-alternate',
+      path: 'topview-alternate'
     },
     {
       name: 'Thermostat',

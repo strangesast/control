@@ -6,7 +6,7 @@ import { AuthorizationService } from '../../services/authorization.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['../log-in/log-in.component.less']
+  styleUrls: ['../login/login.component.less']
 })
 export class RegisterComponent implements OnInit {
   credentials: FormGroup;

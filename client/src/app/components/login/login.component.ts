@@ -21,24 +21,21 @@ class Application {
 }
 
 @Component({
-  selector: 'app-log-in',
-  templateUrl: './log-in.component.html',
-  styleUrls: ['./log-in.component.less']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.less']
 })
-export class LogInComponent implements OnInit {
+export class LoginComponent implements OnInit {
   credentials: FormGroup;
   redirectUrl: string;
   defaults = new FormControl();
-
-  success$: Observable<boolean>;
 
   constructor(
     private authorization: AuthorizationService, 
     private fb: FormBuilder, 
     private router: Router, 
     private route: ActivatedRoute
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     this.redirectUrl = this.route.snapshot.queryParams.returlUrl;
@@ -53,6 +50,11 @@ export class LogInComponent implements OnInit {
         this.credentials.setValue({ username: acc.username, password: acc.password });
       }
     });
+
+    this.authorization.loggedIn$.find(l => l).flatMap(() => this.redirectUrl ?
+      Observable.of(this.redirectUrl) :
+      this.authorization.applications$.first().map(apps => apps[0].path)
+    ).do(x => console.log('redirecting to...', x)).subscribe(path => this.router.navigateByUrl(path));
   }
 
   login() {

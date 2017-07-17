@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { User, Application } from '../models';
-import { Auth as AuthActions } from '../actions';
+import { App as AppActions } from '../actions';
 import * as fromRoot from '../reducers';
 
 // control login / logout / authorization header (jwt)
@@ -14,8 +14,11 @@ export class AuthorizationService {
   token$: Observable<string>;
   user$: Observable<User>;
   applications$: Observable<Application[]>;
+
   loggedIn$: Observable<boolean>;
-  ready$: Observable<boolean>;
+
+  public userInitialized$: Observable<boolean>;
+  public appsInitialized$: Observable<boolean>;
 
   requestOptions: Observable<Partial<RequestOptions>>;
   redirectUrl: string;  // temporarily store where the user is headed
@@ -23,33 +26,34 @@ export class AuthorizationService {
   constructor(private store: Store<fromRoot.State>) {
     this.token$ =        store.select(fromRoot.selectAuthToken);
     this.user$ =         store.select(fromRoot.selectAuthUser);
+    this.applications$ =         store.select(fromRoot.selectAuthApplications);
+    this.userInitialized$ = this.store.select(fromRoot.selectUserInit);
+    this.appsInitialized$ = this.store.select(fromRoot.selectAppsInit);
 
     // user / no user determined
-    this.ready$ = this.store.select(fromRoot.selectAuthReady);
-    this.applications$ = store.select(fromRoot.selectAuthApplications).skipUntil(this.ready$);
-    this.loggedIn$ = this.ready$.filter(r => r).flatMap(() => {
+    //this.ready$ = this.store.select(fromRoot.selectAuthReady);
+    //this.applications$ = store.select(fromRoot.selectAuthApplications).skipUntil(this.ready$);
+    this.loggedIn$ = this.userInitialized$.filter(r => r).flatMap(() => {
       return this.token$.map(token => Boolean(token)).distinctUntilChanged();
     });
-    this.requestOptions = this.token$.map(token => {
-      let headers = new Headers({
+    this.requestOptions = this.token$.map(token => ({
+      headers : new Headers({
         'Content-Type': 'application/json',
         'Authorization': 'JWT ' + token
-      });
-      let options: Partial<RequestOptions> = { headers };
-      return options;
-    });
+      })
+    }));
   }
 
   register(user) {
-    this.store.dispatch(new AuthActions.RegisterRequest(user));
+    this.store.dispatch(new AppActions.RegisterRequest(user));
   }
 
   login(username, password) {
-    let action = new AuthActions.LoginRequest({ username, password });
+    let action = new AppActions.LoginRequest({ username, password });
     this.store.dispatch(action);
   }
 
   logout() {
-    this.store.dispatch(new AuthActions.LogoutRequest());
+    this.store.dispatch(new AppActions.LogoutRequest());
   }
 }

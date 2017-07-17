@@ -9,5 +9,5 @@ export class LoadApplications extends BaseAction {
 
 export type All = LoadApplications;
 
-import * as Auth from './auth';
-export { Auth };
+import * as App from './app';
+export { App };

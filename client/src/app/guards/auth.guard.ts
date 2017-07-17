@@ -12,17 +12,18 @@ import { Observable } from 'rxjs/Observable';
 import { AuthorizationService } from '../services/authorization.service';
 
 @Injectable()
-export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
+export class AuthGuard implements CanActivate, CanActivateChild {
   constructor(private authorization: AuthorizationService, private router: Router) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     let url = state.url;
+
     let loggedIn$ = this.authorization.loggedIn$.first();
 
     return loggedIn$.map(loggedIn => {
+      console.log('logged in? (authguard)', loggedIn);
       if (!loggedIn) {
-        this.router.navigate(['/login']);
-        //this.authorization.redirectUrl = url;
+        this.router.navigate(['/login'], { queryParams: { redirectUrl: url }});
         return false;
       }
       return true;
@@ -31,13 +32,5 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.canActivate(route, state);
-  }
-
-  canLoad(route: Route): Observable<boolean> {
-    let applications$ = this.authorization.applications$.skipWhile(apps => !apps).first();
-    return applications$.map(apps => {
-      let canLoad = apps.some(app => app.modulePath === route.loadChildren);
-      return canLoad;
-    });
   }
 }
