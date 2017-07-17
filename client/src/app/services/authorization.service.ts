@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { User, Application } from '../models';
-import * as Actions from '../actions';
+import { Auth as AuthActions } from '../actions';
 import * as fromRoot from '../reducers';
 
 // control login / logout / authorization header (jwt)
@@ -15,6 +15,7 @@ export class AuthorizationService {
   user$: Observable<User>;
   applications$: Observable<Application[]>;
   loggedIn$: Observable<boolean>;
+  ready$: Observable<boolean>;
 
   requestOptions: Observable<Partial<RequestOptions>>;
   redirectUrl: string;  // temporarily store where the user is headed
@@ -23,10 +24,10 @@ export class AuthorizationService {
     this.token$ =        store.select(fromRoot.selectAuthToken);
     this.user$ =         store.select(fromRoot.selectAuthUser);
     this.applications$ = store.select(fromRoot.selectAuthApplications);
-    this.loggedIn$ = this.token$.map(token => !!token)
-      // may be unnecessary
-      .distinctUntilChanged().shareReplay();
-
+    this.ready$ = this.store.select(fromRoot.selectAuthReady);
+    this.loggedIn$ = this.ready$.filter(r => r).flatMap(() => {
+      return this.token$.map(token => Boolean(token)).distinctUntilChanged();
+    });
     this.requestOptions = this.token$.map(token => {
       let headers = new Headers({
         'Content-Type': 'application/json',
@@ -38,15 +39,15 @@ export class AuthorizationService {
   }
 
   register(user) {
-    this.store.dispatch(new Actions.Auth.RegisterRequest(user));
+    this.store.dispatch(new AuthActions.RegisterRequest(user));
   }
 
   login(username, password) {
-    this.store.dispatch(new Actions.Auth.LoginRequest({ username, password }));
+    let action = new AuthActions.LoginRequest({ username, password });
+    this.store.dispatch(action);
   }
 
   logout() {
-    this.store.dispatch(new Actions.Auth.LogoutRequest());
-    return Observable.of(null);
+    this.store.dispatch(new AuthActions.LogoutRequest());
   }
 }

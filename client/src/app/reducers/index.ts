@@ -1,26 +1,18 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import * as fromApplications from './applications-reducer';
-import * as fromAuth from './auth-reducer';
+import * as fromAuth from './auth';
+import { State as AuthState } from './auth';
+export { State as AuthState } from './auth';
 
 export interface State {
-  auth: fromAuth.State,
-  currentApplication: string,
+  auth: AuthState,
   applications: fromApplications.State
 }
 
 export const initialState: State = {
   auth: undefined,
-  currentApplication: null,
   applications: undefined
 };
-
-export function debug(reducer) {
-  return function (state, action) {
-    console.log('action', action);
-
-    return reducer(state, action);
-  }
-}
 
 export const reducers = {
   auth: fromAuth.reducer,
@@ -32,3 +24,4 @@ export const selectAuthUser         = createSelector(selectAuth, (state: fromAut
 export const selectAuthToken        = createSelector(selectAuth, (state: fromAuth.State) => state.token);
 export const selectAuthErrors       = createSelector(selectAuth, (state: fromAuth.State) => state.errors);
 export const selectAuthApplications = createSelector(selectAuth, (state: fromAuth.State) => state.applications);
+export const selectAuthReady        = createSelector(selectAuth, (state: fromAuth.State) => state.ready);

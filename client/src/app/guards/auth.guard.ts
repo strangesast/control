@@ -15,36 +15,25 @@ import { AuthorizationService } from '../services/authorization.service';
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   constructor(private authorization: AuthorizationService, private router: Router) {}
 
-  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    let url = state.url;
-
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    //let url = state.url;
     let loggedIn$ = this.authorization.loggedIn$.first();
 
-    return loggedIn$.withLatestFrom(this.authorization.applications$).map(([loggedIn, apps]) => {
-      let loginUrl = url.startsWith('/login') || url.startsWith('/register');
-      if (!loggedIn && loginUrl) {
-        return true;
-
-      } else if (!loggedIn && !loginUrl) {
+    return loggedIn$.map(loggedIn => {
+      if (!loggedIn) {
         this.router.navigate(['/login']);
+        //this.authorization.redirectUrl = url;
         return false;
-
-      } else if (loginUrl || url == '/') {
-        console.log('apps', apps);
-        this.router.navigate([apps[0].path]);
-        return false;
-
-      } else {
-        return true;
       }
+      return true;
     });
   }
 
-  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.canActivate(route, state);
   }
 
-  canLoad(route: Route): Observable<boolean> | Promise<boolean> | boolean {
+  canLoad(route: Route): Observable<boolean> {
     let applications$ = this.authorization.applications$.first();
     return applications$.map(apps => apps.some(app => app.modulePath === route.loadChildren));
   }

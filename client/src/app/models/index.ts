@@ -1,3 +1,4 @@
+import { Application } from './application';
 export * from './application';
 
 export interface User {
@@ -8,4 +9,10 @@ export interface User {
   groups?: string[],
   applications?: string[],
   defaultApplication?: string
+}
+
+export interface UserLoad {
+  user: User;
+  token: string;
+  applications?: Application[];
 }

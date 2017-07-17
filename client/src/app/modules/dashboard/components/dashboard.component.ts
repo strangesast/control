@@ -26,6 +26,6 @@ export class DashboardComponent extends SwitcherComponent {
   }
 
   logout() {
-    this.authorization.logout().subscribe(() => this.router.navigate(['/login']));
+    this.authorization.logout()//.subscribe(() => this.router.navigate(['/login']));
   }
 }

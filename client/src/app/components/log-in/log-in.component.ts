@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { AuthorizationService } from '../../services';
+import { AuthorizationService } from '../../services/authorization.service';
 import { users, groups, applications } from '../../../../../defaultObjects.js';
+
+import { Observable } from 'rxjs';
 
 class User {
   username: string = '';
@@ -11,9 +13,7 @@ class User {
 
 class Group {
   name: string = 'New Group';
-}
-
-class Application {
+} class Application {
   name: string = 'New Application';
   description: string;
 }
@@ -27,9 +27,16 @@ export class LogInComponent implements OnInit {
   credentials: FormGroup;
   redirectUrl: string;
   defaults = new FormControl();
-  errors;
 
-  constructor(private authorization: AuthorizationService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { }
+  success$: Observable<boolean>;
+
+  constructor(
+    private authorization: AuthorizationService, 
+    private fb: FormBuilder, 
+    private router: Router, 
+    private route: ActivatedRoute
+  ) {
+  }
 
   ngOnInit() {
     this.redirectUrl = this.route.snapshot.queryParams.returlUrl;
@@ -44,16 +51,10 @@ export class LogInComponent implements OnInit {
         this.credentials.setValue({ username: acc.username, password: acc.password });
       }
     });
-
-    this.authorization.loggedIn$.filter(b => b).first().subscribe(() => {
-      this.router.navigate([this.redirectUrl || '']);
-    });
   }
 
   login() {
-    if (this.credentials.valid) {
-      let { username, password } = this.credentials.value;
-      this.authorization.login(username, password);
-    }
+    let { username, password } = this.credentials.value;
+    this.authorization.login(username, password);
   }
 }
