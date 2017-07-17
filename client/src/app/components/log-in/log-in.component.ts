@@ -13,7 +13,9 @@ class User {
 
 class Group {
   name: string = 'New Group';
-} class Application {
+}
+
+class Application {
   name: string = 'New Application';
   description: string;
 }

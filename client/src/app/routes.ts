@@ -6,6 +6,7 @@ import { DummyComponent } from './components/dummy/dummy.component';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { DefaultGuard } from './guards/default.guard';
 
 const routes: Routes = [
   { path: 'login',    component: LogInComponent,    canActivate: [ LoginGuard ] },
@@ -14,11 +15,30 @@ const routes: Routes = [
     path: '',
     canActivate: [ AuthGuard ],
     resolve: { config: ConfigurationService },
-    //canActivateChild: [ AuthGuard ],
     children: [
-      { path: '', redirectTo: 'toast', pathMatch: 'full' }
+      {
+        path: 'dashboard',
+        loadChildren: 'app/modules/dashboard/dashboard.module#DashboardModule',
+        canLoad: [AuthGuard]
+      },
+      {
+        path: 'topview',
+        loadChildren: 'app/modules/topview/topview.module#TopviewModule',
+        canLoad: [AuthGuard]
+      },
+      {
+        path: 'energy-profile',
+        loadChildren: 'app/modules/energy/energy.module#EnergyModule',
+        canLoad: [AuthGuard]
+      },
+      {
+        path: 'thermostat',
+        loadChildren: 'app/modules/thermostat/thermostat.module#ThermostatModule',
+        canLoad: [AuthGuard]
+      },
+      { path: '', component: DummyComponent, canActivate: [ DefaultGuard ] },
+      { path: '**', component: NotFoundComponent }
     ]
-  },
-  { path: '**', component: NotFoundComponent }
+  }
 ]
-export default routes;
+export { routes };

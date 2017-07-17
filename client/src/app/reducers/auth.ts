@@ -24,11 +24,11 @@ export function reducer (state: State = initialState, action: AuthActions.Action
   switch (type) {
     case AuthActions.UserLoadSuccess.typeString: {
       let payload = (action as AuthActions.UserLoadSuccess).payload
-      let apps = payload.applications;
+      let applications = payload.applications;
       let token = payload.token;
-      let ready = Boolean(!token || (apps && apps.length));
+      let ready = Boolean(!token || (applications && applications.length));
       console.log('READY', ready);
-      return { ...state, token, ready };
+      return { ...state, token, ready, applications };
     }
 
     // reset state on requesting new credentials

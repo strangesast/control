@@ -14,6 +14,7 @@ import { CatalogModule } from './modules/catalog/catalog.module';
 // injectables
 import { ConfigurationService } from './services/configuration.service';
 import { AuthGuard } from './guards/auth.guard';
+import { DefaultGuard } from './guards/default.guard';
 import { LoginGuard } from './guards/login.guard';
 
 // ngrx
@@ -29,7 +30,7 @@ import { DummyComponent } from './components/dummy/dummy.component';
 import { AuthorizationService } from './services/authorization.service';
 import { SwitcherComponent } from './components/switcher/switcher.component';
 
-import routes from './routes'
+import { routes } from './routes'
 
 @NgModule({
   imports: [
@@ -57,6 +58,7 @@ import routes from './routes'
     ConfigurationService, 
     AuthorizationService,
     AuthGuard,
+    DefaultGuard,
     LoginGuard
   ],
   bootstrap: [ AppComponent ],

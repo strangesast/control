@@ -11,13 +11,21 @@ export class LoginGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> {
-      let defaultApp$ = this.authorization.applications$.map(apps => apps[0]);
-      return this.authorization.loggedIn$.first().withLatestFrom(defaultApp$).map(([ loggedIn, app ]) => {
+      let defaultApp$ = this.authorization.applications$.skipWhile(apps => !apps || !apps.length).map(apps => apps[0]);
+      return this.authorization.loggedIn$.first().flatMap(loggedIn => {
         if (loggedIn) {
-          this.router.navigate([ app.path ]);
-          return false;
+          return this.authorization.applications$
+            .skipWhile(apps => !apps || !apps.length)
+            .first()
+            .map(apps => {
+            let app = apps[0];
+            this.router.navigate([ app.path ]);
+            return false;
+          });
+          
+        } else {
+          return Observable.of(true);
         }
-        return true;
       });
   }
 }

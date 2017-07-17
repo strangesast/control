@@ -23,8 +23,10 @@ export class AuthorizationService {
   constructor(private store: Store<fromRoot.State>) {
     this.token$ =        store.select(fromRoot.selectAuthToken);
     this.user$ =         store.select(fromRoot.selectAuthUser);
-    this.applications$ = store.select(fromRoot.selectAuthApplications);
+
+    // user / no user determined
     this.ready$ = this.store.select(fromRoot.selectAuthReady);
+    this.applications$ = store.select(fromRoot.selectAuthApplications).skipUntil(this.ready$);
     this.loggedIn$ = this.ready$.filter(r => r).flatMap(() => {
       return this.token$.map(token => Boolean(token)).distinctUntilChanged();
     });

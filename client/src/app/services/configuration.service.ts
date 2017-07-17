@@ -46,33 +46,26 @@ export class ConfigurationService implements Resolve<any> {
     //this.routerConfig$ = this.applications$.map(apps => {
     //  let routes: Routes = [ ...this.defaultRoutes ];
 
-    //  if (apps.length) {
-    //    let route = { ...routes.find(route => route.path === '') };
-    //    route.children = apps.map (app => {
-    //      let { _id, path, modulePath, name } = app;
-    //      return { path, loadChildren: modulePath, canLoad: [ AuthGuard ] };
-    //    });
+    //  for (let i=0; i<routes.length; i++) {
+    //    let route = routes[i];
+    //    if (route.path == '') {
+    //      let children = apps.map (app => {
+    //        let { _id, path, modulePath, name } = app;
+    //        return {
+    //          path,
+    //          loadChildren: modulePath,
+    //          //canLoad: [ AuthGuard ]
+    //        };
+    //      }).concat({
+    //        path: '',
+    //        redirectTo: apps[0].path,
+    //        pathMatch: 'full'
+    //      });
+    //      routes[i] = { ...route, children };
+    //    }
     //  }
-
+    //  console.log('routes', routes);
     //  return routes;
-    //});
-
-    //this.applications$.subscribe(apps => {
-    //  let app = apps[0];
-
-    //  // remove the old default redirect (if exists)
-    //  let config = this.router.config;
-    //  let children = this.router.config.find(route => route.path === '').children;
-    //  let i = children.findIndex(route => route.path == '');
-    //  if (i > -1) {
-    //    children.splice(i, 1);
-    //  }
-
-    //  if (app) {
-    //    children.push({ path: '', redirectTo: app.path, pathMatch: 'full' }); 
-    //  }
-
-    //  this.router.resetConfig(config);
     //});
 
     this.store.dispatch(new AuthActions.Init());
@@ -89,7 +82,6 @@ export class ConfigurationService implements Resolve<any> {
 
   resolve() {
     // subscribe router.config to routerConfig
-    //this.routerConfig$.subscribe(config => this.router.resetConfig(config));
 
     return this.authorization.ready$.skipWhile(ready => !ready).first().withLatestFrom(this.applications$).flatMap(([ready, apps]) =>  {
       return Observable.of(apps);

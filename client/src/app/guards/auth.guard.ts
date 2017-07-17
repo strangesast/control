@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   constructor(private authorization: AuthorizationService, private router: Router) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    //let url = state.url;
+    let url = state.url;
     let loggedIn$ = this.authorization.loggedIn$.first();
 
     return loggedIn$.map(loggedIn => {
@@ -34,7 +34,10 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   canLoad(route: Route): Observable<boolean> {
-    let applications$ = this.authorization.applications$.first();
-    return applications$.map(apps => apps.some(app => app.modulePath === route.loadChildren));
+    let applications$ = this.authorization.applications$.skipWhile(apps => !apps).first();
+    return applications$.map(apps => {
+      let canLoad = apps.some(app => app.modulePath === route.loadChildren);
+      return canLoad;
+    });
   }
 }

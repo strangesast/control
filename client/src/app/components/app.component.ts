@@ -51,6 +51,8 @@ export class AppComponent {
 
     let ready$ = this.loading$.ignoreElements().concat(Observable.of(true));
 
+    this.applications$.subscribe(console.log.bind(console));
+
     // create new routes each time applications is updated (probably just once)
     //this.routeUpdatesSub = this.applications$
     //  .skipUntil(ready$)

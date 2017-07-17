@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { SwitcherComponent } from '../../catalog/components';
-import { routerTransition } from '../../catalog/directives/router.animations';
+//import { routerTransition } from '../../catalog/directives/router.animations';
 
 @Component({
   selector: 'app-thermostat',
   templateUrl: './thermostat.component.html',
   styleUrls: ['./thermostat.component.less'],
-  animations: [routerTransition()],
-  host: {
-    '[@routerTransition]': 'expanded ? "expanded" : "default"',
-    '[class.expanded]': 'expanded'
-  }
+  //animations: [routerTransition()],
+  //host: {
+  //  '[@routerTransition]': 'expanded ? "expanded" : "default"',
+  //  '[class.expanded]': 'expanded'
+  //}
 })
-export class ThermostatComponent extends SwitcherComponent implements OnInit {
+export class ThermostatComponent implements OnInit {
   // to be removed
   temperature = 70
   setPoint = 75
