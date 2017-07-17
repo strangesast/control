@@ -34,7 +34,7 @@ export class AppEffects {
       let { user, token } = payload;
       return updateStorage({ user, token }).mapTo(payload);
     })
-    .delay(1000)
+    //.delay(1000)
     .map(({ user, token, applications }) =>
       new AppActions.UserLoadSuccess({ user, token, applications })
     );
@@ -55,7 +55,7 @@ export class AppEffects {
         })
       )
     )
-    .delay(1000)
+    //.delay(1000)
     .map(applications => new AppActions.LoadApplicationsSuccess(applications))
     //.catch(err => Observable.of(new AppActions.LoadApplicationsFailure(err)));
 
