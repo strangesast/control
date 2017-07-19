@@ -15,7 +15,9 @@ import { AuthorizationService } from '../services/authorization.service';
     </div>
     <div>
       <span>Loading Apps...</span>
-      <span class="fa fa-1x fa-fw" [ngClass]="(appsReady$ | async) ? 'fa-check' : 'fa-circle-o-notch fa-spin'"></span>
+      <span *ngIf="appsLoadState$ | async as state">
+        <span class="fa fa-1x fa-fw" [ngClass]="state == 'ready' ? 'fa-check' : state == 'error' ? 'fa-times' : 'fa-circle-o-notch fa-spin'"></span>
+      </span>
     </div>
   </div>
   <router-outlet (activate)="onActivate()"></router-outlet>
@@ -25,11 +27,14 @@ import { AuthorizationService } from '../services/authorization.service';
 export class AppComponent {
   loading: boolean = true;
   userReady$: Observable<boolean>;
-  appsReady$: Observable<boolean>;
+  appsLoadState$: Observable<string>;
 
   constructor(private auth: AuthorizationService, public router: Router, private config: ConfigurationService) {
     this.userReady$ = auth.userInitialized$;
-    this.appsReady$ = auth.appsInitialized$;
+    this.appsLoadState$ = Observable.merge(
+      auth.appsLoadError$.mapTo('error'),
+      auth.appsInitialized$.filter(i => i).mapTo('ready')
+    ).publishBehavior('loading').refCount();
   }
 
   onActivate() {

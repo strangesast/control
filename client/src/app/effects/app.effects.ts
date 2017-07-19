@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, Headers } from '@angular/http';
+import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import { Action, INIT } from '@ngrx/store';
 import { Effect, Actions, toPayload } from '@ngrx/effects';
 import { Observable } from 'rxjs';
@@ -57,6 +57,14 @@ export class AppEffects {
     )
     //.delay(1000)
     .map(applications => new AppActions.LoadApplicationsSuccess(applications))
+    .catch(err => {
+      if (err instanceof Response) {
+        return Observable.of(new AppActions.LoadApplicationsFailure({ code: err.status, message: err.statusText }));
+      } else {
+        throw new Error('can\'t handle that error');
+      }
+
+    })
     //.catch(err => Observable.of(new AppActions.LoadApplicationsFailure(err)));
 
 

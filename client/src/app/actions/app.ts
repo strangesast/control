@@ -123,6 +123,10 @@ const LOAD_APPLICATIONS_FAILURE = AUTH_PREFIX + 'LOAD APPLICATIONS FAILURE';
 export class LoadApplicationsFailure extends BaseAction {
   static typeString = LOAD_APPLICATIONS_FAILURE;
   readonly type = LOAD_APPLICATIONS_FAILURE;
+
+  constructor(payload: { code?: number, message }, timestamp?) {
+    super(payload, timestamp);
+  }
 }
 
 export type Actions =

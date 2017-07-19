@@ -19,6 +19,7 @@ export interface AppState {
   auth: AuthState,
   userInitialized: boolean; // has a user been loaded from localstorage
   appsInitialized: boolean; // have apps been requested
+  appsLoadError: any;
 }
 
 export interface State {
@@ -33,7 +34,8 @@ export const initialState = {
     applications: []
   },
   userInitialized: false,
-  appsInitialized: false
+  appsInitialized: false,
+  appsLoadError: null
 }
 
 export function appReducer (state: AppState = initialState, action: AppActions.Actions): AppState {
@@ -43,7 +45,6 @@ export function appReducer (state: AppState = initialState, action: AppActions.A
     case AppActions.UserLoadSuccess.typeString: {
       let payload = (action as AppActions.UserLoadSuccess).payload
       let { user, token, applications } = payload;
-      console.log('from user load', applications);
       return {
         ...state,
         appsInitialized: applications && applications.length > 0,
@@ -55,6 +56,10 @@ export function appReducer (state: AppState = initialState, action: AppActions.A
     case AppActions.LoadApplicationsSuccess.typeString: {
       let applications = (action as AppActions.LoadApplicationsSuccess).payload;
       return { ...state, appsInitialized: true, auth: { ...state.auth, applications }};
+    }
+    case AppActions.LoadApplicationsFailure.typeString: {
+      let payload = (action as AppActions.LoadApplicationsFailure).payload;
+      return { ...state, appsInitialized: false, appsLoadError: payload };
     }
 
     // reset state on requesting new credentials
@@ -93,4 +98,5 @@ export const selectAuthErrors       = createSelector(selectAuth, (state: AuthSta
 export const selectAuthApplications = createSelector(selectAuth, (state: AuthState) => state.applications);
 export const selectUserInit = createSelector(selectApp, (state: AppState) => state.userInitialized);
 export const selectAppsInit = createSelector(selectApp, (state: AppState) => state.appsInitialized);
+export const selectAppsErr = createSelector(selectApp, (state: AppState) => state.appsLoadError);
 //export const selectAuthReady        = createSelector(selectAuth, (state: AuthState) => state.ready);

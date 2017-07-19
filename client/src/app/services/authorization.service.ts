@@ -19,6 +19,7 @@ export class AuthorizationService {
 
   public userInitialized$: Observable<boolean>;
   public appsInitialized$: Observable<boolean>;
+  public appsLoadError$: Observable<any>;
 
   requestOptions: Observable<Partial<RequestOptions>>;
   redirectUrl: string;  // temporarily store where the user is headed
@@ -29,6 +30,7 @@ export class AuthorizationService {
     this.applications$ =         store.select(fromRoot.selectAuthApplications);
     this.userInitialized$ = this.store.select(fromRoot.selectUserInit);
     this.appsInitialized$ = this.store.select(fromRoot.selectAppsInit);
+    this.appsLoadError$ = this.store.select(fromRoot.selectAppsErr);
 
     // user / no user determined
     //this.ready$ = this.store.select(fromRoot.selectAuthReady);

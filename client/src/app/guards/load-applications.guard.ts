@@ -19,22 +19,26 @@ export class LoadApplicationsGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
       let url = state.url;
+      console.log('load apps guarding...', url);
 
       // always return false to halt routing with this config. load new config. redirect to target path
-      return this.authorization.userInitialized$.find(i => i).flatMap(() =>
-        this.authorization.appsInitialized$.find(i => i).flatMap(() =>
-          this.authorization.applications$.first().map(apps => {
-            let routes = createRoutes(apps);
-            this.router.resetConfig(routes);
+      return this.authorization.userInitialized$.find(i => i).withLatestFrom(this.authorization.user$).flatMap(([_, user]) => {
+        console.log('user', user);
+        if (user) {
+          return this.authorization.appsInitialized$.find(i => i).flatMap(() =>
+            this.authorization.applications$.first().map(apps => {
+              let routes = createRoutes(apps);
+              this.router.resetConfig(routes);
 
-            this.router.navigateByUrl(url);
-            return false;
-          })
-          //console.log('3b');
-          //this.router.navigate(['/login'], { queryParams: { redirectUrl: url }});
-          //return Observable.of(false);
-        )
-      );
+              this.router.navigateByUrl(url);
+              return false;
+            })
+          )
+        } else {
+          this.router.navigate(['/login'], { queryParams: { redirectUrl: url }});
+          return Observable.of(false);
+        }
+      });
   }
 }
 

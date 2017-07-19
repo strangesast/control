@@ -21,8 +21,8 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     let loggedIn$ = this.authorization.loggedIn$.first();
 
     return loggedIn$.map(loggedIn => {
-      console.log('logged in? (authguard)', loggedIn);
       if (!loggedIn) {
+        console.log('logged in? (authguard)', loggedIn, url);
         this.router.navigate(['/login'], { queryParams: { redirectUrl: url }});
         return false;
       }

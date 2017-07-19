@@ -22,29 +22,24 @@ const routes: Routes = [
   },
   // need to include these for precompilation...
   {
-    path: 'dashboard',
+    path: '1',
     loadChildren: 'app/modules/dashboard/dashboard.module#DashboardModule',
-    canLoad: [AuthGuard]
   },
   {
-    path: 'topview',
+    path: '2',
     loadChildren: 'app/modules/topview/topview.module#TopviewModule',
-    canLoad: [AuthGuard]
   },
   {
-    path: 'topview-alternate',
+    path: '3',
     loadChildren: 'app/modules/topview-alternate/topview-alternate.module#TopviewAlternateModule',
-    canLoad: [AuthGuard]
   },
   {
-    path: 'energy-profile',
+    path: '4',
     loadChildren: 'app/modules/energy/energy.module#EnergyModule',
-    canLoad: [AuthGuard]
   },
   {
-    path: 'thermostat',
+    path: '5',
     loadChildren: 'app/modules/thermostat/thermostat.module#ThermostatModule',
-    canLoad: [AuthGuard]
   }
 ]
 export { routes };

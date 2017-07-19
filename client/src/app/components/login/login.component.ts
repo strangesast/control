@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.redirectUrl = this.route.snapshot.queryParams.returlUrl;
+    this.redirectUrl = this.route.snapshot.queryParams.redirectUrl;
     this.credentials = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
