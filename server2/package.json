@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "./node_modules/.bin/nodemon server.js",
     "test": "./node_modules/.bin/concurrently \"./node_modules/.bin/nodemon server.js\" \"./node_modules/.bin/karma start karma.conf.js\""
   },
   "author": "",

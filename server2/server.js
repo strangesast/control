@@ -22,7 +22,7 @@ const express = require('express'),
 
 const dataDir = '../data';
 const defaultObjects = fs.readdirSync(dataDir).map(fname => path.join(dataDir, fname)).filter(fpath =>
-  fs.statSync(fpath).isFile()).map(fpath => JSON.parse(fs.readFileSync(fpath, 'utf8'))).reduce((a, obj) => Object.assign(a, obj), {});
+  fs.statSync(fpath).isFile() && fpath.endsWith('.json')).map(fpath => JSON.parse(fs.readFileSync(fpath, 'utf8'))).reduce((a, obj) => Object.assign(a, obj), {});
 
 
 // database configuration
@@ -37,8 +37,9 @@ const schema = [
       value: FLOAT
     },
     tags: [
-      'device', // for now an int (but tags are always strings)
-      'area' // from sensor
+      // id from mongo
+      'point',
+      'area'
     ]
   },
   {
@@ -52,8 +53,20 @@ const schema = [
   }
 ];
 
-function dt(v) {
-  return Math.sign(v)*(Math.random()-0.5)*Math.pow(Math.E, -Math.pow(v, 2)) + v/2;
+const recalcInterval = 2000;
+const initTemp = 70;
+const initTempSpread = 4;
+const precision = 10;
+
+function generateInitTemp() {
+  let t = initTemp + (Math.random() - 1)*initTempSpread;
+  return Math.floor(t*precision)/precision;
+}
+
+function calcTempChange(t, sp) {
+  let v = sp - t;
+  let dt = Math.sign(v)*(Math.random()-0.5)*Math.pow(Math.E, -Math.pow(v, 2)) + v/2;
+  return Math.floor(dt*precision)/precision;
 }
 
 var mongo, influx;
@@ -83,7 +96,13 @@ var mongo, influx;
   await applicationsCollection.insertMany(defaultObjects.applications);
 
   let pointsCollection = await mongo.createCollection('points');
-  // create default objects
+  await pointsCollection.insertMany(defaultObjects.points);
+
+  let areasCollection = await mongo.createCollection('areas');
+  await areasCollection.insertMany(defaultObjects.areas);
+
+  let featuresCollection = await mongo.createCollection('features');
+  await featuresCollection.insertMany(defaultObjects.features);
 
   
   // influx setup, init
@@ -94,48 +113,60 @@ var mongo, influx;
   }
   await influx.createDatabase(databaseName);
 
-  let init = {
-    temperature: 0.0,
-    setpoint: 10.0
-  };
-
   // setpoints from unique areas from sensors
 
-  await influx.writePoints([
-    {
-      measurement: 'setpoints',
-      tags: { device: '001' },
-      fields: { value: init.setpoint, session: '123' }
+  let setPoints = (await areasCollection.find({}).toArray()).map(area => ({
+    measurement: 'setpoints',
+    tags: { area: area._id },
+    fields: {
+      value: generateInitTemp(),
+      by: 'init',
+      nonce: '1234'
     }
-  ]);
+  }));
+  let tempMeasurements = (await pointsCollection.find({}).toArray()).map(({ area, _id }) => ({
+    measurement: 'temperatures',
+    tags: { area, point: _id },
+    fields: { value: generateInitTemp() }
+  }));
+  await influx.writePoints(setPoints.concat(tempMeasurements));
 
   // thermostat loop
   (async function(sleepTime) {
     let successful = true;
     while (successful) {
-      let [temps, setpoints] = await Promise.all([
-        influx.query(`SELECT last(value) FROM temperatures GROUP BY device`),
-        influx.query(`SELECT last(value) FROM setpoints GROUP BY device`)
-      ]);
-      let arr = setpoints
-        .map(sp => [sp, temps.find(t => t.device != null && t.device == sp.device)])
-        .filter(([a, b]) => a != null)
-        .map(([a, b]) => [a.device, a.last, b ? b.last : 0])
-      let values = arr.map(([device, sp, t]) => ({
-        measurement: 'temperatures',
-        tags: { device },
-        fields: { value: t + dt(sp-t), setpoint: sp }
-      }));
+      let setPoints = await influx.query(`SELECT last(value) FROM temperatures GROUP BY area`);
+      let setPointMap = {};
+      for (let { area, last } of setPoints) {
+        setPointMap[area] = last;
+      }
+
+      let temps = await influx.query(`SELECT last(value) FROM temperatures GROUP BY area,point`);
+      let values = [];
+      for (let { area, point, last } of temps) {
+        let sp = setPointMap[area];
+        let dt = calcTempChange(last, sp);
+        if (Math.abs(dt) > 0) {
+          values.push({
+            measurement: 'temperatures',
+            tags: { area, point },
+            fields: { value: last + dt }
+          });
+        }
+      }
 
       try {
-        await influx.writePoints(values);
+        if (values.length > 0) {
+          await influx.writePoints(values);
+        }
         await new Promise((r) => setTimeout(r, sleepTime));
       } catch (e) {
         successful = false;
+        console.error(e)
       }
     }
     console.log('thermostat loop failed');
-  })(2000);
+  })(recalcInterval);
 })();
 
 const secret = 'toastToastTOAST';

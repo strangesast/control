@@ -1,0 +1,604 @@
+{
+  "points": [
+    {
+      "_id": "5970b443e1a1842549f59b7a",
+      "name": "Room 4 Sensor 1",
+      "area": "5970b443e1a1842549f59b12",
+      "feature": "5970b443e1a1842549f59b16"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b7b",
+      "name": "Room 3 Sensor 1",
+      "area": "5970b443e1a1842549f59b13",
+      "feature": "5970b443e1a1842549f59b17"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b7c",
+      "name": "Room 2 Sensor 1",
+      "area": "5970b443e1a1842549f59b14",
+      "feature": "5970b443e1a1842549f59b18"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b7d",
+      "name": "Room 1 Sensor 1",
+      "area": "5970b443e1a1842549f59b15",
+      "feature": "5970b443e1a1842549f59b19"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b7e",
+      "name": "Room 11 Sensor 4",
+      "area": "5970b443e1a1842549f59b0b",
+      "feature": "5970b443e1a1842549f59b1a"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b7f",
+      "name": "Room 11 Sensor 3",
+      "area": "5970b443e1a1842549f59b0b",
+      "feature": "5970b443e1a1842549f59b1b"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b80",
+      "name": "Room 11 Sensor 2",
+      "area": "5970b443e1a1842549f59b0b",
+      "feature": "5970b443e1a1842549f59b1c"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b81",
+      "name": "Room 5 Sensor 1",
+      "area": "5970b443e1a1842549f59b11",
+      "feature": "5970b443e1a1842549f59b1d"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b82",
+      "name": "Room 6 Sensor 2",
+      "area": "5970b443e1a1842549f59b10",
+      "feature": "5970b443e1a1842549f59b1e"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b83",
+      "name": "Room 8 Sensor 2",
+      "area": "5970b443e1a1842549f59b0e",
+      "feature": "5970b443e1a1842549f59b1f"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b84",
+      "name": "Room 7 Sensor 1",
+      "area": "5970b443e1a1842549f59b0f",
+      "feature": "5970b443e1a1842549f59b20"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b85",
+      "name": "Room 9 Sensor 1",
+      "area": "5970b443e1a1842549f59b0d",
+      "feature": "5970b443e1a1842549f59b21"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b86",
+      "name": "Room 10 Sensor 1",
+      "area": "5970b443e1a1842549f59b0c",
+      "feature": "5970b443e1a1842549f59b22"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b87",
+      "name": "Room 27 Sensor 3",
+      "area": "5970b443e1a1842549f59afb",
+      "feature": "5970b443e1a1842549f59b23"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b88",
+      "name": "Room 27 Sensor 2",
+      "area": "5970b443e1a1842549f59afb",
+      "feature": "5970b443e1a1842549f59b24"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b89",
+      "name": "Room 27 Sensor 1",
+      "area": "5970b443e1a1842549f59afb",
+      "feature": "5970b443e1a1842549f59b25"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b8a",
+      "name": "Room 29 Sensor 1",
+      "area": "5970b443e1a1842549f59aa5",
+      "feature": "5970b443e1a1842549f59b26"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b8b",
+      "name": "Room 30 Sensor 2",
+      "area": "5970b443e1a1842549f59af9",
+      "feature": "5970b443e1a1842549f59b27"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b8c",
+      "name": "Room 31 Sensor 1",
+      "area": "5970b443e1a1842549f59af8",
+      "feature": "5970b443e1a1842549f59b28"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b8d",
+      "name": "Room 33 Sensor 1",
+      "area": "5970b443e1a1842549f59af6",
+      "feature": "5970b443e1a1842549f59b29"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b8e",
+      "name": "Room 32 Sensor 1",
+      "area": "5970b443e1a1842549f59af7",
+      "feature": "5970b443e1a1842549f59b2a"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b8f",
+      "name": "Room 28 Sensor 1",
+      "area": "5970b443e1a1842549f59afa",
+      "feature": "5970b443e1a1842549f59b2b"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b90",
+      "name": "Room 34 Sensor 4",
+      "area": "5970b443e1a1842549f59af5",
+      "feature": "5970b443e1a1842549f59b2c"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b91",
+      "name": "Room 34 Sensor 3",
+      "area": "5970b443e1a1842549f59af5",
+      "feature": "5970b443e1a1842549f59b2d"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b92",
+      "name": "Room 34 Sensor 2",
+      "area": "5970b443e1a1842549f59af5",
+      "feature": "5970b443e1a1842549f59b2e"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b93",
+      "name": "Room 63 Sensor 1",
+      "area": "5970b443e1a1842549f59a9f",
+      "feature": "5970b443e1a1842549f59b2f"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b94",
+      "name": "Room 15 Sensor 2",
+      "area": "5970b443e1a1842549f59b07",
+      "feature": "5970b443e1a1842549f59b30"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b95",
+      "name": "Room 16 Sensor 1",
+      "area": "5970b443e1a1842549f59b06",
+      "feature": "5970b443e1a1842549f59b31"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b96",
+      "name": "Room 18 Sensor 1",
+      "area": "5970b443e1a1842549f59b04",
+      "feature": "5970b443e1a1842549f59b32"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b97",
+      "name": "Room 19 Sensor 1",
+      "area": "5970b443e1a1842549f59b03",
+      "feature": "5970b443e1a1842549f59b33"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b98",
+      "name": "Room 14 Sensor 2",
+      "area": "5970b443e1a1842549f59b08",
+      "feature": "5970b443e1a1842549f59b34"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b99",
+      "name": "Room 14 Sensor 1",
+      "area": "5970b443e1a1842549f59b08",
+      "feature": "5970b443e1a1842549f59b35"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b9a",
+      "name": "Room 12 Sensor 1",
+      "area": "5970b443e1a1842549f59b0a",
+      "feature": "5970b443e1a1842549f59b36"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b9b",
+      "name": "Room 13 Sensor 1",
+      "area": "5970b443e1a1842549f59b09",
+      "feature": "5970b443e1a1842549f59b37"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b9c",
+      "name": "Room 20 Sensor 1",
+      "area": "5970b443e1a1842549f59b02",
+      "feature": "5970b443e1a1842549f59b38"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b9d",
+      "name": "Room 25 Sensor 1",
+      "area": "5970b443e1a1842549f59afd",
+      "feature": "5970b443e1a1842549f59b39"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b9e",
+      "name": "Room 23 Sensor 1",
+      "area": "5970b443e1a1842549f59aff",
+      "feature": "5970b443e1a1842549f59b3a"
+    },
+    {
+      "_id": "5970b443e1a1842549f59b9f",
+      "name": "Room 21 Sensor 1",
+      "area": "5970b443e1a1842549f59b01",
+      "feature": "5970b443e1a1842549f59b3b"
+    },
+    {
+      "_id": "5970b443e1a1842549f59ba0",
+      "name": "Room 24 Sensor 1",
+      "area": "5970b443e1a1842549f59afe",
+      "feature": "5970b443e1a1842549f59b3c"
+    },
+    {
+      "_id": "5970b443e1a1842549f59ba1",
+      "name": "Room 26 Sensor 1",
+      "area": "5970b443e1a1842549f59afc",
+      "feature": "5970b443e1a1842549f59b3d"
+    },
+    {
+      "_id": "5970b443e1a1842549f59ba2",
+      "name": "Room 35 Sensor 3",
+      "area": "5970b443e1a1842549f59af4",
+      "feature": "5970b443e1a1842549f59b3e"
+    },
+    {
+      "_id": "5970b443e1a1842549f59ba3",
+      "name": "Room 35 Sensor 2",
+      "area": "5970b443e1a1842549f59af4",
+      "feature": "5970b443e1a1842549f59b3f"
+    },
+    {
+      "_id": "5970b443e1a1842549f59ba4",
+      "name": "Room 53 Sensor 3",
+      "area": "5970b443e1a1842549f59ae5",
+      "feature": "5970b443e1a1842549f59b40"
+    },
+    {
+      "_id": "5970b443e1a1842549f59ba5",
+      "name": "Room 53 Sensor 2",
+      "area": "5970b443e1a1842549f59ae5",
+      "feature": "5970b443e1a1842549f59b41"
+    },
+    {
+      "_id": "5970b443e1a1842549f59ba6",
+      "name": "Room 37 Sensor 2",
+      "area": "5970b443e1a1842549f59af2",
+      "feature": "5970b443e1a1842549f59b42"
+    },
+    {
+      "_id": "5970b443e1a1842549f59ba7",
+      "name": "Room 40 Sensor 1",
+      "area": "5970b443e1a1842549f59aa2",
+      "feature": "5970b443e1a1842549f59b43"
+    },
+    {
+      "_id": "5970b443e1a1842549f59ba8",
+      "name": "Room 39 Sensor 1",
+      "area": "5970b443e1a1842549f59aa3",
+      "feature": "5970b443e1a1842549f59b44"
+    },
+    {
+      "_id": "5970b443e1a1842549f59ba9",
+      "name": "Room 38 Sensor 4",
+      "area": "5970b443e1a1842549f59aa4",
+      "feature": "5970b443e1a1842549f59b45"
+    },
+    {
+      "_id": "5970b443e1a1842549f59baa",
+      "name": "Room 41 Sensor 1",
+      "area": "5970b443e1a1842549f59af1",
+      "feature": "5970b443e1a1842549f59b46"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bab",
+      "name": "Room 52 Sensor 1",
+      "area": "5970b443e1a1842549f59ae6",
+      "feature": "5970b443e1a1842549f59b47"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bac",
+      "name": "Room 42 Sensor 1",
+      "area": "5970b443e1a1842549f59af0",
+      "feature": "5970b443e1a1842549f59b48"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bad",
+      "name": "Room 43 Sensor 1",
+      "area": "5970b443e1a1842549f59aef",
+      "feature": "5970b443e1a1842549f59b49"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bae",
+      "name": "Room 44 Sensor 1",
+      "area": "5970b443e1a1842549f59aee",
+      "feature": "5970b443e1a1842549f59b4a"
+    },
+    {
+      "_id": "5970b443e1a1842549f59baf",
+      "name": "Room 45 Sensor 1",
+      "area": "5970b443e1a1842549f59aed",
+      "feature": "5970b443e1a1842549f59b4b"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bb0",
+      "name": "Room 46 Sensor 1",
+      "area": "5970b443e1a1842549f59aec",
+      "feature": "5970b443e1a1842549f59b4c"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bb1",
+      "name": "Room 62 Sensor 1",
+      "area": "5970b443e1a1842549f59aa0",
+      "feature": "5970b443e1a1842549f59b4d"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bb2",
+      "name": "Room 49 Sensor 1",
+      "area": "5970b443e1a1842549f59ae9",
+      "feature": "5970b443e1a1842549f59b4e"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bb3",
+      "name": "Room 50 Sensor 1",
+      "area": "5970b443e1a1842549f59ae8",
+      "feature": "5970b443e1a1842549f59b4f"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bb4",
+      "name": "Room 17 Sensor 1",
+      "area": "5970b443e1a1842549f59b05",
+      "feature": "5970b443e1a1842549f59b50"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bb5",
+      "name": "Room 54 Sensor 1",
+      "area": "5970b443e1a1842549f59ae4",
+      "feature": "5970b443e1a1842549f59b51"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bb6",
+      "name": "Room 58 Sensor 1",
+      "area": "5970b443e1a1842549f59ae1",
+      "feature": "5970b443e1a1842549f59b52"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bb7",
+      "name": "Room 56 Sensor 1",
+      "area": "5970b443e1a1842549f59ae2",
+      "feature": "5970b443e1a1842549f59b53"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bb8",
+      "name": "Room 55 Sensor 1",
+      "area": "5970b443e1a1842549f59ae3",
+      "feature": "5970b443e1a1842549f59b54"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bb9",
+      "name": "Room 57 Sensor 1",
+      "area": "5970b443e1a1842549f59aa1",
+      "feature": "5970b443e1a1842549f59b55"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bba",
+      "name": "Room 36 Sensor 1",
+      "area": "5970b443e1a1842549f59af3",
+      "feature": "5970b443e1a1842549f59b56"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bbb",
+      "name": "Room 59 Sensor 5",
+      "area": "5970b443e1a1842549f59ae0",
+      "feature": "5970b443e1a1842549f59b57"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bbc",
+      "name": "Room 59 Sensor 4",
+      "area": "5970b443e1a1842549f59ae0",
+      "feature": "5970b443e1a1842549f59b58"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bbd",
+      "name": "Room 59 Sensor 3",
+      "area": "5970b443e1a1842549f59ae0",
+      "feature": "5970b443e1a1842549f59b59"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bbe",
+      "name": "Room 60 Sensor 4",
+      "area": "5970b443e1a1842549f59adf",
+      "feature": "5970b443e1a1842549f59b5a"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bbf",
+      "name": "Room 60 Sensor 3",
+      "area": "5970b443e1a1842549f59adf",
+      "feature": "5970b443e1a1842549f59b5b"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bc0",
+      "name": "Room 60 Sensor 2",
+      "area": "5970b443e1a1842549f59adf",
+      "feature": "5970b443e1a1842549f59b5c"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bc1",
+      "name": "Room 38 Sensor 3",
+      "area": "5970b443e1a1842549f59aa4",
+      "feature": "5970b443e1a1842549f59b5d"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bc2",
+      "name": "Room 53 Sensor 1",
+      "area": "5970b443e1a1842549f59ae5",
+      "feature": "5970b443e1a1842549f59b5e"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bc3",
+      "name": "Room 37 Sensor 1",
+      "area": "5970b443e1a1842549f59af2",
+      "feature": "5970b443e1a1842549f59b5f"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bc4",
+      "name": "Room 59 Sensor 2",
+      "area": "5970b443e1a1842549f59ae0",
+      "feature": "5970b443e1a1842549f59b60"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bc5",
+      "name": "Room 48 Sensor 1",
+      "area": "5970b443e1a1842549f59aea",
+      "feature": "5970b443e1a1842549f59b61"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bc6",
+      "name": "Room 51 Sensor 1",
+      "area": "5970b443e1a1842549f59ae7",
+      "feature": "5970b443e1a1842549f59b62"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bc7",
+      "name": "Room 61 Sensor 1",
+      "area": "5970b443e1a1842549f59ade",
+      "feature": "5970b443e1a1842549f59b63"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bc8",
+      "name": "Room 60 Sensor 1",
+      "area": "5970b443e1a1842549f59adf",
+      "feature": "5970b443e1a1842549f59b64"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bc9",
+      "name": "Room 59 Sensor 1",
+      "area": "5970b443e1a1842549f59ae0",
+      "feature": "5970b443e1a1842549f59b65"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bca",
+      "name": "Room 38 Sensor 2",
+      "area": "5970b443e1a1842549f59aa4",
+      "feature": "5970b443e1a1842549f59b66"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bcb",
+      "name": "Room 34 Sensor 1",
+      "area": "5970b443e1a1842549f59af5",
+      "feature": "5970b443e1a1842549f59b67"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bcc",
+      "name": "Room 22 Sensor 1",
+      "area": "5970b443e1a1842549f59b00",
+      "feature": "5970b443e1a1842549f59b68"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bcd",
+      "name": "Room 11 Sensor 1",
+      "area": "5970b443e1a1842549f59b0b",
+      "feature": "5970b443e1a1842549f59b69"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bce",
+      "name": "Room 8 Sensor 1",
+      "area": "5970b443e1a1842549f59b0e",
+      "feature": "5970b443e1a1842549f59b6a"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bcf",
+      "name": "Room 6 Sensor 1",
+      "area": "5970b443e1a1842549f59b10",
+      "feature": "5970b443e1a1842549f59b6b"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bd0",
+      "name": "Room 15 Sensor 1",
+      "area": "5970b443e1a1842549f59b07",
+      "feature": "5970b443e1a1842549f59b6c"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bd1",
+      "name": "Room 35 Sensor 1",
+      "area": "5970b443e1a1842549f59af4",
+      "feature": "5970b443e1a1842549f59b6d"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bd2",
+      "name": "Room 38 Sensor 1",
+      "area": "5970b443e1a1842549f59aa4",
+      "feature": "5970b443e1a1842549f59b6e"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bd3",
+      "name": "Room 30 Sensor 1",
+      "area": "5970b443e1a1842549f59af9",
+      "feature": "5970b443e1a1842549f59b6f"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bd4",
+      "name": "South Wing Sensor 6",
+      "area": "5970b443e1a1842549f59a8a",
+      "feature": "5970b443e1a1842549f59b70"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bd5",
+      "name": "South Wing Sensor 5",
+      "area": "5970b443e1a1842549f59a8a",
+      "feature": "5970b443e1a1842549f59b71"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bd6",
+      "name": "North Wing Sensor 3",
+      "area": "5970b443e1a1842549f59a8b",
+      "feature": "5970b443e1a1842549f59b72"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bd7",
+      "name": "North Wing Sensor 2",
+      "area": "5970b443e1a1842549f59a8b",
+      "feature": "5970b443e1a1842549f59b73"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bd8",
+      "name": "South Wing Sensor 4",
+      "area": "5970b443e1a1842549f59a8a",
+      "feature": "5970b443e1a1842549f59b74"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bd9",
+      "name": "South Wing Sensor 3",
+      "area": "5970b443e1a1842549f59a8a",
+      "feature": "5970b443e1a1842549f59b75"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bda",
+      "name": "South Wing Sensor 2",
+      "area": "5970b443e1a1842549f59a8a",
+      "feature": "5970b443e1a1842549f59b76"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bdb",
+      "name": "South Wing Sensor 1",
+      "area": "5970b443e1a1842549f59a8a",
+      "feature": "5970b443e1a1842549f59b77"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bdc",
+      "name": "North Wing Sensor 1",
+      "area": "5970b443e1a1842549f59a8b",
+      "feature": "5970b443e1a1842549f59b78"
+    },
+    {
+      "_id": "5970b443e1a1842549f59bdd",
+      "name": "Sales Department Sensor 1",
+      "area": "5970b443e1a1842549f59a9b",
+      "feature": "5970b443e1a1842549f59b79"
+    }
+  ]
+}
