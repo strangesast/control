@@ -1,0 +1,256 @@
+{
+  "rooms": [
+    {
+      "name": "room063",
+      "parent": "area_south"
+    },
+    {
+      "name": "room062",
+      "parent": "area_north"
+    },
+    {
+      "name": "room061",
+      "parent": "area_sales"
+    },
+    {
+      "name": "room060",
+      "parent": "area_sales"
+    },
+    {
+      "name": "room059",
+      "parent": "area_sales"
+    },
+    {
+      "name": "room058",
+      "parent": "area_sales"
+    },
+    {
+      "name": "room057",
+      "parent": "area_north"
+    },
+    {
+      "name": "room056",
+      "parent": "area_sales"
+    },
+    {
+      "name": "room055",
+      "parent": "area_sales"
+    },
+    {
+      "name": "room054",
+      "parent": "area_sales"
+    },
+    {
+      "name": "room053",
+      "parent": "area_shippingreceiving"
+    },
+    {
+      "name": "room052",
+      "parent": "area_sales"
+    },
+    {
+      "name": "room051",
+      "parent": "area_sales"
+    },
+    {
+      "name": "room050",
+      "parent": "area_sales"
+    },
+    {
+      "name": "room049",
+      "parent": "area_sales"
+    },
+    {
+      "name": "room048",
+      "parent": "area_sales"
+    },
+    {
+      "name": "room047",
+      "parent": "area_sales"
+    },
+    {
+      "name": "room046",
+      "parent": "area_sales"
+    },
+    {
+      "name": "room045",
+      "parent": "area_sales"
+    },
+    {
+      "name": "room044",
+      "parent": "area_sales"
+    },
+    {
+      "name": "room043",
+      "parent": "area_sales"
+    },
+    {
+      "name": "room042",
+      "parent": "area_sales"
+    },
+    {
+      "name": "room041",
+      "parent": "area_sales"
+    },
+    {
+      "name": "room040",
+      "parent": "area_north"
+    },
+    {
+      "name": "room039",
+      "parent": "area_north"
+    },
+    {
+      "name": "room038",
+      "parent": "area_north"
+    },
+    {
+      "name": "room037",
+      "parent": "area_sales"
+    },
+    {
+      "name": "room036",
+      "parent": "area_shippingreceiving"
+    },
+    {
+      "name": "room035",
+      "parent": "area_shippingreceiving"
+    },
+    {
+      "name": "room034",
+      "parent": "area_panelshop"
+    },
+    {
+      "name": "room033",
+      "parent": "area_software"
+    },
+    {
+      "name": "room032",
+      "parent": "area_software"
+    },
+    {
+      "name": "room031",
+      "parent": "area_software"
+    },
+    {
+      "name": "room030",
+      "parent": "area_software"
+    },
+    {
+      "name": "room029",
+      "parent": "area_south"
+    },
+    {
+      "name": "room028",
+      "parent": "area_software"
+    },
+    {
+      "name": "room027",
+      "parent": "area_software"
+    },
+    {
+      "name": "room026",
+      "parent": "area_accounting"
+    },
+    {
+      "name": "room025",
+      "parent": "area_accounting"
+    },
+    {
+      "name": "room024",
+      "parent": "area_accounting"
+    },
+    {
+      "name": "room023",
+      "parent": "area_accounting"
+    },
+    {
+      "name": "room022",
+      "parent": "area_accounting"
+    },
+    {
+      "name": "room021",
+      "parent": "area_accounting"
+    },
+    {
+      "name": "room020",
+      "parent": "area_accounting"
+    },
+    {
+      "name": "room019",
+      "parent": "area_accounting"
+    },
+    {
+      "name": "room018",
+      "parent": "area_accounting"
+    },
+    {
+      "name": "room017",
+      "parent": "area_sales"
+    },
+    {
+      "name": "room016",
+      "parent": "area_accounting"
+    },
+    {
+      "name": "room015",
+      "parent": "area_accounting"
+    },
+    {
+      "name": "room014",
+      "parent": "area_accounting"
+    },
+    {
+      "name": "room013",
+      "parent": "area_accounting"
+    },
+    {
+      "name": "room012",
+      "parent": "area_accounting"
+    },
+    {
+      "name": "room011",
+      "parent": "area_engineering"
+    },
+    {
+      "name": "room010",
+      "parent": "area_engineering"
+    },
+    {
+      "name": "room009",
+      "parent": "area_engineering"
+    },
+    {
+      "name": "room008",
+      "parent": "area_engineering"
+    },
+    {
+      "name": "room007",
+      "parent": "area_engineering"
+    },
+    {
+      "name": "room006",
+      "parent": "area_engineering"
+    },
+    {
+      "name": "room005",
+      "parent": "area_engineering"
+    },
+    {
+      "name": "room004",
+      "parent": "area_engineering"
+    },
+    {
+      "name": "room003",
+      "parent": "area_engineering"
+    },
+    {
+      "name": "room002",
+      "parent": "area_engineering"
+    },
+    {
+      "name": "room001",
+      "parent": "area_engineering"
+    }
+  ]
+}

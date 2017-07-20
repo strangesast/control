@@ -1,0 +1,1511 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 0,
+        "name": "sensor0",
+        "area": "room004"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47083611510742,
+          42.9990321764977
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1,
+        "name": "sensor1",
+        "area": "room003"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47083717195,
+          42.99909770073742
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2,
+        "name": "sensor2",
+        "area": "room002"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47083505826484,
+          42.99915054286623
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3,
+        "name": "sensor3",
+        "area": "room001"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47076636349739,
+          42.99914631549593
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 4,
+        "name": "sensor4",
+        "area": "room011"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47078221613603,
+          42.99902689228482
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 5,
+        "name": "sensor5",
+        "area": "room011"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47060678026838,
+          42.99914420181078
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6,
+        "name": "sensor6",
+        "area": "room011"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.4706110076387,
+          42.99903006281255
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 7,
+        "name": "sensor7",
+        "area": "room005"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47074099927556,
+          42.99900152806299
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8,
+        "name": "sensor8",
+        "area": "room006"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47068075924872,
+          42.99900258490557
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9,
+        "name": "sensor9",
+        "area": "room008"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47060043921293,
+          42.999003641748146
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 10,
+        "name": "sensor10",
+        "area": "room007"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47058670025943,
+          42.99903746071058
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 11,
+        "name": "sensor11",
+        "area": "room009"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47054759708412,
+          42.99909030283939
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12,
+        "name": "sensor12",
+        "area": "room010"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47054225944477,
+          42.999126517645585
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 13,
+        "name": "sensor13",
+        "area": "room027"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47044275846751,
+          42.99914037847824
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 14,
+        "name": "sensor14",
+        "area": "room027"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47049820179812,
+          42.998949296999555
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 15,
+        "name": "sensor15",
+        "area": "room027"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47053334890948,
+          42.999049293006536
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16,
+        "name": "sensor16",
+        "area": "room029"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.4703239513305,
+          42.999140873507976
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 17,
+        "name": "sensor17",
+        "area": "room030"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47040612626694,
+          42.999123052437426
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 18,
+        "name": "sensor18",
+        "area": "room031"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47036949406636,
+          42.99899285961646
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 19,
+        "name": "sensor19",
+        "area": "room033"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47035464317423,
+          42.998970583278265
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 20,
+        "name": "sensor20",
+        "area": "room032"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47035513820397,
+          42.99901761110333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 21,
+        "name": "sensor21",
+        "area": "room028"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47045216403252,
+          42.99896365286194
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 22,
+        "name": "sensor22",
+        "area": "room034"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47021454975851,
+          42.99897157333775
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 23,
+        "name": "sensor23",
+        "area": "room034"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47031009049785,
+          42.999011175716745
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 24,
+        "name": "sensor24",
+        "area": "room034"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.4702051441935,
+          42.99913493315113
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 25,
+        "name": "sensor25",
+        "area": "room063"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47087343433917,
+          42.998983949081186
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26,
+        "name": "sensor26",
+        "area": "room015"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47082492142489,
+          42.998887418282365
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 27,
+        "name": "sensor27",
+        "area": "room016"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47082393136542,
+          42.99880920358384
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 28,
+        "name": "sensor28",
+        "area": "room018"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.4707407663695,
+          42.99880969861358
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 29,
+        "name": "sensor29",
+        "area": "room019"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47069621369313,
+          42.99880920358384
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30,
+        "name": "sensor30",
+        "area": "room014"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47067096717652,
+          42.998837420278875
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 31,
+        "name": "sensor31",
+        "area": "room014"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47075066696426,
+          42.998837420278875
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 32,
+        "name": "sensor32",
+        "area": "room012"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.4707353210424,
+          42.99889731887712
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 33,
+        "name": "sensor33",
+        "area": "room013"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47062492941095,
+          42.99890573438266
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 34,
+        "name": "sensor34",
+        "area": "room020"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47064225545174,
+          42.99880920358384
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 35,
+        "name": "sensor35",
+        "area": "room025"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47057740655613,
+          42.998801778137775
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 36,
+        "name": "sensor36",
+        "area": "room023"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.470562555664,
+          42.99882999483282
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 37,
+        "name": "sensor37",
+        "area": "room021"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47057295128849,
+          42.998913654858455
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 40,
+        "name": "sensor40",
+        "area": "room024"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47051453777947,
+          42.99880920358383
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 41,
+        "name": "sensor41",
+        "area": "room026"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47051552783893,
+          42.99880177813777
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 42,
+        "name": "sensor42",
+        "area": "room035"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47047097516254,
+          42.99891266479898
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 43,
+        "name": "sensor43",
+        "area": "room035"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47043236284301,
+          42.99876316581825
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 44,
+        "name": "sensor44",
+        "area": "room053"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47038434495848,
+          42.99885672643864
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 45,
+        "name": "sensor45",
+        "area": "room053"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47025217201855,
+          42.9989116747395
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 46,
+        "name": "sensor46",
+        "area": "room037"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.4700932674728,
+          42.99893890137506
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 47,
+        "name": "sensor47",
+        "area": "room040"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47009079232411,
+          42.998974048486424
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 48,
+        "name": "sensor48",
+        "area": "room039"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47017148217132,
+          42.998970583278265
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 49,
+        "name": "sensor49",
+        "area": "room038"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47006554580749,
+          42.99904087750099
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 50,
+        "name": "sensor50",
+        "area": "room041"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47001802295269,
+          42.99912503255637
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 51,
+        "name": "sensor51",
+        "area": "room052"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.46997495536553,
+          42.999123547467164
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 52,
+        "name": "sensor52",
+        "area": "room042"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.4699244623323,
+          42.99912453752663
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 53,
+        "name": "sensor53",
+        "area": "room043"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.4698586233772,
+          42.99912503255637
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 54,
+        "name": "sensor54",
+        "area": "room044"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.4697952595708,
+          42.99912503255638
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 55,
+        "name": "sensor55",
+        "area": "room045"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.4697452615673,
+          42.999124042496895
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 56,
+        "name": "sensor56",
+        "area": "room046"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.4697413013294,
+          42.999081469939476
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 57,
+        "name": "sensor57",
+        "area": "room062"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.4697002138612,
+          42.998988899378546
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 58,
+        "name": "sensor58",
+        "area": "room049"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.46973932121047,
+          42.99893098089926
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 59,
+        "name": "sensor59",
+        "area": "room050"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.46973932121047,
+          42.99888395307419
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 60,
+        "name": "sensor60",
+        "area": "room017"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.46973981624019,
+          42.9988379153086
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 61,
+        "name": "sensor61",
+        "area": "room054"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.46973833115098,
+          42.9987943526917
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 62,
+        "name": "sensor62",
+        "area": "room058"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.46995762932471,
+          42.998785937186156
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 63,
+        "name": "sensor63",
+        "area": "room056"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.46999327146581,
+          42.99884633081413
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 64,
+        "name": "sensor64",
+        "area": "room055"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.46999475655502,
+          42.99888741828235
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 68,
+        "name": "sensor68",
+        "area": "room057"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47003336887455,
+          42.99878494712667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 69,
+        "name": "sensor69",
+        "area": "room036"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47035390062959,
+          42.998802520682354
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 70,
+        "name": "sensor70",
+        "area": "room059"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.46978907169901,
+          42.99896068268349
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 71,
+        "name": "sensor71",
+        "area": "room059"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.46998510347507,
+          42.99896117771322
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 72,
+        "name": "sensor72",
+        "area": "room059"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.46985689077304,
+          42.998870587271256
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 73,
+        "name": "sensor73",
+        "area": "room060"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.46976654784594,
+          42.9989931071313
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 74,
+        "name": "sensor74",
+        "area": "room060"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.4699885686832,
+          42.99907057928521
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 75,
+        "name": "sensor75",
+        "area": "room060"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.46974996434972,
+          42.99906166874993
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 76,
+        "name": "sensor76",
+        "area": "room038"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47019425353915,
+          42.999120329773824
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 77,
+        "name": "sensor77",
+        "area": "room053"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47024870681027,
+          42.998826282109725
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 78,
+        "name": "sensor78",
+        "area": "room037"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47014524559509,
+          42.99885796401292
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 79,
+        "name": "sensor79",
+        "area": "room059"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.46979129933275,
+          42.998802025652566
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 85,
+        "name": "sensor85",
+        "area": "room048"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.46992990765928,
+          42.99897033576328
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 86,
+        "name": "sensor86",
+        "area": "room051"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.46984278242549,
+          42.999013898380184
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 87,
+        "name": "sensor87",
+        "area": "room061"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.46987099912053,
+          42.99896835564433
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 88,
+        "name": "sensor88",
+        "area": "room060"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.46988287983422,
+          42.999067361591834
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 89,
+        "name": "sensor89",
+        "area": "room059"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.46992693748086,
+          42.998833707555725
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 90,
+        "name": "sensor90",
+        "area": "room038"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47008831717531,
+          42.99912577510086
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 91,
+        "name": "sensor91",
+        "area": "room034"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47029028930822,
+          42.999154981855376
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 92,
+        "name": "sensor92",
+        "area": "room022"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47051255766037,
+          42.99891340734347
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 93,
+        "name": "sensor93",
+        "area": "room011"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47074126139913,
+          42.999095083257146
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 94,
+        "name": "sensor94",
+        "area": "room008"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47055463518807,
+          42.99897330594172
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 95,
+        "name": "sensor95",
+        "area": "room006"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47064374054082,
+          42.99897083079303
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 96,
+        "name": "sensor96",
+        "area": "room015"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47086353374428,
+          42.99882727216914
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 97,
+        "name": "sensor97",
+        "area": "room035"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47041553183182,
+          42.99885598389393
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 98,
+        "name": "sensor98",
+        "area": "room038"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47017049211175,
+          42.99905894608631
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 99,
+        "name": "sensor99",
+        "area": "room030"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47032939665749,
+          42.999044590223924
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 38,
+        "name": "sensor38",
+        "area": "area_south"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47082690154384,
+          42.998948306940086
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 39,
+        "name": "sensor39",
+        "area": "area_south"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47053235885001,
+          42.998937911315586
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 65,
+        "name": "sensor65",
+        "area": "area_north"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47005168497483,
+          42.998766135996654
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 67,
+        "name": "sensor67",
+        "area": "area_north"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47008336687804,
+          42.99898196896221
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 80,
+        "name": "sensor80",
+        "area": "area_south"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.4707387862504,
+          42.99894706936563
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 81,
+        "name": "sensor81",
+        "area": "area_south"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.4706397803029,
+          42.99894706936563
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 82,
+        "name": "sensor82",
+        "area": "area_south"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47043384793209,
+          42.99892875326534
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 83,
+        "name": "sensor83",
+        "area": "area_south"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47031553582481,
+          42.99892974332481
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 84,
+        "name": "sensor84",
+        "area": "area_north"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47014970086275,
+          42.99895399978195
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 66,
+        "name": "sensor66",
+        "area": "area_sales"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47006653586695,
+          42.99885969661705
+        ]
+      }
+    }
+  ]
+}

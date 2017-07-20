@@ -1,0 +1,33 @@
+{
+  "users": [
+    {
+      "name": "Guest Account",
+      "username": "guest",
+      "password": "guest",
+      "groups": [
+        "guest"
+      ],
+      "applications": []
+    },
+    {
+      "name": "User Account",
+      "username": "user",
+      "password": "user",
+      "groups": [
+        "user"
+      ],
+      "applications": []
+    },
+    {
+      "name": "Administrative Account",
+      "username": "admin",
+      "password": "admin",
+      "groups": [
+        "admin"
+      ],
+      "applications": [
+        "dashboard"
+      ]
+    }
+  ]
+}

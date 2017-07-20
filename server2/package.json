@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/concurrently \"nodemon server.js\" \"karma start karma.conf.js\""
+    "test": "./node_modules/.bin/concurrently \"./node_modules/.bin/nodemon server.js\" \"./node_modules/.bin/karma start karma.conf.js\""
   },
   "author": "",
   "license": "ISC",
@@ -34,6 +34,7 @@
     "karma-chrome-launcher": "^2.1.1",
     "karma-coverage": "^1.1.1",
     "karma-jasmine": "^1.1.0",
-    "karma-jasmine-html-reporter": "^0.2.2"
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "nodemon": "^1.11.0"
   }
 }

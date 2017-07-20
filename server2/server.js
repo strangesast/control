@@ -17,29 +17,38 @@ const express = require('express'),
       upload = multer(),
       //ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn,
       InfluxDB = Influx.InfluxDB,
-      defaultObjects = require('../defaultObjects');
+      path = require('path'),
+      fs = require('fs')
+
+const dataDir = '../data';
+const defaultObjects = fs.readdirSync(dataDir).map(fname => path.join(dataDir, fname)).filter(fpath =>
+  fs.statSync(fpath).isFile()).map(fpath => JSON.parse(fs.readFileSync(fpath, 'utf8'))).reduce((a, obj) => Object.assign(a, obj), {});
+
 
 // database configuration
 const host = 'localhost';
-const database = 'topview';
+const databaseName = 'topview';
 const { FLOAT, STRING, INTEGER } = Influx.FieldType;
 // influx measurements schema
 const schema = [
   {
     measurement: 'temperatures',
     fields: {
-      value: FLOAT,
-      setpoint: FLOAT
+      value: FLOAT
     },
-    tags: ['device']
+    tags: [
+      'device', // for now an int (but tags are always strings)
+      'area' // from sensor
+    ]
   },
   {
     measurement: 'setpoints',
     fields: {
       value: FLOAT,
-      session: STRING
+      by: STRING, // who set it
+      nonce: STRING // used to determine if request was carried out
     },
-    tags: ['device']
+    tags: ['area'] // for now set points are attached to areas
   }
 ];
 
@@ -50,7 +59,7 @@ function dt(v) {
 var mongo, influx;
 (async function init() {
   // mongo setup
-  mongo = await MongoClient.connect(`mongodb://${ host }:27017/${ database }`);
+  mongo = await MongoClient.connect(`mongodb://${ host }:27017/${ databaseName }`);
   // create collections
   await mongo.dropDatabase();
   let usersCollection = await mongo.createCollection('users', {
@@ -62,28 +71,36 @@ var mongo, influx;
     }
   });
   await usersCollection.ensureIndex('username', { name: 'username', unique: true });
+  await usersCollection.insertMany(defaultObjects.users);
 
+  // groups
   let groupsCollection = await mongo.createCollection('groups');
   await groupsCollection.ensureIndex('name', { name: 'name', unique: true });
+  await groupsCollection.insertMany(defaultObjects.groups);
 
+  // applications
   let applicationsCollection = await mongo.createCollection('applications');
-  let componentsCollection = await mongo.createCollection('components');
+  await applicationsCollection.insertMany(defaultObjects.applications);
+
   let pointsCollection = await mongo.createCollection('points');
   // create default objects
-  await usersCollection.insertMany(defaultObjects.users);
-  await groupsCollection.insertMany(defaultObjects.groups);
-  await applicationsCollection.insertMany(defaultObjects.applications);
 
   
   // influx setup, init
-  influx = new InfluxDB({ host, database, schema });
+  influx = new InfluxDB({ host, database: databaseName, schema });
   let names = await influx.getDatabaseNames();
-  if (names.includes(database)) {
-    await influx.dropDatabase(database);
+  if (names.includes(databaseName)) {
+    await influx.dropDatabase(databaseName);
   }
-  await influx.createDatabase(database);
+  await influx.createDatabase(databaseName);
 
-  let init = { temperature: 0.0, setpoint: 10.0 };
+  let init = {
+    temperature: 0.0,
+    setpoint: 10.0
+  };
+
+  // setpoints from unique areas from sensors
+
   await influx.writePoints([
     {
       measurement: 'setpoints',
