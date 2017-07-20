@@ -20,7 +20,7 @@ import { LoadApplicationsGuard } from './guards/load-applications.guard';
 
 // ngrx
 import { effects } from './effects';
-import { reducers, initialState } from './reducers';
+import { reducers } from './reducers';
 
 // components
 import { AppComponent } from './components/app.component';

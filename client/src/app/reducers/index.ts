@@ -26,7 +26,7 @@ export interface State {
   app: AppState
 }
 
-export const initialState = {
+export const initialState: AppState = {
   auth: {
     user: null,
     token: null,

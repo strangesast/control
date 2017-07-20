@@ -17,12 +17,17 @@ const express = require('express'),
       upload = multer(),
       //ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn,
       InfluxDB = Influx.InfluxDB,
-      path = require('path'),
-      fs = require('fs')
+      WebSocketServer = require('ws').Server,
+      { Observable, Subject, BehaviorSubject, ReplaySubject } = require('rxjs'),
+      fs = require('fs'),
+      path = require('path')
 
 const dataDir = '../data';
-const defaultObjects = fs.readdirSync(dataDir).map(fname => path.join(dataDir, fname)).filter(fpath =>
-  fs.statSync(fpath).isFile() && fpath.endsWith('.json')).map(fpath => JSON.parse(fs.readFileSync(fpath, 'utf8'))).reduce((a, obj) => Object.assign(a, obj), {});
+const defaultObjects = fs.readdirSync(dataDir)
+  .map(fname => path.join(dataDir, fname))
+  .filter(fpath => fs.statSync(fpath).isFile() && fpath.endsWith('.json'))
+  .map(fpath => JSON.parse(fs.readFileSync(fpath, 'utf8')))
+  .reduce((a, obj) => Object.assign(a, obj), {});
 
 
 // database configuration
@@ -297,43 +302,6 @@ userRoute.get('/', function(req, res, next) {
   res.json(req.user);
 });
 
-//userRoute.route('/template')
-//.get(function(req, res, next) {
-//  res.json(req.session.template || {});
-//})
-//.post(upload.array(), async function(req, res, next) {
-//  console.log('body', req.body)
-//  req.session.template = req.body;
-//  await req.session.save()
-//  res.send();
-//});
-//userRoute.route('/defaultTemplate')
-//.get(async function(req, res, next) {
-//  // get applications based on user attributes (groups, role)
-//  // application defines component structure
-//  // groups, user define applications
-//  let users = mongo.collection('users');
-//  let user = await users.findOne({ username: req.user.username });
-//
-//  if (user.groups && user.groups.length) {
-//  }
-//  // user
-//  //   groups
-//  //   applications (in addition to those defined by groups)
-//  //   name
-//  //   username
-//  //   password
-//  // application
-//  //   id
-//  //   name
-//  // component
-//  //   type
-//  //   application
-//  //   attributes
-//  res.json(user);
-//})
-//.post(function(req, res, next) {})
-
 userRoute.get('/applications', async function(req, res, next) {
   let user = await mongo.collection('users').findOne({ _id: req.user['_id'] });
   let applications = await getApplications(user);
@@ -341,7 +309,15 @@ userRoute.get('/applications', async function(req, res, next) {
   res.json(applications);
 });
 
+userRoute.get('/points', async function (req, res, next) {
+  let points = await mongo.collection('points').find({}).toArray();
+  res.json(points);
+});
 
+userRoute.get('/areas', async function (req, res, next) {
+  let areas = await mongo.collection('areas').find({}).toArray();
+  res.json(areas);
+});
 
 app.use('/user', userRoute);
 
@@ -399,6 +375,13 @@ app.route('/:name/:id?')
   }
 });
 
+app.route('/users')
+.get(async function(req, res, next) {
+  let usersCollection = mongo.collection('users');
+  let users = await usersCollection.find({}).toArray();
+  res.json(users);
+});
+
 app.route('/users/:userId/applications/:appId?')
 .get(async function(req, res, next) {
   let { userId, appId } = req.params;
@@ -408,10 +391,7 @@ app.route('/users/:userId/applications/:appId?')
 
   let applications = await getApplications(user);
 
-  return res.json(applications);
-
-  // here
-  next()
+  res.json(applications);
 })
 .post(function(req, res, next) {
   next()
@@ -447,3 +427,26 @@ app.use(function(err, req, res, next) {
 });
 
 var server = app.listen(3000);
+var wss = new WebSocketServer({ server });
+var connections = Observable.fromEvent(wss, 'connection', 'data', (ws, req) => ({ ws, req }));
+
+connections.flatMap(({ ws, req }) => {
+  let messages = Observable.fromEvent(ws, 'message')
+    .pluck('data')
+    .flatMap(text => JSON.stringify(text))
+
+  let errors = messages.catch(err => console.error('message parse error') || Observable.never());
+  let close = Observable.fromEvent(ws, 'close').take(1);
+  let done = Observable.merge(errors, close);
+
+  let responses = messages.takeUntil(done).map(message => {
+    return { type: 'received', data: message };
+  });
+
+  return responses.flatMap(message => {
+    ws.send(JSON.stringify(message));
+
+    return Observable.empty()
+  })
+
+}).subscribe();

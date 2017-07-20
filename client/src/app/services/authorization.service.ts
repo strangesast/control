@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RequestOptions, Headers } from '@angular/http';
+import { Http, RequestOptions, Headers } from '@angular/http';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -13,6 +13,7 @@ import * as fromRoot from '../reducers';
 export class AuthorizationService {
   token$: Observable<string>;
   user$: Observable<User>;
+  users$: Observable<User[]>;
   applications$: Observable<Application[]>;
 
   loggedIn$: Observable<boolean>;
@@ -24,13 +25,14 @@ export class AuthorizationService {
   requestOptions: Observable<Partial<RequestOptions>>;
   redirectUrl: string;  // temporarily store where the user is headed
 
-  constructor(private store: Store<fromRoot.State>) {
+  constructor(private store: Store<fromRoot.State>, http: Http) {
     this.token$ =        store.select(fromRoot.selectAuthToken);
     this.user$ =         store.select(fromRoot.selectAuthUser);
     this.applications$ =         store.select(fromRoot.selectAuthApplications);
     this.userInitialized$ = this.store.select(fromRoot.selectUserInit);
     this.appsInitialized$ = this.store.select(fromRoot.selectAppsInit);
     this.appsLoadError$ = this.store.select(fromRoot.selectAppsErr);
+    this.users$ = http.get('/api/users').map(res => res.json());
 
     // user / no user determined
     //this.ready$ = this.store.select(fromRoot.selectAuthReady);

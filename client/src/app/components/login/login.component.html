@@ -20,9 +20,9 @@
   <div>
     <label>Choose credentials</label>
     <select [formControl]="defaults">
-      <option value="guest">Guest</option>
-      <option value="user">User</option>
-      <option value="admin">Admin</option>
+      <option *ngFor="let user of authorization.users$ | async" [value]="user.username">
+        {{ user.name }}
+      </option>
     </select>
   </div>
   <div>

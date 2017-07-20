@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { AuthorizationService } from '../../services/authorization.service';
-import { users, groups, applications } from '../../../../../defaultObjects.js';
 
 import { Observable } from 'rxjs';
 
@@ -31,7 +30,7 @@ export class LoginComponent implements OnInit {
   defaults = new FormControl();
 
   constructor(
-    private authorization: AuthorizationService, 
+    public authorization: AuthorizationService, 
     private fb: FormBuilder, 
     private router: Router, 
     private route: ActivatedRoute
@@ -44,7 +43,7 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
 
-    this.defaults.valueChanges.subscribe(value => {
+    this.defaults.valueChanges.withLatestFrom(this.authorization.users$).subscribe(([value, users]) => {
       let acc = users.find(({ username }) => username == value);
       if (acc) {
         this.credentials.setValue({ username: acc.username, password: acc.password });
@@ -54,7 +53,7 @@ export class LoginComponent implements OnInit {
     this.authorization.loggedIn$.find(l => l).flatMap(() => this.redirectUrl ?
       Observable.of(this.redirectUrl) :
       this.authorization.applications$.first().map(apps => apps[0].path)
-    ).do(x => console.log('redirecting to...', x)).subscribe(path => this.router.navigateByUrl(path));
+    ).subscribe(path => this.router.navigateByUrl(path));
   }
 
   login() {

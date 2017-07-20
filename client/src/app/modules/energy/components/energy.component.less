@@ -12,13 +12,32 @@
   }
   & > .body {
     flex-grow: 1;
+    height: ~"calc(100% - " @header-height ~")";
   }
   overflow: auto;
 }
 
-.body > div:after {
-  text-align: center;
+.body > div {
+  position: relative;
+
+  min-height: 200px;
+  & > * {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
 }
+
+.body > .indented-tree-list {
+  min-height: 400px;
+}
+
+//
+  .body > div:after {
+    text-align: center;
+  }
 
 .grid-container {
   display: grid;
@@ -49,43 +68,19 @@
 }
 .map {
   grid-area: map;
-  background: blue;
-  &:after {
-    content: 'map';
-  }
 }
 .graph {
   grid-area: graph;
-  background: purple;
-  &:after {
-    content: 'graph';
-  }
 }
 .indented-tree-list {
   grid-area: tree;
-  background: red;
-  &:after {
-    content: 'indented tree list';
-  }
 }
 .photo {
   grid-area: photo;
-  background: cyan;
-  &:after {
-    content: 'photo';
-  }
 }
 .description {
   grid-area: description;
-  background: orange;
-  &:after {
-    content: 'description';
-  }
 }
 .boxes {
   grid-area: boxes;
-  background: green;
-  &:after {
-    content: 'boxes';
-  }
 }

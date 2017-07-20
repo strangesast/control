@@ -2,10 +2,16 @@
   <span>Title</span>
 </header>
 <div class="grid-container body">
-  <div class="map"></div>
-  <div class="graph"></div>
-  <div class="indented-tree-list"></div>
-  <div class="photo"></div>
-  <div class="description"></div>
-  <div class="boxes"></div>
+  <div class="map">Map</div>
+  <div class="graph">Graph</div>
+  <div class="indented-tree-list">
+    <app-tree-list [activeNode]="" [tree]="tree$ | async" (activeNodeChange)="setActiveNode($event)"></app-tree-list>
+  </div>
+  <div class="photo">Photo</div>
+  <div class="description">
+    <div *ngIf="activeNode$ | async as activeNode">
+      <div>{{ activeNode.data.name }}</div>
+    </div>
+  </div>
+  <div class="boxes">Boxes</div>
 </div>

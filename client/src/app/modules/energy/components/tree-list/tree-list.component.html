@@ -1,0 +1,5 @@
+<div *ngFor="let node of treeList" [style.margin-left]="node.y*20 + 'px'" [class.active]="node == activeNode" (click)="selectNode(node, false)" [attr.data-id]="node.data._id">
+  <span class="fa fa-fw icon" [ngClass]="node.data.type == 'area' ? 'fa-folder-o' : 'fa-dot-circle-o'"></span>
+  <span class="name">{{ node.data.name }}</span>
+  <span *ngIf="node.children && node.children.length" class="fa fa-fw fa-caret-down icon"></span>
+</div>
