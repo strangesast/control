@@ -1,4 +1,4 @@
-import { ElementRef, Input, Output, Component, OnInit, EventEmitter } from '@angular/core';
+import { SimpleChanges, ElementRef, Input, Output, Component, OnChanges, EventEmitter } from '@angular/core';
 import { hierarchy, HierarchyNode } from 'd3';
 
 @Component({
@@ -6,18 +6,10 @@ import { hierarchy, HierarchyNode } from 'd3';
   templateUrl: './tree-list.component.html',
   styleUrls: ['./tree-list.component.less']
 })
-export class TreeListComponent implements OnInit {
-  activeNodeValue = null;
+export class TreeListComponent implements OnChanges {
   @Input()
-  get activeNode() {
-    return this.activeNodeValue;
-  }
+  activeNode: HierarchyNode
   @Output() activeNodeChange = new EventEmitter();
-
-  set activeNode(node) {
-    this.activeNodeValue = node;
-    this.activeNodeChange.emit(node);
-  }
 
   treeValue;
   @Input()
@@ -26,30 +18,46 @@ export class TreeListComponent implements OnInit {
   }
 
   set tree(tree) {
-    console.log('tree', tree);
     this.treeValue = tree;
-    if (tree instanceof hierarchy) {
-      this.treeList = getDescendants(tree)
-      console.log('tree', this.treeList);
-    } else {
-      this.treeList = [];
-    }
+    this.calculateTreeList();
   }
   treeList: HierarchyNode[] = []
 
   constructor(private el: ElementRef) { }
 
-  ngOnInit() {
-  }
-
-  selectNode(node, scrollTo=true) {
-    this.activeNode = node;
-    if (scrollTo) {
-      let childEl = this.el.nativeElement.querySelector(`[data-id="${ node.data._id }"]`);
-      childEl.scrollIntoView();
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.activeNode) {
+      let node = changes.activeNode.currentValue;
+      if (node instanceof hierarchy) {
+        let childEl = this.el.nativeElement.querySelector(`[data-id="${ node.data._id }"]`);
+        childEl.scrollIntoView();
+      }
     }
   }
 
+  selectNode(node) {
+    this.activeNode = node;
+    this.activeNodeChange.emit(node);
+  }
+
+  toggleOpen(node) {
+    if (node.children) {
+      node._children = node.children;
+      delete node.children;
+    } else if (node._children) {
+      node.children = node._children;
+      delete node._children;
+    }
+    this.calculateTreeList();
+  }
+
+  calculateTreeList() {
+    if (this.treeValue instanceof hierarchy) {
+      this.treeList = getDescendants(this.treeValue)
+    } else {
+      this.treeList = [];
+    }
+  }
 }
 
 function getDescendants(node, includeRoot=true) {

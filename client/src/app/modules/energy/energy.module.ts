@@ -5,9 +5,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
-import { EnergyComponent } from './components/energy.component';
+import { MapService } from './services/map.service';
 
-import { EnergyRoutingModule } from './energy-routing.module';
+import { EnergyComponent } from './components/energy.component';
 import { MapComponent } from './components/map/map.component';
 import { DataService } from './services/data.service';
 import { GraphComponent } from './components/graph/graph.component';
@@ -39,6 +39,6 @@ const routes: Routes = [
     TreeListComponent
   ],
   bootstrap: [ EnergyComponent ],
-  providers: [DataService]
+  providers: [ DataService, MapService ]
 })
 export class EnergyModule { }

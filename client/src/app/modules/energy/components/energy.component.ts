@@ -20,7 +20,17 @@ export class EnergyComponent implements OnInit {
 
     this.tree$ = Observable.combineLatest(this.data.areas$, this.data.points$).debounceTime(100).switchMap(([ areas, points ]) => {
       if (areas.length) {
-        return Observable.of(t(strat([...areas, ...points])));
+        let node = t(strat([...areas, ...points]));
+        // "close" all but root node, children
+        node.eachAfter(n => {
+          if (n !== node
+            && node.children.indexOf(n) == -1
+            && n.children) {
+            n._children = n.children;
+            delete n.children;
+          }
+        });
+        return Observable.of(node);
 
       } else {
         return Observable.never();
@@ -36,7 +46,6 @@ export class EnergyComponent implements OnInit {
           }
         });
       }
-      console.log('activeNode', activeNode);
       return activeNode;
     });
 
@@ -44,6 +53,7 @@ export class EnergyComponent implements OnInit {
   }
 
   setActiveNode(node) {
+    console.log('setting...');
     this.data.setActiveNode(node.data._id);
   }
 
