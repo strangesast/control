@@ -19,7 +19,6 @@ export class TreeListComponent implements OnChanges {
 
   set tree(tree) {
     this.treeValue = tree;
-    console.log(tree);
     this.calculateTreeList();
   }
   treeList: HierarchyNode[] = []

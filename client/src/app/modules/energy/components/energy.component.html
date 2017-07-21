@@ -1,11 +1,13 @@
 <header>
-  <span>Title</span>
+  <span class="brand">Data Explorer</span>
 </header>
 <div class="grid-container body">
   <div class="map">
-    <app-map></app-map>
+    <app-map [active]="activeNode$ | async" (activeChange)="setActiveNodeById($event)"></app-map>
   </div>
-  <div class="graph">Graph</div>
+  <div class="graph">
+    <app-graph [point]="activeNode$ | async"></app-graph>
+  </div>
   <div class="indented-tree-list">
     <app-tree-list [activeNode]="" [tree]="tree$ | async" (activeNodeChange)="setActiveNode($event)"></app-tree-list>
   </div>

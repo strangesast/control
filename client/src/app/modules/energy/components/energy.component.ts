@@ -51,7 +51,12 @@ export class EnergyComponent implements OnInit {
   }
 
   setActiveNode(node) {
-    this.data.setActiveNode(node.data._id);
+    this.setActiveNodeById(node.data._id);
+  }
+
+  setActiveNodeById(nodeId) {
+    this.data.setActiveNode(nodeId);
+    console.log('by id', nodeId);
   }
 
   ngOnInit() {

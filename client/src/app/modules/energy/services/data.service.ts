@@ -19,7 +19,7 @@ export class DataService {
   constructor(private authorization: AuthorizationService, private store: Store<DataState>, private http: Http) {
     this.points$ = this.store.select(fromRoot.selectDataPoints);
     this.areas$ = this.store.select(fromRoot.selectDataAreas);
-    this.activeNode$ = this.store.select(fromRoot.selectViewActiveNode).do(x => console.log('got active'));
+    this.activeNode$ = this.store.select(fromRoot.selectViewActiveNode);
   }
 
   setActiveNode(id: string) {

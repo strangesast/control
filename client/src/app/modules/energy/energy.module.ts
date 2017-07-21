@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
 import { MapService } from './services/map.service';
+import { GraphService } from './services/graph.service';
 
 import { EnergyComponent } from './components/energy.component';
 import { MapComponent } from './components/map/map.component';
@@ -39,6 +40,6 @@ const routes: Routes = [
     TreeListComponent
   ],
   bootstrap: [ EnergyComponent ],
-  providers: [ DataService, MapService ]
+  providers: [ DataService, MapService, GraphService ]
 })
 export class EnergyModule { }

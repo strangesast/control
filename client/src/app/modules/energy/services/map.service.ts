@@ -27,7 +27,6 @@ export class MapService {
   }
 
   getLayer(layerName) {
-    console.log('getting layer', layerName);
     return this.options$.take(1).flatMap(options => this.http.get(`/api/user/layers/${ layerName }`, options).map(res => res.json()));
   }
 
