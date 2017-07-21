@@ -40,35 +40,33 @@ export class MapComponent implements OnInit {
     let offset = [width/2, height/2];
     let scale = 150;
 
-    //let projection = d3.geoAlbersUsa() // updated for d3 v4
-    //    .scale(1000)
-    //    .translate([width / 2, height / 2]);
- 
-    //let path = d3.geoPath() // updated for d3 v4
-    //  .projection(projection);
-    //let projection = matrix(1, 0, 0, 1, 0, 0);
+    let r = 112.0;
+    let rot = center.map(i => i*-1).concat(180-r);
 
-    let projection = d3.geoMercator().scale(scale).center(center).translate(offset);
+    let calcProjection = (rot?: number) => {
+      return (rot ?
+        d3.geoMercator().rotate(center.map(i => i*-1).concat(180-rot)).center([0, 0]) :
+        d3.geoMercator().rotate([0, 0, 0]).center(center)
+      ).scale(scale).translate(offset);
+    }
+
+    let projection = calcProjection();
+
     let path = d3.geoPath()
       .projection(projection)
 
     let bounds = path.bounds(featureCollection);
-    let hscale  = scale*width  / (bounds[1][0] - bounds[0][0]);
-    let vscale  = scale*height / (bounds[1][1] - bounds[0][1]);
+    let hscale = scale*width  / (bounds[1][0] - bounds[0][0]);
+    let vscale = scale*height / (bounds[1][1] - bounds[0][1]);
     scale   = (hscale < vscale) ? hscale : vscale;
-    offset  = [width - (bounds[0][0] + bounds[1][0])/2, height - (bounds[0][1] + bounds[1][1])/2];
+    offset  = [
+      width - (bounds[0][0] + bounds[1][0])/2,
+      height - (bounds[0][1] + bounds[1][1])/2
+    ];
 
-    projection = d3.geoMercator().center(center).scale(scale).translate(offset);
+    projection = calcProjection();
     path = path.projection(projection);
             
-    function matrix(a, b, c, d, tx, ty) {
-      return d3.geoTransform({
-        point: function(x, y) {
-          this.stream.point(a * x + b * y + tx, c * x + d * y + ty);
-        }
-      });
-    }
-   
     svg.append("rect")
       .attr("fill-opacity", 0)
       .attr("class", "background")
@@ -81,7 +79,7 @@ export class MapComponent implements OnInit {
     // delete this line to disable free zooming
     svg.call(zoom);
     
-    g.selectAll("path").data(features)
+    let selection = g.selectAll("path").data(features)
       .enter().append("path")
         .attr("d", path)
         .attr("class", "feature")
@@ -94,7 +92,11 @@ export class MapComponent implements OnInit {
     
     function clicked(d) {
       if (active.node() === this) return reset();
-      console.log(d);
+      projection = calcProjection(r);
+      path = path.projection(projection);
+      let t = d3.transition().duration(750);
+      selection.transition(t).attr('d', path);
+
       active.classed("active", false);
       active = d3.select(this).classed("active", true);
 
@@ -108,8 +110,7 @@ export class MapComponent implements OnInit {
           scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
           translate = [width / 2 - scale * x, height / 2 - scale * y];
     
-      svg.transition()
-        .duration(750)
+      svg.transition(t)
         .call(
           zoom.transform,
           d3.zoomIdentity.translate(translate[0],translate[1]).scale(scale)
@@ -117,12 +118,16 @@ export class MapComponent implements OnInit {
     }
     
     function reset() {
+      projection = calcProjection();
+      path = path.projection(projection);
+      let t = d3.transition().duration(750);
+      selection.transition(t).attr('d', path);
+
       active.classed("active", false);
       active = d3.select(null);
     
-      svg.transition()
-          .duration(750)
-          .call( zoom.transform, d3.zoomIdentity ); // updated for d3 v4
+      svg.transition(t)
+        .call( zoom.transform, d3.zoomIdentity ); // updated for d3 v4
     }
     
     function zoomed() {
