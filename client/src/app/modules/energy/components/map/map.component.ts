@@ -27,7 +27,7 @@ export class MapComponent implements OnInit {
   @ViewChild('svg') el: ElementRef; 
   layers$: Observable<any[]>;
 
-  layerData;
+  featureCollection;
 
   constructor(private service: MapService) {
     this.layers$ = service.layers$;
@@ -56,7 +56,7 @@ export class MapComponent implements OnInit {
   build(featureCollection) {
     let self = this;
     let features = featureCollection.features;
-    this.layerData = features;
+    this.featureCollection = featureCollection;
     this.active = d3.select(null);
    
     this.zoom = d3.zoom()
@@ -143,9 +143,20 @@ export class MapComponent implements OnInit {
   }
 
   reset() {
-    console.log('reset');
+    let { scale, center } = this.transforms;
     let projection = this.calcProjection();
+    let { width, height } = this.svg.node().getBoundingClientRect();
     let path = d3.geoPath()
+      .projection(projection)
+    let bounds = path.bounds(this.featureCollection);
+    let offset  = [
+      width - (bounds[0][0] + bounds[1][0])/2,
+      height - (bounds[0][1] + bounds[1][1])/2
+    ];
+    this.transforms = { center, offset, scale };
+
+    projection = this.calcProjection();
+    path = d3.geoPath()
       .projection(projection)
     let t = d3.transition().duration(750);
     this.selection.transition(t).attr('d', path);
@@ -158,7 +169,7 @@ export class MapComponent implements OnInit {
   }
 
   clicked(id) {
-    let d = this.layerData.find(x => x._id == id);
+    let d = this.featureCollection.features.find(x => x._id == id);
     if (d == null) return;
     let el = this.svg.select(`[data-id="${ d._id }"]`).node();
     let projection = this.calcProjection(this.r);
