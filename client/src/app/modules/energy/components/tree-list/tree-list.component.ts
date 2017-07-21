@@ -7,11 +7,14 @@ import { hierarchy, HierarchyNode } from 'd3';
   styleUrls: ['./tree-list.component.less']
 })
 export class TreeListComponent implements OnChanges {
-  @Input()
-  activeNode: HierarchyNode
+  activeNodeIdSet: string;
+  activeNode: HierarchyNode;
+
+  @Input('active')
+  activeNodeId: string;
   @Output() activeNodeChange = new EventEmitter();
 
-  treeValue;
+  treeValue: HierarchyNode;
   @Input()
   get tree(): HierarchyNode {
     return this.treeValue;
@@ -26,21 +29,37 @@ export class TreeListComponent implements OnChanges {
   constructor(private el: ElementRef) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.activeNode) {
-      let node = changes.activeNode.currentValue;
-      if (node instanceof hierarchy) {
-        let childEl = this.el.nativeElement.querySelector(`[data-id="${ node.data._id }"]`);
-        childEl.scrollIntoView();
+    if (this.treeValue) {
+      if (changes.activeNodeId) {
+        let id = changes.activeNodeId.currentValue;
+        if (id !== this.activeNodeIdSet) {
+          let n = searchTree(this.treeValue, id)
+          if (n) {
+            for (let pn of n.ancestors()) {
+              if (pn != n && pn._children) {
+                pn.children = pn._children;
+                delete pn._children;
+              }
+            }
+            this.calculateTreeList();
+            let childEl = this.el.nativeElement.querySelector(`[data-id="${ id }"]`);
+            if (childEl) {
+              childEl.scrollIntoView();
+            }
+            this.activeNode = n;
+          }
+        }
       }
     }
   }
 
   selectNode(node) {
     this.activeNode = node;
-    this.activeNodeChange.emit(node);
+    this.activeNodeIdSet = node.data._id;
+    this.activeNodeChange.emit(node.data._id);
   }
 
-  toggleOpen(node) {
+  toggleOpen(node, recalculate=true) {
     if (node.children) {
       node._children = node.children;
       delete node.children;
@@ -48,7 +67,9 @@ export class TreeListComponent implements OnChanges {
       node.children = node._children;
       delete node._children;
     }
-    this.calculateTreeList();
+    if (recalculate) {
+      this.calculateTreeList();
+    }
   }
 
   calculateTreeList() {
@@ -69,4 +90,19 @@ function getDescendants(node, includeRoot=true) {
     }
   })
   return descendants;
+}
+
+function searchTree(tree, id) {
+  let children;
+  if (tree.data && tree.data && tree.data._id == id) {
+    return tree;
+  } else if (children = (tree.children || tree._children)) {
+    for (let child of children) {
+      let res = searchTree(child, id);
+      if (res) {
+        return res;
+      }
+    }
+  }
+  return null;
 }

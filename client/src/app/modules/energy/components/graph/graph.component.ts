@@ -1,5 +1,8 @@
 import { SimpleChanges, Input, Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import * as d3 from 'd3';
+
+import { GraphService } from '../../services/graph.service';
 
 @Component({
   selector: 'app-graph',
@@ -8,17 +11,24 @@ import * as d3 from 'd3';
 })
 export class GraphComponent implements OnInit {
   @Input('point') point;
+  data$: Observable<any[]>;
 
-  constructor() { }
+  constructor(private service: GraphService) {
+    this.data$ = service.data$;
+    //this.data$.subscribe(d => this.build(d));
+  }
 
   ngOnInit() {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('changes', changes);
+    if (changes.point) {
+      this.service.getData(changes.point.currentValue);
+    }
   }
 
   build(data) {
+    console.log('building...', data);
     var margin = {top: 20, right: 20, bottom: 110, left: 50},
         margin2 = {top: 430, right: 20, bottom: 30, left: 40},
         width = 960 - margin.left - margin.right,

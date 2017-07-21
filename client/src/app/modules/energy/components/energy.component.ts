@@ -11,7 +11,8 @@ import { tree, stratify, hierarchy, HierarchyNode } from 'd3';
   //animations: [routerTransition()]
 })
 export class EnergyComponent implements OnInit {
-  activeNode$: Observable<HierarchyNode>;
+  activeNode$: Observable<any>;
+  activeNodeId$: Observable<string>;
   tree$: Observable<HierarchyNode>;
 
   constructor(private data: DataService) {
@@ -37,26 +38,20 @@ export class EnergyComponent implements OnInit {
       }
     });
 
-    this.activeNode$ = this.data.activeNode$.withLatestFrom(this.tree$).map(([ id, tree ]) => {
-      let activeNode;
-      if (tree) {
-        tree.each(n => {
-          if (n.data._id == id) {
-            activeNode = n;
-          }
-        });
-      }
-      return activeNode;
-    });
+    this.activeNode$ = this.data.activeNode$.do(x => console.log('activeNode', x));
+    this.activeNodeId$ = this.data.activeNodeId$;
   }
 
-  setActiveNode(node) {
-    this.setActiveNodeById(node.data._id);
-  }
-
-  setActiveNodeById(nodeId) {
+  setActiveNode(nodeId: string) {
     this.data.setActiveNode(nodeId);
-    console.log('by id', nodeId);
+  }
+
+  setActiveNodeByFeature(featId) {
+    console.log('setting by feat');
+    return this.data.getIdFromFeatureId(featId).map(area => {
+      console.log('got', area);
+      this.data.setActiveNode(area._id);
+    }).subscribe();
   }
 
   ngOnInit() {

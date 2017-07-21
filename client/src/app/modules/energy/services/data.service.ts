@@ -14,15 +14,26 @@ export class DataService {
   points$: Observable<Point[]>;
   areas$: Observable<Area[]>;
 
-  activeNode$: Observable<string>;
+  activeNodeId$: Observable<string>;
+  activeNode$: Observable<any>;
 
   constructor(private authorization: AuthorizationService, private store: Store<DataState>, private http: Http) {
     this.points$ = this.store.select(fromRoot.selectDataPoints);
     this.areas$ = this.store.select(fromRoot.selectDataAreas);
-    this.activeNode$ = this.store.select(fromRoot.selectViewActiveNode);
+    this.activeNodeId$ = this.store.select(fromRoot.selectViewActiveNode);
+    this.activeNode$ = this.activeNodeId$.withLatestFrom(this.points$, this.areas$).map(([id, points, areas]) => {
+      for (let point of points) {
+        if (point._id == id) return point;
+      }
+      for (let area of areas) {
+        if (area._id == id) return area;
+      }
+      return null;
+    });
   }
 
   setActiveNode(id: string) {
+    console.log('setting', id);
     this.store.dispatch(new Actions.ViewSetActiveNode(id));
   }
 
@@ -32,6 +43,12 @@ export class DataService {
 
   uninit() {
     this.store.dispatch(new Actions.DataDeregisterRequest());
+  }
+
+  getIdFromFeatureId(featId) {
+    return this.areas$.first().map(areas => {
+      return areas.find(({ feature }) => feature == featId);
+    });
   }
 
 }

@@ -1,604 +1,504 @@
 {
   "points": [
     {
-      "_id": "5971fbde6f3aca292a4c4251",
+      "_id": "5972564ee954d166c03e4478",
       "name": "Room 2 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41eb",
-      "feature": "5971fbde6f3aca292a4c41ed"
+      "area": "5972564ee954d166c03e443f"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4252",
+      "_id": "5972564ee954d166c03e4479",
       "name": "Room 1 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41ec",
-      "feature": "5971fbde6f3aca292a4c41ee"
+      "area": "5972564ee954d166c03e4440"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4253",
+      "_id": "5972564ee954d166c03e447a",
       "name": "Room 3 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41ea",
-      "feature": "5971fbde6f3aca292a4c41ef"
+      "area": "5972564ee954d166c03e443e"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4254",
+      "_id": "5972564ee954d166c03e447b",
       "name": "Room 4 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41e9",
-      "feature": "5971fbde6f3aca292a4c41f0"
+      "area": "5972564ee954d166c03e443d"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4255",
+      "_id": "5972564ee954d166c03e447c",
       "name": "Room 63 Sensor 1",
-      "area": "5971fbde6f3aca292a4c4171",
-      "feature": "5971fbde6f3aca292a4c41f1"
+      "area": "5972564ee954d166c03e43ee"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4256",
+      "_id": "5972564ee954d166c03e447d",
       "name": "Room 5 Sensor 2",
-      "area": "5971fbde6f3aca292a4c41e8",
-      "feature": "5971fbde6f3aca292a4c41f2"
+      "area": "5972564ee954d166c03e443c"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4257",
+      "_id": "5972564ee954d166c03e447e",
       "name": "Room 5 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41e8",
-      "feature": "5971fbde6f3aca292a4c41f3"
+      "area": "5972564ee954d166c03e443c"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4258",
+      "_id": "5972564ee954d166c03e447f",
       "name": "Room 6 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41e7",
-      "feature": "5971fbde6f3aca292a4c41f4"
+      "area": "5972564ee954d166c03e443b"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4259",
+      "_id": "5972564ee954d166c03e4480",
       "name": "Room 8 Sensor 3",
-      "area": "5971fbde6f3aca292a4c41e5",
-      "feature": "5971fbde6f3aca292a4c41f5"
+      "area": "5972564ee954d166c03e4439"
     },
     {
-      "_id": "5971fbde6f3aca292a4c425a",
+      "_id": "5972564ee954d166c03e4481",
       "name": "Room 8 Sensor 2",
-      "area": "5971fbde6f3aca292a4c41e5",
-      "feature": "5971fbde6f3aca292a4c41f6"
+      "area": "5972564ee954d166c03e4439"
     },
     {
-      "_id": "5971fbde6f3aca292a4c425b",
+      "_id": "5972564ee954d166c03e4482",
       "name": "Room 7 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41e6",
-      "feature": "5971fbde6f3aca292a4c41f7"
+      "area": "5972564ee954d166c03e443a"
     },
     {
-      "_id": "5971fbde6f3aca292a4c425c",
+      "_id": "5972564ee954d166c03e4483",
       "name": "Room 9 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41e4",
-      "feature": "5971fbde6f3aca292a4c41f8"
+      "area": "5972564ee954d166c03e4438"
     },
     {
-      "_id": "5971fbde6f3aca292a4c425d",
+      "_id": "5972564ee954d166c03e4484",
       "name": "Room 10 Sensor 2",
-      "area": "5971fbde6f3aca292a4c41e3",
-      "feature": "5971fbde6f3aca292a4c41f9"
+      "area": "5972564ee954d166c03e4437"
     },
     {
-      "_id": "5971fbde6f3aca292a4c425e",
+      "_id": "5972564ee954d166c03e4485",
       "name": "Room 10 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41e3",
-      "feature": "5971fbde6f3aca292a4c41fa"
+      "area": "5972564ee954d166c03e4437"
     },
     {
-      "_id": "5971fbde6f3aca292a4c425f",
+      "_id": "5972564ee954d166c03e4486",
       "name": "Room 30 Sensor 3",
-      "area": "5971fbde6f3aca292a4c41d2",
-      "feature": "5971fbde6f3aca292a4c41fb"
+      "area": "5972564ee954d166c03e4426"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4260",
+      "_id": "5972564ee954d166c03e4487",
       "name": "Room 30 Sensor 2",
-      "area": "5971fbde6f3aca292a4c41d2",
-      "feature": "5971fbde6f3aca292a4c41fc"
+      "area": "5972564ee954d166c03e4426"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4261",
+      "_id": "5972564ee954d166c03e4488",
       "name": "Room 30 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41d2",
-      "feature": "5971fbde6f3aca292a4c41fd"
+      "area": "5972564ee954d166c03e4426"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4262",
+      "_id": "5972564ee954d166c03e4489",
       "name": "Room 32 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41d0",
-      "feature": "5971fbde6f3aca292a4c41fe"
+      "area": "5972564ee954d166c03e4424"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4263",
+      "_id": "5972564ee954d166c03e448a",
       "name": "Room 31 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41d1",
-      "feature": "5971fbde6f3aca292a4c41ff"
+      "area": "5972564ee954d166c03e4425"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4264",
+      "_id": "5972564ee954d166c03e448b",
       "name": "Room 33 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41cf",
-      "feature": "5971fbde6f3aca292a4c4200"
+      "area": "5972564ee954d166c03e4423"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4265",
+      "_id": "5972564ee954d166c03e448c",
       "name": "Room 28 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41d3",
-      "feature": "5971fbde6f3aca292a4c4201"
+      "area": "5972564ee954d166c03e4427"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4266",
+      "_id": "5972564ee954d166c03e448d",
       "name": "South Wing Sensor 1",
-      "area": "5971fbde6f3aca292a4c4161",
-      "feature": "5971fbde6f3aca292a4c4202"
+      "area": "5972564ee954d166c03e43ea"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4267",
+      "_id": "5972564ee954d166c03e448e",
       "name": "Room 12 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41e1",
-      "feature": "5971fbde6f3aca292a4c4203"
+      "area": "5972564ee954d166c03e4435"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4268",
+      "_id": "5972564ee954d166c03e448f",
       "name": "Room 14 Sensor 3",
-      "area": "5971fbde6f3aca292a4c41e0",
-      "feature": "5971fbde6f3aca292a4c4204"
+      "area": "5972564ee954d166c03e4434"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4269",
+      "_id": "5972564ee954d166c03e4490",
       "name": "Room 14 Sensor 2",
-      "area": "5971fbde6f3aca292a4c41e0",
-      "feature": "5971fbde6f3aca292a4c4205"
+      "area": "5972564ee954d166c03e4434"
     },
     {
-      "_id": "5971fbde6f3aca292a4c426a",
+      "_id": "5972564ee954d166c03e4491",
       "name": "Room 15 Sensor 3",
-      "area": "5971fbde6f3aca292a4c41df",
-      "feature": "5971fbde6f3aca292a4c4206"
+      "area": "5972564ee954d166c03e4433"
     },
     {
-      "_id": "5971fbde6f3aca292a4c426b",
+      "_id": "5972564ee954d166c03e4492",
       "name": "Room 15 Sensor 2",
-      "area": "5971fbde6f3aca292a4c41df",
-      "feature": "5971fbde6f3aca292a4c4207"
+      "area": "5972564ee954d166c03e4433"
     },
     {
-      "_id": "5971fbde6f3aca292a4c426c",
+      "_id": "5972564ee954d166c03e4493",
       "name": "Room 16 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41de",
-      "feature": "5971fbde6f3aca292a4c4208"
+      "area": "5972564ee954d166c03e4432"
     },
     {
-      "_id": "5971fbde6f3aca292a4c426d",
+      "_id": "5972564ee954d166c03e4494",
       "name": "Room 18 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41dc",
-      "feature": "5971fbde6f3aca292a4c4209"
+      "area": "5972564ee954d166c03e4430"
     },
     {
-      "_id": "5971fbde6f3aca292a4c426e",
+      "_id": "5972564ee954d166c03e4495",
       "name": "Room 19 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41db",
-      "feature": "5971fbde6f3aca292a4c420a"
+      "area": "5972564ee954d166c03e442f"
     },
     {
-      "_id": "5971fbde6f3aca292a4c426f",
+      "_id": "5972564ee954d166c03e4496",
       "name": "Room 20 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41da",
-      "feature": "5971fbde6f3aca292a4c420b"
+      "area": "5972564ee954d166c03e442e"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4270",
+      "_id": "5972564ee954d166c03e4497",
       "name": "Room 13 Sensor 2",
-      "area": "5971fbde6f3aca292a4c4178",
-      "feature": "5971fbde6f3aca292a4c420c"
+      "area": "5972564ee954d166c03e43f5"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4271",
+      "_id": "5972564ee954d166c03e4498",
       "name": "Room 13 Sensor 1",
-      "area": "5971fbde6f3aca292a4c4178",
-      "feature": "5971fbde6f3aca292a4c420d"
+      "area": "5972564ee954d166c03e43f5"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4272",
+      "_id": "5972564ee954d166c03e4499",
       "name": "Room 21 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41d9",
-      "feature": "5971fbde6f3aca292a4c420e"
+      "area": "5972564ee954d166c03e442d"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4273",
+      "_id": "5972564ee954d166c03e449a",
       "name": "Room 22 Sensor 1",
-      "area": "5971fbde6f3aca292a4c4177",
-      "feature": "5971fbde6f3aca292a4c420f"
+      "area": "5972564ee954d166c03e43f4"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4274",
+      "_id": "5972564ee954d166c03e449b",
       "name": "Room 35 Sensor 3",
-      "area": "5971fbde6f3aca292a4c41cd",
-      "feature": "5971fbde6f3aca292a4c4210"
+      "area": "5972564ee954d166c03e4421"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4275",
+      "_id": "5972564ee954d166c03e449c",
       "name": "Room 24 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41d7",
-      "feature": "5971fbde6f3aca292a4c4211"
+      "area": "5972564ee954d166c03e442b"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4276",
+      "_id": "5972564ee954d166c03e449d",
       "name": "Room 26 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41d5",
-      "feature": "5971fbde6f3aca292a4c4212"
+      "area": "5972564ee954d166c03e4429"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4277",
+      "_id": "5972564ee954d166c03e449e",
       "name": "Room 25 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41d6",
-      "feature": "5971fbde6f3aca292a4c4213"
+      "area": "5972564ee954d166c03e442a"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4278",
+      "_id": "5972564ee954d166c03e449f",
       "name": "Room 23 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41d8",
-      "feature": "5971fbde6f3aca292a4c4214"
+      "area": "5972564ee954d166c03e442c"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4279",
+      "_id": "5972564ee954d166c03e44a0",
       "name": "Room 35 Sensor 2",
-      "area": "5971fbde6f3aca292a4c41cd",
-      "feature": "5971fbde6f3aca292a4c4215"
+      "area": "5972564ee954d166c03e4421"
     },
     {
-      "_id": "5971fbde6f3aca292a4c427a",
+      "_id": "5972564ee954d166c03e44a1",
       "name": "Room 36 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41cc",
-      "feature": "5971fbde6f3aca292a4c4216"
+      "area": "5972564ee954d166c03e4420"
     },
     {
-      "_id": "5971fbde6f3aca292a4c427b",
+      "_id": "5972564ee954d166c03e44a2",
       "name": "Room 34 Sensor 3",
-      "area": "5971fbde6f3aca292a4c41ce",
-      "feature": "5971fbde6f3aca292a4c4217"
+      "area": "5972564ee954d166c03e4422"
     },
     {
-      "_id": "5971fbde6f3aca292a4c427c",
+      "_id": "5972564ee954d166c03e44a3",
       "name": "Room 53 Sensor 3",
-      "area": "5971fbde6f3aca292a4c41be",
-      "feature": "5971fbde6f3aca292a4c4218"
+      "area": "5972564ee954d166c03e4412"
     },
     {
-      "_id": "5971fbde6f3aca292a4c427d",
+      "_id": "5972564ee954d166c03e44a4",
       "name": "Room 37 Sensor 3",
-      "area": "5971fbde6f3aca292a4c41cb",
-      "feature": "5971fbde6f3aca292a4c4219"
+      "area": "5972564ee954d166c03e441f"
     },
     {
-      "_id": "5971fbde6f3aca292a4c427e",
+      "_id": "5972564ee954d166c03e44a5",
       "name": "North Wing Sensor 3",
-      "area": "5971fbde6f3aca292a4c4162",
-      "feature": "5971fbde6f3aca292a4c421a"
+      "area": "5972564ee954d166c03e43eb"
     },
     {
-      "_id": "5971fbde6f3aca292a4c427f",
+      "_id": "5972564ee954d166c03e44a6",
       "name": "Room 56 Sensor 2",
-      "area": "5971fbde6f3aca292a4c41bb",
-      "feature": "5971fbde6f3aca292a4c421b"
+      "area": "5972564ee954d166c03e440f"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4280",
+      "_id": "5972564ee954d166c03e44a7",
       "name": "Room 56 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41bb",
-      "feature": "5971fbde6f3aca292a4c421c"
+      "area": "5972564ee954d166c03e440f"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4281",
+      "_id": "5972564ee954d166c03e44a8",
       "name": "Room 55 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41bc",
-      "feature": "5971fbde6f3aca292a4c421d"
+      "area": "5972564ee954d166c03e4410"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4282",
+      "_id": "5972564ee954d166c03e44a9",
       "name": "Room 58 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41ba",
-      "feature": "5971fbde6f3aca292a4c421e"
+      "area": "5972564ee954d166c03e440e"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4283",
+      "_id": "5972564ee954d166c03e44aa",
       "name": "Room 57 Sensor 1",
-      "area": "5971fbde6f3aca292a4c4172",
-      "feature": "5971fbde6f3aca292a4c421f"
+      "area": "5972564ee954d166c03e43ef"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4284",
+      "_id": "5972564ee954d166c03e44ab",
       "name": "Room 47 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41c4",
-      "feature": "5971fbde6f3aca292a4c4220"
+      "area": "5972564ee954d166c03e4418"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4285",
+      "_id": "5972564ee954d166c03e44ac",
       "name": "Room 48 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41c3",
-      "feature": "5971fbde6f3aca292a4c4221"
+      "area": "5972564ee954d166c03e4417"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4286",
+      "_id": "5972564ee954d166c03e44ad",
       "name": "Room 51 Sensor 2",
-      "area": "5971fbde6f3aca292a4c41c0",
-      "feature": "5971fbde6f3aca292a4c4222"
+      "area": "5972564ee954d166c03e4414"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4287",
+      "_id": "5972564ee954d166c03e44ae",
       "name": "Room 61 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41b7",
-      "feature": "5971fbde6f3aca292a4c4223"
+      "area": "5972564ee954d166c03e440b"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4288",
+      "_id": "5972564ee954d166c03e44af",
       "name": "Room 62 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41b6",
-      "feature": "5971fbde6f3aca292a4c4224"
+      "area": "5972564ee954d166c03e440a"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4289",
+      "_id": "5972564ee954d166c03e44b0",
       "name": "Room 46 Sensor 2",
-      "area": "5971fbde6f3aca292a4c41c5",
-      "feature": "5971fbde6f3aca292a4c4225"
+      "area": "5972564ee954d166c03e4419"
     },
     {
-      "_id": "5971fbde6f3aca292a4c428a",
+      "_id": "5972564ee954d166c03e44b1",
       "name": "Room 46 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41c5",
-      "feature": "5971fbde6f3aca292a4c4226"
+      "area": "5972564ee954d166c03e4419"
     },
     {
-      "_id": "5971fbde6f3aca292a4c428b",
+      "_id": "5972564ee954d166c03e44b2",
       "name": "Room 45 Sensor 2",
-      "area": "5971fbde6f3aca292a4c41c6",
-      "feature": "5971fbde6f3aca292a4c4227"
+      "area": "5972564ee954d166c03e441a"
     },
     {
-      "_id": "5971fbde6f3aca292a4c428c",
+      "_id": "5972564ee954d166c03e44b3",
       "name": "Room 44 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41c7",
-      "feature": "5971fbde6f3aca292a4c4228"
+      "area": "5972564ee954d166c03e441b"
     },
     {
-      "_id": "5971fbde6f3aca292a4c428d",
+      "_id": "5972564ee954d166c03e44b4",
       "name": "Room 43 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41c8",
-      "feature": "5971fbde6f3aca292a4c4229"
+      "area": "5972564ee954d166c03e441c"
     },
     {
-      "_id": "5971fbde6f3aca292a4c428e",
+      "_id": "5972564ee954d166c03e44b5",
       "name": "Room 42 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41c9",
-      "feature": "5971fbde6f3aca292a4c422a"
+      "area": "5972564ee954d166c03e441d"
     },
     {
-      "_id": "5971fbde6f3aca292a4c428f",
+      "_id": "5972564ee954d166c03e44b6",
       "name": "Room 52 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41bf",
-      "feature": "5971fbde6f3aca292a4c422b"
+      "area": "5972564ee954d166c03e4413"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4290",
+      "_id": "5972564ee954d166c03e44b7",
       "name": "Room 41 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41ca",
-      "feature": "5971fbde6f3aca292a4c422c"
+      "area": "5972564ee954d166c03e441e"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4291",
+      "_id": "5972564ee954d166c03e44b8",
       "name": "Room 38 Sensor 4",
-      "area": "5971fbde6f3aca292a4c4175",
-      "feature": "5971fbde6f3aca292a4c422d"
+      "area": "5972564ee954d166c03e43f2"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4292",
+      "_id": "5972564ee954d166c03e44b9",
       "name": "Room 38 Sensor 3",
-      "area": "5971fbde6f3aca292a4c4175",
-      "feature": "5971fbde6f3aca292a4c422e"
+      "area": "5972564ee954d166c03e43f2"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4293",
+      "_id": "5972564ee954d166c03e44ba",
       "name": "North Wing Sensor 2",
-      "area": "5971fbde6f3aca292a4c4162",
-      "feature": "5971fbde6f3aca292a4c422f"
+      "area": "5972564ee954d166c03e43eb"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4294",
+      "_id": "5972564ee954d166c03e44bb",
       "name": "Room 38 Sensor 2",
-      "area": "5971fbde6f3aca292a4c4175",
-      "feature": "5971fbde6f3aca292a4c4230"
+      "area": "5972564ee954d166c03e43f2"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4295",
+      "_id": "5972564ee954d166c03e44bc",
       "name": "Room 29 Sensor 1",
-      "area": "5971fbde6f3aca292a4c4176",
-      "feature": "5971fbde6f3aca292a4c4231"
+      "area": "5972564ee954d166c03e43f3"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4296",
+      "_id": "5972564ee954d166c03e44bd",
       "name": "Room 53 Sensor 2",
-      "area": "5971fbde6f3aca292a4c41be",
-      "feature": "5971fbde6f3aca292a4c4232"
+      "area": "5972564ee954d166c03e4412"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4297",
+      "_id": "5972564ee954d166c03e44be",
       "name": "Room 53 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41be",
-      "feature": "5971fbde6f3aca292a4c4233"
+      "area": "5972564ee954d166c03e4412"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4298",
+      "_id": "5972564ee954d166c03e44bf",
       "name": "North Wing Sensor 1",
-      "area": "5971fbde6f3aca292a4c4162",
-      "feature": "5971fbde6f3aca292a4c4234"
+      "area": "5972564ee954d166c03e43eb"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4299",
+      "_id": "5972564ee954d166c03e44c0",
       "name": "Room 37 Sensor 2",
-      "area": "5971fbde6f3aca292a4c41cb",
-      "feature": "5971fbde6f3aca292a4c4235"
+      "area": "5972564ee954d166c03e441f"
     },
     {
-      "_id": "5971fbde6f3aca292a4c429a",
+      "_id": "5972564ee954d166c03e44c1",
       "name": "Room 37 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41cb",
-      "feature": "5971fbde6f3aca292a4c4236"
+      "area": "5972564ee954d166c03e441f"
     },
     {
-      "_id": "5971fbde6f3aca292a4c429b",
+      "_id": "5972564ee954d166c03e44c2",
       "name": "Room 59 Sensor 3",
-      "area": "5971fbde6f3aca292a4c41b9",
-      "feature": "5971fbde6f3aca292a4c4237"
+      "area": "5972564ee954d166c03e440d"
     },
     {
-      "_id": "5971fbde6f3aca292a4c429c",
+      "_id": "5972564ee954d166c03e44c3",
       "name": "Room 59 Sensor 2",
-      "area": "5971fbde6f3aca292a4c41b9",
-      "feature": "5971fbde6f3aca292a4c4238"
+      "area": "5972564ee954d166c03e440d"
     },
     {
-      "_id": "5971fbde6f3aca292a4c429d",
+      "_id": "5972564ee954d166c03e44c4",
       "name": "Room 59 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41b9",
-      "feature": "5971fbde6f3aca292a4c4239"
+      "area": "5972564ee954d166c03e440d"
     },
     {
-      "_id": "5971fbde6f3aca292a4c429e",
+      "_id": "5972564ee954d166c03e44c5",
       "name": "Room 60 Sensor 3",
-      "area": "5971fbde6f3aca292a4c41b8",
-      "feature": "5971fbde6f3aca292a4c423a"
+      "area": "5972564ee954d166c03e440c"
     },
     {
-      "_id": "5971fbde6f3aca292a4c429f",
+      "_id": "5972564ee954d166c03e44c6",
       "name": "Room 60 Sensor 2",
-      "area": "5971fbde6f3aca292a4c41b8",
-      "feature": "5971fbde6f3aca292a4c423b"
+      "area": "5972564ee954d166c03e440c"
     },
     {
-      "_id": "5971fbde6f3aca292a4c42a0",
+      "_id": "5972564ee954d166c03e44c7",
       "name": "Room 38 Sensor 1",
-      "area": "5971fbde6f3aca292a4c4175",
-      "feature": "5971fbde6f3aca292a4c423c"
+      "area": "5972564ee954d166c03e43f2"
     },
     {
-      "_id": "5971fbde6f3aca292a4c42a1",
+      "_id": "5972564ee954d166c03e44c8",
       "name": "Room 34 Sensor 2",
-      "area": "5971fbde6f3aca292a4c41ce",
-      "feature": "5971fbde6f3aca292a4c423d"
+      "area": "5972564ee954d166c03e4422"
     },
     {
-      "_id": "5971fbde6f3aca292a4c42a2",
+      "_id": "5972564ee954d166c03e44c9",
       "name": "Room 34 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41ce",
-      "feature": "5971fbde6f3aca292a4c423e"
+      "area": "5972564ee954d166c03e4422"
     },
     {
-      "_id": "5971fbde6f3aca292a4c42a3",
+      "_id": "5972564ee954d166c03e44ca",
       "name": "Room 27 Sensor 2",
-      "area": "5971fbde6f3aca292a4c41d4",
-      "feature": "5971fbde6f3aca292a4c423f"
+      "area": "5972564ee954d166c03e4428"
     },
     {
-      "_id": "5971fbde6f3aca292a4c42a4",
+      "_id": "5972564ee954d166c03e44cb",
       "name": "Room 27 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41d4",
-      "feature": "5971fbde6f3aca292a4c4240"
+      "area": "5972564ee954d166c03e4428"
     },
     {
-      "_id": "5971fbde6f3aca292a4c42a5",
+      "_id": "5972564ee954d166c03e44cc",
       "name": "Room 11 Sensor 3",
-      "area": "5971fbde6f3aca292a4c41e2",
-      "feature": "5971fbde6f3aca292a4c4241"
+      "area": "5972564ee954d166c03e4436"
     },
     {
-      "_id": "5971fbde6f3aca292a4c42a6",
+      "_id": "5972564ee954d166c03e44cd",
       "name": "Room 11 Sensor 2",
-      "area": "5971fbde6f3aca292a4c41e2",
-      "feature": "5971fbde6f3aca292a4c4242"
+      "area": "5972564ee954d166c03e4436"
     },
     {
-      "_id": "5971fbde6f3aca292a4c42a7",
+      "_id": "5972564ee954d166c03e44ce",
       "name": "Room 11 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41e2",
-      "feature": "5971fbde6f3aca292a4c4243"
+      "area": "5972564ee954d166c03e4436"
     },
     {
-      "_id": "5971fbde6f3aca292a4c42a8",
+      "_id": "5972564ee954d166c03e44cf",
       "name": "Room 14 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41e0",
-      "feature": "5971fbde6f3aca292a4c4244"
+      "area": "5972564ee954d166c03e4434"
     },
     {
-      "_id": "5971fbde6f3aca292a4c42a9",
+      "_id": "5972564ee954d166c03e44d0",
       "name": "Room 15 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41df",
-      "feature": "5971fbde6f3aca292a4c4245"
+      "area": "5972564ee954d166c03e4433"
     },
     {
-      "_id": "5971fbde6f3aca292a4c42aa",
+      "_id": "5972564ee954d166c03e44d1",
       "name": "Room 8 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41e5",
-      "feature": "5971fbde6f3aca292a4c4246"
+      "area": "5972564ee954d166c03e4439"
     },
     {
-      "_id": "5971fbde6f3aca292a4c42ab",
+      "_id": "5972564ee954d166c03e44d2",
       "name": "Room 39 Sensor 1",
-      "area": "5971fbde6f3aca292a4c4174",
-      "feature": "5971fbde6f3aca292a4c4247"
+      "area": "5972564ee954d166c03e43f1"
     },
     {
-      "_id": "5971fbde6f3aca292a4c42ac",
+      "_id": "5972564ee954d166c03e44d3",
       "name": "Room 40 Sensor 1",
-      "area": "5971fbde6f3aca292a4c4173",
-      "feature": "5971fbde6f3aca292a4c4248"
+      "area": "5972564ee954d166c03e43f0"
     },
     {
-      "_id": "5971fbde6f3aca292a4c42ad",
+      "_id": "5972564ee954d166c03e44d4",
       "name": "Room 54 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41bd",
-      "feature": "5971fbde6f3aca292a4c4249"
+      "area": "5972564ee954d166c03e4411"
     },
     {
-      "_id": "5971fbde6f3aca292a4c42ae",
+      "_id": "5972564ee954d166c03e44d5",
       "name": "Room 17 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41dd",
-      "feature": "5971fbde6f3aca292a4c424a"
+      "area": "5972564ee954d166c03e4431"
     },
     {
-      "_id": "5971fbde6f3aca292a4c42af",
+      "_id": "5972564ee954d166c03e44d6",
       "name": "Room 50 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41c1",
-      "feature": "5971fbde6f3aca292a4c424b"
+      "area": "5972564ee954d166c03e4415"
     },
     {
-      "_id": "5971fbde6f3aca292a4c42b0",
+      "_id": "5972564ee954d166c03e44d7",
       "name": "Room 49 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41c2",
-      "feature": "5971fbde6f3aca292a4c424c"
+      "area": "5972564ee954d166c03e4416"
     },
     {
-      "_id": "5971fbde6f3aca292a4c42b1",
+      "_id": "5972564ee954d166c03e44d8",
       "name": "Room 51 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41c0",
-      "feature": "5971fbde6f3aca292a4c424d"
+      "area": "5972564ee954d166c03e4414"
     },
     {
-      "_id": "5971fbde6f3aca292a4c42b2",
+      "_id": "5972564ee954d166c03e44d9",
       "name": "Room 60 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41b8",
-      "feature": "5971fbde6f3aca292a4c424e"
+      "area": "5972564ee954d166c03e440c"
     },
     {
-      "_id": "5971fbde6f3aca292a4c42b3",
+      "_id": "5972564ee954d166c03e44da",
       "name": "Room 35 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41cd",
-      "feature": "5971fbde6f3aca292a4c424f"
+      "area": "5972564ee954d166c03e4421"
     },
     {
-      "_id": "5971fbde6f3aca292a4c42b4",
+      "_id": "5972564ee954d166c03e44db",
       "name": "Room 45 Sensor 1",
-      "area": "5971fbde6f3aca292a4c41c6",
-      "feature": "5971fbde6f3aca292a4c4250"
+      "area": "5972564ee954d166c03e441a"
     }
   ]
 }

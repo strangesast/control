@@ -79,14 +79,14 @@ function renameArea(name, id, type) {
     }
     parentMap = {};
 
-    let insertedFeatureIds = await insertInto(featuresCollection, featuresToSave);
-    for (let i=0; i<l; i++) {
-      let fid = insertedFeatureIds[i];
-      let doc = docsToSave[i];
-      doc['feature'] = fid;
-    }
-
     let insertedDocIds = await insertInto(areasCollection, docsToSave);
+    for (let i=0; i<l; i++) {
+      let did = insertedDocIds[i];
+      let feature = featuresToSave[i];
+      feature.properties['area'] = did;
+    }
+    let insertedFeatureIds = await insertInto(featuresCollection, featuresToSave);
+
   
     for (let i=0,pid,id; pid=parentNames[i], id=insertedDocIds[i], i<l; i++) {
       parentMap[pid] = id;
@@ -117,19 +117,24 @@ function renameArea(name, id, type) {
     countPerArea[area] = (countPerArea[area] || 0) + 1;
   }
 
-  let insertedFeatureIds = await insertInto(featuresCollection, featuresToSave);
-  
-  // add feature reference, update name based on count from that area
-  for (let i=0; i<docsToSave.length; i++) {
-    let fid = insertedFeatureIds[i];
-    let doc = docsToSave[i];
+  for (let doc of docsToSave) {
     let areaId = doc.area;
     let areaName = savedAreas[areaId].name;
-    doc.feature = insertedFeatureIds[i];
     doc.name = `${ areaName } Sensor ${ countPerArea[areaId]-- }`;
   }
 
-  await insertInto(pointsCollection, docsToSave);
+  l = docsToSave.length;
+  let insertedDocIds = await insertInto(pointsCollection, docsToSave);
+  
+  // add feature reference, update name based on count from that area
+  for (let i=0; i<l; i++) {
+    let did = insertedDocIds[i];
+    let feature = featuresToSave[i];
+    feature.properties.point = did;
+  }
+
+  let insertedFeatureIds = await insertInto(featuresCollection, featuresToSave);
+
 
 
   for (let collection of [featuresCollection, pointsCollection, areasCollection]) {

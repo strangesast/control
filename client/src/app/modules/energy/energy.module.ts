@@ -13,6 +13,9 @@ import { MapComponent } from './components/map/map.component';
 import { DataService } from './services/data.service';
 import { GraphComponent } from './components/graph/graph.component';
 import { TreeListComponent } from './components/tree-list/tree-list.component';
+import { HeatmapComponent } from './components/heatmap/heatmap.component';
+import { PieComponent } from './components/pie/pie.component';
+import { SankeyComponent } from './components/sankey/sankey.component';
 
 import { effects } from './effects';
 import { reducers } from './reducers';
@@ -37,7 +40,10 @@ const routes: Routes = [
     EnergyComponent,
     MapComponent,
     GraphComponent,
-    TreeListComponent
+    TreeListComponent,
+    HeatmapComponent,
+    PieComponent,
+    SankeyComponent
   ],
   bootstrap: [ EnergyComponent ],
   providers: [ DataService, MapService, GraphService ]

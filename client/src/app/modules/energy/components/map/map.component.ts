@@ -47,8 +47,8 @@ export class MapComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.svg) {
-      if (changes.activeElement && changes.activeElement.currentValue) {
-        this.clicked(changes.activeElement.currentValue.data.feature);
+      if (changes.activeElement) {
+        this.clicked(changes.activeElement.currentValue);
       }
     }
   }
@@ -110,12 +110,16 @@ export class MapComponent implements OnInit {
     this.selection = g.selectAll('path').data(features)
       .enter().append('path')
         .attr('d', path)
-        .attr('data-id', (d) => d._id)
+        .attr('data-id', (d) => d.properties['area'] || d.properties['point'])
         .attr('class', 'feature')
-        .on('click', function ({ _id: id }) {
-          self.activeElementChange.emit(id);
-          if (self.active.node() === this) return self.reset();
-          self.clicked(id);
+        .on('click', function (d) {
+          if (self.active.node() === this) {
+            self.reset();
+          } else {
+            let id = d.properties['area'] || d.properties['point'];
+            self.clicked(id);
+            self.activeElementChange.emit(id);
+          }
         });
     
     g.append('path')
@@ -169,9 +173,10 @@ export class MapComponent implements OnInit {
   }
 
   clicked(id) {
-    let d = this.featureCollection.features.find(x => x._id == id);
-    if (d == null) return;
-    let el = this.svg.select(`[data-id="${ d._id }"]`).node();
+    let feature = this.featureCollection.features.find(({ properties: p }) =>
+      p['area'] == id || p['point'] == id)
+    if (feature == null) return;
+    let el = this.svg.select(`[data-id="${ feature.properties['area'] || feature.properties['point'] }"]`).node();
     let projection = this.calcProjection(this.r);
     let path = d3.geoPath()
       .projection(projection)
@@ -183,7 +188,7 @@ export class MapComponent implements OnInit {
 
     let { width, height } = this.svg.node().getBoundingClientRect();
   
-    let bounds = path.bounds(d),
+    let bounds = path.bounds(feature),
         dx = bounds[1][0] - bounds[0][0],
         dy = bounds[1][1] - bounds[0][1],
         x = (bounds[0][0] + bounds[1][0]) / 2,

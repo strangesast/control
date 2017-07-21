@@ -17,6 +17,7 @@ const express = require('express'),
       upload = multer(),
       //ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn,
       InfluxDB = Influx.InfluxDB,
+      { escape } = Influx,
       WebSocketServer = require('ws').Server,
       { Observable, Subject, BehaviorSubject, ReplaySubject } = require('rxjs'),
       fs = require('fs'),
@@ -74,6 +75,19 @@ function calcTempChange(t, sp) {
   return Math.floor(dt*precision)/precision;
 }
 
+function fixIds(objs) {
+  for (let obj of objs) {
+    for (let prop in obj) {
+      let val = obj[prop];
+      if (val && typeof val === 'string' && val.length == 24) {
+        try {
+          obj[prop] = ObjectID.createFromHexString(val);
+        } catch (e) {}
+      }
+    }
+  }
+}
+
 var mongo, influx;
 (async function init() {
   // mongo setup
@@ -99,6 +113,10 @@ var mongo, influx;
   // applications
   let applicationsCollection = await mongo.createCollection('applications');
   await applicationsCollection.insertMany(defaultObjects.applications);
+
+  fixIds(defaultObjects.points);
+  fixIds(defaultObjects.areas);
+  fixIds(defaultObjects.features);
 
   let pointsCollection = await mongo.createCollection('points');
   await pointsCollection.insertMany(defaultObjects.points);
@@ -335,6 +353,28 @@ userRoute.get('/layers/:layerName', async function (req, res, next) {
     features
   }
   res.json(layer);
+});
+
+userRoute.get('/points/:id', async function (req, res, next) {
+  let { id } = req.params;
+  let point = await mongo.collection('points').findOne({ _id: ObjectID.createFromHexString(id) });
+
+  if (point) {
+    let value = await influx.query(`SELECT last(value) FROM temperatures WHERE "point" = '${ escape.tag(id) }'`);
+    res.json({ value });
+    return;
+  }
+
+  point = await mongo.collection('areas').findOne({ _id: id });//ObjectID.createFromHexString(id) });
+  if (point) {
+    let value = await influx.query(`SELECT last(value) FROM temperatures GROUP BY 'area' WHERE "area" = '${ escape.tag(id) }'`);
+    res.json({ value });
+    return
+  }
+  let err = new Error('no point with that id found')
+  err.status = 404;
+  next(err);
+
 });
 
 app.use('/user', userRoute);

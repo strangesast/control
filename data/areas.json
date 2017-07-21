@@ -1,508 +1,436 @@
 {
   "areas": [
     {
-      "_id": "5971fbde6f3aca292a4c415e",
+      "_id": "5972564ee954d166c03e43e8",
       "type": "building",
       "parent": null,
-      "name": "Day Automation - Victor Office",
-      "feature": "5971fbde6f3aca292a4c415d"
+      "name": "Day Automation - Victor Office"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4161",
+      "_id": "5972564ee954d166c03e43ea",
       "type": "wing",
-      "parent": "5971fbde6f3aca292a4c415e",
-      "name": "South Wing",
-      "feature": "5971fbde6f3aca292a4c415f"
+      "parent": "5972564ee954d166c03e43e8",
+      "name": "South Wing"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4162",
+      "_id": "5972564ee954d166c03e43eb",
       "type": "wing",
-      "parent": "5971fbde6f3aca292a4c415e",
-      "name": "North Wing",
-      "feature": "5971fbde6f3aca292a4c4160"
+      "parent": "5972564ee954d166c03e43e8",
+      "name": "North Wing"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4171",
+      "_id": "5972564ee954d166c03e43ee",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c4161",
-      "name": "Room 63",
-      "feature": "5971fbde6f3aca292a4c4163"
+      "parent": "5972564ee954d166c03e43ea",
+      "name": "Room 63"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4172",
+      "_id": "5972564ee954d166c03e43ef",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c4162",
-      "name": "Room 57",
-      "feature": "5971fbde6f3aca292a4c4164"
+      "parent": "5972564ee954d166c03e43eb",
+      "name": "Room 57"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4173",
+      "_id": "5972564ee954d166c03e43f0",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c4162",
-      "name": "Room 40",
-      "feature": "5971fbde6f3aca292a4c4165"
+      "parent": "5972564ee954d166c03e43eb",
+      "name": "Room 40"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4174",
+      "_id": "5972564ee954d166c03e43f1",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c4162",
-      "name": "Room 39",
-      "feature": "5971fbde6f3aca292a4c4166"
+      "parent": "5972564ee954d166c03e43eb",
+      "name": "Room 39"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4175",
+      "_id": "5972564ee954d166c03e43f2",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c4162",
-      "name": "Room 38",
-      "feature": "5971fbde6f3aca292a4c4167"
+      "parent": "5972564ee954d166c03e43eb",
+      "name": "Room 38"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4176",
+      "_id": "5972564ee954d166c03e43f3",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c4161",
-      "name": "Room 29",
-      "feature": "5971fbde6f3aca292a4c4168"
+      "parent": "5972564ee954d166c03e43ea",
+      "name": "Room 29"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4177",
+      "_id": "5972564ee954d166c03e43f4",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c4161",
-      "name": "Room 22",
-      "feature": "5971fbde6f3aca292a4c4169"
+      "parent": "5972564ee954d166c03e43ea",
+      "name": "Room 22"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4178",
+      "_id": "5972564ee954d166c03e43f5",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c4161",
-      "name": "Room 13",
-      "feature": "5971fbde6f3aca292a4c416a"
+      "parent": "5972564ee954d166c03e43ea",
+      "name": "Room 13"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4179",
+      "_id": "5972564ee954d166c03e43f6",
       "type": "department",
-      "parent": "5971fbde6f3aca292a4c4161",
-      "name": "Software Department",
-      "feature": "5971fbde6f3aca292a4c416b"
+      "parent": "5972564ee954d166c03e43ea",
+      "name": "Software Department"
     },
     {
-      "_id": "5971fbde6f3aca292a4c417a",
+      "_id": "5972564ee954d166c03e43f7",
       "type": "department",
-      "parent": "5971fbde6f3aca292a4c4161",
-      "name": "Shippingreceiving Department",
-      "feature": "5971fbde6f3aca292a4c416c"
+      "parent": "5972564ee954d166c03e43ea",
+      "name": "Shippingreceiving Department"
     },
     {
-      "_id": "5971fbde6f3aca292a4c417b",
+      "_id": "5972564ee954d166c03e43f8",
       "type": "department",
-      "parent": "5971fbde6f3aca292a4c4162",
-      "name": "Sales Department",
-      "feature": "5971fbde6f3aca292a4c416d"
+      "parent": "5972564ee954d166c03e43eb",
+      "name": "Sales Department"
     },
     {
-      "_id": "5971fbde6f3aca292a4c417c",
+      "_id": "5972564ee954d166c03e43f9",
       "type": "department",
-      "parent": "5971fbde6f3aca292a4c4161",
-      "name": "Panelshop Department",
-      "feature": "5971fbde6f3aca292a4c416e"
+      "parent": "5972564ee954d166c03e43ea",
+      "name": "Panelshop Department"
     },
     {
-      "_id": "5971fbde6f3aca292a4c417d",
+      "_id": "5972564ee954d166c03e43fa",
       "type": "department",
-      "parent": "5971fbde6f3aca292a4c4161",
-      "name": "Engineering Department",
-      "feature": "5971fbde6f3aca292a4c416f"
+      "parent": "5972564ee954d166c03e43ea",
+      "name": "Engineering Department"
     },
     {
-      "_id": "5971fbde6f3aca292a4c417e",
+      "_id": "5972564ee954d166c03e43fb",
       "type": "department",
-      "parent": "5971fbde6f3aca292a4c4161",
-      "name": "Accounting Department",
-      "feature": "5971fbde6f3aca292a4c4170"
+      "parent": "5972564ee954d166c03e43ea",
+      "name": "Accounting Department"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41b6",
+      "_id": "5972564ee954d166c03e440a",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417b",
-      "name": "Room 62",
-      "feature": "5971fbde6f3aca292a4c417f"
+      "parent": "5972564ee954d166c03e43f8",
+      "name": "Room 62"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41b7",
+      "_id": "5972564ee954d166c03e440b",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417b",
-      "name": "Room 61",
-      "feature": "5971fbde6f3aca292a4c4180"
+      "parent": "5972564ee954d166c03e43f8",
+      "name": "Room 61"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41b8",
+      "_id": "5972564ee954d166c03e440c",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417b",
-      "name": "Room 60",
-      "feature": "5971fbde6f3aca292a4c4181"
+      "parent": "5972564ee954d166c03e43f8",
+      "name": "Room 60"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41b9",
+      "_id": "5972564ee954d166c03e440d",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417b",
-      "name": "Room 59",
-      "feature": "5971fbde6f3aca292a4c4182"
+      "parent": "5972564ee954d166c03e43f8",
+      "name": "Room 59"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41ba",
+      "_id": "5972564ee954d166c03e440e",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417b",
-      "name": "Room 58",
-      "feature": "5971fbde6f3aca292a4c4183"
+      "parent": "5972564ee954d166c03e43f8",
+      "name": "Room 58"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41bb",
+      "_id": "5972564ee954d166c03e440f",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417b",
-      "name": "Room 56",
-      "feature": "5971fbde6f3aca292a4c4184"
+      "parent": "5972564ee954d166c03e43f8",
+      "name": "Room 56"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41bc",
+      "_id": "5972564ee954d166c03e4410",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417b",
-      "name": "Room 55",
-      "feature": "5971fbde6f3aca292a4c4185"
+      "parent": "5972564ee954d166c03e43f8",
+      "name": "Room 55"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41bd",
+      "_id": "5972564ee954d166c03e4411",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417b",
-      "name": "Room 54",
-      "feature": "5971fbde6f3aca292a4c4186"
+      "parent": "5972564ee954d166c03e43f8",
+      "name": "Room 54"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41be",
+      "_id": "5972564ee954d166c03e4412",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417a",
-      "name": "Room 53",
-      "feature": "5971fbde6f3aca292a4c4187"
+      "parent": "5972564ee954d166c03e43f7",
+      "name": "Room 53"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41bf",
+      "_id": "5972564ee954d166c03e4413",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417b",
-      "name": "Room 52",
-      "feature": "5971fbde6f3aca292a4c4188"
+      "parent": "5972564ee954d166c03e43f8",
+      "name": "Room 52"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41c0",
+      "_id": "5972564ee954d166c03e4414",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417b",
-      "name": "Room 51",
-      "feature": "5971fbde6f3aca292a4c4189"
+      "parent": "5972564ee954d166c03e43f8",
+      "name": "Room 51"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41c1",
+      "_id": "5972564ee954d166c03e4415",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417b",
-      "name": "Room 50",
-      "feature": "5971fbde6f3aca292a4c418a"
+      "parent": "5972564ee954d166c03e43f8",
+      "name": "Room 50"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41c2",
+      "_id": "5972564ee954d166c03e4416",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417b",
-      "name": "Room 49",
-      "feature": "5971fbde6f3aca292a4c418b"
+      "parent": "5972564ee954d166c03e43f8",
+      "name": "Room 49"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41c3",
+      "_id": "5972564ee954d166c03e4417",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417b",
-      "name": "Room 48",
-      "feature": "5971fbde6f3aca292a4c418c"
+      "parent": "5972564ee954d166c03e43f8",
+      "name": "Room 48"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41c4",
+      "_id": "5972564ee954d166c03e4418",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417b",
-      "name": "Room 47",
-      "feature": "5971fbde6f3aca292a4c418d"
+      "parent": "5972564ee954d166c03e43f8",
+      "name": "Room 47"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41c5",
+      "_id": "5972564ee954d166c03e4419",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417b",
-      "name": "Room 46",
-      "feature": "5971fbde6f3aca292a4c418e"
+      "parent": "5972564ee954d166c03e43f8",
+      "name": "Room 46"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41c6",
+      "_id": "5972564ee954d166c03e441a",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417b",
-      "name": "Room 45",
-      "feature": "5971fbde6f3aca292a4c418f"
+      "parent": "5972564ee954d166c03e43f8",
+      "name": "Room 45"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41c7",
+      "_id": "5972564ee954d166c03e441b",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417b",
-      "name": "Room 44",
-      "feature": "5971fbde6f3aca292a4c4190"
+      "parent": "5972564ee954d166c03e43f8",
+      "name": "Room 44"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41c8",
+      "_id": "5972564ee954d166c03e441c",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417b",
-      "name": "Room 43",
-      "feature": "5971fbde6f3aca292a4c4191"
+      "parent": "5972564ee954d166c03e43f8",
+      "name": "Room 43"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41c9",
+      "_id": "5972564ee954d166c03e441d",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417b",
-      "name": "Room 42",
-      "feature": "5971fbde6f3aca292a4c4192"
+      "parent": "5972564ee954d166c03e43f8",
+      "name": "Room 42"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41ca",
+      "_id": "5972564ee954d166c03e441e",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417b",
-      "name": "Room 41",
-      "feature": "5971fbde6f3aca292a4c4193"
+      "parent": "5972564ee954d166c03e43f8",
+      "name": "Room 41"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41cb",
+      "_id": "5972564ee954d166c03e441f",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417b",
-      "name": "Room 37",
-      "feature": "5971fbde6f3aca292a4c4194"
+      "parent": "5972564ee954d166c03e43f8",
+      "name": "Room 37"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41cc",
+      "_id": "5972564ee954d166c03e4420",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417a",
-      "name": "Room 36",
-      "feature": "5971fbde6f3aca292a4c4195"
+      "parent": "5972564ee954d166c03e43f7",
+      "name": "Room 36"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41cd",
+      "_id": "5972564ee954d166c03e4421",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417a",
-      "name": "Room 35",
-      "feature": "5971fbde6f3aca292a4c4196"
+      "parent": "5972564ee954d166c03e43f7",
+      "name": "Room 35"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41ce",
+      "_id": "5972564ee954d166c03e4422",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417c",
-      "name": "Room 34",
-      "feature": "5971fbde6f3aca292a4c4197"
+      "parent": "5972564ee954d166c03e43f9",
+      "name": "Room 34"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41cf",
+      "_id": "5972564ee954d166c03e4423",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c4179",
-      "name": "Room 33",
-      "feature": "5971fbde6f3aca292a4c4198"
+      "parent": "5972564ee954d166c03e43f6",
+      "name": "Room 33"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41d0",
+      "_id": "5972564ee954d166c03e4424",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c4179",
-      "name": "Room 32",
-      "feature": "5971fbde6f3aca292a4c4199"
+      "parent": "5972564ee954d166c03e43f6",
+      "name": "Room 32"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41d1",
+      "_id": "5972564ee954d166c03e4425",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c4179",
-      "name": "Room 31",
-      "feature": "5971fbde6f3aca292a4c419a"
+      "parent": "5972564ee954d166c03e43f6",
+      "name": "Room 31"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41d2",
+      "_id": "5972564ee954d166c03e4426",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c4179",
-      "name": "Room 30",
-      "feature": "5971fbde6f3aca292a4c419b"
+      "parent": "5972564ee954d166c03e43f6",
+      "name": "Room 30"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41d3",
+      "_id": "5972564ee954d166c03e4427",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c4179",
-      "name": "Room 28",
-      "feature": "5971fbde6f3aca292a4c419c"
+      "parent": "5972564ee954d166c03e43f6",
+      "name": "Room 28"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41d4",
+      "_id": "5972564ee954d166c03e4428",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c4179",
-      "name": "Room 27",
-      "feature": "5971fbde6f3aca292a4c419d"
+      "parent": "5972564ee954d166c03e43f6",
+      "name": "Room 27"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41d5",
+      "_id": "5972564ee954d166c03e4429",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417e",
-      "name": "Room 26",
-      "feature": "5971fbde6f3aca292a4c419e"
+      "parent": "5972564ee954d166c03e43fb",
+      "name": "Room 26"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41d6",
+      "_id": "5972564ee954d166c03e442a",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417e",
-      "name": "Room 25",
-      "feature": "5971fbde6f3aca292a4c419f"
+      "parent": "5972564ee954d166c03e43fb",
+      "name": "Room 25"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41d7",
+      "_id": "5972564ee954d166c03e442b",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417e",
-      "name": "Room 24",
-      "feature": "5971fbde6f3aca292a4c41a0"
+      "parent": "5972564ee954d166c03e43fb",
+      "name": "Room 24"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41d8",
+      "_id": "5972564ee954d166c03e442c",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417e",
-      "name": "Room 23",
-      "feature": "5971fbde6f3aca292a4c41a1"
+      "parent": "5972564ee954d166c03e43fb",
+      "name": "Room 23"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41d9",
+      "_id": "5972564ee954d166c03e442d",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417e",
-      "name": "Room 21",
-      "feature": "5971fbde6f3aca292a4c41a2"
+      "parent": "5972564ee954d166c03e43fb",
+      "name": "Room 21"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41da",
+      "_id": "5972564ee954d166c03e442e",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417e",
-      "name": "Room 20",
-      "feature": "5971fbde6f3aca292a4c41a3"
+      "parent": "5972564ee954d166c03e43fb",
+      "name": "Room 20"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41db",
+      "_id": "5972564ee954d166c03e442f",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417e",
-      "name": "Room 19",
-      "feature": "5971fbde6f3aca292a4c41a4"
+      "parent": "5972564ee954d166c03e43fb",
+      "name": "Room 19"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41dc",
+      "_id": "5972564ee954d166c03e4430",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417e",
-      "name": "Room 18",
-      "feature": "5971fbde6f3aca292a4c41a5"
+      "parent": "5972564ee954d166c03e43fb",
+      "name": "Room 18"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41dd",
+      "_id": "5972564ee954d166c03e4431",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417b",
-      "name": "Room 17",
-      "feature": "5971fbde6f3aca292a4c41a6"
+      "parent": "5972564ee954d166c03e43f8",
+      "name": "Room 17"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41de",
+      "_id": "5972564ee954d166c03e4432",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417e",
-      "name": "Room 16",
-      "feature": "5971fbde6f3aca292a4c41a7"
+      "parent": "5972564ee954d166c03e43fb",
+      "name": "Room 16"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41df",
+      "_id": "5972564ee954d166c03e4433",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417e",
-      "name": "Room 15",
-      "feature": "5971fbde6f3aca292a4c41a8"
+      "parent": "5972564ee954d166c03e43fb",
+      "name": "Room 15"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41e0",
+      "_id": "5972564ee954d166c03e4434",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417e",
-      "name": "Room 14",
-      "feature": "5971fbde6f3aca292a4c41a9"
+      "parent": "5972564ee954d166c03e43fb",
+      "name": "Room 14"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41e1",
+      "_id": "5972564ee954d166c03e4435",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417e",
-      "name": "Room 12",
-      "feature": "5971fbde6f3aca292a4c41aa"
+      "parent": "5972564ee954d166c03e43fb",
+      "name": "Room 12"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41e2",
+      "_id": "5972564ee954d166c03e4436",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417d",
-      "name": "Room 11",
-      "feature": "5971fbde6f3aca292a4c41ab"
+      "parent": "5972564ee954d166c03e43fa",
+      "name": "Room 11"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41e3",
+      "_id": "5972564ee954d166c03e4437",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417d",
-      "name": "Room 10",
-      "feature": "5971fbde6f3aca292a4c41ac"
+      "parent": "5972564ee954d166c03e43fa",
+      "name": "Room 10"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41e4",
+      "_id": "5972564ee954d166c03e4438",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417d",
-      "name": "Room 9",
-      "feature": "5971fbde6f3aca292a4c41ad"
+      "parent": "5972564ee954d166c03e43fa",
+      "name": "Room 9"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41e5",
+      "_id": "5972564ee954d166c03e4439",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417d",
-      "name": "Room 8",
-      "feature": "5971fbde6f3aca292a4c41ae"
+      "parent": "5972564ee954d166c03e43fa",
+      "name": "Room 8"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41e6",
+      "_id": "5972564ee954d166c03e443a",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417d",
-      "name": "Room 7",
-      "feature": "5971fbde6f3aca292a4c41af"
+      "parent": "5972564ee954d166c03e43fa",
+      "name": "Room 7"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41e7",
+      "_id": "5972564ee954d166c03e443b",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417d",
-      "name": "Room 6",
-      "feature": "5971fbde6f3aca292a4c41b0"
+      "parent": "5972564ee954d166c03e43fa",
+      "name": "Room 6"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41e8",
+      "_id": "5972564ee954d166c03e443c",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417d",
-      "name": "Room 5",
-      "feature": "5971fbde6f3aca292a4c41b1"
+      "parent": "5972564ee954d166c03e43fa",
+      "name": "Room 5"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41e9",
+      "_id": "5972564ee954d166c03e443d",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417d",
-      "name": "Room 4",
-      "feature": "5971fbde6f3aca292a4c41b2"
+      "parent": "5972564ee954d166c03e43fa",
+      "name": "Room 4"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41ea",
+      "_id": "5972564ee954d166c03e443e",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417d",
-      "name": "Room 3",
-      "feature": "5971fbde6f3aca292a4c41b3"
+      "parent": "5972564ee954d166c03e43fa",
+      "name": "Room 3"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41eb",
+      "_id": "5972564ee954d166c03e443f",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417d",
-      "name": "Room 2",
-      "feature": "5971fbde6f3aca292a4c41b4"
+      "parent": "5972564ee954d166c03e43fa",
+      "name": "Room 2"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41ec",
+      "_id": "5972564ee954d166c03e4440",
       "type": "room",
-      "parent": "5971fbde6f3aca292a4c417d",
-      "name": "Room 1",
-      "feature": "5971fbde6f3aca292a4c41b5"
+      "parent": "5972564ee954d166c03e43fa",
+      "name": "Room 1"
     }
   ]
 }

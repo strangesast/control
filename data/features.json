@@ -1,7 +1,7 @@
 {
   "features": [
     {
-      "_id": "5971fbde6f3aca292a4c415d",
+      "_id": "5972564ee954d166c03e43e9",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -175,12 +175,13 @@
         ]
       },
       "properties": {
-        "layer": "building"
+        "layer": "building",
+        "area": "5972564ee954d166c03e43e8"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c415f",
+      "_id": "5972564ee954d166c03e43ec",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -314,12 +315,13 @@
         ]
       },
       "properties": {
-        "layer": "wing"
+        "layer": "wing",
+        "area": "5972564ee954d166c03e43ea"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4160",
+      "_id": "5972564ee954d166c03e43ed",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -393,12 +395,13 @@
         ]
       },
       "properties": {
-        "layer": "wing"
+        "layer": "wing",
+        "area": "5972564ee954d166c03e43eb"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4163",
+      "_id": "5972564ee954d166c03e43fc",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -452,12 +455,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e43ee"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4164",
+      "_id": "5972564ee954d166c03e43fd",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -521,12 +525,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e43ef"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4165",
+      "_id": "5972564ee954d166c03e43fe",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -580,12 +585,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e43f0"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4166",
+      "_id": "5972564ee954d166c03e43ff",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -639,12 +645,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e43f1"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4167",
+      "_id": "5972564ee954d166c03e4400",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -728,12 +735,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e43f2"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4168",
+      "_id": "5972564ee954d166c03e4401",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -767,12 +775,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e43f3"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4169",
+      "_id": "5972564ee954d166c03e4402",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -806,12 +815,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e43f4"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c416a",
+      "_id": "5972564ee954d166c03e4403",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -845,12 +855,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e43f5"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c416b",
+      "_id": "5972564ee954d166c03e4404",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -904,12 +915,13 @@
         ]
       },
       "properties": {
-        "layer": "department"
+        "layer": "department",
+        "area": "5972564ee954d166c03e43f6"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c416c",
+      "_id": "5972564ee954d166c03e4405",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -943,12 +955,13 @@
         ]
       },
       "properties": {
-        "layer": "department"
+        "layer": "department",
+        "area": "5972564ee954d166c03e43f7"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c416d",
+      "_id": "5972564ee954d166c03e4406",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -1022,12 +1035,13 @@
         ]
       },
       "properties": {
-        "layer": "department"
+        "layer": "department",
+        "area": "5972564ee954d166c03e43f8"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c416e",
+      "_id": "5972564ee954d166c03e4407",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -1071,12 +1085,13 @@
         ]
       },
       "properties": {
-        "layer": "department"
+        "layer": "department",
+        "area": "5972564ee954d166c03e43f9"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c416f",
+      "_id": "5972564ee954d166c03e4408",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -1150,12 +1165,13 @@
         ]
       },
       "properties": {
-        "layer": "department"
+        "layer": "department",
+        "area": "5972564ee954d166c03e43fa"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4170",
+      "_id": "5972564ee954d166c03e4409",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -1269,12 +1285,13 @@
         ]
       },
       "properties": {
-        "layer": "department"
+        "layer": "department",
+        "area": "5972564ee954d166c03e43fb"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c417f",
+      "_id": "5972564ee954d166c03e4441",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -1328,12 +1345,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e440a"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4180",
+      "_id": "5972564ee954d166c03e4442",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -1397,12 +1415,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e440b"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4181",
+      "_id": "5972564ee954d166c03e4443",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -1506,12 +1525,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e440c"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4182",
+      "_id": "5972564ee954d166c03e4444",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -1585,12 +1605,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e440d"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4183",
+      "_id": "5972564ee954d166c03e4445",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -1634,12 +1655,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e440e"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4184",
+      "_id": "5972564ee954d166c03e4446",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -1673,12 +1695,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e440f"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4185",
+      "_id": "5972564ee954d166c03e4447",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -1712,12 +1735,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4410"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4186",
+      "_id": "5972564ee954d166c03e4448",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -1766,12 +1790,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4411"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4187",
+      "_id": "5972564ee954d166c03e4449",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -1815,12 +1840,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4412"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4188",
+      "_id": "5972564ee954d166c03e444a",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -1854,12 +1880,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4413"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4189",
+      "_id": "5972564ee954d166c03e444b",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -1908,12 +1935,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4414"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c418a",
+      "_id": "5972564ee954d166c03e444c",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -1947,12 +1975,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4415"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c418b",
+      "_id": "5972564ee954d166c03e444d",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -2001,12 +2030,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4416"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c418c",
+      "_id": "5972564ee954d166c03e444e",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -2050,12 +2080,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4417"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c418d",
+      "_id": "5972564ee954d166c03e444f",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -2089,12 +2120,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4418"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c418e",
+      "_id": "5972564ee954d166c03e4450",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -2153,12 +2185,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4419"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c418f",
+      "_id": "5972564ee954d166c03e4451",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -2212,12 +2245,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e441a"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4190",
+      "_id": "5972564ee954d166c03e4452",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -2251,12 +2285,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e441b"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4191",
+      "_id": "5972564ee954d166c03e4453",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -2310,12 +2345,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e441c"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4192",
+      "_id": "5972564ee954d166c03e4454",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -2369,12 +2405,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e441d"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4193",
+      "_id": "5972564ee954d166c03e4455",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -2428,12 +2465,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e441e"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4194",
+      "_id": "5972564ee954d166c03e4456",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -2547,12 +2585,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e441f"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4195",
+      "_id": "5972564ee954d166c03e4457",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -2586,12 +2625,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4420"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4196",
+      "_id": "5972564ee954d166c03e4458",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -2625,12 +2665,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4421"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4197",
+      "_id": "5972564ee954d166c03e4459",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -2674,12 +2715,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4422"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4198",
+      "_id": "5972564ee954d166c03e445a",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -2713,12 +2755,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4423"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c4199",
+      "_id": "5972564ee954d166c03e445b",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -2752,12 +2795,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4424"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c419a",
+      "_id": "5972564ee954d166c03e445c",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -2791,12 +2835,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4425"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c419b",
+      "_id": "5972564ee954d166c03e445d",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -2830,12 +2875,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4426"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c419c",
+      "_id": "5972564ee954d166c03e445e",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -2869,12 +2915,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4427"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c419d",
+      "_id": "5972564ee954d166c03e445f",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -2938,12 +2985,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4428"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c419e",
+      "_id": "5972564ee954d166c03e4460",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -2987,12 +3035,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4429"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c419f",
+      "_id": "5972564ee954d166c03e4461",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -3026,12 +3075,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e442a"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41a0",
+      "_id": "5972564ee954d166c03e4462",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -3075,12 +3125,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e442b"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41a1",
+      "_id": "5972564ee954d166c03e4463",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -3114,12 +3165,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e442c"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41a2",
+      "_id": "5972564ee954d166c03e4464",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -3163,12 +3215,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e442d"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41a3",
+      "_id": "5972564ee954d166c03e4465",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -3212,12 +3265,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e442e"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41a4",
+      "_id": "5972564ee954d166c03e4466",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -3261,12 +3315,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e442f"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41a5",
+      "_id": "5972564ee954d166c03e4467",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -3315,12 +3370,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4430"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41a6",
+      "_id": "5972564ee954d166c03e4468",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -3374,12 +3430,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4431"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41a7",
+      "_id": "5972564ee954d166c03e4469",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -3413,12 +3470,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4432"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41a8",
+      "_id": "5972564ee954d166c03e446a",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -3457,12 +3515,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4433"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41a9",
+      "_id": "5972564ee954d166c03e446b",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -3516,12 +3575,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4434"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41aa",
+      "_id": "5972564ee954d166c03e446c",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -3555,12 +3615,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4435"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41ab",
+      "_id": "5972564ee954d166c03e446d",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -3634,12 +3695,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4436"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41ac",
+      "_id": "5972564ee954d166c03e446e",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -3683,12 +3745,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4437"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41ad",
+      "_id": "5972564ee954d166c03e446f",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -3722,12 +3785,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4438"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41ae",
+      "_id": "5972564ee954d166c03e4470",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -3771,12 +3835,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4439"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41af",
+      "_id": "5972564ee954d166c03e4471",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -3810,12 +3875,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e443a"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41b0",
+      "_id": "5972564ee954d166c03e4472",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -3869,12 +3935,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e443b"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41b1",
+      "_id": "5972564ee954d166c03e4473",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -3928,12 +3995,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e443c"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41b2",
+      "_id": "5972564ee954d166c03e4474",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -3967,12 +4035,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e443d"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41b3",
+      "_id": "5972564ee954d166c03e4475",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -4006,12 +4075,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e443e"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41b4",
+      "_id": "5972564ee954d166c03e4476",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -4045,12 +4115,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e443f"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41b5",
+      "_id": "5972564ee954d166c03e4477",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -4084,12 +4155,13 @@
         ]
       },
       "properties": {
-        "layer": "room"
+        "layer": "room",
+        "area": "5972564ee954d166c03e4440"
       },
       "type": "Feature"
     },
     {
-      "_id": "5971fbde6f3aca292a4c41ed",
+      "_id": "5972564ee954d166c03e44dc",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4099,11 +4171,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e4478"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c41ee",
+      "_id": "5972564ee954d166c03e44dd",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4113,11 +4186,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e4479"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c41ef",
+      "_id": "5972564ee954d166c03e44de",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4127,11 +4201,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e447a"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c41f0",
+      "_id": "5972564ee954d166c03e44df",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4141,11 +4216,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e447b"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c41f1",
+      "_id": "5972564ee954d166c03e44e0",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4155,11 +4231,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e447c"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c41f2",
+      "_id": "5972564ee954d166c03e44e1",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4169,11 +4246,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e447d"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c41f3",
+      "_id": "5972564ee954d166c03e44e2",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4183,11 +4261,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e447e"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c41f4",
+      "_id": "5972564ee954d166c03e44e3",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4197,11 +4276,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e447f"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c41f5",
+      "_id": "5972564ee954d166c03e44e4",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4211,11 +4291,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e4480"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c41f6",
+      "_id": "5972564ee954d166c03e44e5",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4225,11 +4306,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e4481"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c41f7",
+      "_id": "5972564ee954d166c03e44e6",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4239,11 +4321,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e4482"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c41f8",
+      "_id": "5972564ee954d166c03e44e7",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4253,11 +4336,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e4483"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c41f9",
+      "_id": "5972564ee954d166c03e44e8",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4267,11 +4351,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e4484"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c41fa",
+      "_id": "5972564ee954d166c03e44e9",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4281,11 +4366,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e4485"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c41fb",
+      "_id": "5972564ee954d166c03e44ea",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4295,11 +4381,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e4486"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c41fc",
+      "_id": "5972564ee954d166c03e44eb",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4309,11 +4396,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e4487"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c41fd",
+      "_id": "5972564ee954d166c03e44ec",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4323,11 +4411,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e4488"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c41fe",
+      "_id": "5972564ee954d166c03e44ed",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4337,11 +4426,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e4489"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c41ff",
+      "_id": "5972564ee954d166c03e44ee",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4351,11 +4441,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e448a"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4200",
+      "_id": "5972564ee954d166c03e44ef",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4365,11 +4456,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e448b"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4201",
+      "_id": "5972564ee954d166c03e44f0",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4379,11 +4471,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e448c"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4202",
+      "_id": "5972564ee954d166c03e44f1",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4393,11 +4486,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e448d"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4203",
+      "_id": "5972564ee954d166c03e44f2",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4407,11 +4501,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e448e"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4204",
+      "_id": "5972564ee954d166c03e44f3",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4421,11 +4516,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e448f"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4205",
+      "_id": "5972564ee954d166c03e44f4",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4435,11 +4531,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e4490"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4206",
+      "_id": "5972564ee954d166c03e44f5",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4449,11 +4546,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e4491"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4207",
+      "_id": "5972564ee954d166c03e44f6",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4463,11 +4561,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e4492"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4208",
+      "_id": "5972564ee954d166c03e44f7",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4477,11 +4576,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e4493"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4209",
+      "_id": "5972564ee954d166c03e44f8",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4491,11 +4591,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e4494"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c420a",
+      "_id": "5972564ee954d166c03e44f9",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4505,11 +4606,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e4495"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c420b",
+      "_id": "5972564ee954d166c03e44fa",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4519,11 +4621,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e4496"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c420c",
+      "_id": "5972564ee954d166c03e44fb",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4533,11 +4636,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e4497"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c420d",
+      "_id": "5972564ee954d166c03e44fc",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4547,11 +4651,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e4498"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c420e",
+      "_id": "5972564ee954d166c03e44fd",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4561,11 +4666,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e4499"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c420f",
+      "_id": "5972564ee954d166c03e44fe",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4575,11 +4681,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e449a"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4210",
+      "_id": "5972564ee954d166c03e44ff",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4589,11 +4696,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e449b"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4211",
+      "_id": "5972564ee954d166c03e4500",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4603,11 +4711,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e449c"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4212",
+      "_id": "5972564ee954d166c03e4501",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4617,11 +4726,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e449d"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4213",
+      "_id": "5972564ee954d166c03e4502",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4631,11 +4741,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e449e"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4214",
+      "_id": "5972564ee954d166c03e4503",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4645,11 +4756,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e449f"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4215",
+      "_id": "5972564ee954d166c03e4504",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4659,11 +4771,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44a0"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4216",
+      "_id": "5972564ee954d166c03e4505",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4673,11 +4786,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44a1"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4217",
+      "_id": "5972564ee954d166c03e4506",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4687,11 +4801,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44a2"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4218",
+      "_id": "5972564ee954d166c03e4507",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4701,11 +4816,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44a3"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4219",
+      "_id": "5972564ee954d166c03e4508",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4715,11 +4831,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44a4"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c421a",
+      "_id": "5972564ee954d166c03e4509",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4729,11 +4846,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44a5"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c421b",
+      "_id": "5972564ee954d166c03e450a",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4743,11 +4861,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44a6"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c421c",
+      "_id": "5972564ee954d166c03e450b",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4757,11 +4876,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44a7"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c421d",
+      "_id": "5972564ee954d166c03e450c",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4771,11 +4891,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44a8"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c421e",
+      "_id": "5972564ee954d166c03e450d",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4785,11 +4906,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44a9"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c421f",
+      "_id": "5972564ee954d166c03e450e",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4799,11 +4921,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44aa"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4220",
+      "_id": "5972564ee954d166c03e450f",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4813,11 +4936,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44ab"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4221",
+      "_id": "5972564ee954d166c03e4510",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4827,11 +4951,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44ac"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4222",
+      "_id": "5972564ee954d166c03e4511",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4841,11 +4966,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44ad"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4223",
+      "_id": "5972564ee954d166c03e4512",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4855,11 +4981,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44ae"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4224",
+      "_id": "5972564ee954d166c03e4513",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4869,11 +4996,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44af"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4225",
+      "_id": "5972564ee954d166c03e4514",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4883,11 +5011,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44b0"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4226",
+      "_id": "5972564ee954d166c03e4515",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4897,11 +5026,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44b1"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4227",
+      "_id": "5972564ee954d166c03e4516",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4911,11 +5041,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44b2"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4228",
+      "_id": "5972564ee954d166c03e4517",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4925,11 +5056,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44b3"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4229",
+      "_id": "5972564ee954d166c03e4518",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4939,11 +5071,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44b4"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c422a",
+      "_id": "5972564ee954d166c03e4519",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4953,11 +5086,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44b5"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c422b",
+      "_id": "5972564ee954d166c03e451a",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4967,11 +5101,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44b6"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c422c",
+      "_id": "5972564ee954d166c03e451b",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4981,11 +5116,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44b7"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c422d",
+      "_id": "5972564ee954d166c03e451c",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -4995,11 +5131,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44b8"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c422e",
+      "_id": "5972564ee954d166c03e451d",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5009,11 +5146,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44b9"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c422f",
+      "_id": "5972564ee954d166c03e451e",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5023,11 +5161,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44ba"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4230",
+      "_id": "5972564ee954d166c03e451f",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5037,11 +5176,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44bb"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4231",
+      "_id": "5972564ee954d166c03e4520",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5051,11 +5191,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44bc"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4232",
+      "_id": "5972564ee954d166c03e4521",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5065,11 +5206,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44bd"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4233",
+      "_id": "5972564ee954d166c03e4522",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5079,11 +5221,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44be"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4234",
+      "_id": "5972564ee954d166c03e4523",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5093,11 +5236,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44bf"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4235",
+      "_id": "5972564ee954d166c03e4524",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5107,11 +5251,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44c0"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4236",
+      "_id": "5972564ee954d166c03e4525",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5121,11 +5266,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44c1"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4237",
+      "_id": "5972564ee954d166c03e4526",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5135,11 +5281,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44c2"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4238",
+      "_id": "5972564ee954d166c03e4527",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5149,11 +5296,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44c3"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4239",
+      "_id": "5972564ee954d166c03e4528",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5163,11 +5311,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44c4"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c423a",
+      "_id": "5972564ee954d166c03e4529",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5177,11 +5326,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44c5"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c423b",
+      "_id": "5972564ee954d166c03e452a",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5191,11 +5341,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44c6"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c423c",
+      "_id": "5972564ee954d166c03e452b",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5205,11 +5356,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44c7"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c423d",
+      "_id": "5972564ee954d166c03e452c",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5219,11 +5371,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44c8"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c423e",
+      "_id": "5972564ee954d166c03e452d",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5233,11 +5386,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44c9"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c423f",
+      "_id": "5972564ee954d166c03e452e",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5247,11 +5401,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44ca"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4240",
+      "_id": "5972564ee954d166c03e452f",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5261,11 +5416,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44cb"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4241",
+      "_id": "5972564ee954d166c03e4530",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5275,11 +5431,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44cc"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4242",
+      "_id": "5972564ee954d166c03e4531",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5289,11 +5446,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44cd"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4243",
+      "_id": "5972564ee954d166c03e4532",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5303,11 +5461,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44ce"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4244",
+      "_id": "5972564ee954d166c03e4533",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5317,11 +5476,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44cf"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4245",
+      "_id": "5972564ee954d166c03e4534",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5331,11 +5491,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44d0"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4246",
+      "_id": "5972564ee954d166c03e4535",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5345,11 +5506,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44d1"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4247",
+      "_id": "5972564ee954d166c03e4536",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5359,11 +5521,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44d2"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4248",
+      "_id": "5972564ee954d166c03e4537",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5373,11 +5536,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44d3"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4249",
+      "_id": "5972564ee954d166c03e4538",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5387,11 +5551,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44d4"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c424a",
+      "_id": "5972564ee954d166c03e4539",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5401,11 +5566,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44d5"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c424b",
+      "_id": "5972564ee954d166c03e453a",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5415,11 +5581,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44d6"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c424c",
+      "_id": "5972564ee954d166c03e453b",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5429,11 +5596,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44d7"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c424d",
+      "_id": "5972564ee954d166c03e453c",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5443,11 +5611,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44d8"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c424e",
+      "_id": "5972564ee954d166c03e453d",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5457,11 +5626,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44d9"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c424f",
+      "_id": "5972564ee954d166c03e453e",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5471,11 +5641,12 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44da"
       }
     },
     {
-      "_id": "5971fbde6f3aca292a4c4250",
+      "_id": "5972564ee954d166c03e453f",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -5485,7 +5656,8 @@
       },
       "type": "Feature",
       "properties": {
-        "layer": "point"
+        "layer": "point",
+        "point": "5972564ee954d166c03e44db"
       }
     }
   ]

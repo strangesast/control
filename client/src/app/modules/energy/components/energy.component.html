@@ -3,18 +3,18 @@
 </header>
 <div class="grid-container body">
   <div class="map">
-    <app-map [active]="activeNode$ | async" (activeChange)="setActiveNodeById($event)"></app-map>
+    <app-map [active]="activeNodeId$ | async" (activeChange)="data.setActiveNode($event)"></app-map>
   </div>
   <div class="graph">
-    <app-graph [point]="activeNode$ | async"></app-graph>
+    <app-graph [point]="activeNodeId$ | async"></app-graph>
   </div>
   <div class="indented-tree-list">
-    <app-tree-list [activeNode]="" [tree]="tree$ | async" (activeNodeChange)="setActiveNode($event)"></app-tree-list>
+    <app-tree-list [active]="activeNodeId$ | async" [tree]="tree$ | async" (activeNodeChange)="data.setActiveNode($event)"></app-tree-list>
   </div>
   <div class="photo">Photo</div>
   <div class="description">
     <div *ngIf="activeNode$ | async as activeNode">
-      <div>{{ activeNode.data.name }}</div>
+      <div>{{ activeNode.name }}</div>
     </div>
   </div>
   <div class="boxes">Boxes</div>
