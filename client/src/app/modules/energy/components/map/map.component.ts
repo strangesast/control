@@ -98,7 +98,9 @@ export class MapComponent implements OnInit {
       .attr('class', 'background')
       .attr('width', width)
       .attr('height', height)
-      .on('click', () => this.reset());
+      .on('click', () => {
+        self.reset()
+      });
     
     let g = this.svg.append('g');
     
@@ -110,9 +112,9 @@ export class MapComponent implements OnInit {
         .attr('d', path)
         .attr('data-id', (d) => d._id)
         .attr('class', 'feature')
-        .on('click', ({ _id: id }) => {
+        .on('click', function ({ _id: id }) {
           self.activeElementChange.emit(id);
-          if (this.active.node() === this) return self.reset();
+          if (self.active.node() === this) return self.reset();
           self.clicked(id);
         });
     
@@ -141,6 +143,7 @@ export class MapComponent implements OnInit {
   }
 
   reset() {
+    console.log('reset');
     let projection = this.calcProjection();
     let path = d3.geoPath()
       .projection(projection)
