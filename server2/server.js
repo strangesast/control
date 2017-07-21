@@ -297,7 +297,7 @@ app.all('/logout', function(req, res, next) {
 var userRoute = express.Router();
 
 //userRoute.use(ensureLoggedIn('/login'))
-userRoute.use(passport.authenticate('jwt', { session: false }));
+userRoute.use(passport.authenticate('jwt', { session: false })); // should replace with call to next on failed auth
 userRoute.get('/', function(req, res, next) {
   res.json(req.user);
 });
@@ -317,6 +317,24 @@ userRoute.get('/points', async function (req, res, next) {
 userRoute.get('/areas', async function (req, res, next) {
   let areas = await mongo.collection('areas').find({}).toArray();
   res.json(areas);
+});
+
+userRoute.get('/layers', async function (req, res, next) {
+  let layers = await mongo.collection('features').distinct('properties.layer');
+  //let layers2 = (await mongo.collection('features').find({}).toArray()).reduce((a, { properties: p }) => a.indexOf(p.layer) > -1 ? a.concat(p.layer) : a, []);
+  res.json(layers);
+});
+
+userRoute.get('/layers/:layerName', async function (req, res, next) {
+  let { layerName } = req.params;
+  let features = await mongo.collection('features').find({ 'properties.layer': layerName }).toArray();
+
+  let layer = {
+    type: 'FeatureCollection',
+    crs: { type: 'name', properties: { name: 'urn:ogc:def:crs:OGC:1.3:CRS84' } },
+    features
+  }
+  res.json(layer);
 });
 
 app.use('/user', userRoute);

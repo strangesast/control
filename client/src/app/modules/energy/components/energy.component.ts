@@ -18,9 +18,9 @@ export class EnergyComponent implements OnInit {
     let strat = stratify().id(d => d._id).parentId(d => d.parent || d.area);
     let t = tree().nodeSize([0, 1]);
 
-    this.tree$ = Observable.combineLatest(this.data.areas$, this.data.points$).debounceTime(100).switchMap(([ areas, points ]) => {
+    this.tree$ = Observable.combineLatest(this.data.areas$, this.data.points$).debounceTime(200).switchMap(([ areas, points ]) => {
       if (areas.length) {
-        let node = t(strat([...areas, ...points]));
+        let node = t(strat([...areas, ...points.map(point => Object.assign({}, point, { type: 'point' }))]));
         // "close" all but root node, children
         node.eachAfter(n => {
           if (n !== node
@@ -48,12 +48,9 @@ export class EnergyComponent implements OnInit {
       }
       return activeNode;
     });
-
-    this.activeNode$.subscribe();
   }
 
   setActiveNode(node) {
-    console.log('setting...');
     this.data.setActiveNode(node.data._id);
   }
 

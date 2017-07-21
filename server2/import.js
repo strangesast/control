@@ -13,121 +13,123 @@ const fs = require('fs'),
 let dataDir = '../data';
 let geoDir = path.join(dataDir, 'geo');
 
-let features = fs.readdirSync(geoDir)
-  .map(n => path.join(geoDir, n))
-  .filter(p => fs.statSync(p).isFile() && p.endsWith('.geojson'))
-  .reduce((a, p) => {
-    // like building, wing, sensor, etc
-    let type = p.indexOf('sensor') > -1 ? 'sensor' : 'area';
-    let category;
-    if (type == 'area') {
-      category = p.substring(p.lastIndexOf('/')+1, p.lastIndexOf('.geojson')).slice(0, -1);
-    }
-
-    let features = JSON.parse(fs.readFileSync(p)).features;
-    for (let feature of features) {
-      Object.assign(feature.properties, { category, type });
-    };
-
-    a[type] = (a[type] || []).concat(features);
+let featureSets = ['areas', 'points']
+  .reduce((a, name) => {
+    a[name] = JSON.parse(fs.readFileSync(path.join(geoDir, name + '.geojson')));
     return a;
-  }, {});
+  }, {})
 
-function cap(str) {
-  return str[0].toUpperCase() + str.substr(1);
+
+function renameArea(name, id, type) {
+  if (type == 'building') {
+    return 'Day Automation - Victor Office';
+  }
+  if (name && name.startsWith('area')) {
+    return [name.substr(5), type].map(cap).join(' ');
+  }
+  if (name && name.startsWith('room')) {
+    return `Room ${ parseInt(name.substring(4)) }`
+  }
+  return `${ cap(type) } ${ id+0 }`
 }
 
 (async function() {
   const host = 'localhost';
   const databaseName = 'topview';
   const dbUrl = `mongodb://${ host }:27017/${ databaseName }`;
+
   mongo = await MongoClient.connect(dbUrl);
   await mongo.dropDatabase();
+
   let featuresCollection = await mongo.createCollection('features');
   let areasCollection = await mongo.createCollection('areas');
   let pointsCollection = await mongo.createCollection('points');
 
-  let oldAreaNameToId = {};
-
-  let parentMap = { [null]: null };
+  let areaFeatures = featureSets.areas.features;
+  let oldNameToId = {};
   let parentIds = [null];
-  let prevParentNames = [];
-  let parentFeatures = features.area.filter(feature =>
-    parentIds.indexOf(feature.properties.parent) > -1
-  );
-
-  let inserted = 0;
-  let areaFeatures = {};
-  while (parentFeatures.length) {
+  
+  let findParents = () => areaFeatures
+    .filter(feature => parentIds.indexOf(feature.properties.parent) > -1);
+  
+  let parentFeatures = findParents();
+  let parentMap = {};
+  let savedAreas = {};
+  
+  let l;
+  while (l = parentFeatures.length) {
     let parentNames = [];
+    let docsToSave = [];
+    let featuresToSave = [];
 
-    for (let feature of parentFeatures) {
-      let { name, parent, category, type } = feature.properties;
-      parentNames.push(name);
+    // move properties from feature to new object
+    for (let {
+      geometry,
+      type: featureType,
+      properties: { id, name, parent, type }
+    } of parentFeatures) {
+      parentNames.push(name || id);
+  
+      let nameText = renameArea(name, id, type);
 
-      let nameText = category == 'room' ? `Room ${ parseInt(name.slice(-3)) }` :
-          category == 'building' ? 'Day Automation - Victor Office' :
-          `${ cap(name.substr(5)) } ${ cap(category) }`;
-
-      feature.properties = {
-        category,
-        type,
-        parent: parentMap[parent],
-        name: nameText
-      };
+      let doc = { type, parent: parentMap[parent], name: nameText };
+      let feature  = { geometry, properties: { layer: type }, type: featureType };
+      docsToSave.push(doc);
+      featuresToSave.push(feature);
     }
     parentMap = {};
 
-    let l = parentFeatures.length;
-    let areas = parentFeatures.map(feature => feature.properties);
-    let justFeatures = parentFeatures.map(({ geometry, type }) => ({ geometry, type, properties: {} }))
-
-    let insertedFeatureIds = await insertInto(featuresCollection, justFeatures);
+    let insertedFeatureIds = await insertInto(featuresCollection, featuresToSave);
     for (let i=0; i<l; i++) {
-      areas[i].feature = insertedFeatureIds[i];
+      let fid = insertedFeatureIds[i];
+      let doc = docsToSave[i];
+      doc['feature'] = fid;
     }
 
-    let insertedAreaIds = await insertInto(areasCollection, areas);
-    inserted += l
-
-    for (let i=0,pid,id; pid=parentNames[i], id=insertedAreaIds[i], i<l; i++) {
+    let insertedDocIds = await insertInto(areasCollection, docsToSave);
+  
+    for (let i=0,pid,id; pid=parentNames[i], id=insertedDocIds[i], i<l; i++) {
       parentMap[pid] = id;
-      areaFeatures[id] = parentFeatures[i];
+      savedAreas[id] = docsToSave[i];
     }
-    Object.assign(oldAreaNameToId, parentMap);
-
-    prevParentNames = prevParentNames.concat(parentNames);
+    Object.assign(oldNameToId, parentMap);
+  
     parentIds = Object.keys(parentMap);
-    parentFeatures = features.area.filter(feature =>
-      parentIds.indexOf(feature.properties.parent) > -1
-    );
+    parentFeatures = findParents();
   }
 
+  let pointFeatures = featureSets.points.features;
   let countPerArea = {};
-  for (let feature of features.sensor) {
-    let { area } = feature.properties;
-    let areaId = oldAreaNameToId[area];
-    if (areaId == null) throw new Error('sensor with unknown area');
-    countPerArea[areaId] = (countPerArea[areaId] || 0) + 1;
+
+  let docsToSave = [];
+  let featuresToSave = [];
+
+  // add features first
+  for (let {
+    geometry,
+    type: featureType,
+    properties: { id, parent }} of pointFeatures) {
+    let area = oldNameToId[parent];
+    let doc = { name: '', area };
+    let feature = { geometry, type: featureType, properties: { layer: 'point' } };
+    docsToSave.push(doc);
+    featuresToSave.push(feature);
+    countPerArea[area] = (countPerArea[area] || 0) + 1;
   }
 
-  for(let feature of features.sensor) {
-    let { area: oldAreaName } = feature.properties;
-    let areaId = oldAreaNameToId[oldAreaName];
-    let area = areaFeatures[areaId];
-    let name = `${ area.properties.name } Sensor ${ countPerArea[areaId]-- }`;
-    feature.properties = { name, area: areaId };
+  let insertedFeatureIds = await insertInto(featuresCollection, featuresToSave);
+  
+  // add feature reference, update name based on count from that area
+  for (let i=0; i<docsToSave.length; i++) {
+    let fid = insertedFeatureIds[i];
+    let doc = docsToSave[i];
+    let areaId = doc.area;
+    let areaName = savedAreas[areaId].name;
+    doc.feature = insertedFeatureIds[i];
+    doc.name = `${ areaName } Sensor ${ countPerArea[areaId]-- }`;
   }
 
-  let points = features.sensor.map(feature => feature.properties);
-  let l = points.length;
-  let justFeatures = features.sensor.map(({ geometry, type }) => ({ geometry, type, properties: {} }));
-
-  let insertedFeatureIds = await insertInto(featuresCollection, justFeatures);
-  for (let i=0; i<l; i++) {
-    points[i].feature = insertedFeatureIds[i];
-  }
-  await insertInto(pointsCollection, points);
+  await insertInto(pointsCollection, docsToSave);
 
 
   for (let collection of [featuresCollection, pointsCollection, areasCollection]) {
@@ -139,8 +141,17 @@ function cap(str) {
   }
 
   mongo.close();
-
 })();
+
+function cap(str) {
+  return str[0].toUpperCase() + str.substr(1);
+}
+
+function saveObject (name, obj) {
+  let text = JSON.stringify({ [name] : obj }, null, 2);
+  let p = path.join(dataDir, name + '.json');
+  fs.writeFileSync(p, text);
+}
 
 async function insertInto(collection, docs) {
   let { insertedIds, insertedCount } = await collection.insertMany(docs);

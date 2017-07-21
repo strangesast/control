@@ -55,11 +55,16 @@ export function appReducer (state: AppState = initialState, action: AppActions.A
 
     case AppActions.LoadApplicationsSuccess.typeString: {
       let applications = (action as AppActions.LoadApplicationsSuccess).payload;
-      return { ...state, appsInitialized: true, auth: { ...state.auth, applications }};
+      return { ...state, appsInitialized: true, appsLoadError: null, auth: { ...state.auth, applications }};
     }
     case AppActions.LoadApplicationsFailure.typeString: {
       let payload = (action as AppActions.LoadApplicationsFailure).payload;
-      return { ...state, appsInitialized: false, appsLoadError: payload };
+      return {
+        ...state,
+        auth: { ...state.auth, user: null, token: null, applications: [] },
+        appsInitialized: false,
+        appsLoadError: payload
+      };
     }
 
     // reset state on requesting new credentials

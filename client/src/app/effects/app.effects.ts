@@ -67,6 +67,12 @@ export class AppEffects {
     })
     //.catch(err => Observable.of(new AppActions.LoadApplicationsFailure(err)));
 
+  @Effect() loadFailLogout$ = this.actions$
+    .ofType(AppActions.LoadApplicationsFailure.typeString)
+    .map(() => {
+      return new AppActions.Logout();
+    })
+
 
   @Effect() register$ = this.actions$
     .ofType(AppActions.RegisterRequest.typeString)
@@ -87,6 +93,7 @@ export class AppEffects {
         .ofType(AppActions.LoginRequest.typeString)
         .map(toPayload)
         .switchMap(payload =>
+          console.log('got request', payload) ||
           this.options$.first().flatMap(options =>
             this.http.post('/api/login', JSON.stringify(payload), options).map(res => {
               let { user, token, applications } = res.json();
@@ -116,6 +123,7 @@ export class AppEffects {
 
   @Effect() logout$ = this.actions$
     .ofType(AppActions.LogoutRequest.typeString)
+    .do(x => console.log('got logout'))
     .switchMap(() => clearStorage().map(() => new AppActions.Logout()));
 
 }
@@ -149,6 +157,7 @@ function updateStorage({ user, token }: UserLoad): Observable<void> {
 }
 
 function clearStorage(): Observable<void> {
+  console.log('cleared user/token');
   localStorage.removeItem('currentUser');
   localStorage.removeItem('token');
   return Observable.of(undefined);

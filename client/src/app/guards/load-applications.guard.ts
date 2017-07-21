@@ -23,17 +23,19 @@ export class LoadApplicationsGuard implements CanActivate {
 
       // always return false to halt routing with this config. load new config. redirect to target path
       return this.authorization.userInitialized$.find(i => i).withLatestFrom(this.authorization.user$).flatMap(([_, user]) => {
-        console.log('user', user);
         if (user) {
-          return this.authorization.appsInitialized$.find(i => i).flatMap(() =>
-            this.authorization.applications$.first().map(apps => {
+          let errored = this.authorization.appsLoadError$.filter(e => !!e).map(() => {
+            console.log('here!');
+            this.router.navigate(['/login'], { queryParams: { redirectUrl: url }});
+          });
+          let loaded = this.authorization.appsInitialized$.find(i => i).flatMap(() =>
+            this.authorization.applications$.map(apps => {
               let routes = createRoutes(apps);
               this.router.resetConfig(routes);
-
               this.router.navigateByUrl(url);
-              return false;
             })
-          )
+          );
+          return Observable.merge(errored, loaded).first().mapTo(false);
         } else {
           this.router.navigate(['/login'], { queryParams: { redirectUrl: url }});
           return Observable.of(false);
