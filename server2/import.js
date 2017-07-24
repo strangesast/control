@@ -12,6 +12,7 @@ const fs = require('fs'),
 
 let dataDir = '../data';
 let geoDir = path.join(dataDir, 'geo');
+let buildingShortname = 'dayauto_victor';
 
 let featureSets = ['areas', 'points']
   .reduce((a, name) => {
@@ -72,8 +73,8 @@ function renameArea(name, id, type) {
   
       let nameText = renameArea(name, id, type);
 
-      let doc = { type, parent: parentMap[parent], name: nameText };
-      let feature  = { geometry, properties: { layer: type }, type: featureType };
+      let doc = { type, parent: parentMap[parent], name: nameText, iconPath: `/assets/img/${ name }.png` };
+      let feature  = { geometry, properties: { building: buildingShortname, layer: type }, type: featureType };
       docsToSave.push(doc);
       featuresToSave.push(feature);
     }

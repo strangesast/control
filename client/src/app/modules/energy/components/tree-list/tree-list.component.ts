@@ -79,6 +79,10 @@ export class TreeListComponent implements OnChanges {
       this.treeList = [];
     }
   }
+
+  classFromType(type, active) {
+    return (type == 'building' ? 'fa-building' : type == 'point' ? 'fa-circle' : 'fa-folder') + (active ? '' : '-o');
+  }
 }
 
 function getDescendants(node, includeRoot=true) {

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { AuthorizationService } from '../../../services/authorization.service';
-import { Observable } from 'rxjs';
+import { Feature, FeatureCollection } from '../models';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 const layerPriority = [
   'building',
@@ -12,23 +13,32 @@ const layerPriority = [
 ];
 
 function layerSort (a, b) {
-  return layerPriority.indexOf(a) > layerPriority.indexOf(b) ? -1 : 1;
+  return layerPriority.indexOf(a.key) > layerPriority.indexOf(b.key) ? -1 : 1;
 }
 
 @Injectable()
 export class MapService {
   options$: Observable<Partial<RequestOptions>>;
   layers$: Observable<any[]>
+  features$: Observable<{ [id: string]: any }>
+  map$: Observable<FeatureCollection>;
+
+  building$: Observable<string>;
 
   constructor(private auth: AuthorizationService, private http: Http) {
     this.options$ = this.auth.requestOptions;
-    this.layers$ = this.options$.take(1).flatMap(options =>
-      this.http.get('/api/user/layers', options).map(res => res.json().sort(layerSort)));
+    this.map$ = Observable.of(null).withLatestFrom(this.options$)
+      .switchMap(([_, options]) => this.http.get(`/api/user/features/buildings`, options).map(res => res.json()));
+
+    this.features$ = this.options$.flatMap(options => this.http.get(`/api/user/features`, options).map(res => res.json()))
+      .scan((obj, arr: Feature[]) => arr.reduce((a, feature) => ({ ...a, [ feature._id ] : feature }), obj), {}).shareReplay(1);
   }
 
-  getLayer(layerName) {
-    return this.options$.take(1).flatMap(options => this.http.get(`/api/user/layers/${ layerName }`, options).map(res => res.json()));
-  }
+  //getLayer(layerName) {
+  //  let uri = `/api/user/buildings/0/layers/${ layerName }/features`;
+  //  return this.options$.take(1).flatMap(options =>
+  //    this.http.get(uri, options).map(res => res.json()));
+  //}
 
   resolve() {
   }

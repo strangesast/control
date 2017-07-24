@@ -1,436 +1,508 @@
 {
   "areas": [
     {
-      "_id": "5972564ee954d166c03e43e8",
+      "_id": "597623c451d828538ebb10fb",
       "type": "building",
       "parent": null,
-      "name": "Day Automation - Victor Office"
+      "name": "Day Automation - Victor Office",
+      "iconPath": "/assets/img/area_building.png"
     },
     {
-      "_id": "5972564ee954d166c03e43ea",
+      "_id": "597623c451d828538ebb10fd",
       "type": "wing",
-      "parent": "5972564ee954d166c03e43e8",
-      "name": "South Wing"
+      "parent": "597623c451d828538ebb10fb",
+      "name": "South Wing",
+      "iconPath": "/assets/img/area_south.png"
     },
     {
-      "_id": "5972564ee954d166c03e43eb",
+      "_id": "597623c451d828538ebb10fe",
       "type": "wing",
-      "parent": "5972564ee954d166c03e43e8",
-      "name": "North Wing"
+      "parent": "597623c451d828538ebb10fb",
+      "name": "North Wing",
+      "iconPath": "/assets/img/area_north.png"
     },
     {
-      "_id": "5972564ee954d166c03e43ee",
+      "_id": "597623c451d828538ebb1101",
       "type": "room",
-      "parent": "5972564ee954d166c03e43ea",
-      "name": "Room 63"
+      "parent": "597623c451d828538ebb10fd",
+      "name": "Room 63",
+      "iconPath": "/assets/img/room063.png"
     },
     {
-      "_id": "5972564ee954d166c03e43ef",
+      "_id": "597623c451d828538ebb1102",
       "type": "room",
-      "parent": "5972564ee954d166c03e43eb",
-      "name": "Room 57"
+      "parent": "597623c451d828538ebb10fe",
+      "name": "Room 57",
+      "iconPath": "/assets/img/room057.png"
     },
     {
-      "_id": "5972564ee954d166c03e43f0",
+      "_id": "597623c451d828538ebb1103",
       "type": "room",
-      "parent": "5972564ee954d166c03e43eb",
-      "name": "Room 40"
+      "parent": "597623c451d828538ebb10fe",
+      "name": "Room 40",
+      "iconPath": "/assets/img/room040.png"
     },
     {
-      "_id": "5972564ee954d166c03e43f1",
+      "_id": "597623c451d828538ebb1104",
       "type": "room",
-      "parent": "5972564ee954d166c03e43eb",
-      "name": "Room 39"
+      "parent": "597623c451d828538ebb10fe",
+      "name": "Room 39",
+      "iconPath": "/assets/img/room039.png"
     },
     {
-      "_id": "5972564ee954d166c03e43f2",
+      "_id": "597623c451d828538ebb1105",
       "type": "room",
-      "parent": "5972564ee954d166c03e43eb",
-      "name": "Room 38"
+      "parent": "597623c451d828538ebb10fe",
+      "name": "Room 38",
+      "iconPath": "/assets/img/room038.png"
     },
     {
-      "_id": "5972564ee954d166c03e43f3",
+      "_id": "597623c451d828538ebb1106",
       "type": "room",
-      "parent": "5972564ee954d166c03e43ea",
-      "name": "Room 29"
+      "parent": "597623c451d828538ebb10fd",
+      "name": "Room 29",
+      "iconPath": "/assets/img/room029.png"
     },
     {
-      "_id": "5972564ee954d166c03e43f4",
+      "_id": "597623c451d828538ebb1107",
       "type": "room",
-      "parent": "5972564ee954d166c03e43ea",
-      "name": "Room 22"
+      "parent": "597623c451d828538ebb10fd",
+      "name": "Room 22",
+      "iconPath": "/assets/img/room022.png"
     },
     {
-      "_id": "5972564ee954d166c03e43f5",
+      "_id": "597623c451d828538ebb1108",
       "type": "room",
-      "parent": "5972564ee954d166c03e43ea",
-      "name": "Room 13"
+      "parent": "597623c451d828538ebb10fd",
+      "name": "Room 13",
+      "iconPath": "/assets/img/room013.png"
     },
     {
-      "_id": "5972564ee954d166c03e43f6",
+      "_id": "597623c451d828538ebb1109",
       "type": "department",
-      "parent": "5972564ee954d166c03e43ea",
-      "name": "Software Department"
+      "parent": "597623c451d828538ebb10fd",
+      "name": "Software Department",
+      "iconPath": "/assets/img/area_software.png"
     },
     {
-      "_id": "5972564ee954d166c03e43f7",
+      "_id": "597623c451d828538ebb110a",
       "type": "department",
-      "parent": "5972564ee954d166c03e43ea",
-      "name": "Shippingreceiving Department"
+      "parent": "597623c451d828538ebb10fd",
+      "name": "Shippingreceiving Department",
+      "iconPath": "/assets/img/area_shippingreceiving.png"
     },
     {
-      "_id": "5972564ee954d166c03e43f8",
+      "_id": "597623c451d828538ebb110b",
       "type": "department",
-      "parent": "5972564ee954d166c03e43eb",
-      "name": "Sales Department"
+      "parent": "597623c451d828538ebb10fe",
+      "name": "Sales Department",
+      "iconPath": "/assets/img/area_sales.png"
     },
     {
-      "_id": "5972564ee954d166c03e43f9",
+      "_id": "597623c451d828538ebb110c",
       "type": "department",
-      "parent": "5972564ee954d166c03e43ea",
-      "name": "Panelshop Department"
+      "parent": "597623c451d828538ebb10fd",
+      "name": "Panelshop Department",
+      "iconPath": "/assets/img/area_panelshop.png"
     },
     {
-      "_id": "5972564ee954d166c03e43fa",
+      "_id": "597623c451d828538ebb110d",
       "type": "department",
-      "parent": "5972564ee954d166c03e43ea",
-      "name": "Engineering Department"
+      "parent": "597623c451d828538ebb10fd",
+      "name": "Engineering Department",
+      "iconPath": "/assets/img/area_engineering.png"
     },
     {
-      "_id": "5972564ee954d166c03e43fb",
+      "_id": "597623c451d828538ebb110e",
       "type": "department",
-      "parent": "5972564ee954d166c03e43ea",
-      "name": "Accounting Department"
+      "parent": "597623c451d828538ebb10fd",
+      "name": "Accounting Department",
+      "iconPath": "/assets/img/area_accounting.png"
     },
     {
-      "_id": "5972564ee954d166c03e440a",
+      "_id": "597623c451d828538ebb111d",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f8",
-      "name": "Room 62"
+      "parent": "597623c451d828538ebb110b",
+      "name": "Room 62",
+      "iconPath": "/assets/img/room062.png"
     },
     {
-      "_id": "5972564ee954d166c03e440b",
+      "_id": "597623c451d828538ebb111e",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f8",
-      "name": "Room 61"
+      "parent": "597623c451d828538ebb110b",
+      "name": "Room 61",
+      "iconPath": "/assets/img/room061.png"
     },
     {
-      "_id": "5972564ee954d166c03e440c",
+      "_id": "597623c451d828538ebb111f",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f8",
-      "name": "Room 60"
+      "parent": "597623c451d828538ebb110b",
+      "name": "Room 60",
+      "iconPath": "/assets/img/room060.png"
     },
     {
-      "_id": "5972564ee954d166c03e440d",
+      "_id": "597623c451d828538ebb1120",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f8",
-      "name": "Room 59"
+      "parent": "597623c451d828538ebb110b",
+      "name": "Room 59",
+      "iconPath": "/assets/img/room059.png"
     },
     {
-      "_id": "5972564ee954d166c03e440e",
+      "_id": "597623c451d828538ebb1121",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f8",
-      "name": "Room 58"
+      "parent": "597623c451d828538ebb110b",
+      "name": "Room 58",
+      "iconPath": "/assets/img/room058.png"
     },
     {
-      "_id": "5972564ee954d166c03e440f",
+      "_id": "597623c451d828538ebb1122",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f8",
-      "name": "Room 56"
+      "parent": "597623c451d828538ebb110b",
+      "name": "Room 56",
+      "iconPath": "/assets/img/room056.png"
     },
     {
-      "_id": "5972564ee954d166c03e4410",
+      "_id": "597623c451d828538ebb1123",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f8",
-      "name": "Room 55"
+      "parent": "597623c451d828538ebb110b",
+      "name": "Room 55",
+      "iconPath": "/assets/img/room055.png"
     },
     {
-      "_id": "5972564ee954d166c03e4411",
+      "_id": "597623c451d828538ebb1124",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f8",
-      "name": "Room 54"
+      "parent": "597623c451d828538ebb110b",
+      "name": "Room 54",
+      "iconPath": "/assets/img/room054.png"
     },
     {
-      "_id": "5972564ee954d166c03e4412",
+      "_id": "597623c451d828538ebb1125",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f7",
-      "name": "Room 53"
+      "parent": "597623c451d828538ebb110a",
+      "name": "Room 53",
+      "iconPath": "/assets/img/room053.png"
     },
     {
-      "_id": "5972564ee954d166c03e4413",
+      "_id": "597623c451d828538ebb1126",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f8",
-      "name": "Room 52"
+      "parent": "597623c451d828538ebb110b",
+      "name": "Room 52",
+      "iconPath": "/assets/img/room052.png"
     },
     {
-      "_id": "5972564ee954d166c03e4414",
+      "_id": "597623c451d828538ebb1127",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f8",
-      "name": "Room 51"
+      "parent": "597623c451d828538ebb110b",
+      "name": "Room 51",
+      "iconPath": "/assets/img/room051.png"
     },
     {
-      "_id": "5972564ee954d166c03e4415",
+      "_id": "597623c451d828538ebb1128",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f8",
-      "name": "Room 50"
+      "parent": "597623c451d828538ebb110b",
+      "name": "Room 50",
+      "iconPath": "/assets/img/room050.png"
     },
     {
-      "_id": "5972564ee954d166c03e4416",
+      "_id": "597623c451d828538ebb1129",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f8",
-      "name": "Room 49"
+      "parent": "597623c451d828538ebb110b",
+      "name": "Room 49",
+      "iconPath": "/assets/img/room049.png"
     },
     {
-      "_id": "5972564ee954d166c03e4417",
+      "_id": "597623c451d828538ebb112a",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f8",
-      "name": "Room 48"
+      "parent": "597623c451d828538ebb110b",
+      "name": "Room 48",
+      "iconPath": "/assets/img/room048.png"
     },
     {
-      "_id": "5972564ee954d166c03e4418",
+      "_id": "597623c451d828538ebb112b",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f8",
-      "name": "Room 47"
+      "parent": "597623c451d828538ebb110b",
+      "name": "Room 47",
+      "iconPath": "/assets/img/room047.png"
     },
     {
-      "_id": "5972564ee954d166c03e4419",
+      "_id": "597623c451d828538ebb112c",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f8",
-      "name": "Room 46"
+      "parent": "597623c451d828538ebb110b",
+      "name": "Room 46",
+      "iconPath": "/assets/img/room046.png"
     },
     {
-      "_id": "5972564ee954d166c03e441a",
+      "_id": "597623c451d828538ebb112d",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f8",
-      "name": "Room 45"
+      "parent": "597623c451d828538ebb110b",
+      "name": "Room 45",
+      "iconPath": "/assets/img/room045.png"
     },
     {
-      "_id": "5972564ee954d166c03e441b",
+      "_id": "597623c451d828538ebb112e",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f8",
-      "name": "Room 44"
+      "parent": "597623c451d828538ebb110b",
+      "name": "Room 44",
+      "iconPath": "/assets/img/room044.png"
     },
     {
-      "_id": "5972564ee954d166c03e441c",
+      "_id": "597623c451d828538ebb112f",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f8",
-      "name": "Room 43"
+      "parent": "597623c451d828538ebb110b",
+      "name": "Room 43",
+      "iconPath": "/assets/img/room043.png"
     },
     {
-      "_id": "5972564ee954d166c03e441d",
+      "_id": "597623c451d828538ebb1130",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f8",
-      "name": "Room 42"
+      "parent": "597623c451d828538ebb110b",
+      "name": "Room 42",
+      "iconPath": "/assets/img/room042.png"
     },
     {
-      "_id": "5972564ee954d166c03e441e",
+      "_id": "597623c451d828538ebb1131",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f8",
-      "name": "Room 41"
+      "parent": "597623c451d828538ebb110b",
+      "name": "Room 41",
+      "iconPath": "/assets/img/room041.png"
     },
     {
-      "_id": "5972564ee954d166c03e441f",
+      "_id": "597623c451d828538ebb1132",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f8",
-      "name": "Room 37"
+      "parent": "597623c451d828538ebb110b",
+      "name": "Room 37",
+      "iconPath": "/assets/img/room037.png"
     },
     {
-      "_id": "5972564ee954d166c03e4420",
+      "_id": "597623c451d828538ebb1133",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f7",
-      "name": "Room 36"
+      "parent": "597623c451d828538ebb110a",
+      "name": "Room 36",
+      "iconPath": "/assets/img/room036.png"
     },
     {
-      "_id": "5972564ee954d166c03e4421",
+      "_id": "597623c451d828538ebb1134",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f7",
-      "name": "Room 35"
+      "parent": "597623c451d828538ebb110a",
+      "name": "Room 35",
+      "iconPath": "/assets/img/room035.png"
     },
     {
-      "_id": "5972564ee954d166c03e4422",
+      "_id": "597623c451d828538ebb1135",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f9",
-      "name": "Room 34"
+      "parent": "597623c451d828538ebb110c",
+      "name": "Room 34",
+      "iconPath": "/assets/img/room034.png"
     },
     {
-      "_id": "5972564ee954d166c03e4423",
+      "_id": "597623c451d828538ebb1136",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f6",
-      "name": "Room 33"
+      "parent": "597623c451d828538ebb1109",
+      "name": "Room 33",
+      "iconPath": "/assets/img/room033.png"
     },
     {
-      "_id": "5972564ee954d166c03e4424",
+      "_id": "597623c451d828538ebb1137",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f6",
-      "name": "Room 32"
+      "parent": "597623c451d828538ebb1109",
+      "name": "Room 32",
+      "iconPath": "/assets/img/room032.png"
     },
     {
-      "_id": "5972564ee954d166c03e4425",
+      "_id": "597623c451d828538ebb1138",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f6",
-      "name": "Room 31"
+      "parent": "597623c451d828538ebb1109",
+      "name": "Room 31",
+      "iconPath": "/assets/img/room031.png"
     },
     {
-      "_id": "5972564ee954d166c03e4426",
+      "_id": "597623c451d828538ebb1139",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f6",
-      "name": "Room 30"
+      "parent": "597623c451d828538ebb1109",
+      "name": "Room 30",
+      "iconPath": "/assets/img/room030.png"
     },
     {
-      "_id": "5972564ee954d166c03e4427",
+      "_id": "597623c451d828538ebb113a",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f6",
-      "name": "Room 28"
+      "parent": "597623c451d828538ebb1109",
+      "name": "Room 28",
+      "iconPath": "/assets/img/room028.png"
     },
     {
-      "_id": "5972564ee954d166c03e4428",
+      "_id": "597623c451d828538ebb113b",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f6",
-      "name": "Room 27"
+      "parent": "597623c451d828538ebb1109",
+      "name": "Room 27",
+      "iconPath": "/assets/img/room027.png"
     },
     {
-      "_id": "5972564ee954d166c03e4429",
+      "_id": "597623c451d828538ebb113c",
       "type": "room",
-      "parent": "5972564ee954d166c03e43fb",
-      "name": "Room 26"
+      "parent": "597623c451d828538ebb110e",
+      "name": "Room 26",
+      "iconPath": "/assets/img/room026.png"
     },
     {
-      "_id": "5972564ee954d166c03e442a",
+      "_id": "597623c451d828538ebb113d",
       "type": "room",
-      "parent": "5972564ee954d166c03e43fb",
-      "name": "Room 25"
+      "parent": "597623c451d828538ebb110e",
+      "name": "Room 25",
+      "iconPath": "/assets/img/room025.png"
     },
     {
-      "_id": "5972564ee954d166c03e442b",
+      "_id": "597623c451d828538ebb113e",
       "type": "room",
-      "parent": "5972564ee954d166c03e43fb",
-      "name": "Room 24"
+      "parent": "597623c451d828538ebb110e",
+      "name": "Room 24",
+      "iconPath": "/assets/img/room024.png"
     },
     {
-      "_id": "5972564ee954d166c03e442c",
+      "_id": "597623c451d828538ebb113f",
       "type": "room",
-      "parent": "5972564ee954d166c03e43fb",
-      "name": "Room 23"
+      "parent": "597623c451d828538ebb110e",
+      "name": "Room 23",
+      "iconPath": "/assets/img/room023.png"
     },
     {
-      "_id": "5972564ee954d166c03e442d",
+      "_id": "597623c451d828538ebb1140",
       "type": "room",
-      "parent": "5972564ee954d166c03e43fb",
-      "name": "Room 21"
+      "parent": "597623c451d828538ebb110e",
+      "name": "Room 21",
+      "iconPath": "/assets/img/room021.png"
     },
     {
-      "_id": "5972564ee954d166c03e442e",
+      "_id": "597623c451d828538ebb1141",
       "type": "room",
-      "parent": "5972564ee954d166c03e43fb",
-      "name": "Room 20"
+      "parent": "597623c451d828538ebb110e",
+      "name": "Room 20",
+      "iconPath": "/assets/img/room020.png"
     },
     {
-      "_id": "5972564ee954d166c03e442f",
+      "_id": "597623c451d828538ebb1142",
       "type": "room",
-      "parent": "5972564ee954d166c03e43fb",
-      "name": "Room 19"
+      "parent": "597623c451d828538ebb110e",
+      "name": "Room 19",
+      "iconPath": "/assets/img/room019.png"
     },
     {
-      "_id": "5972564ee954d166c03e4430",
+      "_id": "597623c451d828538ebb1143",
       "type": "room",
-      "parent": "5972564ee954d166c03e43fb",
-      "name": "Room 18"
+      "parent": "597623c451d828538ebb110e",
+      "name": "Room 18",
+      "iconPath": "/assets/img/room018.png"
     },
     {
-      "_id": "5972564ee954d166c03e4431",
+      "_id": "597623c451d828538ebb1144",
       "type": "room",
-      "parent": "5972564ee954d166c03e43f8",
-      "name": "Room 17"
+      "parent": "597623c451d828538ebb110b",
+      "name": "Room 17",
+      "iconPath": "/assets/img/room017.png"
     },
     {
-      "_id": "5972564ee954d166c03e4432",
+      "_id": "597623c451d828538ebb1145",
       "type": "room",
-      "parent": "5972564ee954d166c03e43fb",
-      "name": "Room 16"
+      "parent": "597623c451d828538ebb110e",
+      "name": "Room 16",
+      "iconPath": "/assets/img/room016.png"
     },
     {
-      "_id": "5972564ee954d166c03e4433",
+      "_id": "597623c451d828538ebb1146",
       "type": "room",
-      "parent": "5972564ee954d166c03e43fb",
-      "name": "Room 15"
+      "parent": "597623c451d828538ebb110e",
+      "name": "Room 15",
+      "iconPath": "/assets/img/room015.png"
     },
     {
-      "_id": "5972564ee954d166c03e4434",
+      "_id": "597623c451d828538ebb1147",
       "type": "room",
-      "parent": "5972564ee954d166c03e43fb",
-      "name": "Room 14"
+      "parent": "597623c451d828538ebb110e",
+      "name": "Room 14",
+      "iconPath": "/assets/img/room014.png"
     },
     {
-      "_id": "5972564ee954d166c03e4435",
+      "_id": "597623c451d828538ebb1148",
       "type": "room",
-      "parent": "5972564ee954d166c03e43fb",
-      "name": "Room 12"
+      "parent": "597623c451d828538ebb110e",
+      "name": "Room 12",
+      "iconPath": "/assets/img/room012.png"
     },
     {
-      "_id": "5972564ee954d166c03e4436",
+      "_id": "597623c451d828538ebb1149",
       "type": "room",
-      "parent": "5972564ee954d166c03e43fa",
-      "name": "Room 11"
+      "parent": "597623c451d828538ebb110d",
+      "name": "Room 11",
+      "iconPath": "/assets/img/room011.png"
     },
     {
-      "_id": "5972564ee954d166c03e4437",
+      "_id": "597623c451d828538ebb114a",
       "type": "room",
-      "parent": "5972564ee954d166c03e43fa",
-      "name": "Room 10"
+      "parent": "597623c451d828538ebb110d",
+      "name": "Room 10",
+      "iconPath": "/assets/img/room010.png"
     },
     {
-      "_id": "5972564ee954d166c03e4438",
+      "_id": "597623c451d828538ebb114b",
       "type": "room",
-      "parent": "5972564ee954d166c03e43fa",
-      "name": "Room 9"
+      "parent": "597623c451d828538ebb110d",
+      "name": "Room 9",
+      "iconPath": "/assets/img/room009.png"
     },
     {
-      "_id": "5972564ee954d166c03e4439",
+      "_id": "597623c451d828538ebb114c",
       "type": "room",
-      "parent": "5972564ee954d166c03e43fa",
-      "name": "Room 8"
+      "parent": "597623c451d828538ebb110d",
+      "name": "Room 8",
+      "iconPath": "/assets/img/room008.png"
     },
     {
-      "_id": "5972564ee954d166c03e443a",
+      "_id": "597623c451d828538ebb114d",
       "type": "room",
-      "parent": "5972564ee954d166c03e43fa",
-      "name": "Room 7"
+      "parent": "597623c451d828538ebb110d",
+      "name": "Room 7",
+      "iconPath": "/assets/img/room007.png"
     },
     {
-      "_id": "5972564ee954d166c03e443b",
+      "_id": "597623c451d828538ebb114e",
       "type": "room",
-      "parent": "5972564ee954d166c03e43fa",
-      "name": "Room 6"
+      "parent": "597623c451d828538ebb110d",
+      "name": "Room 6",
+      "iconPath": "/assets/img/room006.png"
     },
     {
-      "_id": "5972564ee954d166c03e443c",
+      "_id": "597623c451d828538ebb114f",
       "type": "room",
-      "parent": "5972564ee954d166c03e43fa",
-      "name": "Room 5"
+      "parent": "597623c451d828538ebb110d",
+      "name": "Room 5",
+      "iconPath": "/assets/img/room005.png"
     },
     {
-      "_id": "5972564ee954d166c03e443d",
+      "_id": "597623c451d828538ebb1150",
       "type": "room",
-      "parent": "5972564ee954d166c03e43fa",
-      "name": "Room 4"
+      "parent": "597623c451d828538ebb110d",
+      "name": "Room 4",
+      "iconPath": "/assets/img/room004.png"
     },
     {
-      "_id": "5972564ee954d166c03e443e",
+      "_id": "597623c451d828538ebb1151",
       "type": "room",
-      "parent": "5972564ee954d166c03e43fa",
-      "name": "Room 3"
+      "parent": "597623c451d828538ebb110d",
+      "name": "Room 3",
+      "iconPath": "/assets/img/room003.png"
     },
     {
-      "_id": "5972564ee954d166c03e443f",
+      "_id": "597623c451d828538ebb1152",
       "type": "room",
-      "parent": "5972564ee954d166c03e43fa",
-      "name": "Room 2"
+      "parent": "597623c451d828538ebb110d",
+      "name": "Room 2",
+      "iconPath": "/assets/img/room002.png"
     },
     {
-      "_id": "5972564ee954d166c03e4440",
+      "_id": "597623c451d828538ebb1153",
       "type": "room",
-      "parent": "5972564ee954d166c03e43fa",
-      "name": "Room 1"
+      "parent": "597623c451d828538ebb110d",
+      "name": "Room 1",
+      "iconPath": "/assets/img/room001.png"
     }
   ]
 }

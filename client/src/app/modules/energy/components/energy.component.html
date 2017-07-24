@@ -8,13 +8,24 @@
   <div class="graph">
     <app-graph [point]="activeNodeId$ | async"></app-graph>
   </div>
-  <div class="indented-tree-list">
-    <app-tree-list [active]="activeNodeId$ | async" [tree]="tree$ | async" (activeNodeChange)="data.setActiveNode($event)"></app-tree-list>
+  <div class="indented-tree-list" [ngSwitch]="activeTreeView">
+    <div class="tabs">
+      <div (click)="activeTreeView = 'features'" [class.active]="activeTreeView == 'features'">Features</div>
+      <div (click)="activeTreeView = 'layers'" [class.active]="activeTreeView == 'layers'">Layers</div>
+    </div>
+    <app-tree-list *ngSwitchCase="'features'" [active]="activeNodeId$ | async" [tree]="tree$ | async" (activeNodeChange)="data.setActiveNode($event)"></app-tree-list>
+    <div *ngSwitchCase="'layers'">
+      <div *ngFor="let layer of layers$ | async" class="list">
+        <div><span class="icon fa fa-fw fa-square-o"></span><span class="name">{{ layer.name }}</span></div>
+      </div>
+    </div>
   </div>
-  <div class="photo">Photo</div>
+  <div class="photo">
+    <img *ngIf="activeNode$ | async as activeNode" [src]="activeNode.iconPath"/>
+  </div>
   <div class="description">
     <div *ngIf="activeNode$ | async as activeNode">
-      <div>{{ activeNode.name }}</div>
+      {{ activeNode.name }}
     </div>
   </div>
   <div class="boxes">Boxes</div>

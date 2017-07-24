@@ -15,13 +15,21 @@ export class EnergyComponent implements OnInit {
   activeNodeId$: Observable<string>;
   tree$: Observable<HierarchyNode>;
 
+  activeTreeView: string = 'features'; // | 'layers'
+
+  activeBuilding$: Observable<any>;
+  activeLayerKey$: Observable<string>;
+  layers$: Observable<any>;
+
   constructor(private data: DataService) {
     let strat = stratify().id(d => d._id).parentId(d => d.parent || d.area);
     let t = tree().nodeSize([0, 1]);
 
-    this.tree$ = Observable.combineLatest(this.data.areas$, this.data.points$).debounceTime(200).switchMap(([ areas, points ]) => {
-      if (areas.length) {
-        let node = t(strat([...areas, ...points.map(point => Object.assign({}, point, { type: 'point' }))]));
+    this.tree$ = Observable.combineLatest(this.data.areas$, this.data.points$)
+      .filter(([a, p]) => a.length > 0)
+      .map(([ areas, points ]) => {
+        points = points.map(point => Object.assign({}, point, { type: 'point' }));
+        let node = t(strat([...areas, ...points]));
         // "close" all but root node, children
         node.eachAfter(n => {
           if (n !== node
@@ -31,27 +39,16 @@ export class EnergyComponent implements OnInit {
             delete n.children;
           }
         });
-        return Observable.of(node);
+        return node;
+      });
 
-      } else {
-        return Observable.never();
-      }
-    });
-
-    this.activeNode$ = this.data.activeNode$.do(x => console.log('activeNode', x));
+    this.activeNode$ = this.data.activeNode$;
     this.activeNodeId$ = this.data.activeNodeId$;
+    this.layers$ = this.data.layers$;
   }
 
   setActiveNode(nodeId: string) {
     this.data.setActiveNode(nodeId);
-  }
-
-  setActiveNodeByFeature(featId) {
-    console.log('setting by feat');
-    return this.data.getIdFromFeatureId(featId).map(area => {
-      console.log('got', area);
-      this.data.setActiveNode(area._id);
-    }).subscribe();
   }
 
   ngOnInit() {

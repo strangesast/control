@@ -1,0 +1,17 @@
+{
+  "buildings": [
+    {
+      "name": "Day Automation - Victor Office",
+      "shortname": "dayauto_victor",
+      "centroid": [ -77.470846759195197, 42.99875240803506 ],
+      "gamma": -67.656616728547547,
+      "layers": [
+        { "name": "Buildings Layer", "key": "building" },
+        { "name": "Wing Layer", "key": "wing" },
+        { "name": "Department Layer", "key": "department" },
+        { "name": "Room Layer", "key": "room" },
+        { "name": "Point Layer", "key": "point" }
+      ]
+    }
+  ]
+}

@@ -118,6 +118,9 @@ var mongo, influx;
   fixIds(defaultObjects.areas);
   fixIds(defaultObjects.features);
 
+  let buildingsCollection = await mongo.createCollection('buildings');
+  await buildingsCollection.insertMany(defaultObjects.buildings);
+
   let pointsCollection = await mongo.createCollection('points');
   await pointsCollection.insertMany(defaultObjects.points);
 
@@ -337,23 +340,50 @@ userRoute.get('/areas', async function (req, res, next) {
   res.json(areas);
 });
 
-userRoute.get('/layers', async function (req, res, next) {
-  let layers = await mongo.collection('features').distinct('properties.layer');
-  //let layers2 = (await mongo.collection('features').find({}).toArray()).reduce((a, { properties: p }) => a.indexOf(p.layer) > -1 ? a.concat(p.layer) : a, []);
-  res.json(layers);
+// narrow this with bounding box
+userRoute.get('/features', async function (req, res, next) {
+  let features = await mongo.collection('features').find({}).toArray();
+  res.json(features);
 });
 
-userRoute.get('/layers/:layerName', async function (req, res, next) {
-  let { layerName } = req.params;
-  let features = await mongo.collection('features').find({ 'properties.layer': layerName }).toArray();
+userRoute.get('/features/buildings', async function (req, res, next) {
+  let features = await mongo.collection('features').find({ 'properties.layer': 'building' }).toArray();
 
-  let layer = {
+  let featureCollection = {
     type: 'FeatureCollection',
     crs: { type: 'name', properties: { name: 'urn:ogc:def:crs:OGC:1.3:CRS84' } },
     features
   }
-  res.json(layer);
+
+  res.json(featureCollection);
 });
+
+userRoute.get('/features/buildings/:building', async function (req, res, next) {
+  let buildingName = req.params.building;
+  let building = await mongo.collection('buildings').findOne({ shortname: buildingName });
+  if (!building) {
+    let err = new Error(`no building with that name "${ buildingName }"`);
+    err.status = 404;
+    next(err);
+    return;
+  }
+  let features = await mongo.collection('features').find({ 'properties.building': building.shortname }).toArray();
+
+  res.json(features);
+});
+
+//userRoute.get('/buildings/0/layers/:layerName/features', async function (req, res, next) {
+//  let { layerName } = req.params;
+//  let features = await mongo.collection('features').find({ 'properties.layer': layerName }).toArray();
+//
+//  let featureCollection = {
+//    type: 'FeatureCollection',
+//    crs: { type: 'name', properties: { name: 'urn:ogc:def:crs:OGC:1.3:CRS84' } },
+//    features
+//  }
+//
+//  res.json(featureCollection);
+//});
 
 userRoute.get('/points/:id', async function (req, res, next) {
   let { id } = req.params;

@@ -1,5 +1,5 @@
 <div *ngFor="let node of treeList" [style.margin-left]="node.y*20 + 'px'" [class.active]="node == activeNode" [attr.data-id]="node.data._id">
-  <span class="fa fa-fw icon" [ngClass]="node.data.type == 'building' ? 'fa-building-o' : node.data.type == 'point' ? 'fa-dot-circle-o' : 'fa-folder-o' "></span>
+  <span class="fa fa-fw icon" [ngClass]="classFromType(node.data.type, node == activeNode)"></span>
   <span class="name" (click)="selectNode(node)">{{ node.data.name }}</span>
   <span *ngIf="node.children || node._children" class="fa fa-fw fa-caret-down icon" [class.fa-flip-vertical]="node.children" (click)="toggleOpen(node)"></span>
 </div>

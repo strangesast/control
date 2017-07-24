@@ -1,9 +1,10 @@
 import { SimpleChanges, EventEmitter, ViewChild, ElementRef, Output, Input, Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 //import * as topojson from 'topojson';
 import { Selection } from 'd3';
 import * as d3 from 'd3';
 
+import { Feature, FeatureCollection } from '../../models';
 import { MapService } from '../../services/map.service';
 
 @Component({
@@ -15,27 +16,62 @@ export class MapComponent implements OnInit {
   // inputs
   //   layer
   //   activeElement
-  @Output() layerChange = new EventEmitter();
-  @Input('layer') layer: string;
+  //@Output() layerChange = new EventEmitter();
+  //@Input('layer') layer: string;
 
-  @Output('activeChange')
-  activeElementChange = new EventEmitter();
+  @Output()
+  activeChange = new EventEmitter();
 
+  active$ = new BehaviorSubject(null);
   @Input('active')
-  activeElement: string;
+  set active(active) {
+    this.active$.next(active);
+  };
+  get active() {
+    return this.active$.getValue();
+  }
+  activeEl$: Observable<Feature>;
 
   @ViewChild('svg') el: ElementRef; 
-  layers$: Observable<any[]>;
 
-  featureCollection;
+  map$: Observable<FeatureCollection>;
+
+  featureCollection: Observable<FeatureCollection>;
 
   constructor(private service: MapService) {
-    this.layers$ = service.layers$;
+    this.activeEl$ = this.active$
+      .distinctUntilChanged()
+      .switchMap(activeEl => {
+        console.log('active el', activeEl);
+        return service.features$.map(features => [ activeEl, features ]);
+      })
+      //.withLatestFrom(service.features$)
+      .filter(([id, features]) => !id || features.hasOwnProperty(id))
+      .map(([active, features]) => active && features[active]);
 
-    this.layers$.flatMap(layers => this.service.getLayer(layers[1])).subscribe(x => this.build(x));
+    this.featureCollection = this.activeEl$
+      .startWith(null)
+      .pairwise()
+      .withLatestFrom(this.service.features$)
+      .scan((lastFeatureCollection, [[lastEl, el], features]) => {
+        // if in the same layer, dont recalculate FeatureCollection
+        if (el && lastEl && el.properties.layer === lastEl.properties.layer) {
+          return lastFeatureCollection;
+        }
+        let layer = el ? el.properties.layer : 'building';
+        return {
+          type: 'FeatureCollection',
+          crs: { type: 'name', properties: { name: 'urn:ogc:def:crs:OGC:1.3:CRS84' } },
+          features: Object.keys(features).map(id => features[id]).filter(feature => feature.properties.layer == layer)
+        };
+      }, {} as FeatureCollection)
+
+    this.featureCollection.subscribe(x => console.log(x));
+    //this.service.features$.subscribe(x => console.log('features', x));
+    //this.featureCollection.withLatestFrom(this.active$).subscribe(fc => console.log(fc));
   }
 
-  active
+  activeSelection
   r: number;
   svg
   zoom
@@ -46,25 +82,28 @@ export class MapComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.svg) {
-      if (changes.activeElement) {
-        this.clicked(changes.activeElement.currentValue);
-      }
-    }
   }
 
+  /*
   build(featureCollection) {
     let self = this;
     let features = featureCollection.features;
     this.featureCollection = featureCollection;
-    this.active = d3.select(null);
+    this.activeSelection = d3.select(null);
    
     this.zoom = d3.zoom()
-        .scaleExtent([1, 8])
-        .on('zoom', zoomed);
+      .scaleExtent([1, 8])
+      .on('zoom', function() {
+        g.style('stroke-width', 1.5 / d3.event.transform.k + 'px');
+        g.attr('transform', d3.event.transform);
+      })
     
     this.svg = d3.select(this.el.nativeElement)
-        .on('click', stopped, true);
+      .on('click', function () {
+        // also stop propagation so we don’t click-to-zoom.
+        if (d3.event.defaultPrevented) d3.event.stopPropagation();
+      }, true);
+
  
     let { width, height } = this.svg.node().getBoundingClientRect();
 
@@ -74,7 +113,7 @@ export class MapComponent implements OnInit {
     this.transforms = { center, offset, scale };
 
 
-    this.r = 112.0;
+    this.r = 180-112.0;
 
     let projection = this.calcProjection();
     let path = d3.geoPath()
@@ -98,14 +137,11 @@ export class MapComponent implements OnInit {
       .attr('class', 'background')
       .attr('width', width)
       .attr('height', height)
-      .on('click', () => {
-        self.reset()
-      });
+      .on('click', () => self.reset());
     
     let g = this.svg.append('g');
     
-    // delete this line to disable free zooming
-    this.svg.call(this.zoom);
+    this.svg.call(this.zoom); // delete this line to disable free zooming
     
     this.selection = g.selectAll('path').data(features)
       .enter().append('path')
@@ -113,12 +149,12 @@ export class MapComponent implements OnInit {
         .attr('data-id', (d) => d.properties['area'] || d.properties['point'])
         .attr('class', 'feature')
         .on('click', function (d) {
-          if (self.active.node() === this) {
+          if (self.activeSelection.node() === this) {
             self.reset();
           } else {
             let id = d.properties['area'] || d.properties['point'];
             self.clicked(id);
-            self.activeElementChange.emit(id);
+            self.activeChange.emit(id);
           }
         });
     
@@ -127,21 +163,13 @@ export class MapComponent implements OnInit {
       .attr('class', 'mesh')
       .attr('d', path);
    
-    function zoomed() {
-      g.style('stroke-width', 1.5 / d3.event.transform.k + 'px');
-      g.attr('transform', d3.event.transform); // updated for d3 v4
-    }
-    
-    function stopped() {
-      // also stop propagation so we don’t click-to-zoom.
-      if (d3.event.defaultPrevented) d3.event.stopPropagation();
-    }
   }
+  */
 
   calcProjection (rot?: number) {
     let { center, scale, offset } = this.transforms;
     return (rot ?
-      d3.geoMercator().rotate(center.map(i => i*-1).concat(180-rot)).center([0, 0]) :
+      d3.geoMercator().rotate(center.map(i => i*-1).concat(rot)).center([0, 0]) :
       d3.geoMercator().rotate([0, 0, 0]).center(center)
     ).scale(scale).translate(offset);
   }
@@ -165,13 +193,14 @@ export class MapComponent implements OnInit {
     let t = d3.transition().duration(750);
     this.selection.transition(t).attr('d', path);
 
-    this.active.classed('active', false);
-    this.active = d3.select(null);
+    this.activeSelection.classed('active', false);
+    this.activeSelection = d3.select(null);
   
     this.svg.transition(t)
-      .call( this.zoom.transform, d3.zoomIdentity ); // updated for d3 v4
+      .call( this.zoom.transform, d3.zoomIdentity );
   }
 
+  /*
   clicked(id) {
     let feature = this.featureCollection.features.find(({ properties: p }) =>
       p['area'] == id || p['point'] == id)
@@ -183,8 +212,8 @@ export class MapComponent implements OnInit {
     let t = d3.transition().duration(750);
     this.selection.transition(t).attr('d', path);
 
-    this.active.classed('active', false);
-    this.active = d3.select(el).classed('active', true);
+    this.activeSelection.classed('active', false);
+    this.activeSelection = d3.select(el).classed('active', true);
 
     let { width, height } = this.svg.node().getBoundingClientRect();
   
@@ -202,6 +231,7 @@ export class MapComponent implements OnInit {
         d3.zoomIdentity.translate(translate[0],translate[1]).scale(scale)
       );
   }
+  */
  
 
 }

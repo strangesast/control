@@ -19,6 +19,7 @@ export class EnergyEffects {
       return Observable.forkJoin(
         this.http.get('/api/user/points', options).map(res => res.json()),
         this.http.get('/api/user/areas', options).map(res => res.json())
+        //this.http.get('/api/user/buildings/0/layers', options).map(res => res.json())
       ).map(([ points, areas ]) => new EnergyActions.DataRegister({ points, areas }))
     });
 }

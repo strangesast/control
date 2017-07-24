@@ -22,7 +22,7 @@ import { LoadApplicationsGuard } from './guards/load-applications.guard';
 import { effects } from './effects';
 import { reducers } from './reducers';
 
-// components
+// directives
 import { AppComponent } from './components/app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -30,6 +30,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { DummyComponent } from './components/dummy/dummy.component';
 import { AuthorizationService } from './services/authorization.service';
 import { SwitcherComponent } from './components/switcher/switcher.component';
+import { TreeDirective } from './directives/tree.directive';
 
 // containers
 import { LoginContainerComponent } from './containers/login-container/login-container.component'
@@ -55,7 +56,8 @@ import { routes } from './routes';
     NotFoundComponent,
     DummyComponent,
     SwitcherComponent,
-    LoginContainerComponent
+    LoginContainerComponent,
+    TreeDirective
   ],
   providers: [
     ConfigurationService, 
