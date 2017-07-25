@@ -4,6 +4,8 @@ import { DataService } from '../services/data.service';
 import { Observable } from 'rxjs';
 import { tree, stratify, hierarchy, HierarchyNode } from 'd3';
 
+const layerOrder = ['building', 'wing', 'department', 'room', 'point'];
+
 @Component({
   selector: 'app-energy',
   templateUrl: './energy.component.html',
@@ -31,6 +33,7 @@ export class EnergyComponent implements OnInit {
       .map(([ areas, points ]) => {
         points = points.map(point => Object.assign({}, point, { type: 'point' }));
         let node = t(strat([...areas, ...points]));
+        node.sort((a, b) => layerOrder.indexOf(a.data.type) < layerOrder.indexOf(b.data.type) ? -1 : 1);
         // "close" all but root node, children
         node.eachAfter(n => {
           if (n !== node

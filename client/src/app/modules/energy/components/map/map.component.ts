@@ -58,35 +58,52 @@ export class MapComponent implements OnInit {
   constructor(private service: MapService) {
     this.reset$ = new Subject();
 
-    //this.reset$.flatMap((dir) => this.layer$.take(1).map(currentLayer => {
-    //  let layers = ['building', 'wing', 'department', 'room'];
-    //  let i = layers.indexOf(currentLayer);
-    //  let layer = layers[i+dir];
-    //  console.log('currentLayer', currentLayer, 'layer', layer);
-    //  return { active: null, layer };
-    //})),
+    let data$ = service.features$.flatMap(featureMap =>
+      //Observable.merge(
+        this.active$.distinctUntilChanged().scan(({ active: prevActive, layer: prevLayer, features }, activeId) => {
+          let active = activeId && featureMap[activeId];
+          let layer = active ? active.properties.layer : null;
 
-    let data$ = service.features$.flatMap(featureMap => this.active$.distinctUntilChanged().scan(({ active: prevActive, layer: prevLayer, features }, activeId) => {
-      let active = activeId && featureMap[activeId];
-      let layer = active ? active.properties.layer : null;
+          // only recalculate feature list when layer changes.  if active = null,
+          // use the same feature list
+          if (
+            active != null &&
+            (prevActive && prevActive.properties.layer) != active.properties.layer
+          ) {
+            layer = active.properties.layer;
+            features = getFeatures(featureMap, layer);
+          } else if (layer == null) {
+            // also disable floorplan
+            features = getFeatures(featureMap, 'building');
+          } else {
+            layer = prevLayer;
+          }
 
-      // only recalculate feature list when layer changes.  if active = null,
-      // use the same feature list
-      if (
-        active != null &&
-        (prevActive && prevActive.properties.layer) != active.properties.layer
-      ) {
-        layer = active.properties.layer;
-        features = getFeatures(featureMap, layer);
-      } else if (layer == null) {
-        // also disable floorplan
-        features = getFeatures(featureMap, 'building');
-      } else {
-        layer = prevLayer;
-      }
+          return { active, layer, features };
+        }, { active: null, layer: null, features: [] }),
+        //this.service.layers$.flatMap(layers => this.reset$.withLatestFrom(data$).switchMap(([dir, { layer: prevLayer, active, features }]) => {
+        //  let i = layers.findIndex((l) => l.key == prevLayer);
+        //  let layer = layers[Math.min(i+dir, layers.length)];
+        //  if (layer != prevLayer) {
+        //    features = getFeatures(featureMap, layer || 'building');
+        //    return Observable.of({ active, layer, features });
+        //  }
+        //  return Observable.never();
+        //}))
+    //)
+    ).shareReplay(1);
 
-      return { active, layer, features };
-    }, { active: null, layer: null, features: [] })).shareReplay(1);
+    //this.service.layers$.flatMap(layers => this.reset$.withLatestFrom(data$).switchMap(([dir, { layer: prevLayer, active, features }]) => {
+    //  let i = layers.findIndex((l) => l.key == prevLayer);
+    //  let layer = layers[Math.min(i+dir, layers.length)];
+    //  if (layer != prevLayer) {
+    //    features = getFeatures(featureMap, layer || 'building');
+    //    return Observable.of({ active, layer, features });
+    //  }
+    //  return Observable.never();
+    //}))
+
+
 
     this.layer$ = <Observable<string>>data$.pluck('layer').distinctUntilChanged()
 
@@ -94,8 +111,28 @@ export class MapComponent implements OnInit {
 
     data$.take(1).subscribe(({ active, layer, features }) => this.init(wrapCollection(features)));
 
+
     data$.skip(1).subscribe(({ active, layer, features }) => {
       if (layer) {
+        this.clicked(active, features);
+      } else {
+        this.reset(features, false);
+      }
+    });
+
+    Observable.forkJoin(this.service.layers$, this.service.features$).flatMap(([ layers, featureMap]) => this.reset$.withLatestFrom(data$).switchMap(([ dir, { active, layer: prevLayer, features }]) => {
+      let i = layers.findIndex((l) => l.key == prevLayer);
+      let layer = layers[Math.min(i+dir, layers.length)];
+      let layerKey = layer ? layer.key : null;
+      if (layerKey != prevLayer) {
+        features = getFeatures(featureMap, layerKey || 'building');
+        console.log('features', features);
+        return Observable.of({ active, layer: layerKey, features });
+      }
+      return Observable.never();
+    })).subscribe(({ active, layer, features }) => {
+      console.log('layer', layer, 'features', features);
+      if (layer != null) {
         this.clicked(active, features);
       } else {
         this.reset(features, false);

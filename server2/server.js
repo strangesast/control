@@ -340,11 +340,12 @@ userRoute.get('/areas', async function (req, res, next) {
   res.json(areas);
 });
 
+const layerOrder = ['building', 'wing', 'department', 'room', 'point'];
 // narrow this with bounding box
 userRoute.get('/features', async function (req, res, next) {
   let features = await mongo.collection('features').find({}).toArray();
   let layerKeys = await mongo.collection('features').distinct('properties.layer');
-  res.json({ features, layers: layerKeys.map(key => ({ key, name: key })) });
+  res.json({ features, layers: layerKeys.sort((a, b) => layerOrder.indexOf(a) > layerOrder.indexOf(b) ? 1 : -1).map(key => ({ key, name: key })) });
 });
 
 userRoute.get('/features/buildings', async function (req, res, next) {
