@@ -20,27 +20,23 @@ function layerSort (a, b) {
 export class MapService {
   options$: Observable<Partial<RequestOptions>>;
   layers$: Observable<any[]>
-  features$: Observable<{ [id: string]: any }>
+  features$: Observable<{ [id: string]: Feature }>
   map$: Observable<FeatureCollection>;
 
   building$: Observable<string>;
 
   constructor(private auth: AuthorizationService, private http: Http) {
+    // get all features
+    // on element select, orient to that feature, doubleclick to go down level, click outside to go up
+    // depth:
+    //   buildings overview
+    //   building
+    //   wings
+    //   departments
+    //   rooms
     this.options$ = this.auth.requestOptions;
-    this.map$ = Observable.of(null).withLatestFrom(this.options$)
-      .switchMap(([_, options]) => this.http.get(`/api/user/features/buildings`, options).map(res => res.json()));
 
-    this.features$ = this.options$.flatMap(options => this.http.get(`/api/user/features`, options).map(res => res.json()))
-      .scan((obj, arr: Feature[]) => arr.reduce((a, feature) => ({ ...a, [ feature._id ] : feature }), obj), {}).shareReplay(1);
+    this.features$ = this.options$.first().flatMap(options => this.http.get(`/api/user/features`, options).do(() => console.log('making request...')).map(res => res.json())).map((res: Feature[]) =>
+      res.reduce((a, feature) => ({ ...a, [feature.properties['area'] || feature.properties['point']]: feature }), {})).shareReplay(1);
   }
-
-  //getLayer(layerName) {
-  //  let uri = `/api/user/buildings/0/layers/${ layerName }/features`;
-  //  return this.options$.take(1).flatMap(options =>
-  //    this.http.get(uri, options).map(res => res.json()));
-  //}
-
-  resolve() {
-  }
-
 }

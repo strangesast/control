@@ -7,6 +7,18 @@ import * as d3 from 'd3';
 import { Feature, FeatureCollection } from '../../models';
 import { MapService } from '../../services/map.service';
 
+function getFeatures(map, key) {
+  return Object.keys(map).map(id => map[id]).filter(f => f.properties.layer == key);
+}
+
+function wrapCollection(features) {
+  return {
+    type: 'FeatureCollection',
+    crs: { type: 'name', properties: { name: 'urn:ogc:def:crs:OGC:1.3:CRS84' } },
+    features
+  };
+}
+
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -39,36 +51,26 @@ export class MapComponent implements OnInit {
   featureCollection: Observable<FeatureCollection>;
 
   constructor(private service: MapService) {
-    this.activeEl$ = this.active$
-      .distinctUntilChanged()
-      .switchMap(activeEl => {
-        console.log('active el', activeEl);
-        return service.features$.map(features => [ activeEl, features ]);
-      })
-      //.withLatestFrom(service.features$)
-      .filter(([id, features]) => !id || features.hasOwnProperty(id))
-      .map(([active, features]) => active && features[active]);
+    let data$ = service.features$.flatMap(featureMap => {
+      let features = getFeatures(featureMap, 'building');
+      return this.active$.distinctUntilChanged().scan(({ active: prevActive, features }, activeId) => {
+        let active = activeId && featureMap[activeId];
 
-    this.featureCollection = this.activeEl$
-      .startWith(null)
-      .pairwise()
-      .withLatestFrom(this.service.features$)
-      .scan((lastFeatureCollection, [[lastEl, el], features]) => {
-        // if in the same layer, dont recalculate FeatureCollection
-        if (el && lastEl && el.properties.layer === lastEl.properties.layer) {
-          return lastFeatureCollection;
+        // only recalculate feature list when layer changes.  if active = null, use the same feature list
+        if (active != null && (prevActive && prevActive.properties.layer) != active.properties.layer) {
+          features = getFeatures(featureMap, active.properties.layer);
         }
-        let layer = el ? el.properties.layer : 'building';
-        return {
-          type: 'FeatureCollection',
-          crs: { type: 'name', properties: { name: 'urn:ogc:def:crs:OGC:1.3:CRS84' } },
-          features: Object.keys(features).map(id => features[id]).filter(feature => feature.properties.layer == layer)
-        };
-      }, {} as FeatureCollection)
 
-    this.featureCollection.subscribe(x => console.log(x));
-    //this.service.features$.subscribe(x => console.log('features', x));
-    //this.featureCollection.withLatestFrom(this.active$).subscribe(fc => console.log(fc));
+        return { active, features };
+      }, { active: null, features });
+    });
+
+
+    data$.first().subscribe(({ active, features }) => {
+      this.build(wrapCollection(features));
+    });
+
+    // data$.subscribe(...)
   }
 
   activeSelection
@@ -84,8 +86,10 @@ export class MapComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
   }
 
-  /*
+  ngOnDestroy() {}
+
   build(featureCollection) {
+    console.log('building...');
     let self = this;
     let features = featureCollection.features;
     this.featureCollection = featureCollection;
@@ -164,7 +168,6 @@ export class MapComponent implements OnInit {
       .attr('d', path);
    
   }
-  */
 
   calcProjection (rot?: number) {
     let { center, scale, offset } = this.transforms;
@@ -200,6 +203,10 @@ export class MapComponent implements OnInit {
       .call( this.zoom.transform, d3.zoomIdentity );
   }
 
+  clicked(id) {
+    this.active$.next(id);
+  }
+
   /*
   clicked(id) {
     let feature = this.featureCollection.features.find(({ properties: p }) =>
@@ -232,6 +239,4 @@ export class MapComponent implements OnInit {
       );
   }
   */
- 
-
 }
