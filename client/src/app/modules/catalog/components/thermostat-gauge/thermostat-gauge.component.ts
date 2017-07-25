@@ -343,7 +343,7 @@ export class ThermostatGaugeComponent extends GenericComponent implements OnInit
       .datum({ startAngle: 0, endAngle: Math.PI*2.8 })
       .attr('d', barc)
       .attr('opacity', 0.0)
-      .call(drag)
+      .call(<any>drag)
 
     this.redraw(1000);
 
@@ -360,14 +360,14 @@ export class ThermostatGaugeComponent extends GenericComponent implements OnInit
       let steady = Math.abs(setPoint - temperature) < 0.1;
       if (lastState != steady) {
         lastState = steady;
-        let t = d3.transition().duration(500);
+        let t = d3.transition(null).duration(500);
         setPointGroup.transition(t).attr('transform', `translate(${ steady ? 0 : size/8 }, 0) scale(${ steady ? 1 : 0.5 })`);
         tempGroup.transition(t).attr('transform', `translate(${ steady ? 0 : -size/8 }, 0) scale(${ steady ? 1 : 0.5 })`).attr('opacity', steady ? 0.0 : 1.0);
         coolingStateText.text(steady ? 'STEADY' : setPoint > temperature ? 'HEATING' : 'COOLING')
       }
 
       if (animate) {
-        let t = d3.transition().duration(animate);
+        let t = d3.transition(null).duration(animate);
         foreground.transition(t).attrTween('d', arcTween(b, a));
         pointer.transition(t).attrTween('d', lineTween(a));
         setPointText.transition(t).tween('text', setPointTweener(setPoint));
@@ -380,7 +380,7 @@ export class ThermostatGaugeComponent extends GenericComponent implements OnInit
         setPointText.text(Math.round(setPoint))
         tempText.text(Math.round(temperature))
         foreground.attr('d', (d) => {
-          return larc({ startAngle: b, endAngle: a })
+          return larc(<any>{ startAngle: b, endAngle: a })
         })
         pointer.datum({ angle: a}).attr('d', (d) => drawPointer(d, or+sw/2, ir));
       }
@@ -419,7 +419,7 @@ export class ThermostatGaugeComponent extends GenericComponent implements OnInit
     function setPointTweener(value) {
       return function() {
         var that = d3.select(this);
-        sp = d3.interpolateNumber(that.text(), Math.round(value))
+        sp = d3.interpolateNumber(parseInt(that.text()), Math.round(value))
         return function(t) {
           that.text(Math.round(sp(t)));
         }
@@ -439,7 +439,7 @@ function transform(value, min, max) {
 function textTweener(value) {
   return function() {
     var that = d3.select(this);
-    let i = d3.interpolateNumber(that.text(), Math.round(value))
+    let i = d3.interpolateNumber(parseInt(that.text()), Math.round(value))
     return function(t) {
       that.text(Math.round(i(t)));
     }

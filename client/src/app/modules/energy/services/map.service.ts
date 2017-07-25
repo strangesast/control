@@ -23,6 +23,8 @@ export class MapService {
   features$: Observable<{ [id: string]: Feature }>
   map$: Observable<FeatureCollection>;
 
+  pointValues$;
+
   building$: Observable<string>;
 
   constructor(private auth: AuthorizationService, private http: Http) {
@@ -39,7 +41,11 @@ export class MapService {
     let req = this.options$.first()
       .flatMap(options => this.http.get(`/api/user/features`, options).map(res => res.json())).share()
 
+    this.map$ = this.options$.first().flatMap((options) => this.http.get(`/assets/floorplan.geojson`, options).map(res => res.json())).shareReplay(1);
+
     this.layers$ = req.map(({ layers }: { layers: string[] }) => layers);
+
+    this.pointValues$ = this.options$.flatMap(options => this.http.get(`/api/user/points`, options).map(res => res.json()))
 
     this.features$ = req.map(({ features }: { features: Feature[] }) => features.reduce((a, feature) => ({ ...a, [feature.properties['area'] || feature.properties['point']]: feature }), {}))
       .shareReplay(1)

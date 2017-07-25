@@ -43,11 +43,11 @@ export class GraphComponent extends GenericComponent implements OnInit {
           .rangeRound([height, 0]);
       
       var line = d3.line()
-          .x(function(d) { return x(d.date); })
-          .y(function(d) { return y(d.value); });
+          .x(function(d: any) { return x(d.date); })
+          .y(function(d: any) { return y(d.value); });
       
-      x.domain(d3.extent(data, function(d) { return d.date; }));
-      y.domain(d3.extent(data, function(d) { return d.value; }));
+      x.domain(<any>d3.extent(data, function(d: any) { return d.date; }));
+      y.domain(<any>d3.extent(data, function(d: any) { return d.value; }));
       
       g.select("g.xaxis")
           .attr("transform", "translate(0," + height + ")")

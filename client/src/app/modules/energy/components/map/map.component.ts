@@ -142,12 +142,12 @@ export class MapComponent implements OnInit {
     // data$.subscribe(...)
   }
 
-  activeSelection
+  activeSelection: Selection<any, any, any, any>;
   r: number;
-  svg
-  zoom
-  path
-  selection: Selection;
+  svg: Selection<any, any, any, any>;
+  zoom;
+  path;
+  selection: Selection<any, any, any, any>;
   transforms = { center: [], offset: [], scale: 150 };
 
   ngOnInit() {
@@ -224,15 +224,15 @@ export class MapComponent implements OnInit {
     this.selection = this.selection.data(features, (d) => d._id)
       .enter().append('path')
         .attr('d', this.path)
-        .attr('data-id', (d) => d.properties['area'] || d.properties['point'])
+        .attr('data-id', (d: any) => d.properties['area'] || d.properties['point'])
         .attr('class', 'feature')
-        .on('click', function (d) {
+        .on('click', function (d: Feature) {
           if (self.activeSelection.node() === this) {
             self.reset$.next(-1);
             //self.reset();
           } else {
             let id = d.properties['area'] || d.properties['point'];
-            this.active = id;
+            self.active = id;
             self.activeChange.emit(id);
           }
         })
@@ -247,9 +247,9 @@ export class MapComponent implements OnInit {
   calcProjection (rot?: number) {
     let { center, scale, offset } = this.transforms;
     let projection = rot ?
-      d3.geoMercator().rotate(center.map(i => i*-1).concat(rot)).center([0, 0]) :
-      d3.geoMercator().rotate([0, 0, 0]).center(center)
-    return projection.scale(scale).translate(offset);
+      d3.geoMercator().rotate(center.map(i => i*-1).concat(rot) as [number, number, number]).center([0, 0]) :
+      d3.geoMercator().rotate([0, 0, 0]).center(center as [number, number])
+    return projection.scale(scale).translate(offset as [number, number]);
   }
 
   reset(features, rot) {
@@ -269,7 +269,7 @@ export class MapComponent implements OnInit {
     //projection = this.calcProjection();
     projection = this.calcProjection(rot ? this.r : null);
     this.path = d3.geoPath().projection(projection)
-    let t = d3.transition().duration(750);
+    let t = d3.transition(null).duration(750);
     this.selection.transition(t).attr('d', this.path);
 
     this.activeSelection.classed('active', false);
@@ -282,7 +282,7 @@ export class MapComponent implements OnInit {
   //  this.active$.next(id);
   //}
 
-  clicked(active, features) {
+  clicked(active, features: Feature[]) {
     /*
     let feature = this.featureCollection.features.find(({ properties: p }) =>
       p['area'] == id || p['point'] == id)
@@ -294,7 +294,7 @@ export class MapComponent implements OnInit {
     let path = d3.geoPath()
       .projection(projection)
 
-    let t = d3.transition().ease(d3.easePoly).duration(750);
+    let t = d3.transition(null).ease(d3.easePoly).duration(750);
 
     let selection = this.selection.data(features, (d) => d._id)
 
@@ -312,7 +312,7 @@ export class MapComponent implements OnInit {
           //self.reset();
         } else {
           let id = d.properties['area'] || d.properties['point'];
-          this.active = id;
+          self.active = id;
           self.activeChange.emit(id);
         }
       });

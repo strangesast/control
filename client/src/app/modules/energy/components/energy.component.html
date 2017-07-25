@@ -6,7 +6,12 @@
     <app-map (layerChange)="layer = $event" [active]="activeNodeId$ | async" (activeChange)="data.setActiveNode($event)"></app-map>
   </div>
   <div class="graph">
-    <app-graph [point]="activeNodeId$ | async"></app-graph>
+    <div>
+      <app-graph [point]="activeNodeId$ | async"></app-graph>
+    </div>
+    <div>
+      <app-heatmap [active]="activeNodeId$ | async"></app-heatmap>
+    </div>
   </div>
   <div class="indented-tree-list" [ngSwitch]="activeTreeView">
     <div class="tabs">

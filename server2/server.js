@@ -330,11 +330,6 @@ userRoute.get('/applications', async function(req, res, next) {
   res.json(applications);
 });
 
-userRoute.get('/points', async function (req, res, next) {
-  let points = await mongo.collection('points').find({}).toArray();
-  res.json(points);
-});
-
 userRoute.get('/areas', async function (req, res, next) {
   let areas = await mongo.collection('areas').find({}).toArray();
   res.json(areas);
@@ -386,6 +381,28 @@ userRoute.get('/features/buildings/:building', async function (req, res, next) {
 //
 //  res.json(featureCollection);
 //});
+userRoute.get('/points', async function (req, res, next) {
+  let features = await mongo.collection('features').find({ 'properties.layer': 'point' }).toArray();
+  let points = await mongo.collection('points').find({}).toArray();
+
+  let featureMap = features.reduce((a, feat) => {
+    let id = feat.properties.point;
+    delete feat.properties;
+    a[id] = feat;
+    return a;
+  }, {});
+
+  let pointValues = await influx.query(`SELECT last(value) FROM temperatures GROUP BY point`);
+  let pointValueMap = pointValues.reduce((a, { last, time, point }) => Object.assign(a, { [point]: { last, time }}), {});
+
+  for (let point of points) {
+    let id = point._id;
+    point.feature = featureMap[id];
+    point.data = pointValueMap[id];
+  }
+
+  res.json(points);
+});
 
 userRoute.get('/points/:id', async function (req, res, next) {
   let { id } = req.params;
@@ -393,7 +410,7 @@ userRoute.get('/points/:id', async function (req, res, next) {
 
   if (point) {
     let value = await influx.query(`SELECT last(value) FROM temperatures WHERE "point" = '${ escape.tag(id) }'`);
-    res.json({ value });
+    res.json(value);
     return;
   }
 

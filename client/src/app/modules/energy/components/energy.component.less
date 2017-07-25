@@ -33,11 +33,14 @@ header > .brand {
 
 .body > div {
   position: relative;
-  min-height: 200px;
-  max-height: 500px;
 }
 
 .body > .indented-tree-list {
+  @media(min-width: 1020px) {
+    min-height: 200px;
+    max-height: 500px;
+  }
+
   & > .tabs {
     flex-shrink: 0;
   }
@@ -57,7 +60,7 @@ header > .brand {
     "map map"
     "tree tree"
     "boxes boxes";
-  grid-template-rows: @photo-width @map-width @map-width minmax(auto, @photo-width) @photo-width; 
+  grid-template-rows: @photo-width auto @map-width minmax(auto, @photo-width) @photo-width; 
 }
 
 @media(min-width: 1020px) {
@@ -141,5 +144,15 @@ header > .brand {
   & > img {
     max-width: 100%;
     max-height: 100%;
+  }
+}
+
+.graph {
+  display: flex;
+  flex-direction: column;
+
+  & > div {
+    flex-shrink: 0;
+    flex-basis: 400px;
   }
 }

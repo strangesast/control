@@ -154,7 +154,7 @@ export class GaugeComponent extends GenericComponent implements OnInit {
     
     var pointerPath = buildPointerPath(midValue);
     
-    var pointerLine = d3.line().x(d => d.x).y(d => d.y).curve(d3.curveCatmullRom.alpha(0.5))
+    var pointerLine = d3.line().x((d: any) => d.x).y((d: any) => d.y).curve(d3.curveCatmullRom.alpha(0.5))
     
     pointerContainer.selectAll('path').data([pointerPath])
       .enter().append('path')

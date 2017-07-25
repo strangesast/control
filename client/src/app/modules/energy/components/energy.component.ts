@@ -3,6 +3,7 @@ import { DataService } from '../services/data.service';
 //import { routerTransition } from '../../catalog/directives/router.animations';
 import { Observable } from 'rxjs';
 import { tree, stratify, hierarchy, HierarchyNode } from 'd3';
+import { Point, Area } from '../models';
 
 const layerOrder = ['building', 'wing', 'department', 'room', 'point'];
 
@@ -15,7 +16,7 @@ const layerOrder = ['building', 'wing', 'department', 'room', 'point'];
 export class EnergyComponent implements OnInit {
   activeNode$: Observable<any>;
   activeNodeId$: Observable<string>;
-  tree$: Observable<HierarchyNode>;
+  tree$: Observable<HierarchyNode<any>>;
 
   activeTreeView: string = 'features'; // | 'layers'
 
@@ -25,7 +26,7 @@ export class EnergyComponent implements OnInit {
   layer: string;
 
   constructor(private data: DataService) {
-    let strat = stratify().id(d => d._id).parentId(d => d.parent || d.area);
+    let strat = stratify().id((d: any) => d._id).parentId((d: any) => d.parent || d.area);
     let t = tree().nodeSize([0, 1]);
 
     this.tree$ = Observable.combineLatest(this.data.areas$, this.data.points$)
@@ -33,13 +34,13 @@ export class EnergyComponent implements OnInit {
       .map(([ areas, points ]) => {
         points = points.map(point => Object.assign({}, point, { type: 'point' }));
         let node = t(strat([...areas, ...points]));
-        node.sort((a, b) => layerOrder.indexOf(a.data.type) < layerOrder.indexOf(b.data.type) ? -1 : 1);
+        node.sort((a: any, b: any) => layerOrder.indexOf(a.data.type) < layerOrder.indexOf(b.data.type) ? -1 : 1);
         // "close" all but root node, children
         node.eachAfter(n => {
           if (n !== node
             && node.children.indexOf(n) == -1
             && n.children) {
-            n._children = n.children;
+            (<any>n)._children = n.children;
             delete n.children;
           }
         });

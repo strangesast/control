@@ -141,8 +141,8 @@ export class GraphComponent implements OnInit {
       var selection = d3.event.selection;
       x.domain(selection.map(x2.invert, x2));
       focus.selectAll(".dot")
-            .attr("cx", function(d) { return x(d.date); })
-            .attr("cy", function(d) { return y(d.price); });
+            .attr("cx", function(d: any) { return x(d.date); })
+            .attr("cy", function(d: any) { return y(d.price); });
       focus.select(".axis--x").call(xAxis);
     }
     

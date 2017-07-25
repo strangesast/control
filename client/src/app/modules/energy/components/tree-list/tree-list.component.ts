@@ -8,15 +8,15 @@ import { hierarchy, HierarchyNode } from 'd3';
 })
 export class TreeListComponent implements OnChanges {
   activeNodeIdSet: string;
-  activeNode: HierarchyNode;
+  activeNode: HierarchyNode<any>;
 
   @Input('active')
   activeNodeId: string;
   @Output() activeNodeChange = new EventEmitter();
 
-  treeValue: HierarchyNode;
+  treeValue: HierarchyNode<any>;
   @Input()
-  get tree(): HierarchyNode {
+  get tree(): HierarchyNode<any> {
     return this.treeValue;
   }
 
@@ -24,7 +24,7 @@ export class TreeListComponent implements OnChanges {
     this.treeValue = tree;
     this.calculateTreeList();
   }
-  treeList: HierarchyNode[] = []
+  treeList: HierarchyNode<any>[] = []
 
   constructor(private el: ElementRef) { }
 
@@ -42,10 +42,10 @@ export class TreeListComponent implements OnChanges {
               }
             }
             this.calculateTreeList();
-            let childEl = this.el.nativeElement.querySelector(`[data-id="${ id }"]`);
-            if (childEl) {
-              childEl.scrollIntoView();
-            }
+            //let childEl = this.el.nativeElement.querySelector(`[data-id="${ id }"]`);
+            //if (childEl) {
+            //  childEl.scrollIntoView();
+            //}
             this.activeNode = n;
           }
         }
