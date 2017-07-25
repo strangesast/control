@@ -36,10 +36,12 @@ export class MapService {
     //   rooms
     this.options$ = this.auth.requestOptions;
 
-    this.features$ = this.options$
-      .first()
-      .flatMap(options => this.http.get(`/api/user/features`, options).map(res => res.json()))
-      .map((res: Feature[]) => res.reduce((a, feature) => ({ ...a, [feature.properties['area'] || feature.properties['point']]: feature }), {}))
+    let req = this.options$.first()
+      .flatMap(options => this.http.get(`/api/user/features`, options).map(res => res.json())).share()
+
+    this.layers$ = req.map(({ layers }: { layers: string[] }) => layers);
+
+    this.features$ = req.map(({ features }: { features: Feature[] }) => features.reduce((a, feature) => ({ ...a, [feature.properties['area'] || feature.properties['point']]: feature }), {}))
       .shareReplay(1)
   }
 }

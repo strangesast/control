@@ -9,6 +9,8 @@ import { DataState } from '../reducers';
 import * as fromRoot from '../reducers';
 import { Area, Point, Layer } from '../models';
 
+import { MapService } from './map.service';
+
 @Injectable()
 export class DataService {
   points$: Observable<Point[]>;
@@ -19,7 +21,7 @@ export class DataService {
   activeNode$: Observable<any>;
   activeLayerKey$: Observable<any>;
 
-  constructor(private authorization: AuthorizationService, private store: Store<DataState>, private http: Http) {
+  constructor(private authorization: AuthorizationService, private store: Store<DataState>, private http: Http, public map: MapService) {
     this.points$ = this.store.select(fromRoot.selectDataPoints);
     this.areas$ = this.store.select(fromRoot.selectDataAreas);
     this.layers$ = this.store.select(fromRoot.selectDataLayers);

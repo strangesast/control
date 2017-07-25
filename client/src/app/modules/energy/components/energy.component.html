@@ -3,7 +3,7 @@
 </header>
 <div class="grid-container body">
   <div class="map">
-    <app-map [active]="activeNodeId$ | async" (activeChange)="data.setActiveNode($event)"></app-map>
+    <app-map (layerChange)="layer = $event" [active]="activeNodeId$ | async" (activeChange)="data.setActiveNode($event)"></app-map>
   </div>
   <div class="graph">
     <app-graph [point]="activeNodeId$ | async"></app-graph>
@@ -15,8 +15,8 @@
     </div>
     <app-tree-list *ngSwitchCase="'features'" [active]="activeNodeId$ | async" [tree]="tree$ | async" (activeNodeChange)="data.setActiveNode($event)"></app-tree-list>
     <div *ngSwitchCase="'layers'">
-      <div *ngFor="let layer of layers$ | async" class="list">
-        <div><span class="icon fa fa-fw fa-square-o"></span><span class="name">{{ layer.name }}</span></div>
+      <div *ngFor="let each of layers$ | async" class="list">
+        <div><span class="icon fa fa-fw fa-square-o" [class.fa-square]="each.key == layer"></span><span class="name">{{ each.name }}</span></div>
       </div>
     </div>
   </div>

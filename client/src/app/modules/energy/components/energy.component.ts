@@ -20,6 +20,7 @@ export class EnergyComponent implements OnInit {
   activeBuilding$: Observable<any>;
   activeLayerKey$: Observable<string>;
   layers$: Observable<any>;
+  layer: string;
 
   constructor(private data: DataService) {
     let strat = stratify().id(d => d._id).parentId(d => d.parent || d.area);
@@ -44,7 +45,7 @@ export class EnergyComponent implements OnInit {
 
     this.activeNode$ = this.data.activeNode$;
     this.activeNodeId$ = this.data.activeNodeId$;
-    this.layers$ = this.data.layers$;
+    this.layers$ = this.data.map.layers$;
   }
 
   setActiveNode(nodeId: string) {

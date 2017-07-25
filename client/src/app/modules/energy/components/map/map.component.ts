@@ -50,7 +50,9 @@ export class MapComponent implements OnInit {
 
   // 'room' -> 'department' -> 'wing' -> 'building' -> null
   reset$: Subject<number>; // start at current layer, go up to null
-  layer$: Observable<string>;
+
+
+  @Output('layerChange') layer$: Observable<string>;
 
 
   constructor(private service: MapService) {
@@ -67,8 +69,6 @@ export class MapComponent implements OnInit {
     let data$ = service.features$.flatMap(featureMap => this.active$.distinctUntilChanged().scan(({ active: prevActive, layer: prevLayer, features }, activeId) => {
       let active = activeId && featureMap[activeId];
       let layer = active ? active.properties.layer : null;
-
-      console.log('got active', active, 'layer', layer);
 
       // only recalculate feature list when layer changes.  if active = null,
       // use the same feature list
@@ -88,10 +88,9 @@ export class MapComponent implements OnInit {
       return { active, layer, features };
     }, { active: null, layer: null, features: [] })).shareReplay(1);
 
-    this.layer$ = <Observable<string>>data$.pluck('layer').distinctUntilChanged();
+    this.layer$ = <Observable<string>>data$.pluck('layer').distinctUntilChanged()
 
-
-    this.layer$.subscribe(x => console.log('layer', x));
+    //this.layer$.subscribe(x => console.log('layer', x));
 
     data$.take(1).subscribe(({ active, layer, features }) => this.init(wrapCollection(features)));
 

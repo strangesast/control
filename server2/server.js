@@ -343,7 +343,8 @@ userRoute.get('/areas', async function (req, res, next) {
 // narrow this with bounding box
 userRoute.get('/features', async function (req, res, next) {
   let features = await mongo.collection('features').find({}).toArray();
-  res.json(features);
+  let layerKeys = await mongo.collection('features').distinct('properties.layer');
+  res.json({ features, layers: layerKeys.map(key => ({ key, name: key })) });
 });
 
 userRoute.get('/features/buildings', async function (req, res, next) {
