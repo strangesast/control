@@ -10,40 +10,61 @@ const fs = require('fs'),
 // save feature
 // link in model
 
-let dataDir = '../data';
+let dataDir = path.join(__dirname, '../data');
 let geoDir = path.join(dataDir, 'geo');
-let buildingShortname = 'dayauto_victor';
 
-let featureSets = ['areas', 'points']
-  .reduce((a, name) => {
-    a[name] = JSON.parse(fs.readFileSync(path.join(geoDir, name + '.geojson')));
-    return a;
-  }, {})
+let files = fs.readdirSync(geoDir).filter(f => f.endsWith('.geojson'));
+
+let order = ['building', 'wing', 'department', 'room'];
+//let features = files.filter(f => f.startsWith('group')).map(f => JSON.parse(fs.readFileSync(path.join(geoDir, f)))).reduce((list, fc) => list.concat(fc.features), []);
 
 
-function renameArea(name, id, type) {
-  if (type == 'building') {
-    return 'Day Automation - Victor Office';
-  }
-  if (name && name.startsWith('area')) {
-    return [name.substr(5), type].map(cap).join(' ');
-  }
-  if (name && name.startsWith('room')) {
-    return `Room ${ parseInt(name.substring(4)) }`
-  }
-  return `${ cap(type) } ${ id+0 }`
-}
+const host = 'localhost';
+const databaseName = 'topview';
+const dbUrl = `mongodb://${ host }:27017/${ databaseName }`;
 
 (async function() {
-  const host = 'localhost';
-  const databaseName = 'topview';
-  const dbUrl = `mongodb://${ host }:27017/${ databaseName }`;
-
-  mongo = await MongoClient.connect(dbUrl);
+  let mongo = await MongoClient.connect(dbUrl);
   await mongo.dropDatabase();
-
-  let featuresCollection = await mongo.createCollection('features');
   let areasCollection = await mongo.createCollection('areas');
+  
+  
+  let parentMap = {};
+  let features = order.map(cat => JSON.parse(fs.readFileSync(path.join(geoDir, `group_${ cat }.geojson`)))).reduce((a, { features }) => a.concat(features), []);
+  
+  let findParents = (ids) => features
+    .filter(feature => ids.indexOf(feature.properties.parent) > -1);
+  
+  parents = findParents([null])
+  
+  let l = 0;
+  while (l = parents.length) {
+    let names = [];
+    let docs = [];
+    for (let { properties, geometry } of parents) {
+      let { gamma, cx, cy, type, name, parent } = properties;
+      let feature = { geometry, properties: { gamma, cx, cy }};
+      let parentId = parentMap[parent];
+      let doc = { type, name: name.split('_').slice(1).join(' '), parent: parentId, feature };
+      names.push(name);
+      docs.push(doc);
+    }
+    let { insertedIds, insertedCount } = await areasCollection.insertMany(docs);
+    if (insertedCount != l) throw new Error('failed to add at least one doc');
+    console.log(insertedCount);
+    for (let i=0; i<l; i++) {
+      parentMap[names[i]] = insertedIds[i];
+    }
+  
+    parents = findParents(names);
+  }
+
+  mongo.close();
+})();
+
+/*
+(async function() {
+  let featuresCollection = await mongo.createCollection('features');
   let pointsCollection = await mongo.createCollection('points');
 
   let areaFeatures = featureSets.areas.features;
@@ -164,3 +185,4 @@ async function insertInto(collection, docs) {
   if (insertedCount != docs.length) throw new Error('failed to add at least one doc');
   return insertedIds;
 }
+*/
