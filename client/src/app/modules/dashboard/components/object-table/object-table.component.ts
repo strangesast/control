@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { Headers, RequestOptions } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
 import { AuthorizationService } from '../../../../services/authorization.service';
 import { Observable } from 'rxjs';
@@ -53,15 +53,11 @@ const classMap = {'users': User, 'groups': Group, 'applications': Application, '
   styleUrls: ['./object-table.component.less']
 })
 export class ObjectTableComponent {
-  objectType$: Observable<any>;
+  objectType$: Observable<string>;
   objects$: Observable<any[]>;
 
-  constructor(route: ActivatedRoute, private http: Http, private authorization: AuthorizationService) {
-    this.objectType$ = route.params.pluck('type').shareReplay();
-
-    this.objects$ = this.objectType$.withLatestFrom(this.authorization.requestOptions)
-       .switchMap(([type, options]) => this.http.get(`/api/${ type }/`, options)
-        .map(res => res.json())
-    );
+  constructor(route: ActivatedRoute, private auth: AuthorizationService) {
+    this.objectType$ = route.params.map(param => param['type'] as string).shareReplay();
+    this.objects$ = this.objectType$.switchMap(type => this.auth.get(`/api/${ type }`));
   }
 }

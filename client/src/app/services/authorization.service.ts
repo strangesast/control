@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, Headers } from '@angular/http';
+import { Http, Response, RequestOptions, RequestOptionsArgs, Headers } from '@angular/http';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -22,17 +22,23 @@ export class AuthorizationService {
   public appsInitialized$: Observable<boolean>;
   public appsLoadError$: Observable<any>;
 
-  requestOptions: Observable<Partial<RequestOptions>>;
+  private requestOptions: Observable<RequestOptionsArgs>;
   redirectUrl: string;  // temporarily store where the user is headed
 
-  constructor(private store: Store<fromRoot.State>, http: Http) {
-    this.token$ =        store.select(fromRoot.selectAuthToken);
-    this.user$ =         store.select(fromRoot.selectAuthUser);
-    this.applications$ =         store.select(fromRoot.selectAuthApplications);
-    this.userInitialized$ = this.store.select(fromRoot.selectUserInit);
-    this.appsInitialized$ = this.store.select(fromRoot.selectAppsInit);
-    this.appsLoadError$ = this.store.select(fromRoot.selectAppsErr);
-    this.users$ = http.get('/api/users').map(res => res.json());
+  urlPrefix: string = '/api';
+
+  constructor(private store: Store<fromRoot.State>, private http: Http) {
+    this.token$ = store.select(fromRoot.selectAuthToken);
+    this.requestOptions = this.token$.map(mapTokenToOptions);
+    this.user$ = store.select(fromRoot.selectAuthUser);
+    this.applications$ = store.select(fromRoot.selectAuthApplications);
+    this.userInitialized$ = store.select(fromRoot.selectUserInit);
+    this.appsInitialized$ = store.select(fromRoot.selectAppsInit);
+    this.appsLoadError$ = store.select(fromRoot.selectAppsErr);
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('password', '1');
+    this.users$ = this.get('/users', { search: params }).do(x => console.log('users', x));
+
 
     // user / no user determined
     //this.ready$ = this.store.select(fromRoot.selectAuthReady);
@@ -40,12 +46,6 @@ export class AuthorizationService {
     this.loggedIn$ = this.userInitialized$.filter(r => r).flatMap(() => {
       return this.token$.map(token => Boolean(token)).distinctUntilChanged();
     });
-    this.requestOptions = this.token$.map(token => ({
-      headers : new Headers({
-        'Content-Type': 'application/json',
-        'Authorization': 'JWT ' + token
-      })
-    }));
   }
 
   register(user) {
@@ -60,4 +60,34 @@ export class AuthorizationService {
   logout() {
     this.store.dispatch(new AppActions.LogoutRequest());
   }
+
+  get(url: string, moreOptions: RequestOptionsArgs={}): Observable<any> {
+    if (!url.startsWith('/')) throw new Error('invalid url');
+    return this.requestOptions.flatMap(options =>
+      this.http.get(this.urlPrefix + url, { ...options, ...moreOptions }).map(mapToJson));
+  }
+
+  post(url: string, body: any, moreOptions: RequestOptionsArgs={}): Observable<any> {
+    if (!url.startsWith('/')) throw new Error('invalid url');
+    return this.requestOptions.flatMap(options =>
+      this.http.post(this.urlPrefix + url, body, { ...options, ...moreOptions }).map(mapToJson));
+  }
+
+  delete(url: string, moreOptions: RequestOptionsArgs={}) {
+    if (!url.startsWith('/')) throw new Error('invalid url');
+    return this.requestOptions.flatMap(options =>
+      this.http.delete(this.urlPrefix + url, {  ...options, ...moreOptions }).map(mapToJson));
+  }
+}
+
+function mapTokenToOptions(token: string): RequestOptionsArgs {
+  let headers: any = { 'Content-Type': 'application/json' };
+  if (token) {
+    headers = { ...headers, 'Authorization': 'JWT ' + token };
+  }
+  return { headers: new Headers(headers) };
+}
+
+function mapToJson(res: Response): any {
+  return res.json();
 }

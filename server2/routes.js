@@ -85,14 +85,14 @@ module.exports = function (app, { mongo, influx }, config) {
       return;
     }
   
-    let existing = await users.findOne({ username: user.username });
+    let existing = await mongo.collection('users').findOne({ username: user.username });
     if (existing) {
       res.status(409).json({ message: 'username already exists' });
       return;
     }
 
     try {
-      await users.insertOne(user);
+      await mongo.collection('users').insertOne(user);
     } catch (err) {
       err.status = 400;
       return next(err);
@@ -108,10 +108,9 @@ module.exports = function (app, { mongo, influx }, config) {
 
   app.delete('/unregister', async function(req, res, next) {
     if (req.user) {
-      let users = mongo.collection('users');
       let result;
       try {
-        result = await users.findOneAndDelete({ username: req.user.username })
+        result = await mongo.collection('users').findOneAndDelete({ username: req.user.username })
       } catch (err) {
         return next(err);
       }
@@ -132,6 +131,13 @@ module.exports = function (app, { mongo, influx }, config) {
   app.all('/logout', function(req, res, next) {
     req.logout();
     res.send();
+  });
+
+  app.route('/users')
+  .get(async function(req, res, next) {
+    //let users = await mongo.collection('users').find({}, { password: 0 }).toArray();
+    let users = await mongo.collection('users').find({}).toArray();
+    res.json(users);
   });
 
   // should replace with call to next on failed auth
@@ -303,13 +309,7 @@ module.exports = function (app, { mongo, influx }, config) {
     }
   });
   
-  app.route('/users')
-  .get(async function(req, res, next) {
-    let usersCollection = mongo.collection('users');
-    let users = await usersCollection.find({}).toArray();
-    res.json(users);
-  });
-  
+ 
   app.route('/users/:userId/applications/:appId?')
   .get(async function(req, res, next) {
     let { userId, appId } = req.params;

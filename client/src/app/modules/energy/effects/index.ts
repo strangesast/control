@@ -8,20 +8,18 @@ import * as EnergyActions from '../actions';
 
 @Injectable()
 export class EnergyEffects {
-  constructor(private authorization: AuthorizationService, private actions$: Actions, private http: Http) {
+  constructor(private auth: AuthorizationService, private actions$: Actions) {
   }
 
   @Effect() init$ = this.actions$
     .ofType(EnergyActions.DataRegisterRequest.typeString)
     .map(toPayload)
-    .withLatestFrom(this.authorization.requestOptions)
-    .switchMap(([_, options]) => {
-      return Observable.forkJoin(
-        this.http.get('/api/user/points', options).map(res => res.json()),
-        this.http.get('/api/user/areas', options).map(res => res.json())
-        //this.http.get('/api/user/buildings/0/layers', options).map(res => res.json())
-      ).map(([ points, areas ]) => new EnergyActions.DataRegister({ points, areas }))
-    });
+    .switchMap(() => Observable.forkJoin(
+      this.auth.get('/user/points'),
+      this.auth.get('/user/areas')
+    ))
+    .map(([ points, areas ]) =>
+      new EnergyActions.DataRegister({ points, areas }));
 }
 
 export const effects = [ EnergyEffects ];

@@ -36,10 +36,7 @@ export class MapService {
     //   wings
     //   departments
     //   rooms
-    this.options$ = this.auth.requestOptions;
-
-    let req = this.options$.first()
-      .flatMap(options => this.http.get(`/api/user/features`, options).map(res => res.json())).share()
+    let req = this.auth.get(`/user/features`).share();
 
     this.map$ = this.options$.first().flatMap((options) => this.http.get(`/assets/floorplan.geojson`, options).map(res => res.json())).shareReplay(1);
 
