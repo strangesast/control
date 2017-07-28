@@ -1,504 +1,1585 @@
 {
   "points": [
     {
-      "_id": "597623c451d828538ebb118b",
-      "name": "Room 2 Sensor 1",
-      "area": "597623c451d828538ebb1152"
-    },
-    {
-      "_id": "597623c451d828538ebb118c",
-      "name": "Room 1 Sensor 1",
-      "area": "597623c451d828538ebb1153"
-    },
-    {
-      "_id": "597623c451d828538ebb118d",
-      "name": "Room 3 Sensor 1",
-      "area": "597623c451d828538ebb1151"
-    },
-    {
-      "_id": "597623c451d828538ebb118e",
-      "name": "Room 4 Sensor 1",
-      "area": "597623c451d828538ebb1150"
-    },
-    {
-      "_id": "597623c451d828538ebb118f",
-      "name": "Room 63 Sensor 1",
-      "area": "597623c451d828538ebb1101"
-    },
-    {
-      "_id": "597623c451d828538ebb1190",
-      "name": "Room 5 Sensor 2",
-      "area": "597623c451d828538ebb114f"
-    },
-    {
-      "_id": "597623c451d828538ebb1191",
-      "name": "Room 5 Sensor 1",
-      "area": "597623c451d828538ebb114f"
-    },
-    {
-      "_id": "597623c451d828538ebb1192",
-      "name": "Room 6 Sensor 1",
-      "area": "597623c451d828538ebb114e"
-    },
-    {
-      "_id": "597623c451d828538ebb1193",
-      "name": "Room 8 Sensor 3",
-      "area": "597623c451d828538ebb114c"
-    },
-    {
-      "_id": "597623c451d828538ebb1194",
-      "name": "Room 8 Sensor 2",
-      "area": "597623c451d828538ebb114c"
-    },
-    {
-      "_id": "597623c451d828538ebb1195",
-      "name": "Room 7 Sensor 1",
-      "area": "597623c451d828538ebb114d"
-    },
-    {
-      "_id": "597623c451d828538ebb1196",
-      "name": "Room 9 Sensor 1",
-      "area": "597623c451d828538ebb114b"
-    },
-    {
-      "_id": "597623c451d828538ebb1197",
-      "name": "Room 10 Sensor 2",
-      "area": "597623c451d828538ebb114a"
-    },
-    {
-      "_id": "597623c451d828538ebb1198",
-      "name": "Room 10 Sensor 1",
-      "area": "597623c451d828538ebb114a"
-    },
-    {
-      "_id": "597623c451d828538ebb1199",
-      "name": "Room 30 Sensor 3",
-      "area": "597623c451d828538ebb1139"
-    },
-    {
-      "_id": "597623c451d828538ebb119a",
-      "name": "Room 30 Sensor 2",
-      "area": "597623c451d828538ebb1139"
-    },
-    {
-      "_id": "597623c451d828538ebb119b",
-      "name": "Room 30 Sensor 1",
-      "area": "597623c451d828538ebb1139"
-    },
-    {
-      "_id": "597623c451d828538ebb119c",
-      "name": "Room 32 Sensor 1",
-      "area": "597623c451d828538ebb1137"
-    },
-    {
-      "_id": "597623c451d828538ebb119d",
-      "name": "Room 31 Sensor 1",
-      "area": "597623c451d828538ebb1138"
-    },
-    {
-      "_id": "597623c451d828538ebb119e",
-      "name": "Room 33 Sensor 1",
-      "area": "597623c451d828538ebb1136"
-    },
-    {
-      "_id": "597623c451d828538ebb119f",
-      "name": "Room 28 Sensor 1",
-      "area": "597623c451d828538ebb113a"
-    },
-    {
-      "_id": "597623c451d828538ebb11a0",
-      "name": "South Wing Sensor 1",
-      "area": "597623c451d828538ebb10fd"
-    },
-    {
-      "_id": "597623c451d828538ebb11a1",
-      "name": "Room 12 Sensor 1",
-      "area": "597623c451d828538ebb1148"
-    },
-    {
-      "_id": "597623c451d828538ebb11a2",
-      "name": "Room 14 Sensor 3",
-      "area": "597623c451d828538ebb1147"
-    },
-    {
-      "_id": "597623c451d828538ebb11a3",
-      "name": "Room 14 Sensor 2",
-      "area": "597623c451d828538ebb1147"
-    },
-    {
-      "_id": "597623c451d828538ebb11a4",
-      "name": "Room 15 Sensor 3",
-      "area": "597623c451d828538ebb1146"
-    },
-    {
-      "_id": "597623c451d828538ebb11a5",
-      "name": "Room 15 Sensor 2",
-      "area": "597623c451d828538ebb1146"
-    },
-    {
-      "_id": "597623c451d828538ebb11a6",
-      "name": "Room 16 Sensor 1",
-      "area": "597623c451d828538ebb1145"
-    },
-    {
-      "_id": "597623c451d828538ebb11a7",
-      "name": "Room 18 Sensor 1",
-      "area": "597623c451d828538ebb1143"
-    },
-    {
-      "_id": "597623c451d828538ebb11a8",
-      "name": "Room 19 Sensor 1",
-      "area": "597623c451d828538ebb1142"
-    },
-    {
-      "_id": "597623c451d828538ebb11a9",
-      "name": "Room 20 Sensor 1",
-      "area": "597623c451d828538ebb1141"
-    },
-    {
-      "_id": "597623c451d828538ebb11aa",
-      "name": "Room 13 Sensor 2",
-      "area": "597623c451d828538ebb1108"
-    },
-    {
-      "_id": "597623c451d828538ebb11ab",
-      "name": "Room 13 Sensor 1",
-      "area": "597623c451d828538ebb1108"
-    },
-    {
-      "_id": "597623c451d828538ebb11ac",
-      "name": "Room 21 Sensor 1",
-      "area": "597623c451d828538ebb1140"
-    },
-    {
-      "_id": "597623c451d828538ebb11ad",
-      "name": "Room 22 Sensor 1",
-      "area": "597623c451d828538ebb1107"
-    },
-    {
-      "_id": "597623c451d828538ebb11ae",
-      "name": "Room 35 Sensor 3",
-      "area": "597623c451d828538ebb1134"
-    },
-    {
-      "_id": "597623c451d828538ebb11af",
-      "name": "Room 24 Sensor 1",
-      "area": "597623c451d828538ebb113e"
-    },
-    {
-      "_id": "597623c451d828538ebb11b0",
-      "name": "Room 26 Sensor 1",
-      "area": "597623c451d828538ebb113c"
-    },
-    {
-      "_id": "597623c451d828538ebb11b1",
-      "name": "Room 25 Sensor 1",
-      "area": "597623c451d828538ebb113d"
-    },
-    {
-      "_id": "597623c451d828538ebb11b2",
-      "name": "Room 23 Sensor 1",
-      "area": "597623c451d828538ebb113f"
-    },
-    {
-      "_id": "597623c451d828538ebb11b3",
-      "name": "Room 35 Sensor 2",
-      "area": "597623c451d828538ebb1134"
-    },
-    {
-      "_id": "597623c451d828538ebb11b4",
-      "name": "Room 36 Sensor 1",
-      "area": "597623c451d828538ebb1133"
-    },
-    {
-      "_id": "597623c451d828538ebb11b5",
-      "name": "Room 34 Sensor 3",
-      "area": "597623c451d828538ebb1135"
-    },
-    {
-      "_id": "597623c451d828538ebb11b6",
-      "name": "Room 53 Sensor 3",
-      "area": "597623c451d828538ebb1125"
-    },
-    {
-      "_id": "597623c451d828538ebb11b7",
-      "name": "Room 37 Sensor 3",
-      "area": "597623c451d828538ebb1132"
-    },
-    {
-      "_id": "597623c451d828538ebb11b8",
-      "name": "North Wing Sensor 3",
-      "area": "597623c451d828538ebb10fe"
-    },
-    {
-      "_id": "597623c451d828538ebb11b9",
-      "name": "Room 56 Sensor 2",
-      "area": "597623c451d828538ebb1122"
-    },
-    {
-      "_id": "597623c451d828538ebb11ba",
-      "name": "Room 56 Sensor 1",
-      "area": "597623c451d828538ebb1122"
-    },
-    {
-      "_id": "597623c451d828538ebb11bb",
-      "name": "Room 55 Sensor 1",
-      "area": "597623c451d828538ebb1123"
-    },
-    {
-      "_id": "597623c451d828538ebb11bc",
-      "name": "Room 58 Sensor 1",
-      "area": "597623c451d828538ebb1121"
-    },
-    {
-      "_id": "597623c451d828538ebb11bd",
-      "name": "Room 57 Sensor 1",
-      "area": "597623c451d828538ebb1102"
-    },
-    {
-      "_id": "597623c451d828538ebb11be",
-      "name": "Room 47 Sensor 1",
-      "area": "597623c451d828538ebb112b"
-    },
-    {
-      "_id": "597623c451d828538ebb11bf",
-      "name": "Room 48 Sensor 1",
-      "area": "597623c451d828538ebb112a"
-    },
-    {
-      "_id": "597623c451d828538ebb11c0",
-      "name": "Room 51 Sensor 2",
-      "area": "597623c451d828538ebb1127"
-    },
-    {
-      "_id": "597623c451d828538ebb11c1",
-      "name": "Room 61 Sensor 1",
-      "area": "597623c451d828538ebb111e"
-    },
-    {
-      "_id": "597623c451d828538ebb11c2",
-      "name": "Room 62 Sensor 1",
-      "area": "597623c451d828538ebb111d"
-    },
-    {
-      "_id": "597623c451d828538ebb11c3",
-      "name": "Room 46 Sensor 2",
-      "area": "597623c451d828538ebb112c"
-    },
-    {
-      "_id": "597623c451d828538ebb11c4",
-      "name": "Room 46 Sensor 1",
-      "area": "597623c451d828538ebb112c"
-    },
-    {
-      "_id": "597623c451d828538ebb11c5",
-      "name": "Room 45 Sensor 2",
-      "area": "597623c451d828538ebb112d"
-    },
-    {
-      "_id": "597623c451d828538ebb11c6",
-      "name": "Room 44 Sensor 1",
-      "area": "597623c451d828538ebb112e"
-    },
-    {
-      "_id": "597623c451d828538ebb11c7",
-      "name": "Room 43 Sensor 1",
-      "area": "597623c451d828538ebb112f"
-    },
-    {
-      "_id": "597623c451d828538ebb11c8",
-      "name": "Room 42 Sensor 1",
-      "area": "597623c451d828538ebb1130"
-    },
-    {
-      "_id": "597623c451d828538ebb11c9",
-      "name": "Room 52 Sensor 1",
-      "area": "597623c451d828538ebb1126"
-    },
-    {
-      "_id": "597623c451d828538ebb11ca",
-      "name": "Room 41 Sensor 1",
-      "area": "597623c451d828538ebb1131"
-    },
-    {
-      "_id": "597623c451d828538ebb11cb",
-      "name": "Room 38 Sensor 4",
-      "area": "597623c451d828538ebb1105"
-    },
-    {
-      "_id": "597623c451d828538ebb11cc",
-      "name": "Room 38 Sensor 3",
-      "area": "597623c451d828538ebb1105"
-    },
-    {
-      "_id": "597623c451d828538ebb11cd",
-      "name": "North Wing Sensor 2",
-      "area": "597623c451d828538ebb10fe"
-    },
-    {
-      "_id": "597623c451d828538ebb11ce",
-      "name": "Room 38 Sensor 2",
-      "area": "597623c451d828538ebb1105"
-    },
-    {
-      "_id": "597623c451d828538ebb11cf",
-      "name": "Room 29 Sensor 1",
-      "area": "597623c451d828538ebb1106"
-    },
-    {
-      "_id": "597623c451d828538ebb11d0",
-      "name": "Room 53 Sensor 2",
-      "area": "597623c451d828538ebb1125"
-    },
-    {
-      "_id": "597623c451d828538ebb11d1",
-      "name": "Room 53 Sensor 1",
-      "area": "597623c451d828538ebb1125"
-    },
-    {
-      "_id": "597623c451d828538ebb11d2",
-      "name": "North Wing Sensor 1",
-      "area": "597623c451d828538ebb10fe"
-    },
-    {
-      "_id": "597623c451d828538ebb11d3",
-      "name": "Room 37 Sensor 2",
-      "area": "597623c451d828538ebb1132"
-    },
-    {
-      "_id": "597623c451d828538ebb11d4",
-      "name": "Room 37 Sensor 1",
-      "area": "597623c451d828538ebb1132"
-    },
-    {
-      "_id": "597623c451d828538ebb11d5",
-      "name": "Room 59 Sensor 3",
-      "area": "597623c451d828538ebb1120"
-    },
-    {
-      "_id": "597623c451d828538ebb11d6",
-      "name": "Room 59 Sensor 2",
-      "area": "597623c451d828538ebb1120"
-    },
-    {
-      "_id": "597623c451d828538ebb11d7",
-      "name": "Room 59 Sensor 1",
-      "area": "597623c451d828538ebb1120"
-    },
-    {
-      "_id": "597623c451d828538ebb11d8",
-      "name": "Room 60 Sensor 3",
-      "area": "597623c451d828538ebb111f"
-    },
-    {
-      "_id": "597623c451d828538ebb11d9",
-      "name": "Room 60 Sensor 2",
-      "area": "597623c451d828538ebb111f"
-    },
-    {
-      "_id": "597623c451d828538ebb11da",
-      "name": "Room 38 Sensor 1",
-      "area": "597623c451d828538ebb1105"
-    },
-    {
-      "_id": "597623c451d828538ebb11db",
-      "name": "Room 34 Sensor 2",
-      "area": "597623c451d828538ebb1135"
-    },
-    {
-      "_id": "597623c451d828538ebb11dc",
-      "name": "Room 34 Sensor 1",
-      "area": "597623c451d828538ebb1135"
-    },
-    {
-      "_id": "597623c451d828538ebb11dd",
-      "name": "Room 27 Sensor 2",
-      "area": "597623c451d828538ebb113b"
-    },
-    {
-      "_id": "597623c451d828538ebb11de",
-      "name": "Room 27 Sensor 1",
-      "area": "597623c451d828538ebb113b"
-    },
-    {
-      "_id": "597623c451d828538ebb11df",
-      "name": "Room 11 Sensor 3",
-      "area": "597623c451d828538ebb1149"
-    },
-    {
-      "_id": "597623c451d828538ebb11e0",
-      "name": "Room 11 Sensor 2",
-      "area": "597623c451d828538ebb1149"
-    },
-    {
-      "_id": "597623c451d828538ebb11e1",
-      "name": "Room 11 Sensor 1",
-      "area": "597623c451d828538ebb1149"
-    },
-    {
-      "_id": "597623c451d828538ebb11e2",
-      "name": "Room 14 Sensor 1",
-      "area": "597623c451d828538ebb1147"
-    },
-    {
-      "_id": "597623c451d828538ebb11e3",
-      "name": "Room 15 Sensor 1",
-      "area": "597623c451d828538ebb1146"
-    },
-    {
-      "_id": "597623c451d828538ebb11e4",
-      "name": "Room 8 Sensor 1",
-      "area": "597623c451d828538ebb114c"
-    },
-    {
-      "_id": "597623c451d828538ebb11e5",
-      "name": "Room 39 Sensor 1",
-      "area": "597623c451d828538ebb1104"
-    },
-    {
-      "_id": "597623c451d828538ebb11e6",
-      "name": "Room 40 Sensor 1",
-      "area": "597623c451d828538ebb1103"
-    },
-    {
-      "_id": "597623c451d828538ebb11e7",
-      "name": "Room 54 Sensor 1",
-      "area": "597623c451d828538ebb1124"
-    },
-    {
-      "_id": "597623c451d828538ebb11e8",
-      "name": "Room 17 Sensor 1",
-      "area": "597623c451d828538ebb1144"
-    },
-    {
-      "_id": "597623c451d828538ebb11e9",
-      "name": "Room 50 Sensor 1",
-      "area": "597623c451d828538ebb1128"
-    },
-    {
-      "_id": "597623c451d828538ebb11ea",
-      "name": "Room 49 Sensor 1",
-      "area": "597623c451d828538ebb1129"
-    },
-    {
-      "_id": "597623c451d828538ebb11eb",
-      "name": "Room 51 Sensor 1",
-      "area": "597623c451d828538ebb1127"
-    },
-    {
-      "_id": "597623c451d828538ebb11ec",
-      "name": "Room 60 Sensor 1",
-      "area": "597623c451d828538ebb111f"
-    },
-    {
-      "_id": "597623c451d828538ebb11ed",
-      "name": "Room 35 Sensor 1",
-      "area": "597623c451d828538ebb1134"
-    },
+      "_id": "597b6cd011138a2cae8d12b4",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1270",
+      "name": "027 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47110020309466,
+            42.99889055760084
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12b5",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1271",
+      "name": "053 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.4704968653356,
+            42.99845197528479
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12b6",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1272",
+      "name": "016 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47092636486713,
+            42.99912505026054
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12b7",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1273",
+      "name": "006 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47087826323994,
+            42.998558322574596
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12b8",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1274",
+      "name": "057 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47062387377588,
+            42.998483109534035
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12b9",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1275",
+      "name": "002 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47062409656859,
+            42.99858295148477
+          ]
+        },
+        "properties": {}
+      }
+    },
     {
-      "_id": "597623c451d828538ebb11ee",
-      "name": "Room 45 Sensor 1",
-      "area": "597623c451d828538ebb112d"
+      "_id": "597b6cd011138a2cae8d12ba",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1275",
+      "name": "002 sensor 2",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47074307002192,
+            42.99864929464818
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12bb",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1276",
+      "name": "049 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47068387396239,
+            42.9985874031296
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12bc",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1277",
+      "name": "054 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.4705626703389,
+            42.99843184778048
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12bd",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1278",
+      "name": "044 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47060641218776,
+            42.99867023103621
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12be",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1279",
+      "name": "012 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47078736901179,
+            42.99897147934513
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12bf",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d127a",
+      "name": "052 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47050719683347,
+            42.99848969830686
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12c0",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d127b",
+      "name": "063 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47071094332622,
+            42.998461897585514
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12c1",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d127c",
+      "name": "013 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47080345149315,
+            42.998940999581926
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12c2",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d127d",
+      "name": "024 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47114915598847,
+            42.99898490344119
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12c3",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d127e",
+      "name": "062 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47074086527387,
+            42.99851608706929
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12c4",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d127f",
+      "name": "028 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47106069792652,
+            42.99886005077476
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12c5",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1280",
+      "name": "007 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47064723145071,
+            42.9984019133291
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12c6",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1281",
+      "name": "010 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47096294226829,
+            42.99905296479719
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12c7",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1281",
+      "name": "010 sensor 2",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47095681574683,
+            42.9990183268294
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12c8",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1281",
+      "name": "010 sensor 3",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47089003609909,
+            42.99908001814267
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12c9",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1281",
+      "name": "010 sensor 4",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47089736797236,
+            42.99893749045485
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12ca",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1281",
+      "name": "010 sensor 5",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47083538321776,
+            42.99904249954327
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12cb",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1282",
+      "name": "051 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47054456527962,
+            42.998565875714185
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12cc",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1283",
+      "name": "017 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47095523422193,
+            42.99911861508332
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12cd",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1284",
+      "name": "023 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47117536093958,
+            42.999011142511755
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12ce",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1285",
+      "name": "055 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47061164362594,
+            42.99849257798855
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12cf",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1286",
+      "name": "014 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47085564644702,
+            42.99892906778395
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12d0",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1287",
+      "name": "001 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47106294744538,
+            42.99908657043063
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12d1",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1287",
+      "name": "001 sensor 2",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47098673757557,
+            42.99902622672077
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12d2",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1288",
+      "name": "048 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47072206665668,
+            42.99862632475433
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12d3",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1289",
+      "name": "011 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.4708028864745,
+            42.99899165058813
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12d4",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d128a",
+      "name": "032 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.4708513423332,
+            42.998842410245224
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12d5",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d128a",
+      "name": "032 sensor 2",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47074777868045,
+            42.99888776100126
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12d6",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d128a",
+      "name": "032 sensor 3",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.4708181713303,
+            42.998877122984084
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12d7",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d128b",
+      "name": "064 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47070554731619,
+            42.998400024478116
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12d8",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d128c",
+      "name": "015 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47088070962529,
+            42.99913108157183
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12d9",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d128d",
+      "name": "020 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47098910496953,
+            42.9989679711391
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12da",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d128e",
+      "name": "025 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47111031595531,
+            42.998941148345
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12db",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d128f",
+      "name": "045 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.470587840666,
+            42.99863543814758
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12dc",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1290",
+      "name": "060 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47081233245812,
+            42.99856961799106
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12dd",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1291",
+      "name": "029 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47092085063254,
+            42.99886622423901
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12de",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1292",
+      "name": "067 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47085684285277,
+            42.998420798344526
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12df",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1293",
+      "name": "033 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47067650534166,
+            42.998740626061796
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12e0",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1294",
+      "name": "019 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47102363979904,
+            42.99903475273411
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12e1",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1295",
+      "name": "036 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47083988122789,
+            42.99874869973
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12e2",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1295",
+      "name": "036 sensor 2",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47087484040541,
+            42.99879683143623
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12e3",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1295",
+      "name": "036 sensor 3",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47090028362639,
+            42.9987171116482
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12e4",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1296",
+      "name": "030 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47091967813463,
+            42.99880258831445
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12e5",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1297",
+      "name": "056 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47066724450269,
+            42.99854093954023
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12e6",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1298",
+      "name": "021 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47097725552976,
+            42.9989239580245
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12e7",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d1299",
+      "name": "004 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.4705743053358,
+            42.99860895646024
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12e8",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d129a",
+      "name": "034 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47076764102489,
+            42.99880395358997
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12e9",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d129a",
+      "name": "034 sensor 2",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.4707757588706,
+            42.998764918047556
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12ea",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d129a",
+      "name": "034 sensor 3",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47077865319207,
+            42.99872415144135
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12eb",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d129b",
+      "name": "042 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47078797690887,
+            42.998673112240525
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12ec",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d129c",
+      "name": "043 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47087159634907,
+            42.99863880997572
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12ed",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d129c",
+      "name": "043 sensor 2",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47079346050072,
+            42.99860588648621
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12ee",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d129c",
+      "name": "043 sensor 3",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47083232952465,
+            42.99858747166064
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12ef",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d129d",
+      "name": "035 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47063178843126,
+            42.998710706418066
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12f0",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d129d",
+      "name": "035 sensor 2",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47072266999943,
+            42.99867540455055
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12f1",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d129e",
+      "name": "047 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47062606299711,
+            42.99859956225678
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12f2",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d129f",
+      "name": "026 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47113595180174,
+            42.99892424687463
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12f3",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12a0",
+      "name": "005 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.4706121121967,
+            42.99841057612028
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12f4",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12a0",
+      "name": "005 sensor 2",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47056110458554,
+            42.99845893145977
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12f5",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12a1",
+      "name": "037 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47082962676221,
+            42.99873219913639
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12f6",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12a2",
+      "name": "040 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47092808100807,
+            42.99868188565532
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12f7",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12a3",
+      "name": "039 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47084543230525,
+            42.99868534798054
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12f8",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12a4",
+      "name": "050 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47058873088798,
+            42.998566744126386
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12f9",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12a5",
+      "name": "058 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47081895610194,
+            42.99853809952873
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12fa",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12a5",
+      "name": "058 sensor 2",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.4708322127532,
+            42.99848624587203
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12fb",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12a5",
+      "name": "058 sensor 3",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47072490555071,
+            42.998418609919995
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12fc",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12a5",
+      "name": "058 sensor 4",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47081801261803,
+            42.998433049274716
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12fd",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12a6",
+      "name": "065 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47075174535183,
+            42.9983828360683
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12fe",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12a7",
+      "name": "008 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47106252539845,
+            42.99910640502468
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d12ff",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12a8",
+      "name": "046 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47064887658591,
+            42.99863457648008
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d1300",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12a9",
+      "name": "031 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47098462429295,
+            42.9988382418692
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d1301",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12a9",
+      "name": "031 sensor 2",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47102422115371,
+            42.998862682417325
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d1302",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12a9",
+      "name": "031 sensor 3",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47096943839014,
+            42.998783476710585
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d1303",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12aa",
+      "name": "041 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47097975636594,
+            42.99867681454653
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d1304",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12ab",
+      "name": "059 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47084507654657,
+            42.998537894973296
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d1305",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12ac",
+      "name": "000 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47101799744352,
+            42.998987215992734
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d1306",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12ad",
+      "name": "003 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47086509678911,
+            42.9988164198154
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d1307",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12ad",
+      "name": "003 sensor 2",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47088879104055,
+            42.99885957855777
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d1308",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12ae",
+      "name": "038 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.4708614837946,
+            42.998714108513106
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d1309",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12af",
+      "name": "018 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47101266647363,
+            42.99910664050447
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d130a",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12b0",
+      "name": "066 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47078069258976,
+            42.99836241185283
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d130b",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12b1",
+      "name": "061 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47075642450244,
+            42.9985520174066
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d130c",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12b2",
+      "name": "009 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47112150276539,
+            42.999009761730676
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d130d",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12b2",
+      "name": "009 sensor 2",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47107499083616,
+            42.99893286359047
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d130e",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12b2",
+      "name": "009 sensor 3",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47103115922164,
+            42.99896130966938
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d130f",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12b2",
+      "name": "009 sensor 4",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47098263615683,
+            42.99890029990342
+          ]
+        },
+        "properties": {}
+      }
+    },
+    {
+      "_id": "597b6cd011138a2cae8d1310",
+      "type": "point",
+      "room": "597b6cd011138a2cae8d12b3",
+      "name": "022 sensor 1",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47108449185721,
+            42.999082117814986
+          ]
+        },
+        "properties": {}
+      }
     }
   ]
 }
