@@ -21,12 +21,14 @@ module.exports = function (app, { mongo, influx }, config) {
 
   const strategy = new JwtStrategy(params, async function(payload, next) {
     let _id = parseId(payload.id);
-    let user = id && await mongo.collection('users').findOne({ _id });
+    let user = _id && await mongo.collection('users').findOne({ _id }, { password: 0 });
     if (user) {
       let { _id, username } = user;
       next(null, { id: _id, username });
     } else {
-      next(new Error('No user found'), null);
+      let err = new Error('No user found');
+      err.status = 401;
+      next(err, null);
     }
   });
   passport.use(strategy);
@@ -36,16 +38,11 @@ module.exports = function (app, { mongo, influx }, config) {
   //});
   // 
   //passport.deserializeUser(function(username, done) {
-  //  mongo.collection('users').findOne({ username }, { password: false, _id: false }, done);
+  //  mongo.collection('users').findOne({ username }, { password: 0, _id: 0 }, done);
   //});
   
   app.use(passport.initialize());
-  
-  // routes
-  app.get('/', function(req, res, next) {
-    res.json({ user: req.user, session: req.session, loggedIn: !!req.user });
-  });
-  
+ 
   app.route('/login').post(async function(req, res, next) {
     let { username, password } = req.body;
     if (!username || !password) {
@@ -75,7 +72,12 @@ module.exports = function (app, { mongo, influx }, config) {
   app.route('/register').post(upload.array(), async function(req, res, next) {
     let body = req.body;
     let users = mongo.collection('users');
-    let user = body;
+    let user;
+    try {
+      user = createUser(body);
+    } catch (err) {
+      return next(err);
+    }
     let { username, password } = body;
   
     if (!username || !password) {
@@ -88,9 +90,9 @@ module.exports = function (app, { mongo, influx }, config) {
       res.status(409).json({ message: 'username already exists' });
       return;
     }
-  
+
     try {
-      await users.insertOne(createUser(user));
+      await users.insertOne(user);
     } catch (err) {
       err.status = 400;
       return next(err);
@@ -134,11 +136,13 @@ module.exports = function (app, { mongo, influx }, config) {
 
   // should replace with call to next on failed auth
   app.use(passport.authenticate('jwt', { session: false }));
-  
+ 
+  // routes
   app.get('/', function(req, res, next) {
-    res.json(req.user);
+    res.json({ user: req.user, session: req.session, loggedIn: !!req.user });
   });
-  
+ 
+ 
   app.get('/applications', async function(req, res, next) {
     let user = await mongo.collection('users').findOne({ _id: req.user['_id'] });
     let applications = await getApplications(user);
@@ -232,7 +236,7 @@ module.exports = function (app, { mongo, influx }, config) {
         return;
       }
   
-      point = await mongo.collection('areas').findOne({ _id: id });//ObjectID.createFromHexString(id) });
+      point = await mongo.collection('areas').findOne({ _id: id });
       if (point) {
         let value = await influx.query(`SELECT last(value) FROM temperatures GROUP BY 'area' WHERE "area" = '${ escape.tag(id) }'`);
         res.json({ value });
@@ -329,8 +333,6 @@ module.exports = function (app, { mongo, influx }, config) {
   }
   
   async function expandGroups(groupIds, applicationIds=[]) {
-    console.log('groups', groupIds);
-
     let res = await mongo.collection('groups').aggregate([
       {'$match': { _id: { $in: groupIds/*.map(ObjectID.createFromHexString.bind(ObjectID))*/ }}},
       {'$unwind': '$applications'},
@@ -361,8 +363,9 @@ module.exports = function (app, { mongo, influx }, config) {
 }
 
 function parseId(string) {
+  if (string instanceof ObjectID) return string;
   if (typeof string === 'string'
-    && string.length !== 24
+    && string.length === 24
   ) {
     try {
       return ObjectID.createFromHexString(string);

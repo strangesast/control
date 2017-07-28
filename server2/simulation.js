@@ -45,7 +45,11 @@ module.exports = async function({ mongo, influx }, dataDir, settings={}) {
     if (exists) {
       await mongo.collection(name).drop()
     }
-    await mongo.createCollection(name, config);
+    try {
+      await mongo.createCollection(name, config);
+    } catch (err) {
+      console.log('fuck this');
+    }
     for (let index of indicies) {
       await mongo.collection(name).ensureIndex(index.name, index.config);
     }
