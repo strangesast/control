@@ -67,6 +67,7 @@ export class HeatmapComponent implements OnInit {
         color = d3.scaleSequential(interpolateTerrain).domain([90, 190]);
 
     let data = points.map(point => {
+      console.log('point', point);
       let pt = point.feature.geometry.coordinates;
       let [x, y] = this.projection(pt);
       let v = point.data.last - 70;

@@ -15,8 +15,8 @@ export class EnergyEffects {
     .ofType(EnergyActions.DataRegisterRequest.typeString)
     .map(toPayload)
     .switchMap(() => Observable.forkJoin(
-      this.auth.get('/user/points'),
-      this.auth.get('/user/areas')
+      this.auth.get('/points'),
+      this.auth.get('/areas')
     ))
     .map(([ points, areas ]) =>
       new EnergyActions.DataRegister({ points, areas }));

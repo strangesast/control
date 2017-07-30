@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions } from '@angular/http';
 import { AuthorizationService } from '../../../services/authorization.service';
 import { Feature, FeatureCollection } from '../models';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -18,7 +17,6 @@ function layerSort (a, b) {
 
 @Injectable()
 export class MapService {
-  options$: Observable<Partial<RequestOptions>>;
   layers$: Observable<any[]>
   features$: Observable<{ [id: string]: Feature }>
   map$: Observable<FeatureCollection>;
@@ -27,7 +25,7 @@ export class MapService {
 
   building$: Observable<string>;
 
-  constructor(private auth: AuthorizationService, private http: Http) {
+  constructor(private auth: AuthorizationService) {
     // get all features
     // on element select, orient to that feature, doubleclick to go down level, click outside to go up
     // depth:
@@ -36,13 +34,13 @@ export class MapService {
     //   wings
     //   departments
     //   rooms
-    let req = this.auth.get(`/user/features`).share();
+    let req = this.auth.get(`/features`).share();
 
-    this.map$ = this.options$.first().flatMap((options) => this.http.get(`/assets/floorplan.geojson`, options).map(res => res.json())).shareReplay(1);
+    this.map$ = this.auth.get(`/assets/floorplan.geojson`, null, false).shareReplay(1);
 
     this.layers$ = req.map(({ layers }: { layers: string[] }) => layers);
 
-    this.pointValues$ = this.options$.flatMap(options => this.http.get(`/api/user/points`, options).map(res => res.json()))
+    this.pointValues$ = this.auth.get(`/points`);
 
     this.features$ = req.map(({ features }: { features: Feature[] }) => features.reduce((a, feature) => ({ ...a, [feature.properties['area'] || feature.properties['point']]: feature }), {}))
       .shareReplay(1)

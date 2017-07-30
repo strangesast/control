@@ -13,7 +13,7 @@ import { AuthGuard } from '../guards/auth.guard';
 
 @Injectable()
 export class LoadApplicationsGuard implements CanActivate {
-  constructor(private authorization: AuthorizationService, private router: Router) {}
+  constructor(private auth: AuthorizationService, private router: Router) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -22,14 +22,13 @@ export class LoadApplicationsGuard implements CanActivate {
       console.log('load apps guarding...', url);
 
       // always return false to halt routing with this config. load new config. redirect to target path
-      return this.authorization.userInitialized$.find(i => i).withLatestFrom(this.authorization.user$).flatMap(([_, user]) => {
+      return this.auth.userInitialized$.find(i => i).withLatestFrom(this.auth.user$).flatMap(([_, user]) => {
         if (user) {
-          let errored = this.authorization.appsLoadError$.filter(e => !!e).map(() => {
-            console.log('here!');
+          let errored = this.auth.appsLoadError$.filter(e => !!e).map(() => {
             this.router.navigate(['/login'], { queryParams: { redirectUrl: url }});
           });
-          let loaded = this.authorization.appsInitialized$.find(i => i).flatMap(() =>
-            this.authorization.applications$.map(apps => {
+          let loaded = this.auth.appsInitialized$.find(i => i).flatMap(() =>
+            this.auth.applications$.map(apps => {
               let routes = createRoutes(apps);
               this.router.resetConfig(routes);
               this.router.navigateByUrl(url);
@@ -46,8 +45,9 @@ export class LoadApplicationsGuard implements CanActivate {
 
 function createRoutes(apps: Application[]): Routes {
   let canActivate = [ AuthGuard ]
-  if (apps.length == 0) {
-    throw new Error('at least one app required');
+  if (!Array.isArray(apps) || !apps.length) {
+    console.log('apps', apps);
+    throw new Error('invalid apps array');
   }
   let children = apps.map(({ path, modulePath: loadChildren }) => ({ path, loadChildren, canActivate }));
   return [

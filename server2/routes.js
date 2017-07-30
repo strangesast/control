@@ -20,8 +20,8 @@ module.exports = function (app, { mongo, influx }, config) {
   };
 
   const strategy = new JwtStrategy(params, async function(payload, next) {
-    let _id = parseId(payload.id);
-    let user = _id && await mongo.collection('users').findOne({ _id }, { password: 0 });
+    let username = payload.username;
+    let user = username && await mongo.collection('users').findOne({ username }, { password: 0 });
     if (user) {
       let { _id, username } = user;
       next(null, { id: _id, username });
@@ -32,14 +32,6 @@ module.exports = function (app, { mongo, influx }, config) {
     }
   });
   passport.use(strategy);
-  
-  //passport.serializeUser(function(user, done) {
-  //  done(null, user.username);
-  //});
-  // 
-  //passport.deserializeUser(function(username, done) {
-  //  mongo.collection('users').findOne({ username }, { password: 0, _id: 0 }, done);
-  //});
   
   app.use(passport.initialize());
  
@@ -150,8 +142,11 @@ module.exports = function (app, { mongo, influx }, config) {
  
  
   app.get('/applications', async function(req, res, next) {
-    let user = await mongo.collection('users').findOne({ _id: req.user['_id'] });
+    let username = req.user['username'];
+    let user = await mongo.collection('users').findOne({ username });
     let applications = await getApplications(user);
+
+    console.log('got apps', applications);
   
     res.json(applications);
   });
@@ -340,7 +335,6 @@ module.exports = function (app, { mongo, influx }, config) {
     ]).next();
     
     if (res == null) throw new Error('failed to aggregate');
-
     let { applications: appIds } = res;
 
     let applications = await mongo.collection('applications')

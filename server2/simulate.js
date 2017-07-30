@@ -3,6 +3,7 @@ const path = require('path'),
       db = require('./db');
 
 if (require.main === module) {
+  console.log('not here');
   (async function main() {
     let config = require('./config')['development'];
     let dbs = await db(config);
