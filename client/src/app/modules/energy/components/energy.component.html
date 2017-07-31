@@ -1,37 +1,32 @@
-<header>
-  <span class="brand">Data Explorer</span>
-</header>
-<div class="grid-container body">
-  <div class="map">
-    <app-map (layerChange)="layer = $event" [active]="activeNodeId$ | async" (activeChange)="data.setActiveNode($event)"></app-map>
-  </div>
+<div class="header">
+  <span class="name">Some really long title for a building or other selected space</span>
+</div>
+<div (click)="toggleSide()" class="tab">
+  <span class="fa fa-fw fa-angle-right" [class.fa-rotate-180]="!activeSide"></span>
+</div>
+<div class="photo">
+  <svg class="placeholder">
+    <line x1="0" y1="100%" x2="100%" y2="0" style="stroke:rgb(255,0,0);stroke-width:2"/>
+    <line x1="0" y1="0" x2="100%" y2="100%" style="stroke:rgb(255,0,0);stroke-width:2"/>
+  </svg>
+</div>
+<div class="description">Some description of the selected location.</div>
+<div class="tree">
+  <app-tree-list [active]="activeNodeId$ | async" [tree]="tree$ | async" (activeNodeChange)="data.setActiveNode($event)"></app-tree-list>
+</div>
+<div class="content" [ngClass]="activeContent">
+  <app-map class="map"></app-map>
   <div class="graph">
-    <div>
-      <app-graph [point]="activeNodeId$ | async"></app-graph>
-    </div>
-    <div>
-      <app-heatmap [active]="activeNodeId$ | async"></app-heatmap>
-    </div>
+    <svg class="placeholder">
+      <line x1="0" y1="100%" x2="100%" y2="0" style="stroke:blue;stroke-width:2"/>
+      <line x1="0" y1="0" x2="100%" y2="100%" style="stroke:blue;stroke-width:2"/>
+    </svg>
   </div>
-  <div class="indented-tree-list" [ngSwitch]="activeTreeView">
-    <div class="tabs">
-      <div (click)="activeTreeView = 'features'" [class.active]="activeTreeView == 'features'">Features</div>
-      <div (click)="activeTreeView = 'layers'" [class.active]="activeTreeView == 'layers'">Layers</div>
-    </div>
-    <app-tree-list *ngSwitchCase="'features'" [active]="activeNodeId$ | async" [tree]="tree$ | async" (activeNodeChange)="data.setActiveNode($event)"></app-tree-list>
-    <div *ngSwitchCase="'layers'">
-      <div *ngFor="let each of layers$ | async" class="list">
-        <div><span class="icon fa fa-fw fa-square-o" [class.fa-square]="each.key == layer"></span><span class="name">{{ each.name }}</span></div>
-      </div>
-    </div>
-  </div>
-  <div class="photo">
-    <img *ngIf="activeNode$ | async as activeNode" [src]="activeNode.iconPath"/>
-  </div>
-  <div class="description">
-    <div *ngIf="activeNode$ | async as activeNode">
-      {{ activeNode.name }}
-    </div>
-  </div>
-  <div class="boxes">Boxes</div>
+</div>
+<div class="side"></div>
+<div (click)="toggleSide(false)" class="shade"></div>
+<div class="footer">
+  <span [class.active]="" (click)="toggleSide()" class="fa fa-fw fa-lg fa-list-ul"></span>
+  <span [class.active]="activeContent == 'map'" (click)="toggleActiveContent('map')" class="fa fa-fw fa-lg fa-map"></span>
+  <span [class.active]="activeContent == 'graph'" (click)="toggleActiveContent('graph')" class="fa fa-fw fa-lg fa-pie-chart"></span>
 </div>

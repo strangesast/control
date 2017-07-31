@@ -64,28 +64,28 @@ export class AuthorizationService {
   get(url: string, moreOptions: RequestOptionsArgs={}, prefix=true): Observable<any> {
     if (!url.startsWith('/')) throw new Error('invalid url');
     let path = (prefix ? this.urlPrefix : '') + url;
-    return this.requestOptions.flatMap(options =>
+    return this.requestOptions.first().flatMap(options =>
       this.http.get(path, { ...options, ...moreOptions }).map(mapToJson));
   }
 
   post(url: string, body: any, moreOptions: RequestOptionsArgs={}, prefix=true): Observable<any> {
     if (!url.startsWith('/')) throw new Error('invalid url');
     let path = (prefix ? this.urlPrefix : '') + url;
-    return this.requestOptions.flatMap(options =>
+    return this.requestOptions.first().flatMap(options =>
       this.http.post(path, JSON.stringify(body), { ...options, ...moreOptions }).map(mapToJson));
   }
 
   put(url: string, body: any, moreOptions: RequestOptionsArgs={}, prefix=true): Observable<any> {
     if (!url.startsWith('/')) throw new Error('invalid url');
     let path = (prefix ? this.urlPrefix : '') + url;
-    return this.requestOptions.flatMap(options =>
+    return this.requestOptions.first().flatMap(options =>
       this.http.put(path, JSON.stringify(body), { ...options, ...moreOptions }).map(mapToJson));
   }
 
   delete(url: string, moreOptions: RequestOptionsArgs={}, prefix=true) {
     if (!url.startsWith('/')) throw new Error('invalid url');
     let path = (prefix ? this.urlPrefix : '') + url;
-    return this.requestOptions.flatMap(options =>
+    return this.requestOptions.first().flatMap(options =>
       this.http.delete(path, {  ...options, ...moreOptions }).map(mapToJson));
   }
 }

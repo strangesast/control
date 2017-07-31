@@ -19,6 +19,7 @@ export class EnergyEffects {
       this.auth.get('/areas')
     ))
     .map(([ points, areas ]) =>
+      console.log('points', points) ||
       new EnergyActions.DataRegister({ points, areas }));
 }
 

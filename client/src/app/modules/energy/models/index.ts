@@ -1,8 +1,16 @@
-export interface Point {
+export interface BasePoint {
   _id?: string;
+  type: string;
   name: string;
-  area?: string; // positioned in which area
-  feature?: string; // position feature description
+  feature?: Feature;
+}
+
+export interface Point extends BasePoint {
+  parent?: string;
+}
+
+export interface Sensor extends BasePoint {
+  room: string;
 }
 
 export interface Area {
@@ -22,11 +30,12 @@ export interface Layer {
 export interface FeatureCollection {
   type: string;
   crs: { type: string, properties: { name: string }};
-  features: { type: string, properties: any }[];
+  features: Feature[]
 }
 
 export interface Feature {
   _id: string;
+  type: string;
   geometry: { type: string, coordinates: (number[])[] };
   properties: { layer: string, building: string, area?: string, point?: string };
 }

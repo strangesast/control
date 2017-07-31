@@ -159,9 +159,8 @@ module.exports = function (app, { mongo, influx }, config) {
   const layerOrder = ['building', 'wing', 'department', 'room', 'point'];
   // narrow this with bounding box
   app.get('/features', async function (req, res, next) {
-    let features = await mongo.collection('features').find({}).toArray();
-    let layerKeys = await mongo.collection('features').distinct('properties.layer');
-    res.json({ features, layers: layerKeys.sort((a, b) => layerOrder.indexOf(a) > layerOrder.indexOf(b) ? 1 : -1).map(key => ({ key, name: key })) });
+    let features = await mongo.collection('areas').find({}).toArray();
+    res.json({ features });
   });
   
   app.get('/features/buildings', async function (req, res, next) {

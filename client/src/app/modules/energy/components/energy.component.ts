@@ -10,7 +10,10 @@ const layerOrder = ['building', 'wing', 'department', 'room', 'point'];
 @Component({
   selector: 'app-energy',
   templateUrl: './energy.component.html',
-  styleUrls: ['./energy.component.less'],
+  styleUrls: ['./energy.component.less', './ful.less', './mid.less', './mob.less'],
+  host: {
+    '[class.side-active]': 'activeSide'
+  }
   //animations: [routerTransition()]
 })
 export class EnergyComponent implements OnInit {
@@ -25,11 +28,14 @@ export class EnergyComponent implements OnInit {
   layers$: Observable<any>;
   layer: string;
 
+  activeSide: boolean = false;
+  activeContent: string = 'map'; // 'graph';
+
   constructor(private data: DataService) {
     let strat = stratify().id((d: any) => d._id).parentId((d: any) => d.parent || d.area);
     let t = tree().nodeSize([0, 1]);
 
-    this.tree$ = Observable.combineLatest(this.data.areas$, this.data.points$)
+    this.tree$ = Observable.combineLatest(this.data.areas$, this.data.points$).do(x => console.log('x', x))
       .filter(([a, p]) => a.length > 0)
       .map(([ areas, points ]) => {
         points = points.map(point => Object.assign({}, point, { type: 'point' }));
@@ -45,7 +51,7 @@ export class EnergyComponent implements OnInit {
           }
         });
         return node;
-      });
+      }).do(x => console.log('got tree', x));
 
     this.activeNode$ = this.data.activeNode$;
     this.activeNodeId$ = this.data.activeNodeId$;
@@ -62,5 +68,13 @@ export class EnergyComponent implements OnInit {
 
   ngOnDestroy() {
     this.data.uninit();
+  }
+
+  toggleSide(active?) {
+    this.activeSide = active != null ? active : !this.activeSide;
+  }
+
+  toggleActiveContent(activeContent?) {
+    this.activeContent = activeContent != null ? activeContent : (this.activeContent == 'map' ? 'graph' : 'map');
   }
 }

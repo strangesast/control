@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthorizationService } from '../../../services/authorization.service';
-import { Feature, FeatureCollection } from '../models';
+import { BasePoint, Feature, FeatureCollection } from '../models';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 const layerPriority = [
@@ -18,7 +18,7 @@ function layerSort (a, b) {
 @Injectable()
 export class MapService {
   layers$: Observable<any[]>
-  features$: Observable<{ [id: string]: Feature }>
+  features$: Observable<{ [id: string]: BasePoint }>
   map$: Observable<FeatureCollection>;
 
   pointValues$;
@@ -42,7 +42,7 @@ export class MapService {
 
     this.pointValues$ = this.auth.get(`/points`);
 
-    this.features$ = req.map(({ features }: { features: Feature[] }) => features.reduce((a, feature) => ({ ...a, [feature.properties['area'] || feature.properties['point']]: feature }), {}))
+    this.features$ = req.map(({ features }: { features: BasePoint[] }) => features.reduce((a, obj) => ({ ...a, [obj._id]: obj }), {}))
       .shareReplay(1)
   }
 }

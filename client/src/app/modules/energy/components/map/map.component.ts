@@ -1,21 +1,23 @@
 import { SimpleChanges, EventEmitter, ViewChild, ElementRef, Output, Input, Component, OnInit } from '@angular/core';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 //import * as topojson from 'topojson';
+import { BasePoint } from '../../models';
 import { Selection } from 'd3';
 import * as d3 from 'd3';
 
 import { Feature, FeatureCollection } from '../../models';
 import { MapService } from '../../services/map.service';
 
-function getFeatures(map, key) {
-  return Object.keys(map).map(id => map[id]).filter(f => f.properties.layer == key);
+function getFeatures(map: { [key: string]: BasePoint }, key) {
+  console.log('map', map, 'key', key);
+  return Object.keys(map).map(id => map[id]).filter(f => f.type == key);
 }
 
-function wrapCollection(features) {
+function wrapCollection(points: BasePoint[]): FeatureCollection {
   return {
     type: 'FeatureCollection',
     crs: { type: 'name', properties: { name: 'urn:ogc:def:crs:OGC:1.3:CRS84' } },
-    features
+    features: points.map(p => p.feature)
   };
 }
 
@@ -42,7 +44,7 @@ export class MapComponent implements OnInit {
   get active() {
     return this.active$.getValue();
   }
-  activeEl$: Observable<Feature>;
+  activeEl$: Observable<BasePoint>;
 
   @ViewChild('svg') el: ElementRef; 
 
@@ -51,95 +53,67 @@ export class MapComponent implements OnInit {
   // 'room' -> 'department' -> 'wing' -> 'building' -> null
   reset$: Subject<number>; // start at current layer, go up to null
 
-
   @Output('layerChange') layer$: Observable<string>;
-
 
   constructor(private service: MapService) {
     this.reset$ = new Subject();
 
     let data$ = service.features$.flatMap(featureMap =>
-      //Observable.merge(
-        this.active$.distinctUntilChanged().scan(({ active: prevActive, layer: prevLayer, features }, activeId) => {
-          let active = activeId && featureMap[activeId];
-          let layer = active ? active.properties.layer : null;
+      this.active$.distinctUntilChanged().scan(({ active: prevActive, layer: prevLayer, points }, activeId) => {
+        let active = activeId && featureMap[activeId];
+        let layer = active ? active.type: null;
 
-          // only recalculate feature list when layer changes.  if active = null,
-          // use the same feature list
-          if (
-            active != null &&
-            (prevActive && prevActive.properties.layer) != active.properties.layer
-          ) {
-            layer = active.properties.layer;
-            features = getFeatures(featureMap, layer);
-          } else if (layer == null) {
-            // also disable floorplan
-            features = getFeatures(featureMap, 'building');
-          } else {
-            layer = prevLayer;
-          }
+        // only recalculate feature list when layer changes.  if active = null,
+        // use the same feature list
+        if (
+          active != null &&
+          (prevActive && prevActive.type) != active.type
+        ) {
+          layer = active.type;
+          points = getFeatures(featureMap, layer);
+        } else if (layer == null) {
+          // also disable floorplan
+          points = getFeatures(featureMap, 'building');
+        } else {
+          layer = prevLayer;
+        }
+        console.log('points', points, active, layer);
 
-          return { active, layer, features };
-        }, { active: null, layer: null, features: [] }),
-        //this.service.layers$.flatMap(layers => this.reset$.withLatestFrom(data$).switchMap(([dir, { layer: prevLayer, active, features }]) => {
-        //  let i = layers.findIndex((l) => l.key == prevLayer);
-        //  let layer = layers[Math.min(i+dir, layers.length)];
-        //  if (layer != prevLayer) {
-        //    features = getFeatures(featureMap, layer || 'building');
-        //    return Observable.of({ active, layer, features });
-        //  }
-        //  return Observable.never();
-        //}))
-    //)
+        return { active, layer, points };
+      }, { active: null, layer: null, points: [] }),
     ).shareReplay(1);
-
-    //this.service.layers$.flatMap(layers => this.reset$.withLatestFrom(data$).switchMap(([dir, { layer: prevLayer, active, features }]) => {
-    //  let i = layers.findIndex((l) => l.key == prevLayer);
-    //  let layer = layers[Math.min(i+dir, layers.length)];
-    //  if (layer != prevLayer) {
-    //    features = getFeatures(featureMap, layer || 'building');
-    //    return Observable.of({ active, layer, features });
-    //  }
-    //  return Observable.never();
-    //}))
-
-
 
     this.layer$ = <Observable<string>>data$.pluck('layer').distinctUntilChanged()
 
-    //this.layer$.subscribe(x => console.log('layer', x));
-
-    data$.take(1).subscribe(({ active, layer, features }) => this.init(wrapCollection(features)));
+    data$.take(1).subscribe(({ active, layer, points }) => this.init(points));
 
 
-    data$.skip(1).subscribe(({ active, layer, features }) => {
+    data$.skip(1).subscribe(({ active, layer, points }) => {
       if (layer) {
-        this.clicked(active, features);
+        this.clicked(active, points);
       } else {
-        this.reset(features, false);
+        this.reset(points, false);
       }
     });
 
-    Observable.forkJoin(this.service.layers$, this.service.features$).flatMap(([ layers, featureMap]) => this.reset$.withLatestFrom(data$).switchMap(([ dir, { active, layer: prevLayer, features }]) => {
+    Observable.forkJoin(this.service.layers$, this.service.features$).flatMap(([ layers, featureMap]) => this.reset$.withLatestFrom(data$).switchMap(([ dir, { active, layer: prevLayer, points }]) => {
       let i = layers.findIndex((l) => l.key == prevLayer);
       let layer = layers[Math.min(i+dir, layers.length)];
       let layerKey = layer ? layer.key : null;
       if (layerKey != prevLayer) {
-        features = getFeatures(featureMap, layerKey || 'building');
-        console.log('features', features);
-        return Observable.of({ active, layer: layerKey, features });
+        points = getFeatures(featureMap, layerKey || 'building');
+        console.log('points', points);
+        return Observable.of({ active, layer: layerKey, points });
       }
       return Observable.never();
-    })).subscribe(({ active, layer, features }) => {
-      console.log('layer', layer, 'features', features);
+    })).subscribe(({ active, layer, points }) => {
+      console.log('layer', layer, 'points', points);
       if (layer != null) {
-        this.clicked(active, features);
+        this.clicked(active, points);
       } else {
-        this.reset(features, false);
+        this.reset(points, false);
       }
     });
-
-    // data$.subscribe(...)
   }
 
   activeSelection: Selection<any, any, any, any>;
@@ -147,7 +121,7 @@ export class MapComponent implements OnInit {
   svg: Selection<any, any, any, any>;
   zoom;
   path;
-  selection: Selection<any, any, any, any>;
+  selection: Selection<any, BasePoint, any, any>;
   transforms = { center: [], offset: [], scale: 150 };
 
   ngOnInit() {
@@ -158,10 +132,9 @@ export class MapComponent implements OnInit {
 
   ngOnDestroy() {}
 
-  init(featureCollection) {
-    console.log('building...');
+  init(points: BasePoint[]) {
     let self = this;
-    let features = featureCollection.features;
+    let featureCollection = wrapCollection(points);
     //this.featureCollection = featureCollection;
     this.activeSelection = d3.select(null);
    
@@ -221,27 +194,22 @@ export class MapComponent implements OnInit {
     
     this.selection = g.selectAll('path');
 
-    this.selection = this.selection.data(features, (d) => d._id)
+    this.selection = this.selection.data(points, (d) => d._id)
       .enter().append('path')
-        .attr('d', this.path)
-        .attr('data-id', (d: any) => d.properties['area'] || d.properties['point'])
+        .attr('d', (d) => this.path(d.feature))
+        .attr('data-id', (d: BasePoint) => d._id)
         .attr('class', 'feature')
-        .on('click', function (d: Feature) {
+        .on('click', function (d: BasePoint) {
           if (self.activeSelection.node() === this) {
             self.reset$.next(-1);
             //self.reset();
           } else {
-            let id = d.properties['area'] || d.properties['point'];
+            let id = d._id;
             self.active = id;
             self.activeChange.emit(id);
           }
         })
       .merge(this.selection);
-    
-    //g.append('path')
-    //  .datum(features)
-    //  .attr('class', 'mesh')
-    //  .attr('d', path);
   }
 
   calcProjection (rot?: number) {
@@ -252,12 +220,14 @@ export class MapComponent implements OnInit {
     return projection.scale(scale).translate(offset as [number, number]);
   }
 
-  reset(features, rot) {
-    let featureCollection = wrapCollection(features);
+  reset(points, rot) {
+    let featureCollection = wrapCollection(points);
     let { scale, center } = this.transforms;
     //let projection = this.calcProjection();
     let projection = this.calcProjection(rot ? this.r : null);
     let { width, height } = this.svg.node().getBoundingClientRect();
+    this.svg.select('rect').attr('width', width).attr('height', height);
+
     let path = d3.geoPath().projection(projection)
     let bounds = path.bounds(featureCollection);
     let offset  = [
@@ -266,11 +236,10 @@ export class MapComponent implements OnInit {
     ];
     this.transforms = { center, offset, scale };
 
-    //projection = this.calcProjection();
     projection = this.calcProjection(rot ? this.r : null);
     this.path = d3.geoPath().projection(projection)
     let t = d3.transition(null).duration(750);
-    this.selection.transition(t).attr('d', this.path);
+    this.selection.transition(t).attr('d', (d) => this.path(d.feature));
 
     this.activeSelection.classed('active', false);
     this.activeSelection = d3.select(null);
@@ -278,17 +247,7 @@ export class MapComponent implements OnInit {
     this.svg.transition(t).call(this.zoom.transform, d3.zoomIdentity);
   }
 
-  //clicked(id) {
-  //  this.active$.next(id);
-  //}
-
-  clicked(active, features: Feature[]) {
-    /*
-    let feature = this.featureCollection.features.find(({ properties: p }) =>
-      p['area'] == id || p['point'] == id)
-    if (feature == null) return;
-    */
-
+  clicked(active: BasePoint, points: BasePoint[]) {
     let self = this;
     let projection = this.calcProjection(this.r);
     let path = d3.geoPath()
@@ -296,55 +255,57 @@ export class MapComponent implements OnInit {
 
     let t = d3.transition(null).ease(d3.easePoly).duration(750);
 
-    let selection = this.selection.data(features, (d) => d._id)
+    let selection = this.selection.data(points, (d) => d._id)
 
-    selection.exit().attr('opacity', 1).transition(t).attr('d', path).attr('opacity', 0).remove();
+    let { width, height } = this.svg.node().getBoundingClientRect();
+    this.svg.select('rect').attr('width', width).attr('height', height);
+
+    selection.exit().attr('opacity', 1).transition(t).attr('d', (d: BasePoint) => path(d.feature)).attr('opacity', 0).remove();
 
     let entering = selection.enter()
       .append('path')
       .attr('opacity', 0)
-      .attr('d', this.path)
-      .attr('data-id', (d) => d.properties['area'] || d.properties['point'])
+      .attr('d', (d) => this.path(d.feature))
+      .attr('data-id', (d) => d._id)
       .attr('class', 'feature')
       .on('click', function (d) {
         if (self.activeSelection.node() === this) {
           self.reset$.next(-1);
           //self.reset();
         } else {
-          let id = d.properties['area'] || d.properties['point'];
+          let id = d._id;
           self.active = id;
           self.activeChange.emit(id);
         }
       });
 
     this.selection = entering.merge(this.selection);
-    this.selection.transition(t).attr('d', path).attr('opacity', 1);
+    this.selection.transition(t).attr('d', (d) => path(d.feature)).attr('opacity', 1);
     this.activeSelection.classed('active', false);
 
     this.path = path;
 
     if (active) {
-      let id = active.properties['area'] || active.properties['point'];
+      let id = active._id;
       let el = this.svg.select(`[data-id="${ id }"]`).node();
       this.activeSelection = d3.select(el).classed('active', true);
 
-      let { width, height } = this.svg.node().getBoundingClientRect();
   
-      let bounds = path.bounds(active),
+      let bounds = path.bounds(active.feature),
           dx = bounds[1][0] - bounds[0][0],
           dy = bounds[1][1] - bounds[0][1],
           x = (bounds[0][0] + bounds[1][0]) / 2,
           y = (bounds[0][1] + bounds[1][1]) / 2,
           scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
           translate = [width / 2 - scale * x, height / 2 - scale * y];
-  
+
       this.svg.transition(t)
         .call(
           this.zoom.transform,
           d3.zoomIdentity.translate(translate[0],translate[1]).scale(scale)
         );
     } else {
-      this.reset(features, true);
+      this.reset(points, true);
     }
   }
 }
