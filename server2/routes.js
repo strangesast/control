@@ -203,22 +203,14 @@ module.exports = function (app, { mongo, influx }, config) {
   //  res.json(featureCollection);
   //});
   app.get('/points', async function (req, res, next) {
-    let features = await mongo.collection('features').find({ 'properties.layer': 'point' }).toArray();
     let points = await mongo.collection('points').find({}).toArray();
+    let values = await influx.query(`SELECT last(value) FROM temperatures GROUP BY point`);
   
-    let featureMap = features.reduce((a, feat) => {
-      let id = feat.properties.point;
-      delete feat.properties;
-      a[id] = feat;
-      return a;
-    }, {});
-  
-    let pointValues = await influx.query(`SELECT last(value) FROM temperatures GROUP BY point`);
-    let pointValueMap = pointValues.reduce((a, { last, time, point }) => Object.assign(a, { [point]: { last, time }}), {});
+    let pointValueMap = values.reduce((a, { last, time, point }) =>
+      Object.assign(a, { [point]: { last, time }}), {});
   
     for (let point of points) {
       let id = point._id;
-      point.feature = featureMap[id];
       point.data = pointValueMap[id];
     }
   
@@ -230,6 +222,8 @@ module.exports = function (app, { mongo, influx }, config) {
     let _id = parseId(id);
     if (_id) {
       let point = await mongo.collection('points').findOne({ _id });
+      console.log('found point');
+      console.log(JSON.stringify(point, null, 2));
   
       if (point) {
         let value = await influx.query(`SELECT last(value) FROM temperatures WHERE "point" = '${ escape.tag(id) }'`);
