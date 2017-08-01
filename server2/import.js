@@ -16,6 +16,7 @@ async function importFromGeo(mongo, dir) {
   if (collectionNames.indexOf('areas') > -1) {
     await mongo.collection('areas').drop();
   }
+  mongo.collection('areas').ensureIndex({ 'feature.geometry': '2dsphere' });
 
   if (collectionNames.indexOf('points') > -1) {
     await mongo.collection('points').drop();
@@ -32,23 +33,46 @@ async function importFromGeo(mongo, dir) {
     .filter(feature => ids.indexOf(feature.properties.parent) > -1);
   
   parents = findParents([null])
+  let buildingId;
+  let buildingIndex;
   
   let l = 0;
+  // start from root building
   while (l = parents.length) {
     let parentIds = [];
     let docs = [];
-    for (let { properties, geometry } of parents) {
+    for (let i=0; i < l; i++) {
+      let { properties, geometry } = parents[i];
       let { gamma, cx, cy, type, name, shortname, parent } = properties;
-      let feature = { type: 'Feature', geometry, properties: { gamma, cx, cy }};
+      if (type == 'building') {
+        if (buildingIndex != null) {
+          throw new Error('more than a single building in this import');
+        }
+        buildingIndex = i;
+      }
       let parentId = parentMap[parent];
-      let doc = { type, name, parent: parentId, feature };
       parentIds.push(shortname);
-      docs.push(doc);
+
+      docs.push({
+        type,
+        name,
+        shortname,
+        parent: parentId,
+        building: buildingId,
+        feature: {
+          type: 'Feature',
+          geometry,
+          properties: { gamma, cx, cy }
+        }
+      });
     }
     let { insertedIds, insertedCount } = await mongo.collection('areas').insertMany(docs);
     if (insertedCount != l) throw new Error('failed to add at least one doc');
-    for (let i=0; i<l; i++) {
-      parentMap[parentIds[i]] = insertedIds[i];
+    if (!buildingId && buildingIndex != null) {
+      buildingId = insertedIds[buildingIndex];
+    }
+    for (let j=0; j<l; j++) {
+      parentMap[parentIds[j]] = insertedIds[j];
     }
     parents = findParents(parentIds);
   }
@@ -64,17 +88,46 @@ async function importFromGeo(mongo, dir) {
   let roomsById = (await mongo.collection('areas').find({ 'type': 'room' }).toArray())
     .reduce((a, d) => Object.assign(a, { [d._id]: d }), {});
 
+  let rooms = Object.keys(roomsById).map(id => roomsById[id]);
+
+  // add set points
+  for (let { feature, _id: roomId, name } of rooms) {
+    let { cx, cy } = feature.properties;
+    let k = 0;
+    docs.push({
+      type: 'point',
+      value: 'set_point',
+      room: roomId,
+      building: buildingId,
+      name: `set point device ${ k+1 }`,
+      feature: {
+        type: 'Feature',
+        properties: {},
+        geometry: { type: 'Point', coordinates: [cx, cy] }
+      }
+    });
+  }
+  // add temperatures
   for (let { geometry, properties } of points) {
-    let { name, room } = properties;
-    let feature = { type: 'Feature', geometry, properties: {}};
-    let parentId = parentMap[room];
-    let parent = roomsById[parentId];
-    let i = parseInt(name.split('_').slice(-1))
-    let doc = { type: 'point', room: parentId, name: `${ parent.name } sensor ${ i+1 }`, feature };
-    docs.push(doc);
+    let { name: shortname, room } = properties;
+    let roomId = parentMap[room];
+    let { name } = roomsById[roomId];
+    let k = parseInt(shortname.split('_').slice(-1))
+    docs.push({
+      type: 'point',
+      value: 'temperature',
+      room: roomId,
+      name: `temperature device ${ k+1 }`,
+      building: buildingId,
+      feature: {
+        type: 'Feature',
+        geometry,
+        properties: {}
+      }
+    });
   }
   let { insertedCount } = await mongo.collection('points').insertMany(docs);
-  if (insertedCount != l) throw new Error('failed to add at least one doc');
+  if (insertedCount != l+rooms.length) throw new Error('failed to add at least one doc');
 }
 
 async function saveToJSON(mongo) {

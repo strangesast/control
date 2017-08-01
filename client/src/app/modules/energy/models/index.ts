@@ -1,31 +1,25 @@
-export interface BasePoint {
+export interface Point {
   _id?: string;
-  type: string;
   name: string;
-  feature?: Feature;
-}
-
-export interface Point extends BasePoint {
-  parent?: string;
-}
-
-export interface Sensor extends BasePoint {
+  type: string;
+  value: string;
+  building: string;
+  feature: Feature;
   room: string;
 }
 
 export interface Area {
   _id?: string;
   name: string;
-  category: string; // building/ department/ etc
+  shortname: string;
   type: string; // area/ room
   parent?: string; // parent area id
-  feature?: string; // whats the geometric representation
+  feature: Feature; // whats the geometric representation
+  building: string;
 }
 
-export interface Layer {
-  name: string;
-  key: string;
-}
+export type Layer = string;
+export type Layers = Layer[];
 
 export interface FeatureCollection {
   type: string;
@@ -37,5 +31,5 @@ export interface Feature {
   _id: string;
   type: string;
   geometry: { type: string, coordinates: (number[])[] };
-  properties: { layer: string, building: string, area?: string, point?: string };
+  properties: any;//{ layer: string, building: string, area?: string, point?: string };
 }

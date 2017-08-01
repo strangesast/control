@@ -14,13 +14,19 @@ export class EnergyEffects {
   @Effect() init$ = this.actions$
     .ofType(EnergyActions.DataRegisterRequest.typeString)
     .map(toPayload)
-    .switchMap(() => Observable.forkJoin(
-      this.auth.get('/points'),
-      this.auth.get('/areas')
-    ))
-    .map(([ points, areas ]) =>
-      console.log('points', points) ||
-      new EnergyActions.DataRegister({ points, areas }));
+    .switchMap((id) => {
+      return this.auth.get(`/buildings/${ id }`).flatMap(building => {
+        if (!building) throw new Error('no building with that id');
+
+        return Observable.forkJoin(
+          this.auth.get(`/buildings/${ id }/points`),
+          this.auth.get(`/buildings/${ id }/areas`),
+          this.auth.get(`/buildings/${ id }/layers`)
+        ).map(a => [building, ...a]);
+      });
+    })
+    .map(([ building, points, areas, layers ]) =>
+      new EnergyActions.DataRegister({ building, points, areas, layers }));
 }
 
 export const effects = [ EnergyEffects ];

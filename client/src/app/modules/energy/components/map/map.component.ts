@@ -1,25 +1,11 @@
 import { SimpleChanges, EventEmitter, ViewChild, ElementRef, Output, Input, Component, OnInit } from '@angular/core';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 //import * as topojson from 'topojson';
-import { BasePoint } from '../../models';
+import { Point, Area } from '../../models';
 import { Selection } from 'd3';
 import * as d3 from 'd3';
 
 import { Feature, FeatureCollection } from '../../models';
-import { MapService } from '../../services/map.service';
-
-function getFeatures(map: { [key: string]: BasePoint }, key) {
-  console.log('map', map, 'key', key);
-  return Object.keys(map).map(id => map[id]).filter(f => f.type == key);
-}
-
-function wrapCollection(points: BasePoint[]): FeatureCollection {
-  return {
-    type: 'FeatureCollection',
-    crs: { type: 'name', properties: { name: 'urn:ogc:def:crs:OGC:1.3:CRS84' } },
-    features: points.map(p => p.feature)
-  };
-}
 
 @Component({
   selector: 'app-map',
@@ -27,93 +13,39 @@ function wrapCollection(points: BasePoint[]): FeatureCollection {
   styleUrls: ['./map.component.less']
 })
 export class MapComponent implements OnInit {
-  // inputs
-  //   layer
-  //   activeElement
-  //@Output() layerChange = new EventEmitter();
-  //@Input('layer') layer: string;
-
-  @Output()
-  activeChange = new EventEmitter();
-
-  active$ = new BehaviorSubject(null);
-  @Input('active')
-  set active(active) {
-    this.active$.next(active);
-  };
-  get active() {
-    return this.active$.getValue();
-  }
-  activeEl$: Observable<BasePoint>;
-
   @ViewChild('svg') el: ElementRef; 
 
-  map$: Observable<FeatureCollection>;
+  // when a new floor is clicked
+  @Output() layerChange = new EventEmitter();
+  // when a new feature is clicked
+  // string
+  @Output() buildingChange: EventEmitter<string> = new EventEmitter();
+  @Output() activeChange: EventEmitter<string> = new EventEmitter();
+  @Input() active: string;
+  @Input() features: FeatureCollection;
+  // like {
+  //    ...
+  //    features: [{
+  //       ...
+  //       properties: {
+  //         ...
+  //         id: string,
+  //         layer: number // only display 0 layer
+  //       }
+  //    }, ... ]
+  // }
+  @Input() map: FeatureCollection;
 
-  // 'room' -> 'department' -> 'wing' -> 'building' -> null
-  reset$: Subject<number>; // start at current layer, go up to null
+  // which projection
+  @Input() state: string = 'normal';
 
-  @Output('layerChange') layer$: Observable<string>;
-
-  constructor(private service: MapService) {
-    this.reset$ = new Subject();
-
-    let data$ = service.features$.flatMap(featureMap =>
-      this.active$.distinctUntilChanged().scan(({ active: prevActive, layer: prevLayer, points }, activeId) => {
-        let active = activeId && featureMap[activeId];
-        let layer = active ? active.type: null;
-
-        // only recalculate feature list when layer changes.  if active = null,
-        // use the same feature list
-        if (
-          active != null &&
-          (prevActive && prevActive.type) != active.type
-        ) {
-          layer = active.type;
-          points = getFeatures(featureMap, layer);
-        } else if (layer == null) {
-          // also disable floorplan
-          points = getFeatures(featureMap, 'building');
-        } else {
-          layer = prevLayer;
-        }
-        console.log('points', points, active, layer);
-
-        return { active, layer, points };
-      }, { active: null, layer: null, points: [] }),
-    ).shareReplay(1);
-
-    this.layer$ = <Observable<string>>data$.pluck('layer').distinctUntilChanged()
-
-    data$.take(1).subscribe(({ active, layer, points }) => this.init(points));
-
-
-    data$.skip(1).subscribe(({ active, layer, points }) => {
-      if (layer) {
-        this.clicked(active, points);
-      } else {
-        this.reset(points, false);
-      }
-    });
-
-    Observable.forkJoin(this.service.layers$, this.service.features$).flatMap(([ layers, featureMap]) => this.reset$.withLatestFrom(data$).switchMap(([ dir, { active, layer: prevLayer, points }]) => {
-      let i = layers.findIndex((l) => l.key == prevLayer);
-      let layer = layers[Math.min(i+dir, layers.length)];
-      let layerKey = layer ? layer.key : null;
-      if (layerKey != prevLayer) {
-        points = getFeatures(featureMap, layerKey || 'building');
-        console.log('points', points);
-        return Observable.of({ active, layer: layerKey, points });
-      }
-      return Observable.never();
-    })).subscribe(({ active, layer, points }) => {
-      console.log('layer', layer, 'points', points);
-      if (layer != null) {
-        this.clicked(active, points);
-      } else {
-        this.reset(points, false);
-      }
-    });
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.features && (changes.features || changes.active)) {
+      this.setActive(this.features, this.active);
+    }
+    if (changes.map) {
+      this.renderMap(this.map);
+    }
   }
 
   activeSelection: Selection<any, any, any, any>;
@@ -121,22 +53,13 @@ export class MapComponent implements OnInit {
   svg: Selection<any, any, any, any>;
   zoom;
   path;
-  selection: Selection<any, BasePoint, any, any>;
+  selection: Selection<any, any, any, any>;
+  projection: d3.GeoProjection;
   transforms = { center: [], offset: [], scale: 150 };
 
   ngOnInit() {
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-  }
-
-  ngOnDestroy() {}
-
-  init(points: BasePoint[]) {
-    let self = this;
-    let featureCollection = wrapCollection(points);
-    //this.featureCollection = featureCollection;
     this.activeSelection = d3.select(null);
+    let [width, height] = [100, 100];
    
     this.zoom = d3.zoom()
       .scaleExtent([1, 8])
@@ -151,31 +74,10 @@ export class MapComponent implements OnInit {
         if (d3.event.defaultPrevented) d3.event.stopPropagation();
       }, true);
 
- 
-    let { width, height } = this.svg.node().getBoundingClientRect();
+    let g = this.svg.append('g');
 
-    let center = d3.geoCentroid(featureCollection);
-    let offset = [width/2, height/2];
-    let scale = 150;
-    this.transforms = { center, offset, scale };
+    this.selection = g.selectAll('path');
 
-    this.r = 180-112.0;
-
-    let projection = this.calcProjection();
-    let path = d3.geoPath().projection(projection)
-    let bounds = path.bounds(featureCollection);
-    let hscale = scale*width  / (bounds[1][0] - bounds[0][0]);
-    let vscale = scale*height / (bounds[1][1] - bounds[0][1]);
-    scale = (hscale < vscale) ? hscale : vscale;
-    offset = [
-      width - (bounds[0][0] + bounds[1][0])/2,
-      height - (bounds[0][1] + bounds[1][1])/2
-    ];
-    this.transforms = { center, offset, scale };
-
-    projection = this.calcProjection();
-    this.path = path.projection(projection);
-            
     this.svg.append('rect')
       .attr('opacity', 0)
       .attr('class', 'background')
@@ -183,115 +85,104 @@ export class MapComponent implements OnInit {
       .attr('height', height)
       .on('click', () => {
         // toggle up
-        self.reset$.next(-1);
+        //self.reset$.next(-1);
         //self.reset()
       });
     
-    let g = this.svg.append('g');
     
     this.svg.call(this.zoom)
       .on('dblclick.zoom', null)
-    
-    this.selection = g.selectAll('path');
-
-    this.selection = this.selection.data(points, (d) => d._id)
-      .enter().append('path')
-        .attr('d', (d) => this.path(d.feature))
-        .attr('data-id', (d: BasePoint) => d._id)
-        .attr('class', 'feature')
-        .on('click', function (d: BasePoint) {
-          if (self.activeSelection.node() === this) {
-            self.reset$.next(-1);
-            //self.reset();
-          } else {
-            let id = d._id;
-            self.active = id;
-            self.activeChange.emit(id);
-          }
-        })
-      .merge(this.selection);
   }
 
-  calcProjection (rot?: number) {
-    let { center, scale, offset } = this.transforms;
-    let projection = rot ?
-      d3.geoMercator().rotate(center.map(i => i*-1).concat(rot) as [number, number, number]).center([0, 0]) :
-      d3.geoMercator().rotate([0, 0, 0]).center(center as [number, number])
-    return projection.scale(scale).translate(offset as [number, number]);
+  ngOnDestroy() {}
+
+
+  renderMap(features: FeatureCollection) {
   }
 
-  reset(points, rot) {
-    let featureCollection = wrapCollection(points);
-    let { scale, center } = this.transforms;
-    //let projection = this.calcProjection();
-    let projection = this.calcProjection(rot ? this.r : null);
-    let { width, height } = this.svg.node().getBoundingClientRect();
-    this.svg.select('rect').attr('width', width).attr('height', height);
-
-    let path = d3.geoPath().projection(projection)
-    let bounds = path.bounds(featureCollection);
-    let offset  = [
-      width - (bounds[0][0] + bounds[1][0])/2,
-      height - (bounds[0][1] + bounds[1][1])/2
-    ];
-    this.transforms = { center, offset, scale };
-
-    projection = this.calcProjection(rot ? this.r : null);
-    this.path = d3.geoPath().projection(projection)
-    let t = d3.transition(null).duration(750);
-    this.selection.transition(t).attr('d', (d) => this.path(d.feature));
-
-    this.activeSelection.classed('active', false);
-    this.activeSelection = d3.select(null);
-  
-    this.svg.transition(t).call(this.zoom.transform, d3.zoomIdentity);
-  }
-
-  clicked(active: BasePoint, points: BasePoint[]) {
+  setActive(fc: FeatureCollection, active?: string) {
+    // remove old features, add new features
     let self = this;
-    let projection = this.calcProjection(this.r);
-    let path = d3.geoPath()
-      .projection(projection)
+    let { features } = fc;
 
+    let [ width, height ] = [100, 100];
+
+    let center = d3.geoCentroid(fc);
+    let offset = [width/2, height/2];
+    let scale = 150;
+    let transforms = { center, offset, scale };
+
+    let path;
+    if (!this.projection) {
+      let projection;
+      if (active) {
+        projection = d3.geoMercator().rotate(center.map(i => i*-1).concat(112) as [number, number, number]).center([0, 0])
+      } else {
+        projection = d3.geoMercator().rotate([0, 0, 0]).center(center as [number, number]);
+      }
+      projection.scale(scale).translate(offset as [number, number]);
+
+      path = d3.geoPath().projection(projection)
+
+      let bounds = path.bounds(fc);
+      let hscale = scale*width  / (bounds[1][0] - bounds[0][0]);
+      let vscale = scale*height / (bounds[1][1] - bounds[0][1]);
+      scale = (hscale < vscale) ? hscale : vscale;
+      offset = [
+        width - (bounds[0][0] + bounds[1][0])/2,
+        height - (bounds[0][1] + bounds[1][1])/2
+      ];
+
+      if (active) {
+        projection = d3.geoMercator().rotate(center.map(i => i*-1).concat(112) as [number, number, number]).center([0, 0])
+      } else {
+        projection = d3.geoMercator().rotate([0, 0, 0]).center(center as [number, number]);
+      }
+      projection.scale(scale).translate(offset as [number, number]);
+      this.projection = projection;
+    }
+
+    path = path.projection(this.projection);
+            
     let t = d3.transition(null).ease(d3.easePoly).duration(750);
 
-    let selection = this.selection.data(points, (d) => d._id)
+    let selection = this.selection.data(features, (d) => d.properties._id)
 
-    let { width, height } = this.svg.node().getBoundingClientRect();
-    this.svg.select('rect').attr('width', width).attr('height', height);
+    let entering = selection.enter().append('path')
+        .attr('d', path)
+        .attr('data-id', d => d.properties.id)
+        .attr('class', 'feature')
+        .on('click', function (d) {
+          let { type, id } = d.properties;
+          if (type == 'building') {
+            self.buildingChange.emit(id);
+          } else if (type == 'point') {
+          } else {
+            self.activeChange.emit(id);
+          }
+          //if (self.activeSelection.node() === this) {
+          //} else {
+          //}
+        })
 
-    selection.exit().attr('opacity', 1).transition(t).attr('d', (d: BasePoint) => path(d.feature)).attr('opacity', 0).remove();
+    this.selection = entering.merge(selection);
+    this.selection.transition(t)
+      .attr('d', path)
+      .attr('opacity', 1);
 
-    let entering = selection.enter()
-      .append('path')
-      .attr('opacity', 0)
-      .attr('d', (d) => this.path(d.feature))
-      .attr('data-id', (d) => d._id)
-      .attr('class', 'feature')
-      .on('click', function (d) {
-        if (self.activeSelection.node() === this) {
-          self.reset$.next(-1);
-          //self.reset();
-        } else {
-          let id = d._id;
-          self.active = id;
-          self.activeChange.emit(id);
-        }
-      });
+
+    selection.exit().transition(t).attr('opacity', 0).attr('d', path).remove();
 
     this.selection = entering.merge(this.selection);
-    this.selection.transition(t).attr('d', (d) => path(d.feature)).attr('opacity', 1);
+
     this.activeSelection.classed('active', false);
 
-    this.path = path;
-
-    if (active) {
-      let id = active._id;
-      let el = this.svg.select(`[data-id="${ id }"]`).node();
-      this.activeSelection = d3.select(el).classed('active', true);
-
-  
-      let bounds = path.bounds(active.feature),
+    this.selection.classed('active', false)
+      .filter(d => d.properties._id == active)
+      .classed('active', true)
+      .each((d, i) => {
+        if (i !== 0) return;
+        let bounds = path.bounds(d),
           dx = bounds[1][0] - bounds[0][0],
           dy = bounds[1][1] - bounds[0][1],
           x = (bounds[0][0] + bounds[1][0]) / 2,
@@ -299,13 +190,31 @@ export class MapComponent implements OnInit {
           scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
           translate = [width / 2 - scale * x, height / 2 - scale * y];
 
-      this.svg.transition(t)
-        .call(
-          this.zoom.transform,
-          d3.zoomIdentity.translate(translate[0],translate[1]).scale(scale)
-        );
-    } else {
-      this.reset(points, true);
-    }
+        this.svg.transition(t)
+          .call(
+            this.zoom.transform,
+            d3.zoomIdentity.translate(translate[0],translate[1]).scale(scale)
+          );
+      });
   }
+}
+
+function projectionTween(projection0, projection1, width, height) {
+  return function(d) {
+    var t = 0;
+    var projection = d3.geoProjection(project)
+        .scale(1)
+        .translate([width / 2, height / 2]);
+    var path = d3.geoPath(projection);
+
+    function project(λ, φ): [number, number] {
+      λ *= 180 / Math.PI, φ *= 180 / Math.PI;
+      var p0 = projection0([λ, φ]), p1 = projection1([λ, φ]);
+      return [(1 - t) * p0[0] + t * p1[0], (1 - t) * -p0[1] + t * -p1[1]];
+    }
+    return function(_) {
+      t = _;
+      return path(d);
+    };
+  };
 }

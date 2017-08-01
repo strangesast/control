@@ -4,14 +4,14 @@ import * as d3 from 'd3';
 import { Observable, Subject } from 'rxjs';
 
 import { Feature, FeatureCollection } from '../../models';
-import { MapService } from '../../services/map.service';
+//import { MapService } from '../../services/map.service';
 
 @Component({
   selector: 'app-heatmap',
   templateUrl: './heatmap.component.html',
   styleUrls: ['./heatmap.component.less']
 })
-export class HeatmapComponent implements OnInit {
+export class HeatmapComponent {
   @ViewChild('svg') svgEl: ElementRef;
   @ViewChild('canvas') svg2El: ElementRef;
   svg: Selection<any, any, any, any>;
@@ -22,29 +22,29 @@ export class HeatmapComponent implements OnInit {
   active$: Subject<string> = new Subject();
   @Input('active') active;
 
-  constructor(private service: MapService) { }
+  //constructor(private service: MapService) { }
 
-  ngOnInit() {
-    this.svg = d3.select(this.svgEl.nativeElement);
+  //ngOnInit() {
+  //  this.svg = d3.select(this.svgEl.nativeElement);
 
-    let init$ = this.service.map$.withLatestFrom(this.service.features$).first().map(([ featureCollection ]) => {
-      this.init(featureCollection);
-    }).share();
+  //  let init$ = this.service.map$.withLatestFrom(this.service.features$).first().map(([ featureCollection ]) => {
+  //    this.init(featureCollection);
+  //  }).share();
 
-    init$.withLatestFrom(this.service.features$).flatMap(([_, featureMap]) => {
+  //  init$.withLatestFrom(this.service.features$).flatMap(([_, featureMap]) => {
 
-      //let pointMap = Object.keys(featureMap).filter(id => featureMap[id].properties.layer == 'point');
+  //    //let pointMap = Object.keys(featureMap).filter(id => featureMap[id].properties.layer == 'point');
 
-      return this.active$.map(activeId => {
-        let active = featureMap[activeId];
+  //    return this.active$.map(activeId => {
+  //      let active = featureMap[activeId];
 
-        this.zoomTo(active);
+  //      this.zoomTo(active);
 
-      })
-    }).subscribe();
+  //    })
+  //  }).subscribe();
 
-    init$.flatMap(() => this.service.pointValues$).subscribe(values => this.heat(values));
-  }
+  //  init$.flatMap(() => this.service.pointValues$).subscribe(values => this.heat(values));
+  //}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.active) {

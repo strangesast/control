@@ -2,25 +2,39 @@ import { createSelector, createFeatureSelector } from '@ngrx/store';
 import * as Actions from '../actions';
 import { Area, Point, Layer } from '../models';
 
+interface GenericAction {
+  type: string;
+  payload?: any;
+}
+
 export interface DataState {
+  active: Point|Area,
+  building: Area,
   points: Point[];
   areas: Area[];
   layers: Layer[];
 }
 
 export const initialDataState: DataState = {
+  active: null,
+  building: null,
   points: [],
   areas: [],
   layers: []
 };
 
-export function dataReducer(state: DataState = initialDataState, action: Actions.All): DataState {
+export function dataReducer(state: DataState = initialDataState, action: GenericAction): DataState {
   let { type, payload } = action;
 
   switch (type) {
     case Actions.DataRegister.typeString:
-      let { points, areas, layers } = payload;
-      return { points, areas, layers };
+      let { points, areas, layers, building } = payload;
+      return { building, points, areas, layers, active: null };
+    case Actions.DataSetActive.typeString:
+      let id = payload;
+      let active: Point|Area = state.areas.find(a => a._id == id);
+      if (!active) active = state.points.find(a => a._id == id);
+      return { ...state, active };
   }
 
   return state;
@@ -36,7 +50,7 @@ export const initialViewState: ViewState = {
   activeLayer: null
 }
 
-export function viewReducer(state: ViewState = initialViewState, action: Actions.All): ViewState {
+export function viewReducer(state: ViewState = initialViewState, action: GenericAction): ViewState {
   let { type, payload } = action;
   switch (type) {
     case Actions.ViewSetActiveNode.typeString:
@@ -58,9 +72,11 @@ export const reducers = {
 
 
 export const selectRoot = createFeatureSelector<EnergyState>('energy');
+export const selectDataBuilding = createSelector(selectRoot, (state: EnergyState) => state.data.building);
 export const selectDataPoints = createSelector(selectRoot, (state: EnergyState) => state.data.points);
 export const selectDataAreas = createSelector(selectRoot, (state: EnergyState) => state.data.areas);
 export const selectDataLayers = createSelector(selectRoot, (state: EnergyState) => state.data.layers);
+export const selectDataActive = createSelector(selectRoot, (state: EnergyState) => state.data.active);
 
 export const selectView = createSelector(selectRoot, (state) => state.view);
 export const selectViewActiveNode = createSelector(selectView, (state: ViewState) => state.activeNode);

@@ -25,6 +25,7 @@ export class LoadApplicationsGuard implements CanActivate {
       return this.auth.userInitialized$.find(i => i).withLatestFrom(this.auth.user$).flatMap(([_, user]) => {
         if (user) {
           let errored = this.auth.appsLoadError$.filter(e => !!e).map(() => {
+            console.log('apps load error');
             this.router.navigate(['/login'], { queryParams: { redirectUrl: url }});
           });
           let loaded = this.auth.appsInitialized$.find(i => i).flatMap(() =>

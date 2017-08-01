@@ -11,11 +11,12 @@
   </svg>
 </div>
 <div class="description">Some description of the selected location.</div>
-<div class="tree">
-  <app-tree-list [active]="activeNodeId$ | async" [tree]="tree$ | async" (activeNodeChange)="data.setActiveNode($event)"></app-tree-list>
+<div [ngSwitch]="activeTreeView" class="tree">
+  <app-tree-list *ngSwitchCase="'features'" [active]="data.active$ | async" [tree]="tree$ | async" (activeChange)="data.setActive($event)"></app-tree-list>
+  <app-tree-list *ngSwitchCase="'layers'" [active]="layer$ | async" [tree]="tree$ | async" (activeChange)="data.setActive($event)"></app-tree-list>
 </div>
 <div class="content" [ngClass]="activeContent">
-  <app-map class="map"></app-map>
+  <app-map [features]="features$ | async" [map]="map$ | async" [active]="data.active$ | async" (activeChange)="data.setActive($event)" (buildingChange)="data.setBuilding($event)" class="map"></app-map>
   <div class="graph">
     <svg class="placeholder">
       <line x1="0" y1="100%" x2="100%" y2="0" style="stroke:blue;stroke-width:2"/>

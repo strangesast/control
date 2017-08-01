@@ -5,7 +5,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MapService } from './services/map.service';
 import { GraphService } from './services/graph.service';
 
 import { EnergyComponent } from './components/energy.component';
@@ -46,6 +45,6 @@ const routes: Routes = [
     SankeyComponent
   ],
   bootstrap: [ EnergyComponent ],
-  providers: [ DataService, MapService, GraphService ]
+  providers: [ DataService, GraphService ]
 })
 export class EnergyModule { }

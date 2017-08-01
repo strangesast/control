@@ -49,9 +49,7 @@ module.exports = function (app, { mongo, influx }, config) {
       let payload = { id: user['_id'], username };
       let token = jwt.sign(payload, secret, { expiresIn: '1d' });
 
-      console.log('getting applications...');
-      //let applications = await getApplications(user);
-      let applications = [];
+      let applications = await getApplications(user);
   
       res.json({ token, user, applications });
   
@@ -92,8 +90,7 @@ module.exports = function (app, { mongo, influx }, config) {
     let payload = { id: user['_id'], username: user.username };
     let token = jwt.sign(payload, secret);
   
-    //let applications = await getApplications(user);
-    let applications = [];
+    let applications = await getApplications(user);
   
     res.json({ token, user, applications });
   });
@@ -137,70 +134,90 @@ module.exports = function (app, { mongo, influx }, config) {
  
   // routes
   app.get('/', function(req, res, next) {
-    res.json({ user: req.user, session: req.session, loggedIn: !!req.user });
+    res.json({ user: req.user });
   });
- 
  
   app.get('/applications', async function(req, res, next) {
     let username = req.user['username'];
     let user = await mongo.collection('users').findOne({ username });
     let applications = await getApplications(user);
-
-    console.log('got apps', applications);
-  
     res.json(applications);
   });
   
-  app.get('/areas', async function (req, res, next) {
-    let areas = await mongo.collection('areas').find({}).toArray();
-    res.json(areas);
-  });
-  
-  const layerOrder = ['building', 'wing', 'department', 'room', 'point'];
-  // narrow this with bounding box
-  app.get('/features', async function (req, res, next) {
-    let features = await mongo.collection('areas').find({}).toArray();
-    res.json({ features });
-  });
-  
-  app.get('/features/buildings', async function (req, res, next) {
-    let features = await mongo.collection('features').find({ 'properties.layer': 'building' }).toArray();
-  
-    let featureCollection = {
-      type: 'FeatureCollection',
-      crs: { type: 'name', properties: { name: 'urn:ogc:def:crs:OGC:1.3:CRS84' } },
-      features
-    }
-  
-    res.json(featureCollection);
-  });
-  
-  app.get('/features/buildings/:building', async function (req, res, next) {
-    let buildingName = req.params.building;
-    let building = await mongo.collection('buildings').findOne({ shortname: buildingName });
-    if (!building) {
-      let err = new Error(`no building with that name "${ buildingName }"`);
+  // map building / areas / layers
+  app.use([
+    '/buildings/:id',
+    '/buildings/:id/areas',
+    '/buildings/:id/layers',
+    '/buildings/:id/points'
+  ], async function (req, res, next) {
+    let { id } = req.params;
+    let _id = parseId(id);
+    let q = { type: 'building' };
+    q[_id ? '_id' : 'shortname'] = _id || id;
+    let building = await mongo.collection('areas').findOne(q);
+    if (building) {
+      req.building = building;
+      next();
+    } else {
+      let err = new Error('no building with that id found');
       err.status = 404;
       next(err);
-      return;
     }
-    let features = await mongo.collection('features').find({ 'properties.building': building.shortname }).toArray();
-  
-    res.json(features);
+  });
+
+  app.get('/buildings', async function (req, res, next) {
+    let { lat, lon, building: nearBuildingId } = req.query;
+    nearBuildingId = parseId(nearBuildingId) || nearBuildingId;
+    let nearBuilding;
+    if (nearBuildingId) {
+      nearBuilding = (await mongo.collection('areas').findOne({ _id: nearBuildingId }))
+        || (await mongo.collection('areas').findOne({ shortname: nearBuildingId }));
+    }
+    let q = { type: 'building' };
+    if (lat != null && lon != null) {
+      try {
+        [lat, lon] = [lat, lon].map(parseFloat);
+        q['feature.geometry'] = { $near: { $geometry: { type: "Point", coordinates: [lon, lat] }}};
+      } catch (e) {
+
+      }
+    } else if (nearBuilding != null) {
+      ({ cx: lon, cy: lat } = nearBuilding.feature.properties);
+      q['feature.geometry'] = { $near: { $geometry: { type: "Point", coordinates: [lon, lat] }}};
+    }
+    let buildings = await mongo.collection('areas').find(q).toArray();
+    res.json(buildings);
+  });
+
+  app.get('/buildings/:id', async function (req, res, next) {
+    res.json(req.building);
+  });
+
+  app.get('/buildings/:id/areas', async function (req, res, next) {
+    let { layer } = req.query;
+    let q = { building: req.building._id };
+    if (layer) {
+      q['type'] = layer;
+    }
+    let areas = await mongo.collection('areas').find(q).toArray();
+    res.json(areas);
+  });
+
+  app.get('/buildings/:id/layers', async function (req, res, next) {
+    let layers = await mongo.collection('areas').distinct('type', { building: req.building._id });
+    res.json(layers);
+  });
+
+  app.get('/buildings/:id/points', async function (req, res, next) {
+    let { value } = req.query;
+    let q = { building: req.building._id };
+    if (value) q['value'] = value;
+    let points = await mongo.collection('points').find(q).toArray();
+
+    res.json(points);
   });
   
-  //app.get('/buildings/0/layers/:layerName/features', async function (req, res, next) {
-  //  let { layerName } = req.params;
-  //  let features = await mongo.collection('features').find({ 'properties.layer': layerName }).toArray();
-  //
-  //  let featureCollection = {
-  //    type: 'FeatureCollection',
-  //    crs: { type: 'name', properties: { name: 'urn:ogc:def:crs:OGC:1.3:CRS84' } },
-  //    features
-  //  }
-  //
-  //  res.json(featureCollection);
-  //});
   app.get('/points', async function (req, res, next) {
     let points = await mongo.collection('points').find({}).toArray();
     let values = await influx.query(`SELECT last(value) FROM temperatures GROUP BY point`);
@@ -221,9 +238,6 @@ module.exports = function (app, { mongo, influx }, config) {
     let _id = parseId(id);
     if (_id) {
       let point = await mongo.collection('points').findOne({ _id });
-      console.log('found point');
-      console.log(JSON.stringify(point, null, 2));
-  
       if (point) {
         let value = await influx.query(`SELECT last(value) FROM temperatures WHERE "point" = '${ escape.tag(id) }'`);
         res.json(value);
@@ -243,107 +257,28 @@ module.exports = function (app, { mongo, influx }, config) {
   
   });
   
-  app.route('/:name/:id?')
-  .all(async function(req, res, next) {
-    let collections = (await mongo.collections()).map(c => c.collectionName);
-    let { name } = req.params;
-    next(!collections.includes(name) ? 'route' : undefined);
-  })
-  .get(async function(req, res, next) {
-    let collection = mongo.collection(req.params.name);
-    let { id } = req.params;
-    try {
-      if (id != null) {
-        let doc = await collection.findOne({ _id: ObjectID.createFromHexString(id) });
-        res.json(doc);
-  
-      } else {
-        let docs = await collection.find({}).toArray();
-        res.json(docs);
-      }
-    } catch (err) {
-      next(err);
-    }
-  })
-  .all(function(req, res, next) {
-    // check user, user role for further requests
-    next()
-  })
-  .post(upload.array(), async function(req, res, next) {
-    let collection = mongo.collection(req.params.name);
-    let body = req.body;
-    let result = await mongo.collection(req.params.name).insert(body)
-    res.json(result.insertedIds);
-  })
-  .put(upload.array(), async function(req, res, next) {
-    let collection = mongo.collection(req.params.name);
-    let { id } = req.params;
-    if (id == null) {
-      return next(new Error('must specify id'));
-    }
-    let body = req.body;
-    let result = await collection.findOneAndUpdate({ _id: ObjectID.createFromHexString(id) }, { '$set' : body }, { upsert: false });
-    res.json(result);
-  })
-  .delete(async function(req, res, next) {
-    let collection = mongo.collection(req.params.name);
-    let { id } = req.params;
-    if (id != null) {
-      let result = await collection.findOneAndDelete({ _id: ObjectID.createFromHexString(id) });
-      res.json(result);
-    } else {
-      let result = await collection.remove();
-      res.json(result);
-    }
-  });
-  
- 
-  app.route('/users/:userId/applications/:appId?')
-  .get(async function(req, res, next) {
-    let { userId, appId } = req.params;
-    let users = mongo.collection('users')
-    let user = await users.findOne({ _id: ObjectID.createFromHexString(userId) })
-    if (!user) return next(new Error('no user with that id'));
-  
-    let applications = await getApplications(user);
-  
-    res.json(applications);
-  })
-  .post(function(req, res, next) {
-    next()
-  });
-  
-  async function getApplications(user) {
-    let ua = user.applications || [];
-    let ug = user.groups || [];
-    let applications = await expandGroups(ug, ua);
-    return applications;
-  }
-  
-  async function expandGroups(groupIds, applicationIds=[]) {
-    let res = await mongo.collection('groups').aggregate([
-      {'$match': { _id: { $in: groupIds/*.map(ObjectID.createFromHexString.bind(ObjectID))*/ }}},
-      {'$unwind': '$applications'},
-      {'$group': { '_id': null, 'applications': { '$addToSet': '$applications' } }}
-    ]).next();
-    
-    if (res == null) throw new Error('failed to aggregate');
-    let { applications: appIds } = res;
-
-    let applications = await mongo.collection('applications')
-      .find({ '_id': { '$in': appIds.concat(applicationIds)/*.map(ObjectID.createFromHexString.bind(ObjectID))*/ }})
-      .sort({ '_id': 1 })
-      .toArray();
-    return applications;
-  }
-  
-  // points management
-  
   // catch-all error handler
   app.use(function(err, req, res, next) {
     //res.status(400)
     res.status(err.status || 500).json({ message: err.message, stack: err.stack });
   });
+
+  async function getApplications(user) {
+    let applicationIds = user.applications || [];
+    let groupIds = user.groups || [];
+    if (!Array.isArray(groupIds) || !Array.isArray(applicationIds)) throw new Error('invalid parameters');
+    let appIds = groupIds.length ? (await mongo.collection('groups').aggregate([
+      {'$match': { _id: { $in: groupIds }}},
+      {'$unwind': '$applications'},
+      {'$group': { '_id': null, 'applications': { '$addToSet': '$applications' } }}
+    ]).next()).applications : [];
+    
+    let applications = (appIds.length || applicationIds.length) ? (await mongo.collection('applications')
+      .find({ '_id': { '$in': appIds.concat(applicationIds) }})
+      .sort({ '_id': 1 })
+      .toArray()) : [];
+    return applications;
+  }
 
   // for chaining
   return app;
