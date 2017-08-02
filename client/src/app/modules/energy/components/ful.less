@@ -16,34 +16,30 @@
 :host {
   @media (min-width: 980px) {
     display: grid;
-    grid-template-columns: @side-width @tab-width auto;
+    grid-template-columns: @tab-width (@side-width - @tab-width) @tab-width auto;
     grid-template-rows: @header-height (@photo-height - @header-height) @description-height auto;
-    transition: transform 0.2s ease;
-    transform: translateX(0);
+    transition: grid-column-end 0.2s ease, grid-column-start 0.2s ease;
+    //transform: translateX(0);
     & > .content {
-      grid-column-start: 2;
+      grid-column-start: 3;
       /* autoprefixer: off */
-      grid-column-end: 4;
+      grid-column-end: 5;
       grid-row-start: 1;
       grid-row-end: 5;
       z-index: 1;
     }
-    &.side-active {
-      grid-template-columns: @side-width @tab-width ~"calc(100% - " @tab-width ~")";
-      transform: translateX(-@side-width);
-    }
     & > .header {
       grid-column-start: 1;
       /* autoprefixer: off */
-      grid-column-end: 2;
+      grid-column-end: 3;
       grid-row-start: 1;
       grid-row-end: 2;
       z-index: 2;
     }
     & > .tab {
-      grid-column-start: 2;
+      grid-column-start: 3;
       /* autoprefixer: off */
-      grid-column-end: 3;
+      grid-column-end: 4;
       grid-row-start: 1;
       grid-row-end: 2;
       z-index: 2;
@@ -51,7 +47,7 @@
     & > .side {
       grid-column-start: 1;
       /* autoprefixer: off */
-      grid-column-end: 2;
+      grid-column-end: 3;
       grid-row-start: 1;
       grid-row-end: 5;
       z-index: 2;
@@ -59,21 +55,21 @@
     & > .photo {
       grid-column-start: 1;
       /* autoprefixer: off */
-      grid-column-end: 2;
+      grid-column-end: 3;
       grid-row-start: 1;
       grid-row-end: 3;
     }
     & > .description {
       grid-column-start: 1;
       /* autoprefixer: off */
-      grid-column-end: 2;
+      grid-column-end: 3;
       grid-row-start: 3;
       grid-row-end: 4;
     }
     & > .tree {
       grid-column-start: 1;
       /* autoprefixer: off */
-      grid-column-end: 2;
+      grid-column-end: 3;
       grid-row-start: 4;
       grid-row-end: 5;
     }
@@ -99,6 +95,18 @@
     }
     & > .shade {
       display: none;
+    }
+    &.side-active > .tab {
+      grid-column-start: 1;
+      /* autoprefixer: off */
+      grid-column-end: 2;
+      z-index: 4;
+    }
+    &.side-active > .content {
+      grid-column-start: 1;
+      z-index: 3;
+      //grid-template-columns: @side-width @tab-width ~"calc(100% - " @tab-width ~")";
+      //transform: translateX(-@side-width);
     }
   }
 }
