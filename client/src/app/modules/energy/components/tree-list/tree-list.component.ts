@@ -7,12 +7,10 @@ import { hierarchy, HierarchyNode } from 'd3';
   styleUrls: ['./tree-list.component.less']
 })
 export class TreeListComponent implements OnChanges {
-  activeNodeIdSet: string;
+  @Input() active: any;
   activeNode: HierarchyNode<any>;
-
-  @Input('active')
-  activeNodeId: string;
-  @Output() activeNodeChange = new EventEmitter();
+  @Input('include-root') includeRoot: boolean = true;
+  @Output() activeChange = new EventEmitter();
 
   treeValue: HierarchyNode<any>;
   @Input()
@@ -30,24 +28,22 @@ export class TreeListComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.treeValue) {
-      if (changes.activeNodeId) {
-        let id = changes.activeNodeId.currentValue;
-        if (id !== this.activeNodeIdSet) {
-          let n = searchTree(this.treeValue, id)
-          if (n) {
-            for (let pn of n.ancestors()) {
-              if (pn != n && pn._children) {
-                pn.children = pn._children;
-                delete pn._children;
-              }
+      if (changes.active && changes.active.currentValue && (!changes.active.previousValue || changes.active.currentValue._id !== changes.active.previousValue._id)) {
+        let id = changes.active.currentValue._id;
+        let n = searchTree(this.treeValue, id)
+        if (n) {
+          this.activeNode = n;
+          for (let pn of n.ancestors()) {
+            if (pn != n && pn._children) {
+              pn.children = pn._children;
+              delete pn._children;
             }
-            this.calculateTreeList();
-            //let childEl = this.el.nativeElement.querySelector(`[data-id="${ id }"]`);
-            //if (childEl) {
-            //  childEl.scrollIntoView();
-            //}
-            this.activeNode = n;
           }
+          this.calculateTreeList();
+          //let childEl = this.el.nativeElement.querySelector(`[data-id="${ id }"]`);
+          //if (childEl) {
+          //  childEl.scrollIntoView();
+          //}
         }
       }
     }
@@ -55,8 +51,7 @@ export class TreeListComponent implements OnChanges {
 
   selectNode(node) {
     this.activeNode = node;
-    this.activeNodeIdSet = node.data._id;
-    this.activeNodeChange.emit(node.data._id);
+    this.activeChange.emit(node.data);
   }
 
   toggleOpen(node, recalculate=true) {
@@ -74,7 +69,7 @@ export class TreeListComponent implements OnChanges {
 
   calculateTreeList() {
     if (this.treeValue instanceof hierarchy) {
-      this.treeList = getDescendants(this.treeValue)
+      this.treeList = getDescendants(this.treeValue, this.includeRoot);
     } else {
       this.treeList = [];
     }

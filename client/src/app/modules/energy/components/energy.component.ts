@@ -17,9 +17,10 @@ const layerOrder = ['building', 'wing', 'department', 'room', 'point'];
   //animations: [routerTransition()]
 })
 export class EnergyComponent {
-  tree$: Observable<HierarchyNode<Area|Point>>;
+  tree$: Observable<HierarchyNode<any>>;
 
   activeTreeView: string = 'features'; // | 'layers'
+  activeTreeViewType: string = 'building'// | 'areas'; // | 'layers'
 
   activeBuilding$: Observable<any>;
   activeLayerKey$: Observable<string>;
@@ -38,7 +39,7 @@ export class EnergyComponent {
     let strat = stratify().id((d: any) => d._id).parentId((d: any) => d.parent || d.room);
     let t = tree().nodeSize([0, 1]);
 
-    this.layer$ = Observable.merge(this.data.active$.filter(d => d != null).map(d => d.type), this.layerOverride$).startWith(null).shareReplay(1).do(x => console.log('layer', x));
+    this.layer$ = Observable.merge(this.data.active$.filter(d => d != null).map(d => d.type), this.layerOverride$).startWith(null).shareReplay(1);
 
     this.map$ = this.data.building$.flatMap(building => {
       if (building == null) return Observable.of(null);
@@ -46,7 +47,6 @@ export class EnergyComponent {
     }).shareReplay(1);
 
     this.features$ = Observable.combineLatest(this.data.building$, this.layer$).flatMap(([ building, layer ]) => {
-      console.log('building', building, 'layer', layer);
       if (building && layer) {
         return (layer == 'point' ? this.data.points$ : this.data.areas$.map(areas => areas.filter(area => area.type == layer)))
           .map((arr: (Point|Area)[]) => arr.map(d => ({ ...d.feature, properties: { ...d.feature.properties, id: d._id, layer: 0, type: d.type }})));
@@ -56,10 +56,13 @@ export class EnergyComponent {
       }
     }).map(wrapCollection);
 
-    this.tree$ = this.data.building$.switchMap((building: Area) => {
-      if (building) {
-        return Observable.combineLatest(this.data.areas$, this.data.points$).map(([ areas, points ]) => {
-          let node = t(strat(areas));
+    this.tree$ = Observable.combineLatest(this.data.building$, this.data.buildings$).switchMap(([ building, buildings]: [Area, Area[]]) => {
+      console.log('buildings', buildings);
+      return (building ? Observable.combineLatest(this.data.areas$, this.data.points$) : Observable.of([[], []])).map(([ areas, points ]) => {
+        try {
+          buildings = buildings.map(b => ({ ...b, parent: 'undefined' }));
+          let node = t(strat(buildings.concat(areas).concat([{ _id: 'undefined' } as Area])));
+          node.each(n => n.y-=1);
           node.sort((a: any, b: any) =>
             layerOrder.indexOf(a.data.type) < layerOrder.indexOf(b.data.type) ? -1 : 1);
           // "close" all but root node, children
@@ -72,12 +75,10 @@ export class EnergyComponent {
             }
           });
           return node as HierarchyNode<any>;
-        });
-      } else {
-        return this.data.buildings$.map(buildings => {
-          return hierarchy(buildings);
-        });
-      }
+        } catch (e) {
+          console.log('e', e);
+        }
+      });
     });
   }
 
@@ -89,6 +90,15 @@ export class EnergyComponent {
   // mobile active window
   toggleActiveContent(activeContent?) {
     this.activeContent = activeContent != null ? activeContent : (this.activeContent == 'map' ? 'graph' : 'map');
+  }
+
+  setActive(area: Area|Point) {
+    let id = area._id;
+    if (area.type == 'building') {
+      this.data.setBuilding(id);
+    } else {
+      this.data.setActive(id);
+    }
   }
 }
 

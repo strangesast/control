@@ -35,6 +35,7 @@ async function importFromGeo(mongo, dir) {
   parents = findParents([null])
   let buildingId;
   let buildingIndex;
+  let buildingGamma;
   
   let l = 0;
   // start from root building
@@ -49,6 +50,7 @@ async function importFromGeo(mongo, dir) {
           throw new Error('more than a single building in this import');
         }
         buildingIndex = i;
+        buildingGamma = gamma;
       }
       let parentId = parentMap[parent];
       parentIds.push(shortname);
@@ -62,7 +64,7 @@ async function importFromGeo(mongo, dir) {
         feature: {
           type: 'Feature',
           geometry,
-          properties: { gamma, cx, cy }
+          properties: { gamma: buildingGamma || gamma, cx, cy }
         }
       });
     }

@@ -19,18 +19,13 @@ export class LoadApplicationsGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
       let url = state.url;
-      console.log('load apps guarding...', url);
-
       // always return false to halt routing with this config. load new config. redirect to target path
       return this.auth.userInitialized$.find(i => i).withLatestFrom(this.auth.user$).flatMap(([_, user]) => {
         if (user) {
-          console.log('user', user);
           let errored = this.auth.appsLoadError$.filter(e => !!e).map(() => {
-            console.log('apps load error');
             this.router.navigate(['/login'], { queryParams: { redirectUrl: url }});
           });
           let loaded = this.auth.appsInitialized$.find(i => i).flatMap(() =>
-            console.log('load apps success') ||
             this.auth.applications$.map(apps => {
               let routes = createRoutes(apps);
               this.router.resetConfig(routes);
@@ -49,7 +44,6 @@ export class LoadApplicationsGuard implements CanActivate {
 function createRoutes(apps: Application[]): Routes {
   let canActivate = [ AuthGuard ]
   if (!Array.isArray(apps) || !apps.length) {
-    console.log('apps', apps);
     throw new Error('invalid apps array');
   }
   let children = apps.map(({ path, modulePath: loadChildren }) => ({ path, loadChildren, canActivate }));

@@ -27,7 +27,7 @@ export class DataService {
     //this.activeLayerKey$ = this.store.select(fromRoot.selectViewActiveLayer);
 
     // refresh buildings whenever building is unset
-    this.buildings$ = this.building$.filter(building => !building).switchMap(() => this.getBuildings());
+    this.buildings$ = this.getBuildings().shareReplay(1).do(x => console.log('got buildings', x));
 
     //this.activeNode$ = this.activeNodeId$.withLatestFrom(this.points$, this.areas$).map(([id, points, areas]) => {
     //  for (let point of points) {
@@ -44,14 +44,12 @@ export class DataService {
   }
 
   setBuilding(id: string) {
-    console.log('set building');
     this.store.dispatch(new Actions.DataRegisterRequest(id));
   }
 
   setActive(id: string) {
     this.store.dispatch(new Actions.DataSetActive(id));
   }
-
 
   unsetBuilding() {
     this.store.dispatch(new Actions.DataDeregisterRequest());
