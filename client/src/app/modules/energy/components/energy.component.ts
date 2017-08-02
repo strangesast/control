@@ -39,7 +39,7 @@ export class EnergyComponent {
     let strat = stratify().id((d: any) => d._id).parentId((d: any) => d.parent || d.room);
     let t = tree().nodeSize([0, 1]);
 
-    this.layer$ = Observable.merge(this.data.active$.filter(d => d != null).map(d => d.type), this.layerOverride$).startWith(null).shareReplay(1);
+    this.layer$ = Observable.merge(this.data.active$.filter(d => d != null).map(d => d.type), this.layerOverride$).startWith(null).distinctUntilChanged().shareReplay(1);
 
     this.map$ = this.data.building$.flatMap(building => {
       if (building == null) return Observable.of(null);

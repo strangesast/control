@@ -42,12 +42,12 @@ export class MapComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.svg) {
+      let t;
       if (changes.features) {
-        this.updateFeatures(changes.features.currentValue);
+        t = this.updateFeatures(changes.features.currentValue, t);
       }
       if (changes.active) {
-        console.log('got active', changes.active.currentValue);
-        this.updateActive(changes.active.currentValue);
+        t = this.updateActive(changes.active.currentValue, t);
       }
     }
     //if (this.features && (changes.features || changes.active)) {
@@ -117,23 +117,25 @@ export class MapComponent implements OnInit {
 
   ngOnDestroy() {}
 
-  updateFeatures(fc: FeatureCollection) {
+  updateFeatures(fc: FeatureCollection, t?) {
     let self = this;
     let { features } = fc || { features: [] };
     let g = this.svg.select('g');
     let selection = this.selection.data(features, (d) => d.properties.id);
 
     if (this.path == null) {
-      this.path = centerFeatures(fc);
+      ({ path: this.path, transforms: this.transforms } = centerFeatures(fc));
       this.projection = this.path.projection();
     }
 
-    let t = d3.transition(null).duration(750);
+    t = t || d3.transition(null).duration(200);
 
-    selection.exit().remove();
+    selection.exit().transition(t).attr('opacity', 0).remove();
 
     let entering = selection.enter().append('path')
+      .attr('fill', 'darkgrey')
       .attr('class', 'feature')
+      .attr('opacity', 0)
       .on('click', function(d) {
         let id = d.properties.id;
         if (d.properties.type === 'building') {
@@ -151,41 +153,67 @@ export class MapComponent implements OnInit {
 
     this.selection = entering.merge(selection)
       .attr('d', this.path)
+
+    this.selection
+      .transition(t)
+      .attr('opacity', 1);
+
+    return t;
   }
 
   changeProjection() {}
 
   // set projection
   // highlight, center active
-  updateActive(id: string) {
+  updateActive(id: string, t?) {
     let self = this;
-    this.selection.classed('active', false).filter(d => d.properties.id == id).classed('active', true).each((d) => {
-      let [ width, height ] = [ 100, 100 ];
-
-      let t = d3.transition(null).duration(750);
-
-      let center = d3.geoCentroid(d);
+    t = t || d3.transition(null).duration(200);
+    this.selection.transition(t).attr('fill', 'darkgrey').attr('d', self.path).filter(d => d.properties.id == id).attr('fill', 'black').on('end', function(d) {
+      let { center, scale, offset } = self.transforms;
+      //let center = d3.geoCentroid(d);
       let gamma = d.properties.gamma;
+      self.projection.rotate(center.map(i => i*-1).concat(-gamma) as [number, number, number]).center([0, 0])
+      self.path.projection(self.projection);
 
-      this.projection.rotate(center.map(i => i*-1).concat(-gamma) as [number, number, number]).center([0, 0])
-      this.path.projection(this.projection);
+      let t = d3.transition(null).duration(200);
+      self.selection.transition(t).attr('d', self.path);
 
-      //let projection = d3.geoMercator().rotate(center.map(i => i*-1).concat(-gamma) as [number, number, number]).center([0, 0]).scale(this.projection.scale()).translate(this.projection.translate());
-      //this.projection.rotate(center.map(i => i*-1).concat(-gamma) as [number, number, number]).center([0, 0]);//.scale(scale);
-      //this.path.projection(projection);
+      let [ width, height ] = [100, 100];
 
-      this.selection.transition(t).attr('d', this.path)//.attrTween('d', projectionTween(this.projection, this.projection = nextPath.projection()));
-
-      var bounds = this.path.bounds(d),
+      var bounds = self.path.bounds(d),
           dx = bounds[1][0] - bounds[0][0],
           dy = bounds[1][1] - bounds[0][1],
           x = (bounds[0][0] + bounds[1][0]) / 2,
           y = (bounds[0][1] + bounds[1][1]) / 2,
-          scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
-          translate = [width / 2 - scale * x, height / 2 - scale * y];
-      
-      //this.svg.transition(t).call( this.zoom.transform as any, d3.zoomIdentity.translate(translate[0],translate[1]).scale(scale) );
+          bscale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
+          translate = [width / 2 - bscale * x, height / 2 - bscale * y];
+        
+      //self.svg.transition(d3.active(this)).call( self.zoom.transform as any, d3.zoomIdentity.translate(translate[0],translate[1]).scale(bscale) );
+
     });
+    //.each((d) => {
+    //  let [ width, height ] = [ 100, 100 ];
+
+    //  let t = d3.transition(null).duration(750);
+
+    //  let center = d3.geoCentroid(d);
+    //  let gamma = d.properties.gamma;
+
+    //  this.projection.rotate(center.map(i => i*-1).concat(-gamma) as [number, number, number]).center([0, 0])
+    //  this.path.projection(this.projection);
+
+    //  this.selection.transition(t).attr('d', this.path)//.attrTween('d', projectionTween(this.projection, this.projection = nextPath.projection()));
+
+    //  var bounds = this.path.bounds(d),
+    //      dx = bounds[1][0] - bounds[0][0],
+    //      dy = bounds[1][1] - bounds[0][1],
+    //      x = (bounds[0][0] + bounds[1][0]) / 2,
+    //      y = (bounds[0][1] + bounds[1][1]) / 2,
+    //      scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
+    //      translate = [width / 2 - scale * x, height / 2 - scale * y];
+    //  
+    //  //this.svg.transition(t).call( this.zoom.transform as any, d3.zoomIdentity.translate(translate[0],translate[1]).scale(scale) );
+    //});
   }
 
   renderMap(features: FeatureCollection) {
@@ -309,11 +337,11 @@ function centerFeatures(fc) {
     width - (bounds[0][0] + bounds[1][0])/2,
     height - (bounds[0][1] + bounds[1][1])/2
   ];
-  
   projection = d3.geoMercator().rotate([0, 0, 0]).center(center as [number, number]);
   projection.scale(scale).translate(offset as [number, number]);
   path.projection(projection);
-  return path;
+  let transforms = { center, scale, offset };
+  return { path, transforms };
 }
 
 
