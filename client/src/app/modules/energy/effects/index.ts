@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, URLSearchParams } from '@angular/http';
 import { Actions, Effect, toPayload } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 
@@ -17,9 +17,10 @@ export class EnergyEffects {
     .switchMap((id) => {
       return this.auth.get(`/buildings/${ id }`).flatMap(building => {
         if (!building) throw new Error('no building with that id');
+        let params: URLSearchParams = new URLSearchParams();
 
         return Observable.forkJoin(
-          this.auth.get(`/buildings/${ id }/points`),
+          this.auth.get(`/buildings/${ id }/points`,  ),
           this.auth.get(`/buildings/${ id }/areas`),
           this.auth.get(`/buildings/${ id }/layers`)
         ).map(a => [building, ...a]);

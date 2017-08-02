@@ -195,10 +195,44 @@ module.exports = function (app, { mongo, influx }, config) {
   });
 
   app.get('/buildings/:id/areas', async function (req, res, next) {
-    let { layer } = req.query;
+    let { layer, values } = req.query;
     let q = { building: req.building._id };
     if (layer) {
       q['type'] = layer;
+      if (values) {
+        let values = await influx.query(`SELECT last("value") FROM "topview"."autogen"."temperatures" WHERE time > now() - 5m GROUP BY "room"`);
+        let roomValues = values.reduce((a, v) => Object.assign(a, { [v.room]: v.last }), {});
+
+        if (layer == 'room') {
+          let rooms = await mongo.collection('areas').find(q).toArray();
+          for (let room of rooms) {
+            room.data = { last: roomValues[room._id] };
+          }
+          res.json(rooms);
+          return;
+
+        } else if (layer == 'department') {
+          let departments = await mongo.collection('areas').aggregate([
+            { $match: q },
+            { $group: { _id: '$parent', children: { $push: '$_id' }}},
+            //{ $group: { _id: '$parent', children: { $push: '$$ROOT' }}},
+            { $lookup: { from: 'areas', localField: '_id', foreignField: '_id', as: 'parent' }},
+            { $unwind: '$parent' },
+            { $addFields: { 'parent.children': '$children' }},
+            { $replaceRoot: { newRoot: '$parent' }}
+          ]).toArray();
+          //  //{ $unwind: "$children" }
+          //]).toArray();
+          for (let department of departments) {
+            let vals = department.children.map(id => roomValues[id]);
+            delete department.children;
+            department.data = { last: vals.reduce((a, b) => a+b, 0)/vals.length };
+          }
+          res.json(departments);
+          return;
+        } else if (layer == 'wing') {
+        }
+      }
     }
     let areas = await mongo.collection('areas').find(q).toArray();
     res.json(areas);

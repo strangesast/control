@@ -140,4 +140,12 @@ describe('server', async () => {
     let temp_points = res.body;
     temp_points.should.have.lengthOf.at.least(set_points.length);
   });
+
+  it ('should get areas and last temperatures', async () => {
+    let res = await chai.request(server)
+      .get(`/buildings/${ encodeURIComponent(building._id) }/areas`)
+      .query({ values: true, layer: 'room' })
+      .set('Authorization', 'JWT ' + token);
+    console.log('res', res.body);
+  });
 });

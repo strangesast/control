@@ -27,7 +27,7 @@ export class DataService {
     //this.activeLayerKey$ = this.store.select(fromRoot.selectViewActiveLayer);
 
     // refresh buildings whenever building is unset
-    this.buildings$ = this.getBuildings().shareReplay(1).do(x => console.log('got buildings', x));
+    this.buildings$ = this.getBuildings().shareReplay(1);
 
     //this.activeNode$ = this.activeNodeId$.withLatestFrom(this.points$, this.areas$).map(([id, points, areas]) => {
     //  for (let point of points) {
