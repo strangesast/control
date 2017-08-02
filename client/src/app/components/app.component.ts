@@ -16,7 +16,7 @@ import { AuthorizationService } from '../services/authorization.service';
     <div>
       <span>Loading Apps...</span>
       <span *ngIf="appsLoadState$ | async as state">
-        <span class="fa fa-1x fa-fw" [ngClass]="state == 'ready' ? 'fa-check' : state == 'error' ? 'fa-times' : 'fa-circle-o-notch fa-spin'"></span>
+        <span class="fa fa-1x fa-fw" [ngClass]="state == 'ready' ? 'fa-check' : (state == 'error' ? 'fa-times' : 'fa-circle-o-notch fa-spin')"></span>
       </span>
     </div>
   </div>
@@ -31,8 +31,9 @@ export class AppComponent {
 
   constructor(private auth: AuthorizationService, public router: Router, private config: ConfigurationService) {
     this.userReady$ = auth.userInitialized$;
+    let errors = auth.appsLoadError$;
     this.appsLoadState$ = Observable.merge(
-      auth.appsLoadError$.mapTo('error'),
+      errors.mapTo('error'),
       auth.appsInitialized$.filter(i => i).mapTo('ready')
     ).publishBehavior('loading').refCount();
   }

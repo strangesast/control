@@ -99,10 +99,15 @@ export class AppEffects {
     //  return Observable.of(new AppActions.LoginFailure([ error ]));
     //})
 
-  @Effect() logout$ = this.actions$
-    .ofType(AppActions.LogoutRequest.typeString)
-    .do(x => console.log('got logout'))
-    .switchMap(() => clearStorage().map(() => new AppActions.Logout()));
+  @Effect() logout$ = Observable.merge(
+    this.actions$
+      .ofType(AppActions.LogoutRequest.typeString)
+      .mapTo(true)
+    ,
+    this.actions$
+      .ofType(AppActions.LoadApplicationsFailure.typeString)
+      .mapTo(false)
+    ).switchMap((b) => clearStorage(b).map(() => new AppActions.Logout()));
 
 }
 
@@ -126,9 +131,8 @@ function updateStorage({ user, token }: UserLoad): Observable<void> {
   return Observable.of(undefined);
 }
 
-function clearStorage(): Observable<void> {
-  console.log('cleared user/token');
-  localStorage.removeItem('currentUser');
+function clearStorage(userToo=true): Observable<void> {
+  if (userToo) localStorage.removeItem('currentUser');
   localStorage.removeItem('token');
   return Observable.of(undefined);
 }

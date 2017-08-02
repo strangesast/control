@@ -49,8 +49,9 @@ export class LoginComponent implements OnInit {
         this.credentials.setValue({ username: acc.username, password: acc.password });
       }
     });
+    let success$ = this.authorization.loggedIn$.skipWhile(b => b).find(b => b);
 
-    this.authorization.loggedIn$.find(l => l).flatMap(() => this.redirectUrl ?
+    success$.flatMap(() => this.redirectUrl ?
       Observable.of(this.redirectUrl) :
       this.authorization.applications$.first().map(apps => apps[0].path)
     ).subscribe(path => this.router.navigateByUrl(path));

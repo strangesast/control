@@ -4,7 +4,7 @@ import * as AppActions from '../actions/app';
 
 export interface ValidationError {
   code?: number;
-  field: string;
+  field?: string;
   message: string;
 }
 
@@ -57,10 +57,11 @@ export function appReducer (state: AppState = initialState, action: AppActions.A
       return { ...state, appsInitialized: true, appsLoadError: null, auth: { ...state.auth, applications }};
     }
     case AppActions.LoadApplicationsFailure.typeString: {
+      console.log('state', state);
       let payload = (action as AppActions.LoadApplicationsFailure).payload;
       return {
         ...state,
-        auth: { ...state.auth, user: null, token: null, applications: [] },
+        auth: { ...state.auth, token: null, applications: [], errors: [ { message: 'token expired' } ] },
         appsInitialized: false,
         appsLoadError: payload
       };
@@ -74,6 +75,7 @@ export function appReducer (state: AppState = initialState, action: AppActions.A
 
     // forego adding token until userloadsuccess
     case AppActions.Login.typeString:
+      console.log('login!', payload);
       let { user, applications } = payload;
       return { ...state, auth: { user, token: null, errors: [], applications }};
 

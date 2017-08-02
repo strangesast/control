@@ -28,7 +28,7 @@ export class AuthorizationService {
   urlPrefix: string = '/api';
 
   constructor(private store: Store<fromRoot.State>, private http: Http) {
-    this.token$ = store.select(fromRoot.selectAuthToken);
+    this.token$ = store.select(fromRoot.selectAuthToken).shareReplay(1);
     this.requestOptions = this.token$.map(mapTokenToOptions);
     this.user$ = store.select(fromRoot.selectAuthUser);
     this.applications$ = store.select(fromRoot.selectAuthApplications);
@@ -37,14 +37,14 @@ export class AuthorizationService {
     this.appsLoadError$ = store.select(fromRoot.selectAppsErr);
     let params: URLSearchParams = new URLSearchParams();
     params.set('password', '1');
-    this.users$ = this.get('/users', { search: params }).do(x => console.log('users', x));
+    this.users$ = this.get('/users', { search: params });
 
 
     // user / no user determined
     //this.ready$ = this.store.select(fromRoot.selectAuthReady);
     //this.applications$ = store.select(fromRoot.selectAuthApplications).skipUntil(this.ready$);
     this.loggedIn$ = this.userInitialized$.filter(r => r).flatMap(() => {
-      return this.token$.map(token => Boolean(token)).distinctUntilChanged();
+      return this.token$.map(t => !!t).distinctUntilChanged();
     });
   }
 
