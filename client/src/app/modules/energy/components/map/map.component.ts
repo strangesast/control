@@ -6,7 +6,6 @@ import { Selection } from 'd3';
 import * as d3 from 'd3';
 import * as d3Geo from 'd3-geo-projection';
 import * as d3ScaleChromatic from 'd3-scale-chromatic';
-console.log(d3);
 
 import { Feature, FeatureCollection } from '../../models';
 
@@ -136,7 +135,7 @@ export class MapComponent implements OnInit {
     selection.exit().transition(t).attr('opacity', 0).remove();
 
     let entering = selection.enter().append('path')
-      .attr('fill', (d) => console.log(this.color(d.properties.data ? d.properties.data.last: 0)) || (d.properties.data ? this.color(d.properties.data.last) : 'darkgrey'))
+      .attr('fill', (d) => d.properties.data ? this.color(d.properties.data.last) : 'darkgrey')
       .attr('class', 'feature')
       .attr('opacity', 0)
       .on('click', function(d) {

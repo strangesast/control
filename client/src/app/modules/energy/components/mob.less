@@ -5,6 +5,19 @@
 @description-height: 80px;
 @footer-height: 60px;
 
+.thick-underline {
+  position: relative;
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: black;
+  }
+}
+
 
 :host {
   @media (max-width: 480px) {
@@ -95,16 +108,7 @@
 
 :host > .footer {
   & > .active {
-    position: relative;
-    &:after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 8px;
-      background: black;
-    }
+    .thick-underline;
   }
 }
 

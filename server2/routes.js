@@ -265,6 +265,7 @@ module.exports = function (app, { mongo, influx }, config) {
             time = vals.reduce((a, b) => b.time > a ? b.time : a, vals[0].time);
             last = Math.floor(vals.reduce((a, b) => a+b.last, 0)/vals.length*precision)/precision;
           } catch (e) {
+            console.log(vals);
             console.log('fuck this, too');
           }
           item.data = { last, time };

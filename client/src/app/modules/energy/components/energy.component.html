@@ -12,9 +12,23 @@
 </div>
 <div class="description">Some description of the selected location.</div>
 <div [ngSwitch]="activeTreeView" class="tree">
-  <button (click)="map.changeProjection()">Test</button>
-  <app-tree-list *ngSwitchCase="'features'" [include-root]="false" [active]="data.active$ | async" [tree]="tree$ | async" (activeChange)="setActive($event)"></app-tree-list>
-  <app-tree-list *ngSwitchCase="'layers'" [active]="layer$ | async" [tree]="tree$ | async" (activeChange)="data.setActive($event)"></app-tree-list>
+  <div class="tabs">
+    <div class="tab" (click)="activeTreeView = 'features'" [class.active]="activeTreeView == 'features'">
+      <span class="fa fa-fw fa-lg fa-align-right fa-rotate-180"></span><span>Areas</span>
+    </div>
+    <div class="tab" (click)="activeTreeView = 'layers'" [class.active]="activeTreeView == 'layers'">
+      <span class="fa fa-fw fa-stack fa-rotate-90">
+        <i class="fa fa-stop fa-layers fa-stack-1x" style="left: 0;"></i>
+        <i class="fa fa-stop fa-layers fa-stack-1x" style="left: -.15em;color:#fff;"></i>
+        <i class="fa fa-stop fa-layers fa-stack-1x" style="left: -.3em;"></i>
+        <i class="fa fa-stop fa-layers fa-stack-1x" style="left: -.45em;color:#fff;"></i>
+        <i class="fa fa-stop fa-layers fa-stack-1x" style="left: -.6em;"></i>
+      </span>
+      <span>Layers</span>
+    </div>
+  </div>
+  <app-tree-list *ngSwitchCase="'features'" [include-root]="false" [active]="active$ | async" [tree]="tree$ | async" (activeChange)="setActive($event)"></app-tree-list>
+  <app-tree-list *ngSwitchCase="'layers'" [include-root]="false" [active]="layer$ | async" [tree]="layers$ | async" (activeChange)="setActiveLayer($event)"></app-tree-list>
 </div>
 <div class="content" [ngClass]="activeContent">
   <app-map #map [features]="features$ | async" [map]="map$ | async" [active]="((data.active$ | async) || { _id: null })._id" (activeChange)="data.setActive($event)" (buildingChange)="data.setBuilding($event)" class="map"></app-map>

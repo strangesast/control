@@ -29,6 +29,7 @@ export class EnergyComponent {
 
   layerOverride$: Subject<string> = new Subject();
   layer$: Observable<string>;
+  active$: Observable<Area|Point>;
 
   features$: Observable<FeatureCollection>;
 
@@ -38,6 +39,9 @@ export class EnergyComponent {
   constructor(public data: DataService) {
     let strat = stratify().id((d: any) => d._id).parentId((d: any) => d.parent || d.room);
     let t = tree().nodeSize([0, 1]);
+
+    this.layers$ = data.layers$.map(arr => hierarchy({ children: arr.map(key => ({ name: key, key })) })).do(x => console.log('layers', x));
+    this.active$ = data.active$;
 
     this.layer$ = Observable.merge(this.data.active$.filter(d => d != null).map(d => d.type), this.layerOverride$).startWith(null).distinctUntilChanged().shareReplay(1);
 
@@ -90,6 +94,13 @@ export class EnergyComponent {
   // mobile active window
   toggleActiveContent(activeContent?) {
     this.activeContent = activeContent != null ? activeContent : (this.activeContent == 'map' ? 'graph' : 'map');
+  }
+
+  setActiveLayer(layer: { key: string, name: string }) {
+    let key = layer && layer.key;
+    if (key) {
+      this.layerOverride$.next(key);
+    }
   }
 
   setActive(area: Area|Point) {
