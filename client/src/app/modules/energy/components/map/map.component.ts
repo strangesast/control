@@ -100,9 +100,9 @@ export class MapComponent implements OnInit {
 
     let g = this.svg.append('g').attr('id', 'container');
 
-    this.fcontainer = g.append('g');
+    this.fcontainer = g.append('g').attr('transform-origin', '50 50');
     this.selection = this.fcontainer.attr('class', 'features').selectAll('path');
-    this.mcontainer = g.append('g');
+    this.mcontainer = g.append('g').attr('transform-origin', '50 50');
     this.mapSelection = this.mcontainer.attr('class', 'map').append('path');
     
 
