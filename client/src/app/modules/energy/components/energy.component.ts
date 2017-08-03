@@ -40,7 +40,7 @@ export class EnergyComponent {
     let strat = stratify().id((d: any) => d._id).parentId((d: any) => d.parent || d.room);
     let t = tree().nodeSize([0, 1]);
 
-    this.layers$ = data.layers$.map(arr => hierarchy({ children: arr.map(key => ({ name: key, key })) })).do(x => console.log('layers', x));
+    this.layers$ = data.layers$.map(arr => hierarchy({ children: arr.map(key => ({ name: key, key })) }));
     this.active$ = data.active$;
 
     this.layer$ = Observable.merge(this.data.active$.filter(d => d != null).map(d => d.type), this.layerOverride$).startWith(null).distinctUntilChanged().shareReplay(1);
@@ -61,7 +61,6 @@ export class EnergyComponent {
     }).map(wrapCollection);
 
     this.tree$ = Observable.combineLatest(this.data.building$, this.data.buildings$).switchMap(([ building, buildings]: [Area, Area[]]) => {
-      console.log('buildings', buildings);
       return (building ? Observable.combineLatest(this.data.areas$, this.data.points$) : Observable.of([[], []])).map(([ areas, points ]) => {
         try {
           buildings = buildings.map(b => ({ ...b, parent: 'undefined' }));
@@ -104,11 +103,15 @@ export class EnergyComponent {
   }
 
   setActive(area: Area|Point) {
-    let id = area._id;
-    if (area.type == 'building') {
-      this.data.setBuilding(id);
+    if (area) {
+      let id = area._id;
+      if (area.type == 'building') {
+        this.data.setBuilding(id);
+      } else {
+        this.data.setActive(id);
+      }
     } else {
-      this.data.setActive(id);
+      this.data.setActive(null);
     }
   }
 }

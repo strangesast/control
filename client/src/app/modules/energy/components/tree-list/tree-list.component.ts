@@ -50,8 +50,13 @@ export class TreeListComponent implements OnChanges {
   }
 
   selectNode(node) {
-    this.activeNode = node;
-    this.activeChange.emit(node.data);
+    if (this.activeNode != node) {
+      this.activeNode = node;
+      this.activeChange.emit(node.data);
+    } else {
+      this.activeNode = null;
+      this.activeChange.emit(null);
+    }
   }
 
   toggleOpen(node, recalculate=true) {

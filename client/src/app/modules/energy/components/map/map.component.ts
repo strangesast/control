@@ -50,12 +50,12 @@ export class MapComponent implements OnInit {
       if (changes.active) {
         t = this.updateActive(changes.active.currentValue, t);
       }
+      if (changes.map) {
+        this.updateMap(this.map);
+      }
     }
     //if (this.features && (changes.features || changes.active)) {
     //  this.setActive(this.features, this.active);
-    //}
-    //if (changes.map) {
-    //  this.renderMap(this.map);
     //}
   }
 
@@ -68,6 +68,7 @@ export class MapComponent implements OnInit {
   projection: d3.GeoProjection;
   transforms = { center: [], offset: [], scale: 150 };
   color = (i) => d3ScaleChromatic.interpolateRdYlBu(d3.scaleLinear().domain([60, 80])(i));
+  mapSelection;
 
   ngOnInit() {
     let [ width, height ] = [100, 100];
@@ -92,9 +93,14 @@ export class MapComponent implements OnInit {
         .attr('height', height)
         //.on('click', reset);
     
+
     let g = this.svg.append('g').attr('id', 'features');
-    this.selection = g.selectAll('path');
+
+
+    this.selection = g.append('g').attr('class', 'features').selectAll('path');
+    this.mapSelection = g.append('g').attr('class', 'map').append('path');
     
+
     this.svg.call(this.zoom)
       .on('dblclick.zoom', null);
    
@@ -163,7 +169,7 @@ export class MapComponent implements OnInit {
 
     this.selection
       .transition(t)
-      .attr('opacity', 1);
+      .attr('opacity', 0.8);
 
     return t;
   }
@@ -187,6 +193,7 @@ export class MapComponent implements OnInit {
 
       let t = d3.transition(null).duration(200);
       self.selection.transition(t).attr('d', self.path);
+      self.mapSelection.transition(t).attr('d', self.path);
 
       let [ width, height ] = [100, 100];
 
@@ -202,7 +209,8 @@ export class MapComponent implements OnInit {
     });
   }
 
-  renderMap(features: FeatureCollection) {
+  updateMap(fc: FeatureCollection) {
+    this.mapSelection.datum(fc).attr('d', this.path);
   }
 }
 

@@ -5,6 +5,10 @@
 @description-height: 200px;
 @footer-height: 60px;
 
+.muted {
+  color: lightgrey;
+}
+
 .thick-underline {
   position: relative;
   &:after {
@@ -35,6 +39,20 @@
 
   & > span.name {
     flex-grow: 1;
+  }
+  & > .header {
+    & > div > .name {
+      font-size: 2em;
+    }
+    & > div > .type {
+      .muted;
+      &:before {
+        content: '(';
+      }
+      &:after {
+        content: ')';
+      }
+    }
   }
 
 }

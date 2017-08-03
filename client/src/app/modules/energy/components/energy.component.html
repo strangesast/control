@@ -1,14 +1,17 @@
-<div class="header">
-  <span class="name">Some really long title for a building or other selected space</span>
-</div>
-<div (click)="toggleSide()" class="tab">
-  <span class="fa fa-fw fa-angle-right" [class.fa-rotate-180]="!activeSide"></span>
-</div>
 <div class="photo">
   <svg class="placeholder">
     <line x1="0" y1="100%" x2="100%" y2="0" style="stroke:rgb(255,0,0);stroke-width:2"/>
     <line x1="0" y1="0" x2="100%" y2="100%" style="stroke:rgb(255,0,0);stroke-width:2"/>
   </svg>
+</div>
+<div class="header">
+  <div *ngIf="active$ | async as active">
+    <span class="name">{{ active.name }}</span>
+    <span class="type">{{ active.type }}</span>
+  </div>
+</div>
+<div (click)="toggleSide()" class="tab">
+  <span class="fa fa-fw fa-angle-right" [class.fa-rotate-180]="!activeSide"></span>
 </div>
 <div class="description">Some description of the selected location.</div>
 <div [ngSwitch]="activeTreeView" class="tree">

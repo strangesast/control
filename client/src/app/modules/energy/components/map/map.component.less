@@ -7,14 +7,23 @@
     width: 100%;
     height: 100%;
 
-    & /deep/ path:hover {
+    & /deep/ .map {
+      pointer-events: none;
+      stroke: black;
+      stroke-width: 0.05px; // desired stroke width (line height)
+      vector-effect: non-scaling-stroke; // line height won't scale
+    }
+
+    & /deep/ .features > path:hover {
       stroke: grey;
       stroke-width: 2px; // desired stroke width (line height)
       vector-effect: non-scaling-stroke; // line height won't scale
     }
-    & /deep/ path.active {
+    & /deep/ .features > path.active {
       stroke: black;
+      //fill: url(#diagonalHatch);
       stroke-width: 2px; // desired stroke width (line height)
+      stroke-linejoin: round;
       vector-effect: non-scaling-stroke; // line height won't scale
     }
 
