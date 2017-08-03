@@ -18,11 +18,12 @@ export class EnergyEffects {
       return this.auth.get(`/buildings/${ id }`).flatMap(building => {
         if (!building) throw new Error('no building with that id');
         let params: URLSearchParams = new URLSearchParams();
+        params.set('values', 'true');
 
         return Observable.forkJoin(
-          this.auth.get(`/buildings/${ id }/points`,  ),
-          this.auth.get(`/buildings/${ id }/areas`),
-          this.auth.get(`/buildings/${ id }/layers`)
+          this.auth.get(`/buildings/${ id }/points`, { search: params }),
+          this.auth.get(`/buildings/${ id }/areas`, { search: params }),
+          this.auth.get(`/buildings/${ id }/layers`, { search: params })
         ).map(a => [building, ...a]);
       });
     })

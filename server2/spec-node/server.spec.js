@@ -1,3 +1,4 @@
+const fs = require('fs');
 const chai = require('chai'),
       chaiHttp = require('chai-http'),
       chaiThings = require('chai-things'),
@@ -144,8 +145,9 @@ describe('server', async () => {
   it ('should get areas and last temperatures', async () => {
     let res = await chai.request(server)
       .get(`/buildings/${ encodeURIComponent(building._id) }/areas`)
-      .query({ values: true, layer: 'room' })
+      .query({ values: true })
       .set('Authorization', 'JWT ' + token);
-    console.log('res', res.body);
+
+    res.body.should.all.have.property('data');
   });
 });

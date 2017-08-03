@@ -6,6 +6,7 @@ export interface Point {
   building: string;
   feature: Feature;
   room: string;
+  data: { time: any, last: number };
 }
 
 export interface Area {
@@ -16,6 +17,7 @@ export interface Area {
   parent?: string; // parent area id
   feature: Feature; // whats the geometric representation
   building: string;
+  data: { time: any, last: number };
 }
 
 export type Layer = string;

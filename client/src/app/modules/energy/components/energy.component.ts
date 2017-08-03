@@ -49,7 +49,7 @@ export class EnergyComponent {
     this.features$ = Observable.combineLatest(this.data.building$, this.layer$).flatMap(([ building, layer ]) => {
       if (building && layer) {
         return (layer == 'point' ? this.data.points$ : this.data.areas$.map(areas => areas.filter(area => area.type == layer)))
-          .map((arr: (Point|Area)[]) => arr.map(d => ({ ...d.feature, properties: { ...d.feature.properties, id: d._id, layer: 0, type: d.type }})));
+          .map((arr: (Point|Area)[]) => arr.map(d => ({ ...d.feature, properties: { ...d.feature.properties, id: d._id, layer: 0, type: d.type, data: d.data }})));
 
       } else {
         return this.data.buildings$.map(arr => arr.map(d => ({ ...d.feature, properties: { ...d.feature.properties, id: d._id, layer: 0, type: 'building' }})));
