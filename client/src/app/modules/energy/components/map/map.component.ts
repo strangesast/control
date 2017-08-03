@@ -96,7 +96,7 @@ export class MapComponent implements OnInit {
     this.selection = g.selectAll('path');
     
     this.svg.call(this.zoom)
-      .on('dblclick.zoom', null)
+      .on('dblclick.zoom', null);
    
     //function reset() {
     //  active.classed('active', false);
@@ -138,7 +138,8 @@ export class MapComponent implements OnInit {
       .attr('fill', (d) => d.properties.data ? this.color(d.properties.data.last) : 'darkgrey')
       .attr('class', 'feature')
       .attr('opacity', 0)
-      .on('click', function(d) {
+
+    entering.on('click', function(d) {
         let id = d.properties.id;
         if (d.properties.type === 'building') {
           self.buildingChange.emit(id);
@@ -152,6 +153,10 @@ export class MapComponent implements OnInit {
         //  self.updateActive(d);
         //}
       });
+
+    entering.on('mouseover', function() {
+      (<any>this).parentNode.appendChild(this);
+    });
 
     this.selection = entering.merge(selection)
       .attr('d', this.path)
