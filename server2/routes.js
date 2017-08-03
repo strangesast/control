@@ -219,13 +219,8 @@ module.exports = function (app, { mongo, influx }, config) {
         // add wing field
         { $addFields: { 'wing': '$_parent.parent' }},
         // remove intermediary
-        { $project: { '_parent': 0 }},
-        //{ $lookup: { from: 'areas', localField: 'department', foreignField: '_id', as: '_department' }},
-        //{ $unwind: '$_department' },
-        //{ $lookup: { from: 'areas', localField: 'wing', foreignField: '_id', as: '_wing' }},
-        //{ $unwind: '$_wing' },
-        //{ $lookup: { from: 'areas', localField: 'building', foreignField: '_id', as: '_building' }},
-        //{ $unwind: '$_building' },
+        //{ $project: { '_parent': 0 }},
+        { $project: { '_parent.feature': 0 }}
         //{ $group: { _id: '$parent', children: { $push: '$_id' }}}
       ];
 
@@ -251,7 +246,15 @@ module.exports = function (app, { mongo, influx }, config) {
         results.push(...departments);
       }
       if (!layer || layer == 'room') {
-        let rooms = await c.aggregate(pipeline).toArray();
+        let rooms = await c.aggregate(pipeline.concat([
+          { $lookup: { from: 'areas', localField: 'department', foreignField: '_id', as: '_department' }},
+          { $unwind: '$_department' },
+          { $lookup: { from: 'areas', localField: 'wing', foreignField: '_id', as: '_wing' }},
+          { $unwind: '$_wing' },
+          { $lookup: { from: 'areas', localField: 'building', foreignField: '_id', as: '_building' }},
+          { $unwind: '$_building' },
+          { $project: { '_building.feature': 0, '_department.feature': 0, '_wing.feature': 0 }}
+        ])).toArray();
         results.push(...rooms);
       }
 

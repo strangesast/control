@@ -69,6 +69,10 @@ export class MapComponent implements OnInit {
   transforms = { center: [], offset: [], scale: 150 };
   color = (i) => d3ScaleChromatic.interpolateRdYlBu(d3.scaleLinear().domain([60, 80])(i));
   mapSelection;
+  fcontainer;
+  mcontainer;
+
+  transformed: boolean = false;
 
   ngOnInit() {
     let [ width, height ] = [100, 100];
@@ -94,11 +98,12 @@ export class MapComponent implements OnInit {
         //.on('click', reset);
     
 
-    let g = this.svg.append('g').attr('id', 'features');
+    let g = this.svg.append('g').attr('id', 'container');
 
-
-    this.selection = g.append('g').attr('class', 'features').selectAll('path');
-    this.mapSelection = g.append('g').attr('class', 'map').append('path');
+    this.fcontainer = g.append('g');
+    this.selection = this.fcontainer.attr('class', 'features').selectAll('path');
+    this.mcontainer = g.append('g');
+    this.mapSelection = this.mcontainer.attr('class', 'map').append('path');
     
 
     this.svg.call(this.zoom)
@@ -146,6 +151,7 @@ export class MapComponent implements OnInit {
       .attr('opacity', 0)
 
     entering.on('click', function(d) {
+        console.log(d);
         let id = d.properties.id;
         if (d.properties.type === 'building') {
           self.buildingChange.emit(id);
@@ -174,7 +180,17 @@ export class MapComponent implements OnInit {
     return t;
   }
 
-  changeProjection() {}
+  changeProjection() {
+    let t0 = d3.transition(null).duration(1000);
+    let t1 = t0.transition().duration(1000);
+    if (this.transformed = !this.transformed) {
+      this.svg.select('g').selectAll('g').transition(t0).attr('transform', 'rotate(-20, 0,100) skewX(60)');
+      this.svg.select('g').selectAll('g').transition(t1).attr('transform', (d, i) => `translate(0, ${ i *10 }) rotate(-20, 0,100) skewX(60)`);
+    } else {
+      this.svg.select('g').selectAll('g').transition(t0).attr('transform', (d, i) => `translate(0, 0) rotate(-20, 0,100) skewX(60)`);
+      this.svg.select('g').selectAll('g').transition(t1).attr('transform', 'rotate(0, 0,100) skewX(0)');
+    }
+  }
 
   // set projection
   // highlight, center active
@@ -182,7 +198,7 @@ export class MapComponent implements OnInit {
     let self = this;
     t = t || d3.transition(null).duration(200);
     this.selection.classed('active', false).transition(t).attr('d', self.path).filter(d => d.properties.id == id).on('start', function() {
-      d3.select(this).classed('active', true);
+      this.activeSelection = d3.select(this).classed('active', true);
       this.parentNode.appendChild(this);
     }).on('end', function(d) {
       let { center, scale, offset } = self.transforms;

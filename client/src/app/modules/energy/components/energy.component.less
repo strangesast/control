@@ -69,6 +69,9 @@
 :host > .tree {
   overflow: auto;
 }
+:host > .tree > button {
+  flex-shrink: 0;
+}
 .tabs {
   flex-shrink: 0;
   display: flex;
@@ -84,5 +87,13 @@
     &.active {
       .thick-underline;
     }
+  }
+}
+:host > .photo {
+  position: relative;
+
+  & > img {
+    max-width: 100%;
+    max-height: 100%;
   }
 }
