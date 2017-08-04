@@ -15,27 +15,39 @@ import { Feature, FeatureCollection } from '../../models';
   styleUrls: ['./map.component.less']
 })
 export class MapComponent implements OnInit {
+  // ideally:
+  //   @Input('layer')
+  //   @Output('layerChange')
+  //
+  //   @Input('active')
+  //   @Output('activeChange')
+  //
+  //   @Input('floor')
+  //   @Output('floorChange')
+  //
+  //   @Input('building')
+  //   @Output('buildingChange')
+  //
+  //   internal service fetches features based on the filters above
+  //
+  //   @Input('init') # building.shortname or coordinates for first view
+  //
+  //
+  //   fn buildingsNear(coord or buiding.shortname)
+  //     returns building list
   @ViewChild('svg') el: ElementRef; 
 
   // when a new floor is clicked
   @Output() layerChange = new EventEmitter();
-  // when a new feature is clicked
-  // string
+
+  // active building id
   @Output() buildingChange: EventEmitter<string> = new EventEmitter();
+  // active area|point id
   @Output() activeChange: EventEmitter<string> = new EventEmitter();
   @Input() active: string;
+
   @Input() features: FeatureCollection;
-  // like {
-  //    ...
-  //    features: [{
-  //       ...
-  //       properties: {
-  //         ...
-  //         id: string,
-  //         layer: number // only display 0 layer
-  //       }
-  //    }, ... ]
-  // }
+  @Input('hide-map') hideMap: boolean = false;
   @Input() map: FeatureCollection;
 
   // which projection
@@ -54,32 +66,36 @@ export class MapComponent implements OnInit {
         this.updateMap(this.map);
       }
     }
-    //if (this.features && (changes.features || changes.active)) {
-    //  this.setActive(this.features, this.active);
-    //}
   }
 
+  // active feature path
   activeSelection: Selection<any, any, any, any>;
-  r: number;
   svg: Selection<any, any, any, any>;
+  // zoom fn, used for transforms
   zoom;
-  path;
+  // features selections
   selection: Selection<any, any, any, any>;
+  // current projection 
   projection: d3.GeoProjection;
+  // current path, using above projection
+  path;
+  // use the same transforms after proj def
   transforms = { center: [], offset: [], scale: 150 };
+  // ugly (but pretty) color interp fn
   color = (i) => d3ScaleChromatic.interpolateRdYlBu(d3.scaleLinear().domain([60, 80])(i));
-  mapSelection;
+  // features container
   fcontainer;
+  // annotations container
+  acontainer;
+  // map (floorplan) outline container
   mcontainer;
+  // the map path itself
+  mapSelection;
 
   transformed: boolean = false;
 
   ngOnInit() {
     let [ width, height ] = [100, 100];
-    
-    //var projection = d3.geoAlbersUsa()
-    //    .scale(1000)
-    //    .translate([width / 2, height / 2]);
     
     this.zoom = d3.zoom()
       .scaleExtent([1, 8])
@@ -101,13 +117,13 @@ export class MapComponent implements OnInit {
     let g = this.svg.append('g').attr('id', 'container');
 
     this.fcontainer = g.append('g').attr('transform-origin', '50 50');
-    this.selection = this.fcontainer.attr('class', 'features').selectAll('path');
+    this.selection = this.fcontainer.attr('class', 'features transform').selectAll('path');
     this.mcontainer = g.append('g').attr('transform-origin', '50 50');
-    this.mapSelection = this.mcontainer.attr('class', 'map').append('path');
+    this.mapSelection = this.mcontainer.attr('class', 'map transform').append('path');
+    this.acontainer = g.append('g');
     
 
-    this.svg.call(this.zoom)
-      .on('dblclick.zoom', null);
+    this.svg.call(this.zoom).on('dblclick.zoom', null);
    
     //function reset() {
     //  active.classed('active', false);
@@ -178,6 +194,15 @@ export class MapComponent implements OnInit {
       .attr('opacity', 0.8);
 
     return t;
+  }
+
+  updateMapVisibilityState(visible?) {
+    visible = visible != null ? visible : (this.hideMap = !this.hideMap);
+    let t = d3.transition(null).duration(750);
+    this.mapSelection.transition(t).attr('opacity', visible ? 1 : 0);
+    this.selection
+      .transition(t)
+      .attr('opacity', visible ? 0.8 : 1.0);
   }
 
   changeProjection() {

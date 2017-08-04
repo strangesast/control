@@ -31,7 +31,8 @@
       <span>Layers</span>
     </div>
   </div>
-  <button (click)="map.changeProjection()">Test</button>
+  <button (click)="map.changeProjection()">Toggle Ortho</button>
+  <button (click)="map.updateMapVisibilityState()">Toggle Opacity</button>
   <app-tree-list *ngSwitchCase="'features'" [include-root]="false" [active]="active$ | async" [tree]="tree$ | async" (activeChange)="setActive($event)"></app-tree-list>
   <app-tree-list *ngSwitchCase="'layers'" [include-root]="false" [active]="layer$ | async" [tree]="layers$ | async" (activeChange)="setActiveLayer($event)"></app-tree-list>
 </div>
