@@ -11,6 +11,7 @@ export class TreeListComponent implements OnChanges {
   activeNode: HierarchyNode<any>;
   @Input('include-root') includeRoot: boolean = true;
   @Output() activeChange = new EventEmitter();
+  lastSelectedId: string;
 
   treeValue: HierarchyNode<any>;
   @Input()
@@ -30,13 +31,16 @@ export class TreeListComponent implements OnChanges {
     if (this.treeValue) {
       if (changes.active && changes.active.currentValue && (!changes.active.previousValue || changes.active.currentValue._id !== changes.active.previousValue._id)) {
         let id = changes.active.currentValue._id;
-        let n = searchTree(this.treeValue, id)
-        if (n) {
+        if (id != this.lastSelectedId) {
           // focus element in list
           let el = this.el.nativeElement.querySelector(`[data-id="${ id }"]`)
           if (el) {
             this.el.nativeElement.scrollTop = el.offsetTop;
           }
+        }
+
+        let n = searchTree(this.treeValue, id)
+        if (n) {
 
           // select existing hierarchynode
           this.activeNode = n;
@@ -56,6 +60,7 @@ export class TreeListComponent implements OnChanges {
     if (this.activeNode != node) {
       this.activeNode = node;
       this.activeChange.emit(node.data);
+      this.lastSelectedId = node.data._id;
 
     } else {
       this.activeNode = null;

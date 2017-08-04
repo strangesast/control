@@ -27,7 +27,7 @@ export class EnergyEffects {
         ).map(a => [building, ...a]);
       });
     })
-    .map(([ building, points, areas, layers ]) => console.log('layers', layers) ||
+    .map(([ building, points, areas, layers ]) =>
       new EnergyActions.DataRegister({ building, points, areas, layers }));
 }
 

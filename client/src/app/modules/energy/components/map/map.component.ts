@@ -119,7 +119,7 @@ export class MapComponent implements OnInit {
     this.fcontainer = g.append('g').attr('transform-origin', '50 50');
     this.selection = this.fcontainer.attr('class', 'features transform').selectAll('path');
     this.mcontainer = g.append('g').attr('transform-origin', '50 50');
-    this.mapSelection = this.mcontainer.attr('class', 'map transform').append('path');
+    this.mapSelection = this.mcontainer.attr('class', 'map transform').append('path').attr('opacity', 1);
     this.acontainer = g.append('g');
     
 
@@ -167,7 +167,6 @@ export class MapComponent implements OnInit {
       .attr('opacity', 0)
 
     entering.on('click', function(d) {
-        console.log(d);
         let id = d.properties.id;
         if (d.properties.type === 'building') {
           self.buildingChange.emit(id);
@@ -206,9 +205,9 @@ export class MapComponent implements OnInit {
     visible = visible != null ? visible : !(this.hideMap = !this.hideMap);
     let t = d3.transition(null).duration(750);
     this.mapSelection.transition(t).attr('opacity', visible ? 1 : 0);
-    this.selection
-      .transition(t)
-      .attr('opacity', visible ? 0.8 : 1.0);
+    //this.selection
+    //  .transition(t)
+    //  .attr('opacity', visible ? 0.8 : 0.8);
   }
 
   changeProjection() {
