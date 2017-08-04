@@ -150,4 +150,19 @@ describe('server', async () => {
 
     res.body.should.all.have.property('data');
   });
+
+  it ('should get a point for each area', async () => {
+    let res = await chai.request(server)
+      .get(`/points`)
+      .set('Authorization', 'JWT ' + token);
+
+    let tempPoint = res.body.find(t => t.value == 'temperature');
+    let spPoint = res.body.find(t => t.value == 'set_point');
+
+    res = await chai.request(server)
+      .get(`/points/${ tempPoint._id }`)
+      .set('Authorization', 'JWT ' + token);
+
+    res.body.should.have.property('history');
+  });
 });

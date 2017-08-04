@@ -4,14 +4,12 @@ const mongodb = require('mongodb'),
       jwt = require('jsonwebtoken'),
       JwtStrategy = require('passport-jwt').Strategy,
       ExtractJwt = require('passport-jwt').ExtractJwt,
-      Influx = require('influx'),
-      { escape } = Influx,
       multer = require('multer'),
       upload = multer();
 
 const precision = 10;
 
-module.exports = function (app, { mongo, influx }, config) {
+module.exports = function (app, { mongo }, config) {
   let { secret } = config;
 
   const params = {
@@ -197,94 +195,94 @@ module.exports = function (app, { mongo, influx }, config) {
 
   app.get('/buildings/:id/areas', async function (req, res, next) {
     let { layer, values } = req.query;
-    let q = { building: req.building._id };
+    let buildingId = req.building._id;
+    let q = { building: buildingId };
 
-    if (values) {
-      let results = [];
-      let points = await influx.query(`SELECT last("value") FROM "topview"."autogen"."temperatures" WHERE time > now() - 5m GROUP BY "room"`);
-      let pointMap = {};
-      for (let { time, last, room } of points) {
-        pointMap[room] = { time, last };
-      }
+    let points = await mongo.collection('values').aggregate([
+      { $sort: { time: 1 }},
+      { $group: { _id: '$point', value: { $last: '$$ROOT' }}},
+      { $replaceRoot: { newRoot: '$value' }},
+      { $project: { point: 1, time: 1, value: 1 }}
+    ]).toArray();
 
-      let c = mongo.collection('areas');
+    let pointMap = points.reduce((a, p) => {
+      let id = p.point;
+      delete p.point;
+      a[id] = p;
+      return a;
+    }, {});
 
-      let pipeline = [
-        // rooms
-        { $match: Object.assign({}, q, { type: 'room' }) },
-        // add department field
-        { $addFields: { 'department': '$parent' }},
-        // lookup parent
-        { $lookup: { from: 'areas', localField: 'parent', foreignField: '_id', as: '_parent' }}, { $unwind: '$_parent' },
-        // add wing field
-        { $addFields: { 'wing': '$_parent.parent' }},
-        // remove intermediary
-        //{ $project: { '_parent': 0 }},
-        { $project: { '_parent.feature': 0 }}
-        //{ $group: { _id: '$parent', children: { $push: '$_id' }}}
-      ];
+    let otherAreas = await mongo.collection('areas').aggregate([
+      // just rooms
+        { $match: { type: 'room', building: req.building._id }},
+      // find room ancestors (department, wing, building)
+        { $graphLookup: {
+              from: 'areas',
+              startWith: '$parent',
+              connectFromField: 'parent',
+              connectToField: '_id',
+              as: 'hierarchy'
+            }},
+      // create doc for each ancestor
+        { $unwind: '$hierarchy' },
+      // keep room, ancestor
+        { $project: { room: '$_id', _id: '$hierarchy._id' }},
+      // group room by ancestor
+        { $group: { _id: '$_id', children: { $push: '$room' }}},
+      // create doc for each ancestor, room pair
+        { $unwind: '$children' },
+        { $project: { child: '$children' }},
+      // lookup points for each room
+        { $lookup: {
+            from: 'points',
+            localField: 'child',
+            foreignField: 'room',
+            as: 'child'
+        }},
+      // create doc for each ancestor, room, point combination
+        { $unwind: '$child' },
+      // group by ancestor
+        { $group: { _id: '$_id', points: { $push: '$child' }}},
+      // add ancestor doc
+        { $lookup: {
+           from: 'areas',
+           localField: '_id',
+           foreignField: '_id',
+           as: 'object'
+        }},
+      // add points as attribute to ancestor doc
+        { $unwind: '$object' },
+        { $addFields: {
+            'object.points': '$points',
+        }},
+        { $replaceRoot: { newRoot: '$object' }}
+    ]).toArray();
 
-      if (!layer || layer == 'wing') {
-        let wings = await c.aggregate(pipeline.concat([
-          { $group: { _id: '$wing', children: { $push: '$_id' }}},
-          { $lookup: { from: 'areas', localField: '_id', foreignField: '_id', as: 'parent' }},
-          { $unwind: '$parent' },
-          { $addFields: { 'parent.children': '$children' }},
-          { $replaceRoot: { newRoot: '$parent' }},
-        ])).toArray();
-        results.push(...wings);
-      }
-      if (!layer || layer == 'department') {
-        let departments = await c.aggregate(pipeline.concat([
-          { $group: { _id: '$department', children: { $push: '$_id' }}},
-          { $lookup: { from: 'areas', localField: '_id', foreignField: '_id', as: 'parent' }},
-          { $unwind: '$parent' },
-          { $addFields: { 'parent.children': '$children' }},
-          { $replaceRoot: { newRoot: '$parent' }},
-          { $addFields: { 'wing': '$parent' }}
-        ])).toArray();
-        results.push(...departments);
-      }
-      if (!layer || layer == 'room') {
-        let rooms = await c.aggregate(pipeline.concat([
-          { $lookup: { from: 'areas', localField: 'department', foreignField: '_id', as: '_department' }},
-          { $unwind: '$_department' },
-          { $lookup: { from: 'areas', localField: 'wing', foreignField: '_id', as: '_wing' }},
-          { $unwind: '$_wing' },
-          { $lookup: { from: 'areas', localField: 'building', foreignField: '_id', as: '_building' }},
-          { $unwind: '$_building' },
-          { $project: { '_building.feature': 0, '_department.feature': 0, '_wing.feature': 0 }}
-        ])).toArray();
-        results.push(...rooms);
-      }
+    let rooms = await mongo.collection('areas').aggregate([
+      // just rooms
+        { $match: { type: 'room', building: req.building._id }},
+      // find points for each room
+        { $lookup: {
+          from: 'points',
+          localField: '_id',
+          foreignField: 'room',
+          as: 'points'
+        }}
+    ]).toArray();
 
-      for (let item of results) {
-        if (item.type == 'room') {
-          item.data = pointMap[item._id];
-        } else {
-          let vals = item.children.map(id => pointMap[id]);
-          let time, last;
-          try {
-            time = vals.reduce((a, b) => b.time > a ? b.time : a, vals[0].time);
-            last = Math.floor(vals.reduce((a, b) => a+b.last, 0)/vals.length*precision)/precision;
-          } catch (e) {
-            console.log(vals);
-            console.log('fuck this, too');
-          }
-          item.data = { last, time };
-          delete item.children;
-        }
-      }
+    let areas = otherAreas.concat(rooms);
 
-      res.json(results);
-
-    } else {
-      if (layer) {
-        q['type'] = layer;
-      }
-      let areas = await mongo.collection('areas').find(q).toArray();
-      res.json(areas);
+    for (let area of areas) {
+      let last = area.points.reduce((a, b) => a + pointMap[b._id].value, 0)/area.points.length;
+      let time = area.points.reduce((a, b) => b.time > a ? b.time : a, 0);
+      area.data = { last, time };
     }
+
+    if (layer) {
+      areas = areas.filter(a => a.type == layer);
+    }
+
+    res.json(areas);
   });
 
   app.get('/buildings/:id/layers', async function (req, res, next) {
@@ -302,42 +300,34 @@ module.exports = function (app, { mongo, influx }, config) {
   });
   
   app.get('/points', async function (req, res, next) {
-    let points = await mongo.collection('points').find({}).toArray();
-    let values = await influx.query(`SELECT last(value) FROM temperatures GROUP BY point`);
-  
-    let pointValueMap = values.reduce((a, { last, time, point }) =>
-      Object.assign(a, { [point]: { last, time }}), {});
-  
-    for (let point of points) {
-      let id = point._id;
-      point.data = pointValueMap[id];
-    }
-  
+    let points = await mongo.collection('values').aggregate([
+      { $sort: { time: 1 }},
+      { $group: { _id: '$point', value: { $last: '$$ROOT' }}},
+      { $project: { 'value._id': 1, 'value.time': 1, 'value.value': 1 }},
+      { $lookup: { from: 'points', localField: '_id', foreignField: '_id', as: 'point' }},
+      { $unwind: '$point' },
+      { $addFields: { 'point.data': '$value' }},
+      { $replaceRoot: { newRoot: '$point' }}
+    ]).toArray();
+
     res.json(points);
   });
   
   app.get('/points/:id', async function (req, res, next) {
     let { id } = req.params;
-    let _id = parseId(id);
-    if (_id) {
-      let point = await mongo.collection('points').findOne({ _id });
-      if (point) {
-        let value = await influx.query(`SELECT last(value) FROM temperatures WHERE "point" = '${ escape.tag(id) }'`);
-        res.json(value);
-        return;
-      }
-  
-      point = await mongo.collection('areas').findOne({ _id: id });
-      if (point) {
-        let value = await influx.query(`SELECT last(value) FROM temperatures GROUP BY 'area' WHERE "area" = '${ escape.tag(id) }'`);
-        res.json({ value });
-        return
-      }
-    }
-    let err = new Error('no point with that id found')
-    err.status = 404;
-    next(err);
-  
+    let _id = parseId(id)
+    if (_id == null) throw new Error('invalid id');
+    let point = await mongo.collection('points').findOne({ _id });
+    let history = await mongo.collection('values').aggregate([
+      { $match: { point: _id }},
+      { $sort: { time: -1 }},
+      { $project: { _id: 0, time: 1, value: 1 }}
+    ]).toArray();
+
+    point.data = history[0];
+    point.history = history;
+
+    res.json(point);
   });
   
   // catch-all error handler

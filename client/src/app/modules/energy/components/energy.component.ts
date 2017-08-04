@@ -64,6 +64,17 @@ export class EnergyComponent {
       return (building ? Observable.combineLatest(this.data.areas$, this.data.points$) : Observable.of([[], []])).map(([ areas, points ]) => {
         try {
           buildings = buildings.map(b => ({ ...b, parent: 'undefined' }));
+          if (building) {
+            let i = buildings.findIndex(b => b._id == building._id);
+            if (i > -1) {
+              buildings.splice(i, 1);
+            }
+          }
+          let b = areas.find(a => a.type == 'building');
+          if (b) {
+            b.parent = 'undefined';
+          }
+
           let node = t(strat(buildings.concat(areas).concat([{ _id: 'undefined' } as Area])));
           node.each(n => n.y-=1);
           node.sort((a: any, b: any) =>

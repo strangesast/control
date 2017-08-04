@@ -6,7 +6,7 @@ var defaultSettings = {
   recalcInterval: 2000,
   initTemp: 70.0,
   initTempSpread: 4.0,
-  precision: 1000
+  precision: 0.1
 };
 
 const collections = [
