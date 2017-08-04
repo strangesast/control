@@ -67,7 +67,9 @@
   }
 }
 :host > .tree {
-  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 :host > .tree > button {
   flex-shrink: 0;

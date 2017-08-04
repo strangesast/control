@@ -32,6 +32,13 @@ export class TreeListComponent implements OnChanges {
         let id = changes.active.currentValue._id;
         let n = searchTree(this.treeValue, id)
         if (n) {
+          // focus element in list
+          let el = this.el.nativeElement.querySelector(`[data-id="${ id }"]`)
+          if (el) {
+            this.el.nativeElement.scrollTop = el.offsetTop;
+          }
+
+          // select existing hierarchynode
           this.activeNode = n;
           for (let pn of n.ancestors()) {
             if (pn != n && pn._children) {
@@ -40,10 +47,6 @@ export class TreeListComponent implements OnChanges {
             }
           }
           this.calculateTreeList();
-          //let childEl = this.el.nativeElement.querySelector(`[data-id="${ id }"]`);
-          //if (childEl) {
-          //  childEl.scrollIntoView();
-          //}
         }
       }
     }
@@ -53,6 +56,7 @@ export class TreeListComponent implements OnChanges {
     if (this.activeNode != node) {
       this.activeNode = node;
       this.activeChange.emit(node.data);
+
     } else {
       this.activeNode = null;
       this.activeChange.emit(null);

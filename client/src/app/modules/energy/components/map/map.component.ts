@@ -182,9 +182,15 @@ export class MapComponent implements OnInit {
         //}
       });
 
-    entering.on('mouseover', function() {
-      (<any>this).parentNode.appendChild(this);
-    });
+    entering
+      .on('mouseover', function() {
+        (<any>this).parentNode.appendChild(this);
+      })
+      .on('mouseleave', function() {
+        if (self.activeSelection) {
+          (<any>this).parentNode.appendChild(self.activeSelection.node());
+        }
+      });
 
     this.selection = entering.merge(selection)
       .attr('d', this.path)
@@ -197,7 +203,7 @@ export class MapComponent implements OnInit {
   }
 
   updateMapVisibilityState(visible?) {
-    visible = visible != null ? visible : (this.hideMap = !this.hideMap);
+    visible = visible != null ? visible : !(this.hideMap = !this.hideMap);
     let t = d3.transition(null).duration(750);
     this.mapSelection.transition(t).attr('opacity', visible ? 1 : 0);
     this.selection
