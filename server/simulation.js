@@ -4,9 +4,9 @@ const path = require('path'),
 
 var defaultSettings = {
   recalcInterval: 2000,
-  initTemp: 70,
-  initTempSpread: 4,
-  precision: 10
+  initTemp: 70.0,
+  initTempSpread: 4.0,
+  precision: 1000
 };
 
 const collections = [
@@ -34,10 +34,29 @@ const collections = [
     name: 'applications',
     config: null,
     indicies: []
+  },
+  {
+    name: 'values',
+    config: null,
+    indicies: []
   }
 ];
 
-module.exports = async function({ mongo, influx }, dataDir, settings={}) {
+// values
+// {
+//   point: <id>,
+//   room: <id>,
+//   building: <id>,
+//   measurement: <string>,
+//   time: <number>, // milliseconds since 1 jan 1970
+//   value: <number>
+// }
+
+
+module.exports = async function({ mongo }, dataDir, settings={}) {
+  if (typeof dataDir !== 'string' || !fs.statSync(dataDir).isDirectory()) {
+    throw new Error('invalid data dir');
+  }
   settings = Object.assign({}, defaultSettings, settings);
   // create collections
   for (let { name, config, indicies } of collections) {
@@ -47,84 +66,82 @@ module.exports = async function({ mongo, influx }, dataDir, settings={}) {
     }
     try {
       await mongo.createCollection(name, config);
-    } catch (err) {
-      console.log('fuck this');
+    } catch (e) {
+      console.log('"failed" to create collection');
+      console.log(e);
     }
+
     for (let index of indicies) {
       await mongo.collection(name).ensureIndex(index.name, index.config);
     }
   }
-  let { users } = await readDataFile(dataDir, 'users.json');
-  await mongo.collection('users').insertMany(users); 
-  let { groups } = await readDataFile(dataDir, 'groups.json');
-  await mongo.collection('groups').insertMany(groups);
-  let { applications } = await readDataFile(dataDir, 'applications.json');
-  await mongo.collection('applications').insertMany(applications);
 
+  for (let name of ['users', 'groups', 'applications']) {
+    let data = await readDataFile(dataDir, `${ name }.json`);
+    await mongo.collection(name).insertMany(data[name]);
+  }
+
+  // import points, features (areas)
   await importFromGeo(mongo, path.join(dataDir, 'geo'));
-  
-  let databaseName = influx.options.database;
-  let names = await influx.getDatabaseNames();
-  if (names.includes(databaseName)) {
-    await influx.dropDatabase(databaseName);
-  }
-  await influx.createDatabase(databaseName);
 
-  let points = [];
-  // setpoints from unique areas from sensors
-  for (let room of await mongo.collection('areas').find({ type: 'room' }).toArray()) {
-    points.push({
-      measurement: 'setpoints',
-      tags: { room: room._id },
-      fields: {
-        value: generateInitTemp(settings),
-        by: 'init',
-        nonce: '1234'
-      }
-    });
-  }
-  for (let point of await mongo.collection('points').find({}).toArray()) {
-    points.push({
-      measurement: 'temperatures',
-      tags: { room: point.room, point: point._id },
-      fields: { value: generateInitTemp(settings) }
-    });
-  }
-  await influx.writePoints(points);
+  let points = await mongo.collection('points')
+    .find({}, { room: 1, building: 1, value: 1, type: 1 })
+    .toArray();
 
+  // initial point values
+  let values = points.map(({ _id: point, building, room, value: measurement, type }) => ({
+    point,
+    building,
+    room,
+    time: Date.now(),
+    measurement,
+    value: measurement == 'temperature' ? generateInitTemp(settings) : settings.initTemp,
+  })); 
+
+  await mongo.collection('values').insertMany(values);
+
+  // import points, features (areas)
   // thermostat loop
   let timeout, done;
   (async function loop(sleepTime) {
     let successful = true;
+
     while (successful && !done) {
-      let setPoints = await influx.query(`SELECT last(value) FROM temperatures GROUP BY room`);
-      let setPointMap = {};
-      for (let { room, last } of setPoints) {
-        setPointMap[room] = last;
-      }
-
-      let temps = await influx.query(`SELECT last(value) FROM temperatures GROUP BY room,point`);
-      let values = [];
-      for (let { room, point, last } of temps) {
-        let sp = setPointMap[room];
-        let dt = calcTempChange(last, sp, settings.precision);
-        if (Math.abs(dt) > 0) {
-          values.push({
-            measurement: 'temperatures',
-            tags: { room, point },
-            fields: { value: last + dt }
-          });
-        }
-      }
-
       try {
-        if (values.length > 0) {
-          //console.log('writing...');
-          await influx.writePoints(values);
-          //console.log('written');
+        // get last point values for each room;
+        let roomPoints = await mongo.collection('values').aggregate([
+            { $sort: { time: 1 }},
+            { $group: { _id: { m: '$measurement', r: '$room', p: '$point' }, vals: { $last: '$$ROOT' }}},
+            { $unwind: '$vals' },
+            { $replaceRoot: { newRoot: '$vals' }},
+            { $group: { _id: '$room', points: { $push: '$$ROOT' }}}
+        ]).toArray();
+
+        let updates = [];
+        for (let { _id, points } of roomPoints) {
+          let sp = points.find(p => p.measurement == 'set_point');
+          for (let temp of points.filter(p => p.measurement == 'temperature')) {
+            delete temp._id;
+            let value = calcNewTemp(temp.value, sp.value, settings.precision);
+            if (Math.abs(value-temp.value) > 0) {
+              updates.push(Object.assign(temp, { time: Date.now(), value }));
+            }
+          }
         }
+
+        if (updates.length > 0) {
+          await mongo.collection('values').insertMany(updates);
+        }
+
+        //console.log((await mongo.collection('values').aggregate([
+        //  { $match: { measurement: 'temperature' }},
+        //  { $sort: { time: 1 }},
+        //  { $group: { _id: '$point', time: { $last: '$time' }, value: { $last: '$value' } } },
+        //  //{ $group: { _id: null, value: { $avg: '$value' } } }
+        //]).toArray()).map(d => d.value.toFixed(4)).slice(0, 10).join(', '));
+
         await new Promise((r) => timeout = setTimeout(r, sleepTime));
-          
+
       } catch (e) {
         successful = false;
         console.log('thermostat loop failed');
@@ -154,12 +171,11 @@ function readDataFile(dataDir, name) {
 
 function generateInitTemp(settings) {
   let { initTemp, initTempSpread, precision } = settings;
-  let t = initTemp + (Math.random() - 1)*initTempSpread;
+  let t = initTemp + (Math.random() - 0.5)*initTempSpread;
   return Math.floor(t*precision)/precision;
 }
 
-function calcTempChange(t, sp, p) {
+function calcNewTemp(t, sp, p) {
   let v = sp - t;
-  let dt = Math.sign(v)*(Math.random()-0.5)*Math.pow(Math.E, -Math.pow(v, 2)) + v/2;
-  return Math.floor(dt*p)/p;
+  return Math.floor((t + v/2)*p)/p;
 }
