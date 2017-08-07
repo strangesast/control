@@ -166,6 +166,10 @@ export class MapComponent implements OnInit {
       .attr('class', 'feature')
       .attr('opacity', 0)
 
+    entering.filter(d => d.properties.id == this.active).each(function() {
+      self.styleActive(this);
+    });
+
     entering.on('click', function(d) {
         let id = d.properties.id;
         if (d.properties.type === 'building') {
@@ -228,8 +232,7 @@ export class MapComponent implements OnInit {
     let self = this;
     t = t || d3.transition(null).duration(200);
     this.selection.classed('active', false).transition(t).attr('d', self.path).filter(d => d.properties.id == id).on('start', function() {
-      this.activeSelection = d3.select(this).classed('active', true);
-      this.parentNode.appendChild(this);
+      self.styleActive(this)
     }).on('end', function(d) {
       let { center, scale, offset } = self.transforms;
       //let center = d3.geoCentroid(d);
@@ -253,6 +256,11 @@ export class MapComponent implements OnInit {
         
       //self.svg.transition(d3.active(this)).call( self.zoom.transform as any, d3.zoomIdentity.translate(translate[0],translate[1]).scale(bscale) );
     });
+  }
+
+  styleActive (el): void {
+    this.activeSelection = d3.select(el).classed('active', true);
+    el.parentNode.appendChild(el);
   }
 
   updateMap(fc: FeatureCollection) {
@@ -305,3 +313,5 @@ function projectionTween(projection0, projection1) {
     };
   };
 }
+
+

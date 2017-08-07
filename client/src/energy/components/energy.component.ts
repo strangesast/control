@@ -43,27 +43,21 @@ export class EnergyComponent {
     this.layers$ = data.layers$.map(arr => hierarchy({ children: arr.map(key => ({ name: key, key, _id: key })) }));
     this.active$ = data.active$;
 
-    this.layer$ = Observable.merge(
-      this.data.active$.map(d => d && d.type),
-      this.layerOverride$
-    )
-      //.startWith(null)
+    this.layer$ = Observable.merge(this.data.active$.map(d => d && d.type), this.layerOverride$)
       .distinctUntilChanged()
-      .shareReplay(1)
-      .do(x => console.log('layer:', x))
+      .shareReplay(1);
 
     this.map$ = this.data.building$
-      .flatMap(building => {
-        if (building == null) return Observable.of(null);
-        return this.data.getMap(building);
-      })
+      .flatMap(building => building == null ? Observable.of(null) : this.data.getMap(building))
       .shareReplay(1);
 
     this.features$ = Observable.combineLatest(this.data.building$, this.layer$)
       .flatMap(([ building, layer ]) => {
         let stuff$;
-        if (building && layer) {
-          stuff$ = (layer == 'point' ? this.data.points$ : this.data.areas$.map(areas => areas.filter(area => area.type == layer)))
+        if (layer == 'point') {
+          stuff$ = this.data.points$;
+        } else if (building && layer) {
+          stuff$ = this.data.areas$.map(areas => areas.filter(area => area.type == layer));
         } else {
           stuff$ = this.data.buildings$.map(arr => arr.map(b => ({ ...b, type: 'building' })));
         }

@@ -13,6 +13,8 @@ export class TreeListComponent implements OnChanges {
   @Output() activeChange = new EventEmitter();
   lastSelectedId: string;
 
+  @Input() radio: boolean = false;
+
   treeValue: HierarchyNode<any>;
   @Input()
   get tree(): HierarchyNode<any> {
@@ -31,7 +33,6 @@ export class TreeListComponent implements OnChanges {
     if (this.treeValue) {
       if (changes.active && changes.active.currentValue && (!changes.active.previousValue || changes.active.currentValue._id !== changes.active.previousValue._id)) {
         let v = changes.active.currentValue;
-        console.log('v', v);
         let id = typeof v === 'string' ? v : v._id;
         let n = searchTree(this.treeValue, id)
         if (n) {
@@ -62,8 +63,7 @@ export class TreeListComponent implements OnChanges {
       this.activeNode = node;
       this.activeChange.emit(node.data);
       this.lastSelectedId = typeof node.data === 'string' ? node.data : node.data._id;
-
-    } else {
+    } else if (!this.radio) {
       this.activeNode = null;
       this.activeChange.emit(null);
     }
