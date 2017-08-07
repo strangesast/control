@@ -54,7 +54,9 @@ export class LoginComponent implements OnInit {
     success$.flatMap(() => this.redirectUrl ?
       Observable.of(this.redirectUrl) :
       this.authorization.applications$.first().map(apps => apps[0].path)
-    ).subscribe(path => this.router.navigateByUrl(path));
+    ).subscribe(path => {
+      this.router.navigateByUrl(path)
+    });
   }
 
   login() {

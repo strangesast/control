@@ -2,6 +2,7 @@ export interface Application {
   _id: string;
   // like 'App App'
   name: string;
+  moduleName: string;
   // used for loadChildren
   modulePath: string;
   // used for url path

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Headers, RequestOptions } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
-import { AuthorizationService } from '../../../../services/authorization.service';
+import { AuthorizationService } from '../../../app/services/authorization.service';
 import { Observable } from 'rxjs';
 
 class User {

@@ -3,7 +3,7 @@ import { Http, URLSearchParams } from '@angular/http';
 import { Actions, Effect, toPayload } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 
-import { AuthorizationService } from '../../../services/authorization.service';
+import { AuthorizationService } from '../../app/services/authorization.service';
 import * as EnergyActions from '../actions';
 
 @Injectable()

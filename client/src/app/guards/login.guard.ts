@@ -14,9 +14,10 @@ export class LoginGuard implements CanActivate {
       //let defaultApp$ = this.authorization.applications$.skipWhile(apps => !apps || !apps.length).map(apps => apps[0]);
       let url = state.url;
       return this.auth.loggedIn$.first().flatMap(loggedIn => {
+        console.log('logged in? (loginguard)', loggedIn, url);
         if (loggedIn) {
           let success$ = this.auth.applications$.find(apps => apps && apps.length > 0).map(apps => {
-            this.router.navigateByUrl(apps[0].path);
+            //this.router.navigateByUrl(apps[0].path);
             return false;
           });
           let failure$ = this.auth.appsLoadError$.map(error => {

@@ -2,31 +2,31 @@
   "applications": [
     {
       "name": "Dashboard",
-      "modulePath": "app/modules/dashboard/dashboard.module#DashboardModule",
+      "moduleName": "DashboardModule",
       "_id": "dashboard",
       "path": "dashboard"
     },
     {
       "name": "Quick View",
-      "modulePath": "app/modules/topview/topview.module#TopviewModule",
+      "moduleName": "TopviewModule",
       "_id": "topview",
       "path": "topview"
     },
     {
       "name": "Quick View 2",
-      "modulePath": "app/modules/topview-alternate/topview-alternate.module#TopviewAlternateModule",
+      "moduleName": "TopviewAlternateModule",
       "_id": "topview-alternate",
       "path": "topview-alternate"
     },
     {
       "name": "Thermostat",
-      "modulePath": "app/modules/thermostat/thermostat.module#ThermostatModule",
+      "moduleName": "ThermostatModule",
       "_id": "thermostat",
       "path": "thermostat"
     },
     {
       "name": "Energy Profile",
-      "modulePath": "app/modules/energy/energy.module#EnergyModule",
+      "moduleName": "EnergyModule",
       "_id": "energy",
       "path": "energy-profile"
     }

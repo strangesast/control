@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
-import { AuthorizationService } from '../../../services/authorization.service';
+import { AuthorizationService } from '../../app/services/authorization.service';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 

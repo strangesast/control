@@ -9,7 +9,19 @@ import { StoreModule, combineReducers, compose } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 // modules
-import { CatalogModule } from './modules/catalog/catalog.module';
+import { CatalogModule } from '../catalog/catalog.module';
+import { DashboardModule } from '../dashboard/dashboard.module';
+import { TopviewModule } from '../topview/topview.module';
+import { TopviewAlternateModule } from '../topview-alternate/topview-alternate.module';
+import { EnergyModule } from '../energy/energy.module';
+import { ThermostatModule } from '../thermostat/thermostat.module';
+const modules = [
+  //DashboardModule,
+  TopviewModule,
+  TopviewAlternateModule,
+  EnergyModule,
+  ThermostatModule
+];
 
 // injectables
 import { ConfigurationService } from './services/configuration.service';

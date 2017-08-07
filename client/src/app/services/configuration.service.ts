@@ -17,7 +17,7 @@ import { DummyComponent } from '../components/dummy/dummy.component';
 import { LoginComponent } from '../components/login/login.component';
 import { RegisterComponent } from '../components/register/register.component';
 
-// configure data retrieval
+// configure data retrieval, subscription to updates
 
 @Injectable()
 export class ConfigurationService implements Resolve<any> {
@@ -26,6 +26,7 @@ export class ConfigurationService implements Resolve<any> {
   public socket: WebSocketSubject<any>;
 
   constructor(private authorization: AuthorizationService, private store: Store<fromRoot.State>, private http: Http, private router: Router) {
+    console.log('config constructor');
     this.user$ = this.store.select(fromRoot.selectAuthUser);
     this.applications$ = this.store.select(fromRoot.selectAuthApplications);
 

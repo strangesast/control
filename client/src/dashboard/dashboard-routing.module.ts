@@ -6,17 +6,17 @@ import { ApplicationTableComponent } from './components/application-table/applic
 import { ObjectTableComponent } from './components/object-table/object-table.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
-import { AuthGuard } from '../../guards/auth.guard';
+import { AuthGuard } from '../app/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     children: [
       {
         path: '',
-        canActivateChild: [AuthGuard],
+        //canActivateChild: [AuthGuard],
         children: [
           { path: '', component: ApplicationTableComponent },
           { path: 'profile', component: UserProfileComponent },

@@ -1,19 +1,42 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, Routes } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { AuthorizationService } from '../services/authorization.service';
+
 import { Application } from '../models';
 
+// modules
+import { DashboardModule } from '../../dashboard/dashboard.module';
+import { EnergyModule } from '../../energy/energy.module';
+import { ThermostatModule } from '../../thermostat/thermostat.module';
+import { TopviewAlternateModule } from '../../topview-alternate/topview-alternate.module';
+import { TopviewModule } from '../../topview/topview.module';
+
+const modules = {
+  'DashboardModule': DashboardModule,
+  'EnergyModule': EnergyModule,
+  'ThermostatModule': ThermostatModule,
+  'TopviewAlternateModule': TopviewAlternateModule,
+  'TopviewModule': TopviewModule
+};
+
+// services
+import { AuthorizationService } from '../services/authorization.service';
 import { ConfigurationService } from '../services/configuration.service';
-import { LoginComponent } from '../components/login/login.component';
-import { RegisterComponent } from '../components/register/register.component';
-import { NotFoundComponent } from '../components/not-found/not-found.component';
+
+// guards
 import { LoginGuard } from '../guards/login.guard';
 import { AuthGuard } from '../guards/auth.guard';
 
+// components
+import { LoginComponent } from '../components/login/login.component';
+import { RegisterComponent } from '../components/register/register.component';
+import { NotFoundComponent } from '../components/not-found/not-found.component';
+
 @Injectable()
 export class LoadApplicationsGuard implements CanActivate {
-  constructor(private auth: AuthorizationService, private router: Router) {}
+  constructor(private auth: AuthorizationService, private router: Router) {
+    console.log('load apps guard constructor');
+  }
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -33,6 +56,7 @@ export class LoadApplicationsGuard implements CanActivate {
             })
           );
           return Observable.merge(errored, loaded).first().mapTo(false);
+
         } else {
           this.router.navigate(['/login'], { queryParams: { redirectUrl: url }});
           return Observable.of(false);
@@ -46,7 +70,7 @@ function createRoutes(apps: Application[]): Routes {
   if (!Array.isArray(apps) || !apps.length) {
     throw new Error('invalid apps array');
   }
-  let children = apps.map(({ path, modulePath: loadChildren }) => ({ path, loadChildren, canActivate }));
+  let children = apps.map(({ path, moduleName }) => ({ path, loadChildren: () => modules[moduleName], canActivate }));
   return [
     {
       path: '',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthorizationService } from '../../../services/authorization.service';
+import { AuthorizationService } from '../../app/services/authorization.service';
 import { routerTransition } from '../../catalog/directives/router.animations';
 
 @Component({

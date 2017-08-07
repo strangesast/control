@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { Store } from '@ngrx/store';
 import { Observable, BehaviorSubject, Subject } from 'rxjs';
 
-import { AuthorizationService } from '../../../services/authorization.service';
+import { AuthorizationService } from '../../app/services/authorization.service';
 import * as Actions from '../actions';
 import * as fromRoot from '../reducers';
 import { FeatureCollection, Area, Point, Layer } from '../models';
