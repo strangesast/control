@@ -7,9 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopviewAlternateComponent implements OnInit {
 
-  constructor() {
-    console.log('init');
-  }
+  constructor() {}
 
   ngOnInit() {
   }

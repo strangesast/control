@@ -57,7 +57,6 @@ export function appReducer (state: AppState = initialState, action: AppActions.A
       return { ...state, appsInitialized: true, appsLoadError: null, auth: { ...state.auth, applications }};
     }
     case AppActions.LoadApplicationsFailure.typeString: {
-      console.log('state', state);
       let payload = (action as AppActions.LoadApplicationsFailure).payload;
       return {
         ...state,
@@ -75,7 +74,6 @@ export function appReducer (state: AppState = initialState, action: AppActions.A
 
     // forego adding token until userloadsuccess
     case AppActions.Login.typeString:
-      console.log('login!', payload);
       let { user, applications } = payload;
       return { ...state, auth: { user, token: null, errors: [], applications }};
 

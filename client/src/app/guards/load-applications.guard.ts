@@ -34,9 +34,7 @@ import { NotFoundComponent } from '../components/not-found/not-found.component';
 
 @Injectable()
 export class LoadApplicationsGuard implements CanActivate {
-  constructor(private auth: AuthorizationService, private router: Router) {
-    console.log('load apps guard constructor');
-  }
+  constructor(private auth: AuthorizationService, private router: Router) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,

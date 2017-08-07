@@ -10,11 +10,9 @@ export class DefaultGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> {
     return this.authorization.applications$.skipWhile(apps => !apps).first().flatMap(apps => {
-      console.log('apps', apps);
       let app = apps[0];
       this.router.navigateByUrl(app.path);
       return Observable.of(false);
-
     });
   }
 }

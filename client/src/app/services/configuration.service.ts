@@ -26,7 +26,6 @@ export class ConfigurationService implements Resolve<any> {
   public socket: WebSocketSubject<any>;
 
   constructor(private authorization: AuthorizationService, private store: Store<fromRoot.State>, private http: Http, private router: Router) {
-    console.log('config constructor');
     this.user$ = this.store.select(fromRoot.selectAuthUser);
     this.applications$ = this.store.select(fromRoot.selectAuthApplications);
 
