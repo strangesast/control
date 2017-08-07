@@ -30,7 +30,9 @@ export class TreeListComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (this.treeValue) {
       if (changes.active && changes.active.currentValue && (!changes.active.previousValue || changes.active.currentValue._id !== changes.active.previousValue._id)) {
-        let id = changes.active.currentValue._id;
+        let v = changes.active.currentValue;
+        console.log('v', v);
+        let id = typeof v === 'string' ? v : v._id;
         let n = searchTree(this.treeValue, id)
         if (n) {
 
@@ -59,7 +61,7 @@ export class TreeListComponent implements OnChanges {
     if (this.activeNode != node) {
       this.activeNode = node;
       this.activeChange.emit(node.data);
-      this.lastSelectedId = node.data._id;
+      this.lastSelectedId = typeof node.data === 'string' ? node.data : node.data._id;
 
     } else {
       this.activeNode = null;
@@ -106,7 +108,7 @@ function getDescendants(node, includeRoot=true) {
 
 function searchTree(tree, id) {
   let children;
-  if (tree.data && tree.data && tree.data._id == id) {
+  if (tree.data && tree.data && (tree.data._id == id || tree.data == id)) {
     return tree;
   } else if (children = (tree.children || tree._children)) {
     for (let child of children) {
