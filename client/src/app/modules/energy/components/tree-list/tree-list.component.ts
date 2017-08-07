@@ -31,14 +31,6 @@ export class TreeListComponent implements OnChanges {
     if (this.treeValue) {
       if (changes.active && changes.active.currentValue && (!changes.active.previousValue || changes.active.currentValue._id !== changes.active.previousValue._id)) {
         let id = changes.active.currentValue._id;
-        if (id != this.lastSelectedId) {
-          // focus element in list
-          let el = this.el.nativeElement.querySelector(`[data-id="${ id }"]`)
-          if (el) {
-            this.el.nativeElement.scrollTop = el.offsetTop;
-          }
-        }
-
         let n = searchTree(this.treeValue, id)
         if (n) {
 
@@ -51,6 +43,13 @@ export class TreeListComponent implements OnChanges {
             }
           }
           this.calculateTreeList();
+        }
+        if (id != this.lastSelectedId) {
+          // focus element in list
+          let el = this.el.nativeElement.querySelector(`[data-id="${ id }"]`)
+          if (el) {
+            this.el.nativeElement.scrollTop = el.offsetTop;
+          }
         }
       }
     }
