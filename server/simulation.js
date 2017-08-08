@@ -6,7 +6,7 @@ var defaultSettings = {
   recalcInterval: 2000,
   initTemp: 70.0,
   initTempSpread: 4.0,
-  precision: 0.1
+  precision: 10
 };
 
 const collections = [
@@ -110,11 +110,11 @@ module.exports = async function({ mongo }, dataDir, settings={}) {
       try {
         // get last point values for each room;
         let roomPoints = await mongo.collection('values').aggregate([
-            { $sort: { time: 1 }},
-            { $group: { _id: { m: '$measurement', r: '$room', p: '$point' }, vals: { $last: '$$ROOT' }}},
-            { $unwind: '$vals' },
-            { $replaceRoot: { newRoot: '$vals' }},
-            { $group: { _id: '$room', points: { $push: '$$ROOT' }}}
+          { $sort: { time: 1 }},
+          { $group: { _id: { m: '$measurement', r: '$room', p: '$point' }, vals: { $last: '$$ROOT' }}},
+          { $unwind: '$vals' },
+          { $replaceRoot: { newRoot: '$vals' }},
+          { $group: { _id: '$room', points: { $push: '$$ROOT' }}}
         ]).toArray();
 
         let updates = [];
@@ -132,6 +132,7 @@ module.exports = async function({ mongo }, dataDir, settings={}) {
         if (updates.length > 0) {
           await mongo.collection('values').insertMany(updates);
         }
+
 
         //console.log((await mongo.collection('values').aggregate([
         //  { $match: { measurement: 'temperature' }},

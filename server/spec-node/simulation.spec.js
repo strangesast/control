@@ -25,7 +25,7 @@ describe('simulation', () => {
       { $group: { _id: '$point', value: { $last: '$value' }}},
       { $group: { _id: null, value: { $stdDevPop: '$value' }}}
     ]).next()).value;
-    expect(std*1000).to.be.above(1000);
+    expect(std).to.be.above(1);
 
     let roomCnt = await mongo.collection('areas').find({ type: 'room' }).count();
     let { pntCnt } = await mongo.collection('points').aggregate([
@@ -48,7 +48,6 @@ describe('simulation', () => {
       { $group: { _id: null, value: { $stdDevPop: '$value' }}}
     ]).next()).value;
 
-    expect(std*1000).to.be.below(1);
-
+    expect(std).to.be.below(0.1);
   });
 });

@@ -156,6 +156,17 @@ module.exports = function (app, { mongo }, config) {
     q[_id ? '_id' : 'shortname'] = _id || id;
     let building = await mongo.collection('areas').findOne(q);
     if (building) {
+      // get average of latest values from points
+      let values = await mongo.collection('values').aggregate([
+        { $sort: { time: 1 }},
+        { $group: { _id: '$point', value: { $last: '$$ROOT' }}},
+        { $replaceRoot: { newRoot: '$value' }},
+        { $group: { _id: { building: '$building', measurement: '$measurement' }, value: { $avg: '$value' }, time: { $max: '$time' }}},
+        { $group: { _id: '$_id.building', value: { $push: { measurement: '$_id.measurement', value: '$value', time: '$time' }}}},
+        { $unwind: '$value' },
+        { $replaceRoot: { newRoot: '$value' }}
+      ]).toArray();
+      building.data = values.reduce((a, v) => Object.assign(a, { [v.measurement]: v.value, time: v.time }), {});
       req.building = building;
       next();
     } else {
@@ -185,7 +196,17 @@ module.exports = function (app, { mongo }, config) {
       ({ cx: lon, cy: lat } = nearBuilding.feature.properties);
       q['feature.geometry'] = { $near: { $geometry: { type: "Point", coordinates: [lon, lat] }}};
     }
-    let buildings = await mongo.collection('areas').find(q).toArray();
+    console.log(q);
+    let buildings = (await mongo.collection('values').aggregate([
+      { $sort: { time: 1 }},
+      { $group: { _id: '$point', value: { $last: '$$ROOT' }}},
+      { $replaceRoot: { newRoot: '$value' }},
+      { $group: { _id: { building: '$building', measurement: '$measurement' }, value: { $avg: '$value' }, time: { $max: '$time' }}},
+      { $group: { _id: '$_id.building', value: { $push: { measurement: '$_id.measurement', value: '$value', time: '$time' }}}},
+      { $lookup: { from: 'areas', localField: '_id', foreignField: '_id', as: 'building' }},
+      { $unwind: '$building' }
+    ]).toArray()).map(({ building, value }) => Object.assign(building, { data: value.reduce((a, v) => Object.assign(a, { [v.measurement]: v.value, time: v.time }), {}) }));
+
     res.json(buildings);
   });
 
@@ -273,9 +294,9 @@ module.exports = function (app, { mongo }, config) {
     let areas = otherAreas.concat(rooms);
 
     for (let area of areas) {
-      let last = area.points.reduce((a, b) => a + pointMap[b._id].value, 0)/area.points.length;
+      let temperature = area.points.reduce((a, b) => a + pointMap[b._id].value, 0)/area.points.length;
       let time = area.points.reduce((a, b) => b.time > a ? b.time : a, 0);
-      area.data = { last, time };
+      area.data = { temperature, time };
     }
 
     if (layer) {
