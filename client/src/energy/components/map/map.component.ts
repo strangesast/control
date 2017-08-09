@@ -1,5 +1,4 @@
-import { SimpleChanges, EventEmitter, ViewChild, ElementRef, Output, Input, Component, OnInit } from '@angular/core';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { SimpleChanges, EventEmitter, ViewChild, ElementRef, Output, Input, Component, OnInit } from '@angular/core'; import { Observable, Subject, BehaviorSubject } from 'rxjs';
 //import * as topojson from 'topojson';
 import { Point, Area } from '../../models';
 import { Selection } from 'd3';
@@ -7,7 +6,11 @@ import * as d3 from 'd3';
 import * as d3Geo from 'd3-geo-projection';
 import * as d3ScaleChromatic from 'd3-scale-chromatic';
 
+import { AuthorizationService } from '../../../app/services/authorization.service';
+
 import { Feature, FeatureCollection } from '../../models';
+const [ width, height ] = [100, 100];
+const offset = [width/2, height/2];
 
 @Component({
   selector: 'app-map',
@@ -15,27 +18,131 @@ import { Feature, FeatureCollection } from '../../models';
   styleUrls: ['./map.component.less']
 })
 export class MapComponent implements OnInit {
-  // ideally:
-  //   @Input('layer')
-  //   @Output('layerChange')
-  //
-  //   @Input('active')
-  //   @Output('activeChange')
-  //
-  //   @Input('floor')
-  //   @Output('floorChange')
-  //
-  //   @Input('building')
-  //   @Output('buildingChange')
-  //
-  //   internal service fetches features based on the filters above
-  //
-  //   @Input('init') # building.shortname or coordinates for first view
-  //
+  @ViewChild('svg') el: ElementRef; 
+
+  projection: string = 'default';
+
+  @Input() building: Area
+  @Output() buildingChange: EventEmitter<Area> = new EventEmitter();
+  buildingCentroid: [number, number];
+  
+  @Input() area: Area
+  @Output() areaChange: EventEmitter<Area> = new EventEmitter();
+  
+  @Input() floor: string;
+  @Output() floorChange: string;
+  
+  @Input() min: number = 60;
+  @Input() max: number = 80;
+  @Input() color: string = 'RdYlBu';
+  @Input() value: string = 'data.temperature';
+  defaultCenter; // center of buildings featurecollection
+  valueParser; // last 'data.temperature' parsing fn
+  colorScale; // last interpolation fn
+  
+  @Input() layer: string;
+  @Output() layerChange: EventEmitter<string> = new EventEmitter();
+  
+  // building.shortname or coordinates for first view
+  @Input() init: string;
+
+  constructor(private auth: AuthorizationService) {
+    this.ready.flatMap(() => auth.get(`/buildings`)).subscribe((buildings: Area[]) => {
+      let self = this;
+
+      let sel = this.svg.select('#container').selectAll('g.layer').data(['building']);
+
+      sel = sel.enter().append('g').attr('class', 'layer').merge(sel);
+
+      let features = sel.selectAll('path.feature').data(buildings)
+
+      features = features.enter().append('path')
+        .attr('class', 'feature')
+        .attr('fill', (d) => this.colorScale(this.valueParser(d)))
+        .on('click', function(d) {
+          let id = d._id;
+          if (d.type == 'building') {
+            self.building = d;
+          }
+
+          let t = d3.transition(null).duration(750);
+
+          if (self.projection == 'default') {
+            let r = d.feature.properties.gamma;
+
+            let bc = self.buildingCentroid || (self.buildingCentroid = d3.geoCentroid(self.building.feature));
+            console.log(bc.map(i => i*-1).concat(-r));
+            buildingProjection.rotate(bc.map(i => i*-1).concat(-r) as [number, number, number])
+
+            features.transition(t).attr('d', (d) => p2(d.feature))
+            self.projection = 'building';
+
+          } else {
+            features.transition(t).attr('d', (d) => p1(d.feature));
+            self.projection = 'default';
+
+          }
+
+
+          if (d.type === 'building') {
+            self.buildingChange.emit(d);
+          } else {
+            self.areaChange.emit(d);
+          }
+          //self.updateActive(d);
+          //if (active.node() === this) {
+          //  return reset();
+          //} else {
+          //  self.updateActive(d);
+          //}
+        })
+        .on('dblclick', function(d) {
+          console.log(d);
+        })
+        .on('mouseover', function() {
+          (<any>this).parentNode.appendChild(this);
+        })
+        .on('mouseleave', function() {
+          //if (self.activeSelection) {
+          //  (<any>this).parentNode.appendChild(self.activeSelection.node());
+          //}
+        })
+        .merge(features)
+
+      let fc = wrapCollection(buildings.map(b => b.feature));
+      this.defaultCenter = d3.geoCentroid(fc as any);
+      let scale = 2e6;
+      let p1 = d3.geoPath().projection(d3.geoMercator().rotate([0, 0, 0]).center(this.defaultCenter as [number, number]).scale(scale).translate(offset as [number, number]));
+
+      let buildingProjection = d3.geoMercator()
+        .scale(scale)
+        .translate(offset as [number, number])
+        .center([0, 0])
+
+      let bc = d3.geoCentroid(fc);
+      console.log(bc);
+      let r = -63;
+
+      let p2 = d3.geoPath().projection(
+      d3Geo.geoSatellite()
+        .distance(0.5)
+        .tilt(0)
+        .scale(1000000)
+        .rotate(bc.map(i => i*-1).concat(-r))
+        .translate(offset));
+
+
+      features.attr('d', (d) => console.log('d', d) || p1(d.feature));
+
+
+
+    });
+  }
+
   //
   //   fn buildingsNear(coord or buiding.shortname)
   //     returns building list
-  @ViewChild('svg') el: ElementRef; 
+  /*
 
   // when a new floor is clicked
   @Output() layerChange = new EventEmitter();
@@ -52,7 +159,9 @@ export class MapComponent implements OnInit {
 
   // which projection
   @Input() state: string = 'normal';
+  */
 
+  /*
   ngOnChanges(changes: SimpleChanges) {
     if (this.svg) {
       let t;
@@ -67,60 +176,67 @@ export class MapComponent implements OnInit {
       }
     }
   }
+  */
 
-  // active feature path
-  activeSelection: Selection<any, any, any, any>;
+  //// active feature path
+  //activeSelection: Selection<any, any, any, any>;
   svg: Selection<any, any, any, any>;
   // zoom fn, used for transforms
   zoom;
-  // features selections
-  selection: Selection<any, any, any, any>;
-  // current projection 
-  projection: d3.GeoProjection;
-  // current path, using above projection
-  path;
-  // use the same transforms after proj def
-  transforms = { center: [], offset: [], scale: 150 };
-  // ugly (but pretty) color interp fn
-  color = (i) => d3ScaleChromatic.interpolateRdYlBu(d3.scaleLinear().domain([60, 80])(i));
-  // features container
-  fcontainer;
-  // annotations container
-  acontainer;
-  // map (floorplan) outline container
-  mcontainer;
-  // the map path itself
-  mapSelection;
+  //// features selections
+  //selection: Selection<any, any, any, any>;
+  //// current projection 
+  //projection: d3.GeoProjection;
+  //// current path, using above projection
+  //path;
+  //// use the same transforms after proj def
+  //transforms = { center: [], offset: [], scale: 150 };
+  //// ugly (but pretty) color interp fn
+  //color = (i) => d3ScaleChromatic.interpolateRdYlBu(d3.scaleLinear().domain([60, 80])(i));
+  //// features container
+  //fcontainer;
+  //// annotations container
+  //acontainer;
+  //// map (floorplan) outline container
+  //mcontainer;
+  //// the map path itself
+  //mapSelection;
 
-  transformed: boolean = false;
+  //transformed: boolean = false;
+
+  ready = new Subject();
 
   ngOnInit() {
-    let [ width, height ] = [100, 100];
-    
+
+    this.valueParser = parseValueString(this.value);
+
+    this.colorScale = d3.scaleLinear()
+      .domain([this.min, this.max])
+      .range([0, 1])
+      .interpolate(() => d3ScaleChromatic[`interpolate${ this.color }`]);
+
     this.zoom = d3.zoom()
-      .scaleExtent([1, 8])
+      .scaleExtent([1, 100])
       .on('zoom', zoomed);
     
     this.svg = d3.select(this.el.nativeElement)
-        //.attr('width', width)
-        //.attr('height', height)
-        .on('click', stopped, true);
+      .on('click', stopped, true);
    
     this.svg.append('rect')
-        .attr('class', 'background')
-        .attr('opacity', 0)
-        .attr('width', width)
-        .attr('height', height)
-        //.on('click', reset);
+      .attr('class', 'background')
+      .attr('opacity', 0)
+      .attr('width', width)
+      .attr('height', height)
+      //.on('click', reset);
     
 
     let g = this.svg.append('g').attr('id', 'container');
 
-    this.fcontainer = g.append('g').attr('transform-origin', '50 50');
-    this.selection = this.fcontainer.attr('class', 'features transform').selectAll('path');
-    this.mcontainer = g.append('g').attr('transform-origin', '50 50');
-    this.mapSelection = this.mcontainer.attr('class', 'map transform').append('path').attr('opacity', 1);
-    this.acontainer = g.append('g');
+    //this.fcontainer = g.append('g').attr('transform-origin', '50 50');
+    //this.selection = this.fcontainer.attr('class', 'features transform').selectAll('path');
+    //this.mcontainer = g.append('g').attr('transform-origin', '50 50');
+    //this.mapSelection = this.mcontainer.attr('class', 'map transform').append('path').attr('opacity', 1);
+    //this.acontainer = g.append('g');
     
 
     this.svg.call(this.zoom).on('dblclick.zoom', null);
@@ -142,10 +258,13 @@ export class MapComponent implements OnInit {
     function stopped() {
       if (d3.event.defaultPrevented) d3.event.stopPropagation();
     }
+
+    this.ready.next();
   }
 
   ngOnDestroy() {}
 
+  /*
   updateFeatures(fc: FeatureCollection, t?) {
     let self = this;
     let { features } = fc || { features: [] };
@@ -170,7 +289,8 @@ export class MapComponent implements OnInit {
       self.styleActive(this);
     });
 
-    entering.on('click', function(d) {
+    entering
+      .on('click', function(d) {
         let id = d.properties.id;
         if (d.properties.type === 'building') {
           self.buildingChange.emit(id);
@@ -183,9 +303,10 @@ export class MapComponent implements OnInit {
         //} else {
         //  self.updateActive(d);
         //}
-      });
-
-    entering
+      })
+      .on('dblclick', function(d) {
+        console.log(d);
+      })
       .on('mouseover', function() {
         (<any>this).parentNode.appendChild(this);
       })
@@ -193,7 +314,7 @@ export class MapComponent implements OnInit {
         if (self.activeSelection) {
           (<any>this).parentNode.appendChild(self.activeSelection.node());
         }
-      });
+      })
 
     this.selection = entering.merge(selection)
       .attr('d', this.path)
@@ -266,6 +387,7 @@ export class MapComponent implements OnInit {
   updateMap(fc: FeatureCollection) {
     this.mapSelection.datum(fc).attr('d', this.path);
   }
+  */
 }
 
 function centerFeatures(fc) {
@@ -287,31 +409,77 @@ function centerFeatures(fc) {
     height - (bounds[0][1] + bounds[1][1])/2
   ];
   projection = d3.geoMercator().rotate([0, 0, 0]).center(center as [number, number]);
+  scale = Math.min(2e6, scale)
   projection.scale(scale).translate(offset as [number, number]);
   path.projection(projection);
   let transforms = { center, scale, offset };
   return { path, transforms };
 }
 
-function projectionTween(projection0, projection1) {
-  let [ width, height ] = [ 100, 100 ];
-  return function(d) {
-    var t = 0;
-    var projection = d3.geoProjection(project)
-        .scale(1)
-        .translate([width / 2, height / 2]);
-    var path = d3.geoPath(projection);
+var opsRe = /[\+\-*\/]/g;
+function parseValueString (str: string) {
+  var ops = [], keys = [], i = 0;
+  while (true) {
+    let arr = opsRe.exec(str);
+    let { 0: op, index } = arr || {} as any;
+    let key = str.substring(i, index);
+    keys.push(key);
+    if (index == null) break;
+    ops.push(op);
+    i = index+1;
+  }
 
-    function project(λ, φ): [number, number] {
-      λ *= 180 / Math.PI, φ *= 180 / Math.PI;
-      var p0 = projection0([λ, φ]), p1 = projection1([λ, φ]);
-      return [(1 - t) * p0[0] + t * p1[0], (1 - t) * -p0[1] + t * -p1[1]];
+  return function(obj) {
+    let i = 0;
+    let value = applyKeys(obj, keys.shift().split('.'));
+    while (keys.length) {
+      let op = ops.shift();
+      let val = applyKeys(obj, keys.shift().split('.'))
+      switch (op) {
+        case '+':
+          value += val
+          break;
+        case '-':
+          value -= val
+          break;
+        case '*':
+          value *= val
+          break;
+        case '/':
+          value /= val
+          break;
+        default:
+          throw new Error('invalid value string');
+      }
     }
-    return function(_) {
-      t = _;
-      return path(d);
-    };
-  };
+    return value;
+  }
 }
 
+function applyKeys (obj, keys) {
+  return keys.reduce((a, key) => (a && a[key]) || null, obj);
+}
 
+(function test() {
+  let obj = { '1': { '1': 1 }, '2': 2, '3': 3, '4': 4 };
+  let value = '1.1+2-4*3/2';
+
+  let fn = parseValueString(value);
+  // should apply operations sequentially
+  let res = fn(obj);
+  if (res !== -1.5) throw new Error('failed test');
+
+  // should simply read value
+  value = '1.1';
+  fn = parseValueString(value);
+  res = fn(obj);
+  if (res !== 1) throw new Error('failed test');
+})();
+
+function wrapCollection(features: Feature[]): FeatureCollection {
+  return {
+    type: 'FeatureCollection',
+    crs: { type: 'name', properties: { name: 'urn:ogc:def:crs:OGC:1.3:CRS84' } },
+    features
+  };
+}
