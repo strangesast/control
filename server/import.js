@@ -1,8 +1,5 @@
 const fs = require('fs'),
       path = require('path'),
-      mongodb = require('mongodb'),
-      MongoClient = mongodb.MongoClient,
-      ObjectID = mongodb.ObjectID,
       db = require('./db');
 
 const order = ['building', 'wing', 'department', 'room'];
@@ -57,6 +54,7 @@ async function importFromGeo(mongo, dir) {
 
       docs.push({
         type,
+        floor: 'first',
         name,
         shortname,
         parent: parentId,
