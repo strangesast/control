@@ -8,7 +8,7 @@ const express = require('express'),
       routes = require('./routes'),
       sockets = require('./sockets'),
       simulation = require('./simulation'),
-      http = require('http')
+      http = require('http');
 
 const port = 3000;
 app.set('trust proxy', true);

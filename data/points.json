@@ -1,1581 +1,3059 @@
 {
   "points": [
     {
-      "_id": "597b6cd011138a2cae8d12b4",
+      "_id": "5991c5018ba136380d5a548e",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1270",
-      "name": "027 sensor 1",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a544a",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
       "feature": {
         "type": "Feature",
+        "properties": {},
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47110020309466,
-            42.99889055760084
+            -77.47084620587104,
+            42.99855129868434
           ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a548f",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a544b",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47101524018478,
+            42.998817659652055
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a5490",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a544c",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47111689584047,
+            42.998921443198874
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a5491",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a544d",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47074761199835,
+            42.998381038460735
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a5492",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a544e",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47080409087538,
+            42.998468650515626
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a5493",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a544f",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47099377198559,
+            42.99896933416503
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a5494",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a5450",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47118342903644,
+            42.999039575478996
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a5495",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a5451",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47083045440468,
+            42.998402161818184
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a5496",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a5452",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47089231873854,
+            42.99903157244211
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a5497",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a5453",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47100851996035,
+            42.99899561395895
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a5498",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a5454",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47105734845348,
+            42.998955266801566
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a5499",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a5455",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.4708266239096,
+            42.998720542307304
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a549a",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a5456",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47062137530106,
+            42.998449232808674
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a549b",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a5457",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47064482431956,
+            42.99848617231778
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a549c",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a5458",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47074180927311,
+            42.99878031540593
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a549d",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a5459",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47073099437594,
+            42.9985149405642
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a549e",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a545a",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47061559118674,
+            42.998527206163395
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a549f",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a545b",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47053567387673,
+            42.99850932355451
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54a0",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a545c",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47080004111717,
+            42.99887037013233
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54a1",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a545d",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47059848058318,
+            42.99857735010359
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54a2",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a545e",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47057422046895,
+            42.99857886789879
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54a3",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a545f",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47104040696867,
+            42.99909902651737
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54a4",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a5460",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47065319356649,
+            42.99840533661174
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54a5",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a5461",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47097593615106,
+            42.9986573754212
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54a6",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a5462",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47068568691509,
+            42.99868909513128
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54a7",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a5463",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47068381092434,
+            42.99859820506792
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54a8",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a5464",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.470997140736,
+            42.99910822790585
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54a9",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5008ba136380d5a5465",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47079510368224,
+            42.99899226100842
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54aa",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a5466",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.4709732717277,
+            42.998932847987
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54ab",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a5467",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.471026490841,
+            42.99902942697678
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54ac",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a5468",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47115755003419,
+            42.99899294858822
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54ad",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a5469",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47056702475167,
+            42.99843566198319
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54ae",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a546a",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47070325932553,
+            42.99862976047191
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54af",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a546b",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47091303098917,
+            42.99881210690849
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54b0",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a546c",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47112669886795,
+            42.99906907735704
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54b1",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a546d",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47081885735675,
+            42.99894863177733
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54b2",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a546e",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.4705965397643,
+            42.998625611970674
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54b3",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a546f",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47071362314983,
+            42.99858615105047
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54b4",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a5470",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47086196578367,
+            42.99860950144688
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54b5",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a5471",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47091579562945,
+            42.99867540343502
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54b6",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a5472",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47066636393193,
+            42.998752009183676
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54b7",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a5473",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47080866029734,
+            42.99856258504314
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54b8",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a5474",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47079835378052,
+            42.99836578522527
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54b9",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a5475",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.4706142033365,
+            42.99865678331854
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54ba",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a5476",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47113542117977,
+            42.99895424161985
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54bb",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a5477",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47077761067243,
+            42.998961102245374
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54bc",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a5478",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47066686870093,
+            42.998532720250495
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54bd",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a5479",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47108542951946,
+            42.99886607241964
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54be",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a547a",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47092230516583,
+            42.99913080556225
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54bf",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a547b",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47055810141143,
+            42.99854996514013
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54c0",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a547c",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47076002871454,
+            42.99856677456357
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54c1",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a547d",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47070068002527,
+            42.99839514644593
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54c2",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a547e",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47064799859088,
+            42.998610176093955
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54c3",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a547f",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47082883721603,
+            42.99868565588249
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54c4",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a5480",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47088540192344,
+            42.999141874972985
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54c5",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a5481",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47070267145408,
+            42.998463520567675
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54c6",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a5482",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47110094219681,
+            42.998893744982226
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54c7",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a5483",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47100043715847,
+            42.999022418851354
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54c8",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a5484",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47079290198745,
+            42.99866175693691
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54c9",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a5485",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47086441462136,
+            42.99885469140972
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54ca",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a5486",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47093408129199,
+            42.9988460280263
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54cb",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a5487",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47089255576255,
+            42.99853729646723
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54cc",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a5488",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47095953519944,
+            42.9991196942829
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54cd",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a5489",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47086416948616,
+            42.99870925598531
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54ce",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a548a",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47066072106747,
+            42.99864434039445
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54cf",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a548b",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47093591311413,
+            42.99874274063782
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54d0",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a548c",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47086496624735,
+            42.99893464596859
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54d1",
+      "type": "point",
+      "value": "set_point",
+      "room": "5991c5018ba136380d5a548d",
+      "building": "5991c5008ba136380d5a543c",
+      "name": "set point device 1",
+      "feature": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47050876155518,
+            42.998461618889706
+          ]
+        }
+      }
+    },
+    {
+      "_id": "5991c5018ba136380d5a54d2",
+      "type": "point",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a544a",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
+      "feature": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.47084172180877,
+            42.99854301355546
+          ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12b5",
+      "_id": "5991c5018ba136380d5a54d3",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1271",
-      "name": "053 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a544b",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.4704968653356,
-            42.99845197528479
+            -77.4709828198165,
+            42.998866688015745
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12b6",
+      "_id": "5991c5018ba136380d5a54d4",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1272",
-      "name": "016 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a544b",
+      "name": "temperature device 2",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47092636486713,
-            42.99912505026054
+            -77.47105934173989,
+            42.99882212713111
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12b7",
+      "_id": "5991c5018ba136380d5a54d5",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1273",
-      "name": "006 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a544b",
+      "name": "temperature device 3",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47087826323994,
-            42.998558322574596
+            -77.47099076085935,
+            42.99880010104763
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12b8",
+      "_id": "5991c5018ba136380d5a54d6",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1274",
-      "name": "057 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a544c",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47062387377588,
-            42.998483109534035
+            -77.47109583323254,
+            42.99892468189925
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12b9",
+      "_id": "5991c5018ba136380d5a54d7",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1275",
-      "name": "002 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a544d",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47062409656859,
-            42.99858295148477
+            -77.47076483966164,
+            42.9983695322127
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12ba",
+      "_id": "5991c5018ba136380d5a54d8",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1275",
-      "name": "002 sensor 2",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a544e",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47074307002192,
-            42.99864929464818
+            -77.47077656171301,
+            42.998506445726946
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12bb",
+      "_id": "5991c5018ba136380d5a54d9",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1276",
-      "name": "049 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a544e",
+      "name": "temperature device 2",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47068387396239,
-            42.9985874031296
+            -77.47081944240853,
+            42.998521465417454
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12bc",
+      "_id": "5991c5018ba136380d5a54da",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1277",
-      "name": "054 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a544e",
+      "name": "temperature device 3",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.4705626703389,
-            42.99843184778048
+            -77.47075661146653,
+            42.998431010681706
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12bd",
+      "_id": "5991c5018ba136380d5a54db",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1278",
-      "name": "044 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a544e",
+      "name": "temperature device 4",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47060641218776,
-            42.99867023103621
+            -77.47085489752634,
+            42.99848275101666
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12be",
+      "_id": "5991c5018ba136380d5a54dc",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1279",
-      "name": "012 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a544f",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47078736901179,
-            42.99897147934513
+            -77.47096654243465,
+            42.99896251198756
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12bf",
+      "_id": "5991c5018ba136380d5a54dd",
       "type": "point",
-      "room": "597b6cd011138a2cae8d127a",
-      "name": "052 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5450",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47050719683347,
-            42.99848969830686
+            -77.47118054744853,
+            42.999028743589626
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12c0",
+      "_id": "5991c5018ba136380d5a54de",
       "type": "point",
-      "room": "597b6cd011138a2cae8d127b",
-      "name": "063 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5451",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47071094332622,
-            42.998461897585514
+            -77.4708389446856,
+            42.99840520132638
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12c1",
+      "_id": "5991c5018ba136380d5a54df",
       "type": "point",
-      "room": "597b6cd011138a2cae8d127c",
-      "name": "013 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5452",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47080345149315,
-            42.998940999581926
+            -77.47085486371611,
+            42.99903204240251
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12c2",
+      "_id": "5991c5018ba136380d5a54e0",
       "type": "point",
-      "room": "597b6cd011138a2cae8d127d",
-      "name": "024 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5452",
+      "name": "temperature device 2",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47114915598847,
-            42.99898490344119
+            -77.47095107362198,
+            42.99899721039816
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12c3",
+      "_id": "5991c5018ba136380d5a54e1",
       "type": "point",
-      "room": "597b6cd011138a2cae8d127e",
-      "name": "062 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5452",
+      "name": "temperature device 3",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47074086527387,
-            42.99851608706929
+            -77.47088165080461,
+            42.99896611620794
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12c4",
+      "_id": "5991c5018ba136380d5a54e2",
       "type": "point",
-      "room": "597b6cd011138a2cae8d127f",
-      "name": "028 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5452",
+      "name": "temperature device 4",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47106069792652,
-            42.99886005077476
+            -77.47088989035456,
+            42.99910341887094
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12c5",
+      "_id": "5991c5018ba136380d5a54e3",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1280",
-      "name": "007 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5452",
+      "name": "temperature device 5",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47064723145071,
-            42.9984019133291
+            -77.47093684342302,
+            42.999037500994625
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12c6",
+      "_id": "5991c5018ba136380d5a54e4",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1281",
-      "name": "010 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5453",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47096294226829,
-            42.99905296479719
+            -77.47102823891791,
+            42.998999045769885
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12c7",
+      "_id": "5991c5018ba136380d5a54e5",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1281",
-      "name": "010 sensor 2",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5454",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47095681574683,
-            42.9990183268294
+            -77.47110546515832,
+            42.99899914482247
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12c8",
+      "_id": "5991c5018ba136380d5a54e6",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1281",
-      "name": "010 sensor 3",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5454",
+      "name": "temperature device 2",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47089003609909,
-            42.99908001814267
+            -77.47104258022723,
+            42.99893849857512
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12c9",
+      "_id": "5991c5018ba136380d5a54e7",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1281",
-      "name": "010 sensor 4",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5454",
+      "name": "temperature device 3",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47089736797236,
-            42.99893749045485
+            -77.47110953768005,
+            42.999032615853054
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12ca",
+      "_id": "5991c5018ba136380d5a54e8",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1281",
-      "name": "010 sensor 5",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5454",
+      "name": "temperature device 4",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47083538321776,
-            42.99904249954327
+            -77.47105821921248,
+            42.9989753425716
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12cb",
+      "_id": "5991c5018ba136380d5a54e9",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1282",
-      "name": "051 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5455",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47054456527962,
-            42.998565875714185
+            -77.47082368196072,
+            42.99873220352459
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12cc",
+      "_id": "5991c5018ba136380d5a54ea",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1283",
-      "name": "017 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5456",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47095523422193,
-            42.99911861508332
+            -77.47062274289074,
+            42.998403528083344
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12cd",
+      "_id": "5991c5018ba136380d5a54eb",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1284",
-      "name": "023 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5456",
+      "name": "temperature device 2",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47117536093958,
-            42.999011142511755
+            -77.47066720594364,
+            42.99844504510493
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12ce",
+      "_id": "5991c5018ba136380d5a54ec",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1285",
-      "name": "055 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5457",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47061164362594,
-            42.99849257798855
+            -77.47063628457313,
+            42.99849235265255
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12cf",
+      "_id": "5991c5018ba136380d5a54ed",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1286",
-      "name": "014 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5458",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47085564644702,
-            42.99892906778395
+            -77.47076609663783,
+            42.99874830789594
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12d0",
+      "_id": "5991c5018ba136380d5a54ee",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1287",
-      "name": "001 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5458",
+      "name": "temperature device 2",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47106294744538,
-            42.99908657043063
+            -77.47071100137319,
+            42.99877461491738
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12d1",
+      "_id": "5991c5018ba136380d5a54ef",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1287",
-      "name": "001 sensor 2",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5458",
+      "name": "temperature device 3",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47098673757557,
-            42.99902622672077
+            -77.47069469332317,
+            42.99880709853474
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12d2",
+      "_id": "5991c5018ba136380d5a54f0",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1288",
-      "name": "048 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5459",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47072206665668,
-            42.99862632475433
+            -77.47071369728243,
+            42.99850613090194
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12d3",
+      "_id": "5991c5018ba136380d5a54f1",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1289",
-      "name": "011 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a545a",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.4708028864745,
-            42.99899165058813
+            -77.47061981876182,
+            42.99848904514489
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12d4",
+      "_id": "5991c5018ba136380d5a54f2",
       "type": "point",
-      "room": "597b6cd011138a2cae8d128a",
-      "name": "032 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a545b",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.4708513423332,
-            42.998842410245224
+            -77.47055439694265,
+            42.998526733823624
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12d5",
+      "_id": "5991c5018ba136380d5a54f3",
       "type": "point",
-      "room": "597b6cd011138a2cae8d128a",
-      "name": "032 sensor 2",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a545c",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47074777868045,
-            42.99888776100126
+            -77.47079342943289,
+            42.998894377916066
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12d6",
+      "_id": "5991c5018ba136380d5a54f4",
       "type": "point",
-      "room": "597b6cd011138a2cae8d128a",
-      "name": "032 sensor 3",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a545c",
+      "name": "temperature device 2",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.4708181713303,
-            42.998877122984084
+            -77.47078622042486,
+            42.9988364559594
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12d7",
+      "_id": "5991c5018ba136380d5a54f5",
       "type": "point",
-      "room": "597b6cd011138a2cae8d128b",
-      "name": "064 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a545c",
+      "name": "temperature device 3",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47070554731619,
-            42.998400024478116
+            -77.47075041952463,
+            42.998905824660746
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12d8",
+      "_id": "5991c5018ba136380d5a54f6",
       "type": "point",
-      "room": "597b6cd011138a2cae8d128c",
-      "name": "015 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a545d",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47088070962529,
-            42.99913108157183
+            -77.47056987581134,
+            42.99849902625249
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12d9",
+      "_id": "5991c5018ba136380d5a54f7",
       "type": "point",
-      "room": "597b6cd011138a2cae8d128d",
-      "name": "020 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a545e",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47098910496953,
-            42.9989679711391
+            -77.47057007275188,
+            42.998593306304514
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12da",
+      "_id": "5991c5018ba136380d5a54f8",
       "type": "point",
-      "room": "597b6cd011138a2cae8d128e",
-      "name": "025 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a545f",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47111031595531,
-            42.998941148345
+            -77.47102862322906,
+            42.999104851057815
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12db",
+      "_id": "5991c5018ba136380d5a54f9",
       "type": "point",
-      "room": "597b6cd011138a2cae8d128f",
-      "name": "045 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5460",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.470587840666,
-            42.99863543814758
+            -77.47066810222803,
+            42.99840824195904
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12dc",
+      "_id": "5991c5018ba136380d5a54fa",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1290",
-      "name": "060 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5461",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47081233245812,
-            42.99856961799106
+            -77.47097039454243,
+            42.99864784155507
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12dd",
+      "_id": "5991c5018ba136380d5a54fb",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1291",
-      "name": "029 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5462",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47092085063254,
-            42.99886622423901
+            -77.47061636409241,
+            42.998676075605374
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12de",
+      "_id": "5991c5018ba136380d5a54fc",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1292",
-      "name": "067 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5462",
+      "name": "temperature device 2",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47085684285277,
-            42.998420798344526
+            -77.47071415491354,
+            42.99868179336228
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12df",
+      "_id": "5991c5018ba136380d5a54fd",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1293",
-      "name": "033 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5463",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47067650534166,
-            42.998740626061796
+            -77.47066053117415,
+            42.99859025368494
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12e0",
+      "_id": "5991c5018ba136380d5a54fe",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1294",
-      "name": "019 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5464",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47102363979904,
-            42.99903475273411
+            -77.47098210155237,
+            42.999107242765845
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12e1",
+      "_id": "5991c5018ba136380d5a54ff",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1295",
-      "name": "036 sensor 1",
+      "value": "temperature",
+      "room": "5991c5008ba136380d5a5465",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47083988122789,
-            42.99874869973
+            -77.47079368637513,
+            42.999005420239534
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12e2",
+      "_id": "5991c5018ba136380d5a5500",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1295",
-      "name": "036 sensor 2",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5466",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47087484040541,
-            42.99879683143623
+            -77.47096634913304,
+            42.99895480802901
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12e3",
+      "_id": "5991c5018ba136380d5a5501",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1295",
-      "name": "036 sensor 3",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5467",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47090028362639,
-            42.9987171116482
+            -77.47104470779469,
+            42.99904389521099
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12e4",
+      "_id": "5991c5018ba136380d5a5502",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1296",
-      "name": "030 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5468",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47091967813463,
-            42.99880258831445
+            -77.47114920766036,
+            42.99898342313014
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12e5",
+      "_id": "5991c5018ba136380d5a5503",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1297",
-      "name": "056 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5469",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47066724450269,
-            42.99854093954023
+            -77.47056108841838,
+            42.998438454188495
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12e6",
+      "_id": "5991c5018ba136380d5a5504",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1298",
-      "name": "021 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a546a",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47097725552976,
-            42.9989239580245
+            -77.47071037078742,
+            42.998626935153695
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12e7",
+      "_id": "5991c5018ba136380d5a5505",
       "type": "point",
-      "room": "597b6cd011138a2cae8d1299",
-      "name": "004 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a546b",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.4705743053358,
-            42.99860895646024
+            -77.47089635193261,
+            42.998813289030124
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12e8",
+      "_id": "5991c5018ba136380d5a5506",
       "type": "point",
-      "room": "597b6cd011138a2cae8d129a",
-      "name": "034 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a546c",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47076764102489,
-            42.99880395358997
+            -77.47110061062415,
+            42.999090871408676
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12e9",
+      "_id": "5991c5018ba136380d5a5507",
       "type": "point",
-      "room": "597b6cd011138a2cae8d129a",
-      "name": "034 sensor 2",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a546d",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.4707757588706,
-            42.998764918047556
+            -77.4708369249653,
+            42.99895032996653
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12ea",
+      "_id": "5991c5018ba136380d5a5508",
       "type": "point",
-      "room": "597b6cd011138a2cae8d129a",
-      "name": "034 sensor 3",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a546e",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47077865319207,
-            42.99872415144135
+            -77.47057798548258,
+            42.99862493672936
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12eb",
+      "_id": "5991c5018ba136380d5a5509",
       "type": "point",
-      "room": "597b6cd011138a2cae8d129b",
-      "name": "042 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a546f",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47078797690887,
-            42.998673112240525
+            -77.47077757183956,
+            42.99868404166909
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12ec",
+      "_id": "5991c5018ba136380d5a550a",
       "type": "point",
-      "room": "597b6cd011138a2cae8d129c",
-      "name": "043 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a546f",
+      "name": "temperature device 2",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47087159634907,
-            42.99863880997572
+            -77.47071051318154,
+            42.99852757923478
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12ed",
+      "_id": "5991c5018ba136380d5a550b",
       "type": "point",
-      "room": "597b6cd011138a2cae8d129c",
-      "name": "043 sensor 2",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5470",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47079346050072,
-            42.99860588648621
+            -77.47086446551242,
+            42.99860785294103
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12ee",
+      "_id": "5991c5018ba136380d5a550c",
       "type": "point",
-      "room": "597b6cd011138a2cae8d129c",
-      "name": "043 sensor 3",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5470",
+      "name": "temperature device 2",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47083232952465,
-            42.99858747166064
+            -77.47089287620275,
+            42.998566726456595
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12ef",
+      "_id": "5991c5018ba136380d5a550d",
       "type": "point",
-      "room": "597b6cd011138a2cae8d129d",
-      "name": "035 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5470",
+      "name": "temperature device 3",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47063178843126,
-            42.998710706418066
+            -77.4708281199329,
+            42.998578210234534
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12f0",
+      "_id": "5991c5018ba136380d5a550e",
       "type": "point",
-      "room": "597b6cd011138a2cae8d129d",
-      "name": "035 sensor 2",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5471",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47072266999943,
-            42.99867540455055
+            -77.47090771108714,
+            42.998695664325446
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12f1",
+      "_id": "5991c5018ba136380d5a550f",
       "type": "point",
-      "room": "597b6cd011138a2cae8d129e",
-      "name": "047 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5472",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47062606299711,
-            42.99859956225678
+            -77.47068787707228,
+            42.998750157702204
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12f2",
+      "_id": "5991c5018ba136380d5a5510",
       "type": "point",
-      "room": "597b6cd011138a2cae8d129f",
-      "name": "026 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5473",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47113595180174,
-            42.99892424687463
+            -77.47083021515415,
+            42.99856764323309
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12f3",
+      "_id": "5991c5018ba136380d5a5511",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12a0",
-      "name": "005 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5474",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.4706121121967,
-            42.99841057612028
+            -77.47079250189803,
+            42.99837456775116
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12f4",
+      "_id": "5991c5018ba136380d5a5512",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12a0",
-      "name": "005 sensor 2",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5475",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47056110458554,
-            42.99845893145977
+            -77.470628537365,
+            42.99864349277439
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12f5",
+      "_id": "5991c5018ba136380d5a5513",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12a1",
-      "name": "037 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5476",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47082962676221,
-            42.99873219913639
+            -77.4711343498974,
+            42.99896400334105
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12f6",
+      "_id": "5991c5018ba136380d5a5514",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12a2",
-      "name": "040 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5477",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47092808100807,
-            42.99868188565532
+            -77.47079234058849,
+            42.998968227286305
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12f7",
+      "_id": "5991c5018ba136380d5a5515",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12a3",
-      "name": "039 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5478",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47084543230525,
-            42.99868534798054
+            -77.47065623513721,
+            42.998549673072
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12f8",
+      "_id": "5991c5018ba136380d5a5516",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12a4",
-      "name": "050 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5479",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47058873088798,
-            42.998566744126386
+            -77.47110674341897,
+            42.99886509947057
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12f9",
+      "_id": "5991c5018ba136380d5a5517",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12a5",
-      "name": "058 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a547a",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47081895610194,
-            42.99853809952873
+            -77.47093249703252,
+            42.99912068403189
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12fa",
+      "_id": "5991c5018ba136380d5a5518",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12a5",
-      "name": "058 sensor 2",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a547b",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.4708322127532,
-            42.99848624587203
+            -77.47057312540547,
+            42.99853854214735
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12fb",
+      "_id": "5991c5018ba136380d5a5519",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12a5",
-      "name": "058 sensor 3",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a547c",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47072490555071,
-            42.998418609919995
+            -77.47077735195134,
+            42.998578336921746
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12fc",
+      "_id": "5991c5018ba136380d5a551a",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12a5",
-      "name": "058 sensor 4",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a547d",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47081801261803,
-            42.998433049274716
+            -77.47071089687243,
+            42.998387116137316
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12fd",
+      "_id": "5991c5018ba136380d5a551b",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12a6",
-      "name": "065 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a547e",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47075174535183,
-            42.9983828360683
+            -77.47065631182647,
+            42.99860368214916
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12fe",
+      "_id": "5991c5018ba136380d5a551c",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12a7",
-      "name": "008 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a547f",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47106252539845,
-            42.99910640502468
+            -77.47084287176679,
+            42.99866913307329
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d12ff",
+      "_id": "5991c5018ba136380d5a551d",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12a8",
-      "name": "046 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5480",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47064887658591,
-            42.99863457648008
+            -77.47087084894663,
+            42.99915256873765
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d1300",
+      "_id": "5991c5018ba136380d5a551e",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12a9",
-      "name": "031 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5481",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47098462429295,
-            42.9988382418692
+            -77.47071383943901,
+            42.99848270232411
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d1301",
+      "_id": "5991c5018ba136380d5a551f",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12a9",
-      "name": "031 sensor 2",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5482",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47102422115371,
-            42.998862682417325
+            -77.47110889943534,
+            42.998906457478256
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d1302",
+      "_id": "5991c5018ba136380d5a5520",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12a9",
-      "name": "031 sensor 3",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5483",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47096943839014,
-            42.998783476710585
+            -77.47102379074951,
+            42.999077440124836
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d1303",
+      "_id": "5991c5018ba136380d5a5521",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12aa",
-      "name": "041 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5483",
+      "name": "temperature device 2",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47097975636594,
-            42.99867681454653
+            -77.47107110203211,
+            42.999090748049355
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d1304",
+      "_id": "5991c5018ba136380d5a5522",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12ab",
-      "name": "059 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5484",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47084507654657,
-            42.998537894973296
+            -77.47078116644664,
+            42.99865062191934
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d1305",
+      "_id": "5991c5018ba136380d5a5523",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12ac",
-      "name": "000 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5485",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47101799744352,
-            42.998987215992734
+            -77.47079110628009,
+            42.99891977531989
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d1306",
+      "_id": "5991c5018ba136380d5a5524",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12ad",
-      "name": "003 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5485",
+      "name": "temperature device 2",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47086509678911,
-            42.9988164198154
+            -77.47082557015058,
+            42.99877229534951
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d1307",
+      "_id": "5991c5018ba136380d5a5525",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12ad",
-      "name": "003 sensor 2",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5486",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47088879104055,
-            42.99885957855777
+            -77.470928792121,
+            42.99886139792543
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d1308",
+      "_id": "5991c5018ba136380d5a5526",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12ae",
-      "name": "038 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5487",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.4708614837946,
-            42.998714108513106
+            -77.47091478088998,
+            42.99854166913472
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d1309",
+      "_id": "5991c5018ba136380d5a5527",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12af",
-      "name": "018 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5488",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47101266647363,
-            42.99910664050447
+            -77.47095255838059,
+            42.999104147428135
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d130a",
+      "_id": "5991c5018ba136380d5a5528",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12b0",
-      "name": "066 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a5489",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47078069258976,
-            42.99836241185283
+            -77.47085223275538,
+            42.998708756030396
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d130b",
+      "_id": "5991c5018ba136380d5a5529",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12b1",
-      "name": "061 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a548a",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47075642450244,
-            42.9985520174066
+            -77.47067251683326,
+            42.99862278576198
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d130c",
+      "_id": "5991c5018ba136380d5a552a",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12b2",
-      "name": "009 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a548b",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47112150276539,
-            42.999009761730676
+            -77.47096962403586,
+            42.99873208789526
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d130d",
+      "_id": "5991c5018ba136380d5a552b",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12b2",
-      "name": "009 sensor 2",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a548b",
+      "name": "temperature device 2",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47107499083616,
-            42.99893286359047
+            -77.47092458823761,
+            42.99873211451543
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d130e",
+      "_id": "5991c5018ba136380d5a552c",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12b2",
-      "name": "009 sensor 3",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a548b",
+      "name": "temperature device 3",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47103115922164,
-            42.99896130966938
+            -77.47095639443103,
+            42.998776006099234
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d130f",
+      "_id": "5991c5018ba136380d5a552d",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12b2",
-      "name": "009 sensor 4",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a548c",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47098263615683,
-            42.99890029990342
+            -77.47086165387138,
+            42.99892355129996
           ]
         },
         "properties": {}
       }
     },
     {
-      "_id": "597b6cd011138a2cae8d1310",
+      "_id": "5991c5018ba136380d5a552e",
       "type": "point",
-      "room": "597b6cd011138a2cae8d12b3",
-      "name": "022 sensor 1",
+      "value": "temperature",
+      "room": "5991c5018ba136380d5a548d",
+      "name": "temperature device 1",
+      "building": "5991c5008ba136380d5a543c",
       "feature": {
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -77.47108449185721,
-            42.999082117814986
+            -77.4705191741567,
+            42.99844390485181
           ]
         },
         "properties": {}

@@ -2,7 +2,7 @@ const fs = require('fs'),
       path = require('path'),
       db = require('./db');
 
-const order = ['building', 'wing', 'department', 'room'];
+const order = ['building', 'floor', 'wing', 'department', 'room'];
 
 function sortOrder (a, b) { return order.findIndex((o) => a.includes(o)) > order.findIndex((o) => b.includes(o)) ? -1 : 1 };
 function ncat (cat) { return `group_${ cat }.geojson` };
@@ -14,6 +14,7 @@ async function importFromGeo(mongo, dir) {
     await mongo.collection('areas').drop();
   }
   mongo.collection('areas').ensureIndex({ 'feature.geometry': '2dsphere' });
+  mongo.collection('areas').ensureIndex({ shortname: 1 }, { unique: true }); 
 
   if (collectionNames.indexOf('points') > -1) {
     await mongo.collection('points').drop();
@@ -41,7 +42,7 @@ async function importFromGeo(mongo, dir) {
     let docs = [];
     for (let i=0; i < l; i++) {
       let { properties, geometry } = parents[i];
-      let { gamma, cx, cy, type, name, shortname, parent } = properties;
+      let { gamma, cx, cy, type, name, shortname, parent, floor } = properties;
       if (type == 'building') {
         if (buildingIndex != null) {
           throw new Error('more than a single building in this import');
@@ -49,15 +50,16 @@ async function importFromGeo(mongo, dir) {
         buildingIndex = i;
         buildingGamma = gamma;
       }
+      let floorId = parentMap[floor];
       let parentId = parentMap[parent];
       parentIds.push(shortname);
 
       docs.push({
         type,
-        floor: 'first',
         name,
         shortname,
         parent: parentId,
+        floor: floorId,
         building: buildingId,
         feature: {
           type: 'Feature',
@@ -141,13 +143,16 @@ async function saveToJSON(mongo) {
 
 if (require.main === module) {
   (async function main() {
-    const config = require('./config')['development'];
-    let { mongo } = await db(config);
-    let basePath = path.join(__dirname, '../data', 'geo');
-    await importFromGeo(mongo, basePath);
-    await saveToJSON(mongo);
-  
-    mongo.close()
+    try {
+      const config = require('./config')['development'];
+      let { mongo } = await db(config);
+      let basePath = path.join(__dirname, '../data', 'geo');
+      await importFromGeo(mongo, basePath);
+      await saveToJSON(mongo);
+      mongo.close()
+    } catch (e) {
+      console.error(e.stack);
+    }
   })();
 }
 

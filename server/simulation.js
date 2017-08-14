@@ -1,5 +1,6 @@
 const path = require('path'),
       fs = require('fs'),
+      { duplicateFloors, duplicateBuildings } = require('./duplicates'),
       { importFromGeo } = require('./import');
 
 var defaultSettings = {
@@ -83,6 +84,8 @@ module.exports = async function({ mongo }, dataDir, settings={}) {
 
   // import points, features (areas)
   await importFromGeo(mongo, path.join(dataDir, 'geo'));
+  await duplicateFloors(mongo);
+  await duplicateBuildings(mongo);
 
   let points = await mongo.collection('points')
     .find({}, { room: 1, building: 1, value: 1, type: 1 })
