@@ -136,7 +136,6 @@ module.exports = async function({ mongo }, dataDir, settings={}) {
           await mongo.collection('values').insertMany(updates);
         }
 
-
         //console.log((await mongo.collection('values').aggregate([
         //  { $match: { measurement: 'temperature' }},
         //  { $sort: { time: 1 }},
@@ -181,5 +180,5 @@ function generateInitTemp(settings) {
 
 function calcNewTemp(t, sp, p) {
   let v = sp - t;
-  return Math.floor((t + v/2)*p)/p;
+  return Math.floor((t + v/10)*p)/p;
 }

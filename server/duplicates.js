@@ -129,8 +129,8 @@ if (require.main === module) {
       const config = require('./config')['development'];
       let { mongo } = await db(config);
 
-      await duplicateFloors({ mongo });
-      await duplicateBuildings({ mongo });
+      await duplicateFloors(mongo);
+      await duplicateBuildings(mongo);
 
       mongo.close();
     } catch (e) {

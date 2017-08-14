@@ -1,11 +1,11 @@
 {
   "points": [
     {
-      "_id": "5991c5018ba136380d5a548e",
+      "_id": "5991d96eae1ccb45549f1f0c",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a544a",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ec8",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -20,11 +20,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a548f",
+      "_id": "5991d96eae1ccb45549f1f0d",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a544b",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ec9",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -39,11 +39,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5490",
+      "_id": "5991d96eae1ccb45549f1f0e",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a544c",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1eca",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -58,11 +58,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5491",
+      "_id": "5991d96eae1ccb45549f1f0f",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a544d",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ecb",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -77,11 +77,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5492",
+      "_id": "5991d96eae1ccb45549f1f10",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a544e",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ecc",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -96,11 +96,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5493",
+      "_id": "5991d96eae1ccb45549f1f11",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a544f",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ecd",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -115,11 +115,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5494",
+      "_id": "5991d96eae1ccb45549f1f12",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a5450",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ece",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -134,11 +134,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5495",
+      "_id": "5991d96eae1ccb45549f1f13",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a5451",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ecf",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -153,11 +153,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5496",
+      "_id": "5991d96eae1ccb45549f1f14",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a5452",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ed0",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -172,11 +172,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5497",
+      "_id": "5991d96eae1ccb45549f1f15",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a5453",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ed1",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -191,11 +191,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5498",
+      "_id": "5991d96eae1ccb45549f1f16",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a5454",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ed2",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -210,11 +210,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5499",
+      "_id": "5991d96eae1ccb45549f1f17",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a5455",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ed3",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -229,11 +229,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a549a",
+      "_id": "5991d96eae1ccb45549f1f18",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a5456",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ed4",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -248,11 +248,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a549b",
+      "_id": "5991d96eae1ccb45549f1f19",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a5457",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ed5",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -267,11 +267,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a549c",
+      "_id": "5991d96eae1ccb45549f1f1a",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a5458",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ed6",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -286,11 +286,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a549d",
+      "_id": "5991d96eae1ccb45549f1f1b",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a5459",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ed7",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -305,11 +305,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a549e",
+      "_id": "5991d96eae1ccb45549f1f1c",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a545a",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ed8",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -324,11 +324,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a549f",
+      "_id": "5991d96eae1ccb45549f1f1d",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a545b",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ed9",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -343,11 +343,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54a0",
+      "_id": "5991d96eae1ccb45549f1f1e",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a545c",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1eda",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -362,11 +362,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54a1",
+      "_id": "5991d96eae1ccb45549f1f1f",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a545d",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1edb",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -381,11 +381,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54a2",
+      "_id": "5991d96eae1ccb45549f1f20",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a545e",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1edc",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -400,11 +400,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54a3",
+      "_id": "5991d96eae1ccb45549f1f21",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a545f",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1edd",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -419,11 +419,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54a4",
+      "_id": "5991d96eae1ccb45549f1f22",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a5460",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ede",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -438,11 +438,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54a5",
+      "_id": "5991d96eae1ccb45549f1f23",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a5461",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1edf",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -457,11 +457,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54a6",
+      "_id": "5991d96eae1ccb45549f1f24",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a5462",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ee0",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -476,11 +476,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54a7",
+      "_id": "5991d96eae1ccb45549f1f25",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a5463",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ee1",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -495,11 +495,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54a8",
+      "_id": "5991d96eae1ccb45549f1f26",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a5464",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ee2",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -514,11 +514,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54a9",
+      "_id": "5991d96eae1ccb45549f1f27",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5008ba136380d5a5465",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ee3",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -533,11 +533,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54aa",
+      "_id": "5991d96eae1ccb45549f1f28",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a5466",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ee4",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -552,11 +552,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54ab",
+      "_id": "5991d96eae1ccb45549f1f29",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a5467",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ee5",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -571,11 +571,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54ac",
+      "_id": "5991d96eae1ccb45549f1f2a",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a5468",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ee6",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -590,11 +590,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54ad",
+      "_id": "5991d96eae1ccb45549f1f2b",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a5469",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ee7",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -609,11 +609,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54ae",
+      "_id": "5991d96eae1ccb45549f1f2c",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a546a",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ee8",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -628,11 +628,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54af",
+      "_id": "5991d96eae1ccb45549f1f2d",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a546b",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ee9",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -647,11 +647,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54b0",
+      "_id": "5991d96eae1ccb45549f1f2e",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a546c",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1eea",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -666,11 +666,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54b1",
+      "_id": "5991d96eae1ccb45549f1f2f",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a546d",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1eeb",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -685,11 +685,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54b2",
+      "_id": "5991d96eae1ccb45549f1f30",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a546e",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1eec",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -704,11 +704,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54b3",
+      "_id": "5991d96eae1ccb45549f1f31",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a546f",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1eed",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -723,11 +723,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54b4",
+      "_id": "5991d96eae1ccb45549f1f32",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a5470",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1eee",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -742,11 +742,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54b5",
+      "_id": "5991d96eae1ccb45549f1f33",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a5471",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1eef",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -761,11 +761,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54b6",
+      "_id": "5991d96eae1ccb45549f1f34",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a5472",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ef0",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -780,11 +780,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54b7",
+      "_id": "5991d96eae1ccb45549f1f35",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a5473",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ef1",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -799,11 +799,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54b8",
+      "_id": "5991d96eae1ccb45549f1f36",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a5474",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ef2",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -818,11 +818,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54b9",
+      "_id": "5991d96eae1ccb45549f1f37",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a5475",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ef3",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -837,11 +837,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54ba",
+      "_id": "5991d96eae1ccb45549f1f38",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a5476",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ef4",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -856,11 +856,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54bb",
+      "_id": "5991d96eae1ccb45549f1f39",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a5477",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ef5",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -875,11 +875,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54bc",
+      "_id": "5991d96eae1ccb45549f1f3a",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a5478",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ef6",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -894,11 +894,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54bd",
+      "_id": "5991d96eae1ccb45549f1f3b",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a5479",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ef7",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -913,11 +913,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54be",
+      "_id": "5991d96eae1ccb45549f1f3c",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a547a",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ef8",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -932,11 +932,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54bf",
+      "_id": "5991d96eae1ccb45549f1f3d",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a547b",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1ef9",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -951,11 +951,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54c0",
+      "_id": "5991d96eae1ccb45549f1f3e",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a547c",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1efa",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -970,11 +970,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54c1",
+      "_id": "5991d96eae1ccb45549f1f3f",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a547d",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1efb",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -989,11 +989,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54c2",
+      "_id": "5991d96eae1ccb45549f1f40",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a547e",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1efc",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -1008,11 +1008,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54c3",
+      "_id": "5991d96eae1ccb45549f1f41",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a547f",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1efd",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -1027,11 +1027,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54c4",
+      "_id": "5991d96eae1ccb45549f1f42",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a5480",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1efe",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -1046,11 +1046,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54c5",
+      "_id": "5991d96eae1ccb45549f1f43",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a5481",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1eff",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -1065,11 +1065,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54c6",
+      "_id": "5991d96eae1ccb45549f1f44",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a5482",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1f00",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -1084,11 +1084,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54c7",
+      "_id": "5991d96eae1ccb45549f1f45",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a5483",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1f01",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -1103,11 +1103,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54c8",
+      "_id": "5991d96eae1ccb45549f1f46",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a5484",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1f02",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -1122,11 +1122,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54c9",
+      "_id": "5991d96eae1ccb45549f1f47",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a5485",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1f03",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -1141,11 +1141,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54ca",
+      "_id": "5991d96eae1ccb45549f1f48",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a5486",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1f04",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -1160,11 +1160,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54cb",
+      "_id": "5991d96eae1ccb45549f1f49",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a5487",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1f05",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -1179,11 +1179,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54cc",
+      "_id": "5991d96eae1ccb45549f1f4a",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a5488",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1f06",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -1198,11 +1198,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54cd",
+      "_id": "5991d96eae1ccb45549f1f4b",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a5489",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1f07",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -1217,11 +1217,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54ce",
+      "_id": "5991d96eae1ccb45549f1f4c",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a548a",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1f08",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -1236,11 +1236,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54cf",
+      "_id": "5991d96eae1ccb45549f1f4d",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a548b",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1f09",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -1255,11 +1255,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54d0",
+      "_id": "5991d96eae1ccb45549f1f4e",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a548c",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1f0a",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -1274,11 +1274,11 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54d1",
+      "_id": "5991d96eae1ccb45549f1f4f",
       "type": "point",
       "value": "set_point",
-      "room": "5991c5018ba136380d5a548d",
-      "building": "5991c5008ba136380d5a543c",
+      "room": "5991d96eae1ccb45549f1f0b",
+      "building": "5991d96dae1ccb45549f1eba",
       "name": "set point device 1",
       "feature": {
         "type": "Feature",
@@ -1293,12 +1293,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54d2",
+      "_id": "5991d96eae1ccb45549f1f50",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a544a",
+      "room": "5991d96eae1ccb45549f1ec8",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1312,12 +1312,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54d3",
+      "_id": "5991d96eae1ccb45549f1f51",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a544b",
+      "room": "5991d96eae1ccb45549f1ec9",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1331,12 +1331,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54d4",
+      "_id": "5991d96eae1ccb45549f1f52",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a544b",
+      "room": "5991d96eae1ccb45549f1ec9",
       "name": "temperature device 2",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1350,12 +1350,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54d5",
+      "_id": "5991d96eae1ccb45549f1f53",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a544b",
+      "room": "5991d96eae1ccb45549f1ec9",
       "name": "temperature device 3",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1369,12 +1369,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54d6",
+      "_id": "5991d96eae1ccb45549f1f54",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a544c",
+      "room": "5991d96eae1ccb45549f1eca",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1388,12 +1388,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54d7",
+      "_id": "5991d96eae1ccb45549f1f55",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a544d",
+      "room": "5991d96eae1ccb45549f1ecb",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1407,12 +1407,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54d8",
+      "_id": "5991d96eae1ccb45549f1f56",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a544e",
+      "room": "5991d96eae1ccb45549f1ecc",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1426,12 +1426,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54d9",
+      "_id": "5991d96eae1ccb45549f1f57",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a544e",
+      "room": "5991d96eae1ccb45549f1ecc",
       "name": "temperature device 2",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1445,12 +1445,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54da",
+      "_id": "5991d96eae1ccb45549f1f58",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a544e",
+      "room": "5991d96eae1ccb45549f1ecc",
       "name": "temperature device 3",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1464,12 +1464,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54db",
+      "_id": "5991d96eae1ccb45549f1f59",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a544e",
+      "room": "5991d96eae1ccb45549f1ecc",
       "name": "temperature device 4",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1483,12 +1483,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54dc",
+      "_id": "5991d96eae1ccb45549f1f5a",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a544f",
+      "room": "5991d96eae1ccb45549f1ecd",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1502,12 +1502,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54dd",
+      "_id": "5991d96eae1ccb45549f1f5b",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5450",
+      "room": "5991d96eae1ccb45549f1ece",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1521,12 +1521,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54de",
+      "_id": "5991d96eae1ccb45549f1f5c",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5451",
+      "room": "5991d96eae1ccb45549f1ecf",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1540,12 +1540,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54df",
+      "_id": "5991d96eae1ccb45549f1f5d",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5452",
+      "room": "5991d96eae1ccb45549f1ed0",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1559,12 +1559,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54e0",
+      "_id": "5991d96eae1ccb45549f1f5e",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5452",
+      "room": "5991d96eae1ccb45549f1ed0",
       "name": "temperature device 2",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1578,12 +1578,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54e1",
+      "_id": "5991d96eae1ccb45549f1f5f",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5452",
+      "room": "5991d96eae1ccb45549f1ed0",
       "name": "temperature device 3",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1597,12 +1597,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54e2",
+      "_id": "5991d96eae1ccb45549f1f60",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5452",
+      "room": "5991d96eae1ccb45549f1ed0",
       "name": "temperature device 4",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1616,12 +1616,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54e3",
+      "_id": "5991d96eae1ccb45549f1f61",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5452",
+      "room": "5991d96eae1ccb45549f1ed0",
       "name": "temperature device 5",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1635,12 +1635,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54e4",
+      "_id": "5991d96eae1ccb45549f1f62",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5453",
+      "room": "5991d96eae1ccb45549f1ed1",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1654,12 +1654,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54e5",
+      "_id": "5991d96eae1ccb45549f1f63",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5454",
+      "room": "5991d96eae1ccb45549f1ed2",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1673,12 +1673,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54e6",
+      "_id": "5991d96eae1ccb45549f1f64",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5454",
+      "room": "5991d96eae1ccb45549f1ed2",
       "name": "temperature device 2",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1692,12 +1692,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54e7",
+      "_id": "5991d96eae1ccb45549f1f65",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5454",
+      "room": "5991d96eae1ccb45549f1ed2",
       "name": "temperature device 3",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1711,12 +1711,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54e8",
+      "_id": "5991d96eae1ccb45549f1f66",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5454",
+      "room": "5991d96eae1ccb45549f1ed2",
       "name": "temperature device 4",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1730,12 +1730,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54e9",
+      "_id": "5991d96eae1ccb45549f1f67",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5455",
+      "room": "5991d96eae1ccb45549f1ed3",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1749,12 +1749,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54ea",
+      "_id": "5991d96eae1ccb45549f1f68",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5456",
+      "room": "5991d96eae1ccb45549f1ed4",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1768,12 +1768,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54eb",
+      "_id": "5991d96eae1ccb45549f1f69",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5456",
+      "room": "5991d96eae1ccb45549f1ed4",
       "name": "temperature device 2",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1787,12 +1787,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54ec",
+      "_id": "5991d96eae1ccb45549f1f6a",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5457",
+      "room": "5991d96eae1ccb45549f1ed5",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1806,12 +1806,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54ed",
+      "_id": "5991d96eae1ccb45549f1f6b",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5458",
+      "room": "5991d96eae1ccb45549f1ed6",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1825,12 +1825,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54ee",
+      "_id": "5991d96eae1ccb45549f1f6c",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5458",
+      "room": "5991d96eae1ccb45549f1ed6",
       "name": "temperature device 2",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1844,12 +1844,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54ef",
+      "_id": "5991d96eae1ccb45549f1f6d",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5458",
+      "room": "5991d96eae1ccb45549f1ed6",
       "name": "temperature device 3",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1863,12 +1863,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54f0",
+      "_id": "5991d96eae1ccb45549f1f6e",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5459",
+      "room": "5991d96eae1ccb45549f1ed7",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1882,12 +1882,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54f1",
+      "_id": "5991d96eae1ccb45549f1f6f",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a545a",
+      "room": "5991d96eae1ccb45549f1ed8",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1901,12 +1901,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54f2",
+      "_id": "5991d96eae1ccb45549f1f70",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a545b",
+      "room": "5991d96eae1ccb45549f1ed9",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1920,12 +1920,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54f3",
+      "_id": "5991d96eae1ccb45549f1f71",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a545c",
+      "room": "5991d96eae1ccb45549f1eda",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1939,12 +1939,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54f4",
+      "_id": "5991d96eae1ccb45549f1f72",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a545c",
+      "room": "5991d96eae1ccb45549f1eda",
       "name": "temperature device 2",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1958,12 +1958,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54f5",
+      "_id": "5991d96eae1ccb45549f1f73",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a545c",
+      "room": "5991d96eae1ccb45549f1eda",
       "name": "temperature device 3",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1977,12 +1977,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54f6",
+      "_id": "5991d96eae1ccb45549f1f74",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a545d",
+      "room": "5991d96eae1ccb45549f1edb",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -1996,12 +1996,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54f7",
+      "_id": "5991d96eae1ccb45549f1f75",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a545e",
+      "room": "5991d96eae1ccb45549f1edc",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2015,12 +2015,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54f8",
+      "_id": "5991d96eae1ccb45549f1f76",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a545f",
+      "room": "5991d96eae1ccb45549f1edd",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2034,12 +2034,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54f9",
+      "_id": "5991d96eae1ccb45549f1f77",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5460",
+      "room": "5991d96eae1ccb45549f1ede",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2053,12 +2053,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54fa",
+      "_id": "5991d96eae1ccb45549f1f78",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5461",
+      "room": "5991d96eae1ccb45549f1edf",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2072,12 +2072,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54fb",
+      "_id": "5991d96eae1ccb45549f1f79",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5462",
+      "room": "5991d96eae1ccb45549f1ee0",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2091,12 +2091,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54fc",
+      "_id": "5991d96eae1ccb45549f1f7a",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5462",
+      "room": "5991d96eae1ccb45549f1ee0",
       "name": "temperature device 2",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2110,12 +2110,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54fd",
+      "_id": "5991d96eae1ccb45549f1f7b",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5463",
+      "room": "5991d96eae1ccb45549f1ee1",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2129,12 +2129,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54fe",
+      "_id": "5991d96eae1ccb45549f1f7c",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5464",
+      "room": "5991d96eae1ccb45549f1ee2",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2148,12 +2148,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a54ff",
+      "_id": "5991d96eae1ccb45549f1f7d",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5008ba136380d5a5465",
+      "room": "5991d96eae1ccb45549f1ee3",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2167,12 +2167,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5500",
+      "_id": "5991d96eae1ccb45549f1f7e",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5466",
+      "room": "5991d96eae1ccb45549f1ee4",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2186,12 +2186,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5501",
+      "_id": "5991d96eae1ccb45549f1f7f",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5467",
+      "room": "5991d96eae1ccb45549f1ee5",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2205,12 +2205,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5502",
+      "_id": "5991d96eae1ccb45549f1f80",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5468",
+      "room": "5991d96eae1ccb45549f1ee6",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2224,12 +2224,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5503",
+      "_id": "5991d96eae1ccb45549f1f81",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5469",
+      "room": "5991d96eae1ccb45549f1ee7",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2243,12 +2243,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5504",
+      "_id": "5991d96eae1ccb45549f1f82",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a546a",
+      "room": "5991d96eae1ccb45549f1ee8",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2262,12 +2262,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5505",
+      "_id": "5991d96eae1ccb45549f1f83",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a546b",
+      "room": "5991d96eae1ccb45549f1ee9",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2281,12 +2281,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5506",
+      "_id": "5991d96eae1ccb45549f1f84",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a546c",
+      "room": "5991d96eae1ccb45549f1eea",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2300,12 +2300,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5507",
+      "_id": "5991d96eae1ccb45549f1f85",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a546d",
+      "room": "5991d96eae1ccb45549f1eeb",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2319,12 +2319,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5508",
+      "_id": "5991d96eae1ccb45549f1f86",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a546e",
+      "room": "5991d96eae1ccb45549f1eec",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2338,12 +2338,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5509",
+      "_id": "5991d96eae1ccb45549f1f87",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a546f",
+      "room": "5991d96eae1ccb45549f1eed",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2357,12 +2357,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a550a",
+      "_id": "5991d96eae1ccb45549f1f88",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a546f",
+      "room": "5991d96eae1ccb45549f1eed",
       "name": "temperature device 2",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2376,12 +2376,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a550b",
+      "_id": "5991d96eae1ccb45549f1f89",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5470",
+      "room": "5991d96eae1ccb45549f1eee",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2395,12 +2395,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a550c",
+      "_id": "5991d96eae1ccb45549f1f8a",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5470",
+      "room": "5991d96eae1ccb45549f1eee",
       "name": "temperature device 2",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2414,12 +2414,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a550d",
+      "_id": "5991d96eae1ccb45549f1f8b",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5470",
+      "room": "5991d96eae1ccb45549f1eee",
       "name": "temperature device 3",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2433,12 +2433,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a550e",
+      "_id": "5991d96eae1ccb45549f1f8c",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5471",
+      "room": "5991d96eae1ccb45549f1eef",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2452,12 +2452,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a550f",
+      "_id": "5991d96eae1ccb45549f1f8d",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5472",
+      "room": "5991d96eae1ccb45549f1ef0",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2471,12 +2471,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5510",
+      "_id": "5991d96eae1ccb45549f1f8e",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5473",
+      "room": "5991d96eae1ccb45549f1ef1",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2490,12 +2490,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5511",
+      "_id": "5991d96eae1ccb45549f1f8f",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5474",
+      "room": "5991d96eae1ccb45549f1ef2",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2509,12 +2509,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5512",
+      "_id": "5991d96eae1ccb45549f1f90",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5475",
+      "room": "5991d96eae1ccb45549f1ef3",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2528,12 +2528,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5513",
+      "_id": "5991d96eae1ccb45549f1f91",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5476",
+      "room": "5991d96eae1ccb45549f1ef4",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2547,12 +2547,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5514",
+      "_id": "5991d96eae1ccb45549f1f92",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5477",
+      "room": "5991d96eae1ccb45549f1ef5",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2566,12 +2566,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5515",
+      "_id": "5991d96eae1ccb45549f1f93",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5478",
+      "room": "5991d96eae1ccb45549f1ef6",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2585,12 +2585,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5516",
+      "_id": "5991d96eae1ccb45549f1f94",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5479",
+      "room": "5991d96eae1ccb45549f1ef7",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2604,12 +2604,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5517",
+      "_id": "5991d96eae1ccb45549f1f95",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a547a",
+      "room": "5991d96eae1ccb45549f1ef8",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2623,12 +2623,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5518",
+      "_id": "5991d96eae1ccb45549f1f96",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a547b",
+      "room": "5991d96eae1ccb45549f1ef9",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2642,12 +2642,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5519",
+      "_id": "5991d96eae1ccb45549f1f97",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a547c",
+      "room": "5991d96eae1ccb45549f1efa",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2661,12 +2661,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a551a",
+      "_id": "5991d96eae1ccb45549f1f98",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a547d",
+      "room": "5991d96eae1ccb45549f1efb",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2680,12 +2680,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a551b",
+      "_id": "5991d96eae1ccb45549f1f99",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a547e",
+      "room": "5991d96eae1ccb45549f1efc",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2699,12 +2699,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a551c",
+      "_id": "5991d96eae1ccb45549f1f9a",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a547f",
+      "room": "5991d96eae1ccb45549f1efd",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2718,12 +2718,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a551d",
+      "_id": "5991d96eae1ccb45549f1f9b",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5480",
+      "room": "5991d96eae1ccb45549f1efe",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2737,12 +2737,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a551e",
+      "_id": "5991d96eae1ccb45549f1f9c",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5481",
+      "room": "5991d96eae1ccb45549f1eff",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2756,12 +2756,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a551f",
+      "_id": "5991d96eae1ccb45549f1f9d",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5482",
+      "room": "5991d96eae1ccb45549f1f00",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2775,12 +2775,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5520",
+      "_id": "5991d96eae1ccb45549f1f9e",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5483",
+      "room": "5991d96eae1ccb45549f1f01",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2794,12 +2794,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5521",
+      "_id": "5991d96eae1ccb45549f1f9f",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5483",
+      "room": "5991d96eae1ccb45549f1f01",
       "name": "temperature device 2",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2813,12 +2813,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5522",
+      "_id": "5991d96eae1ccb45549f1fa0",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5484",
+      "room": "5991d96eae1ccb45549f1f02",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2832,12 +2832,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5523",
+      "_id": "5991d96eae1ccb45549f1fa1",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5485",
+      "room": "5991d96eae1ccb45549f1f03",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2851,12 +2851,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5524",
+      "_id": "5991d96eae1ccb45549f1fa2",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5485",
+      "room": "5991d96eae1ccb45549f1f03",
       "name": "temperature device 2",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2870,12 +2870,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5525",
+      "_id": "5991d96eae1ccb45549f1fa3",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5486",
+      "room": "5991d96eae1ccb45549f1f04",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2889,12 +2889,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5526",
+      "_id": "5991d96eae1ccb45549f1fa4",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5487",
+      "room": "5991d96eae1ccb45549f1f05",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2908,12 +2908,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5527",
+      "_id": "5991d96eae1ccb45549f1fa5",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5488",
+      "room": "5991d96eae1ccb45549f1f06",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2927,12 +2927,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5528",
+      "_id": "5991d96eae1ccb45549f1fa6",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a5489",
+      "room": "5991d96eae1ccb45549f1f07",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2946,12 +2946,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a5529",
+      "_id": "5991d96eae1ccb45549f1fa7",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a548a",
+      "room": "5991d96eae1ccb45549f1f08",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2965,12 +2965,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a552a",
+      "_id": "5991d96eae1ccb45549f1fa8",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a548b",
+      "room": "5991d96eae1ccb45549f1f09",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -2984,12 +2984,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a552b",
+      "_id": "5991d96eae1ccb45549f1fa9",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a548b",
+      "room": "5991d96eae1ccb45549f1f09",
       "name": "temperature device 2",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -3003,12 +3003,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a552c",
+      "_id": "5991d96eae1ccb45549f1faa",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a548b",
+      "room": "5991d96eae1ccb45549f1f09",
       "name": "temperature device 3",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -3022,12 +3022,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a552d",
+      "_id": "5991d96eae1ccb45549f1fab",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a548c",
+      "room": "5991d96eae1ccb45549f1f0a",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
@@ -3041,12 +3041,12 @@
       }
     },
     {
-      "_id": "5991c5018ba136380d5a552e",
+      "_id": "5991d96eae1ccb45549f1fac",
       "type": "point",
       "value": "temperature",
-      "room": "5991c5018ba136380d5a548d",
+      "room": "5991d96eae1ccb45549f1f0b",
       "name": "temperature device 1",
-      "building": "5991c5008ba136380d5a543c",
+      "building": "5991d96dae1ccb45549f1eba",
       "feature": {
         "type": "Feature",
         "geometry": {
