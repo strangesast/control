@@ -2,7 +2,7 @@ const express = require('express'),
       app = express(),
       path = require('path'),
       bodyParser = require('body-parser'),
-      env = app.get('env') || 'development';
+      env = app.get('env') || 'development',
       config = require('./config')[env],
       initDatabases = require('./db'),
       routes = require('./routes'),
@@ -17,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 (async function() {
   let dbs = await initDatabases(config);
+  console.log('config', config);
   routes(app, dbs, config);
 
   let server = http.createServer(app)

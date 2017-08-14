@@ -9,6 +9,16 @@ chai.use(chaiThings)
 chai.use(chaiHttp)
 const expect = chai.expect;
 
+before(async function (done) {
+  server.on('mount', function() {
+    console.log('done', done);
+    done();
+  });
+  this.timeout(10000);
+  let res = await chai.request(server)
+    .get('/status')
+});
+
 describe('server', async () => {
   let token, user, building, cx, cy;
   it ('should create user, use token to authenticate further requests', async () => {
@@ -46,6 +56,7 @@ describe('server', async () => {
       .set('Authorization', 'JWT ' + token);
     expect(res.body).to.be.an('array')
     building = res.body[0];
+    console.log('building', building);
     expect(building).to.have.property('_id');
     expect(building).to.have.property('feature');
     ({ cx, cy } = building.feature.properties);

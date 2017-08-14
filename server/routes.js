@@ -121,6 +121,10 @@ module.exports = function (app, { mongo }, config) {
     res.send();
   });
 
+  app.get('/status', function(req, res, next) {
+    res.send();
+  });
+
   app.route('/users')
   .get(async function(req, res, next) {
     //let users = await mongo.collection('users').find({}, { password: 0 }).toArray();
@@ -196,16 +200,18 @@ module.exports = function (app, { mongo }, config) {
       ({ cx: lon, cy: lat } = nearBuilding.feature.properties);
       q['feature.geometry'] = { $near: { $geometry: { type: "Point", coordinates: [lon, lat] }}};
     }
-    console.log(q);
-    let buildings = (await mongo.collection('values').aggregate([
-      { $sort: { time: 1 }},
-      { $group: { _id: '$point', value: { $last: '$$ROOT' }}},
-      { $replaceRoot: { newRoot: '$value' }},
-      { $group: { _id: { building: '$building', measurement: '$measurement' }, value: { $avg: '$value' }, time: { $max: '$time' }}},
-      { $group: { _id: '$_id.building', value: { $push: { measurement: '$_id.measurement', value: '$value', time: '$time' }}}},
-      { $lookup: { from: 'areas', localField: '_id', foreignField: '_id', as: 'building' }},
-      { $unwind: '$building' }
-    ]).toArray()).map(({ building, value }) => Object.assign(building, { data: value.reduce((a, v) => Object.assign(a, { [v.measurement]: v.value, time: v.time }), {}) }));
+    let buildings = await mongo.collection('areas').find({ type: 'building' }).toArray();
+    //let buildings = (await mongo.collection('values').aggregate([
+    //  { $sort: { time: 1 }},
+    //  { $group: { _id: '$point', value: { $last: '$$ROOT' }}},
+    //  { $replaceRoot: { newRoot: '$value' }},
+    //  { $group: { _id: { building: '$building', measurement: '$measurement' }, value: { $avg: '$value' }, time: { $max: '$time' }}},
+    //  { $group: { _id: '$_id.building', value: { $push: { measurement: '$_id.measurement', value: '$value', time: '$time' }}}},
+    //  { $lookup: { from: 'areas', localField: '_id', foreignField: '_id', as: 'building' }},
+    //  { $unwind: '$building' }
+    //]).toArray()).map(({ building, value }) => Object.assign(building, { data: value.reduce((a, v) => Object.assign(a, { [v.measurement]: v.value, time: v.time }), {}) }));
+
+    console.log('buildings...', buildings);
 
     res.json(buildings);
   });
@@ -233,7 +239,8 @@ module.exports = function (app, { mongo }, config) {
       return a;
     }, {});
 
-    let otherAreas = await mongo.collection('areas').aggregate([
+    let otherAreas = await mongo.collection('areas').aggregate(
+      [
       // just rooms
         { $match: { type: 'room', building: req.building._id }},
       // find room ancestors (department, wing, building)
@@ -277,9 +284,11 @@ module.exports = function (app, { mongo }, config) {
             'object.points': '$points',
         }},
         { $replaceRoot: { newRoot: '$object' }}
-    ]).toArray();
+      ]
+    ).toArray();
 
-    let rooms = await mongo.collection('areas').aggregate([
+    let rooms = await mongo.collection('areas').aggregate(
+      [
       // just rooms
         { $match: { type: 'room', building: req.building._id }},
       // find points for each room
@@ -289,12 +298,13 @@ module.exports = function (app, { mongo }, config) {
           foreignField: 'room',
           as: 'points'
         }}
-    ]).toArray();
+      ]
+    ).toArray();
 
     let areas = otherAreas.concat(rooms);
 
     for (let area of areas) {
-      let temperature = area.points.reduce((a, b) => a + pointMap[b._id].value, 0)/area.points.length;
+      let temperature = area.points.reduce((a, b) => a + pointMap[b._id].value, 0) / area.points.length;
       let time = area.points.reduce((a, b) => b.time > a ? b.time : a, 0);
       area.data = { temperature, time };
     }

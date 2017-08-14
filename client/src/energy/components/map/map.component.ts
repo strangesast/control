@@ -407,10 +407,10 @@ function parseValueString (str: string) {
 
   return function(obj) {
     let i = 0;
-    let value = applyKeys(obj, keys.shift().split('.'));
-    while (keys.length) {
+    let value = applyKeys(obj, keys[i++].split('.'));
+    while (i < keys.length) {
       let op = ops.shift();
-      let val = applyKeys(obj, keys.shift().split('.'))
+      let val = applyKeys(obj, keys[i++].split('.'));
       switch (op) {
         case '+':
           value += val
