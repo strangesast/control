@@ -56,10 +56,15 @@ describe('server', async () => {
       .set('Authorization', 'JWT ' + token);
     expect(res.body).to.be.an('array');
     expect(res.body).to.have.lengthOf.above(0);
-    building = res.body[0];
-    expect(building).to.have.property('_id');
-    expect(building).to.have.property('feature');
+    let buildings = res.body;
+    building = buildings[0];
+
+    building.should.have.property('_id');
+    building.should.have.property('feature');
     ({ cx, cy } = building.feature.properties);
+
+    buildings.should.all.have.property('data');
+
   });
 
   it ('should get geo near', async () => {

@@ -227,17 +227,12 @@ module.exports = function (app, { mongo }, config) {
 
     let areas = await mongo.collection('areas').find(Object.assign({ building: buildingId}, q)).sort({ _id: 1 }).toArray();
     if (values) {
-      let areaValues = (await mongo.collection('values').aggregate(pipeline).toArray()).reduce(function(a, b) {
-        a[b._id.toString()] = b;
+      let valueMap = (await mongo.collection('values').aggregate(pipeline, { allowDiskUse: true }).toArray()).reduce(function(a, b) {
+        a[b._id.toString()] = valuesToDataMap(b.values);
         return a;
       }, {});
       for (let area of areas) {
-        let v = areaValues[area._id.toString()];
-        if (v) {
-          area.data = v.values.reduce((a, { measurement, time, last }) => Object.assign(a, { [measurement]: last }), {});
-        } else {
-          area.data = {};
-        }
+        area.data = valueMap[area._id.toString()] || {};
       }
     }
     res.json(areas);
@@ -266,7 +261,7 @@ module.exports = function (app, { mongo }, config) {
       { $unwind: '$point' },
       { $addFields: { 'point.data': '$value' }},
       { $replaceRoot: { newRoot: '$point' }}
-    ]).toArray();
+    ], { allowDiskUse: true }).toArray();
 
     res.json(points);
   });
@@ -280,7 +275,7 @@ module.exports = function (app, { mongo }, config) {
       { $match: { point: _id }},
       { $sort: { time: -1 }},
       { $project: { _id: 0, time: 1, value: 1 }}
-    ]).toArray();
+    ], { allowDiskUse: true }).toArray();
 
     point.data = history[0];
     point.history = history;
@@ -296,44 +291,36 @@ module.exports = function (app, { mongo }, config) {
 
   async function addBuildingData(buildings) {
     let pipeline = [
-      // necessary for last
-      { $sort: { time: 1 }},
       // get last value for each point
-      { $group: { _id: '$point', value: { $last: '$$ROOT' }}},
+      { $sort: { time: -1 }},
+      { $group: { _id: '$point', value: { $first: '$$ROOT' }}},
       { $replaceRoot: { newRoot: '$value' }},
+      // use point building, measurement info
+      { $lookup: {
+        from: 'points',
+        localField: 'point',
+        foreignField: '_id',
+        as: 'point'
+      }},
+      { $unwind: '$point' },
       // get avg for each measurement, building combination
-      { $group: {
-        _id: { building: '$building', measurement: '$measurement' },
-        value: { $avg: '$value' },
-        time: { $max: '$time' }
-      }},
-      // create array of value, measurement, time objs
-      { $group: {
-        _id: '$_id.building',
-        value: { $push: { measurement: '$_id.measurement', value: '$value', time: '$time' }}
-      }},
-      // must match buildings sort
-      { $sort: { _id: 1 }}
-    ]
+      { $group: { _id: { building: '$point.building', measurement: '$point.value' }, last: { $avg: '$value' }, time: { $first: '$time' }}},
+      // add unique measurements to array
+      { $group: { _id: '$_id.building', values: { $push: { last: '$last', time: '$time', measurement: '$_id.measurement' }}}}
+    ];
+
     if (!Array.isArray(buildings)) {
       pipeline.push({ $match: { _id: buildings._id }});
       buildings = [buildings];
     }
-    // probably already sorted this way
-    buildings.sort(sortById);
-    let values = await mongo.collection('values').aggregate(pipeline).toArray();
-    let j = 0;
+
+    let valueMap = (await mongo.collection('values').aggregate(pipeline, { allowDiskUse: true }).toArray()).reduce(function(a, { _id, values }) {
+      a[_id.toString()] = valuesToDataMap(values);
+      return a;
+    }, {});
+
     for (let b of buildings) {
-      if (j >= values.length) {
-        //break;
-        b.data = {};
-        // or add b.data = null
-      } else if (values[j]._id.equals(b._id)) {
-        b.data = values[j].value.reduce((a, { measurement, value }) => Object.assign(a, { [measurement]: value }), {});
-      } else {
-        // value found for that building
-        j++;
-      }
+      b.data = valueMap[b._id.toString()] || {};
     }
 
     return buildings;
@@ -404,6 +391,10 @@ function createUser(props) {
 
 function sortById (a, b) {
   return a._id > b._id ? 1 : b._id > a._id ? -1 : 0;
+}
+
+function valuesToDataMap (values) {
+  return values.reduce((a, { measurement, time, last }) => Object.assign(a, { [measurement]: last }), {});
 }
 
 const pointValuesPipeline = [

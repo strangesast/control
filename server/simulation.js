@@ -7,7 +7,7 @@ var defaultSettings = {
   recalcInterval: 2000,
   initTemp: 70.0,
   initTempSpread: 4.0,
-  precision: 10,
+  precision: 2,
   buildings: 2,
   floors: 2
 };
@@ -61,21 +61,13 @@ module.exports = async function({ mongo }, dataDir, settings={}) {
     throw new Error('invalid data dir');
   }
   settings = Object.assign({}, defaultSettings, settings);
+  await mongo.dropDatabase();
   // create collections
   for (let { name, config, indicies } of collections) {
-    let exists = (await mongo.listCollections({ name }).toArray()).length > 0;
-    if (exists) {
-      await mongo.collection(name).drop()
-    }
-    try {
-      await mongo.createCollection(name, config);
-    } catch (e) {
-      console.log('"failed" to create collection');
-      console.log(e);
-    }
+    await mongo.createCollection(name, config);
 
     for (let index of indicies) {
-      await mongo.collection(name).ensureIndex(index.name, index.config);
+      await mongo.collection(name).createIndex(index.name, index.config);
     }
   }
 
@@ -120,7 +112,7 @@ module.exports = async function({ mongo }, dataDir, settings={}) {
           { $unwind: '$vals' },
           { $replaceRoot: { newRoot: '$vals' }},
           { $group: { _id: '$room', points: { $push: '$$ROOT' }}}
-        ]).toArray();
+        ], { allowDiskUse: true }).toArray();
 
         let updates = [];
         for (let { _id, points } of roomPoints) {
@@ -134,6 +126,7 @@ module.exports = async function({ mongo }, dataDir, settings={}) {
           }
         }
 
+        console.log(updates.length);
         if (updates.length > 0) {
           await mongo.collection('values').insertMany(updates);
         }
