@@ -7,7 +7,9 @@ var defaultSettings = {
   recalcInterval: 2000,
   initTemp: 70.0,
   initTempSpread: 4.0,
-  precision: 10
+  precision: 10,
+  buildings: 2,
+  floors: 2
 };
 
 const collections = [
@@ -84,8 +86,8 @@ module.exports = async function({ mongo }, dataDir, settings={}) {
 
   // import points, features (areas)
   await importFromGeo(mongo, path.join(dataDir, 'geo'));
-  await duplicateFloors(mongo);
-  await duplicateBuildings(mongo);
+  await duplicateFloors(mongo, settings.floors);
+  await duplicateBuildings(mongo, settings.buildings);
 
   let points = await mongo.collection('points')
     .find({}, { room: 1, building: 1, value: 1, type: 1 })

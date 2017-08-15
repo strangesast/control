@@ -160,19 +160,10 @@ module.exports = function (app, { mongo }, config) {
     q[_id ? '_id' : 'shortname'] = _id || id;
     let building = await mongo.collection('areas').findOne(q);
     if (building) {
-      // get average of latest values from points
-      let values = await mongo.collection('values').aggregate([
-        { $sort: { time: 1 }},
-        { $group: { _id: '$point', value: { $last: '$$ROOT' }}},
-        { $replaceRoot: { newRoot: '$value' }},
-        { $group: { _id: { building: '$building', measurement: '$measurement' }, value: { $avg: '$value' }, time: { $max: '$time' }}},
-        { $group: { _id: '$_id.building', value: { $push: { measurement: '$_id.measurement', value: '$value', time: '$time' }}}},
-        { $unwind: '$value' },
-        { $replaceRoot: { newRoot: '$value' }}
-      ]).toArray();
-      building.data = values.reduce((a, v) => Object.assign(a, { [v.measurement]: v.value, time: v.time }), {});
+      await addBuildingData(building);
       req.building = building;
       next();
+
     } else {
       let err = new Error('no building with that id found');
       err.status = 404;
@@ -200,18 +191,9 @@ module.exports = function (app, { mongo }, config) {
       ({ cx: lon, cy: lat } = nearBuilding.feature.properties);
       q['feature.geometry'] = { $near: { $geometry: { type: "Point", coordinates: [lon, lat] }}};
     }
-    let buildings = await mongo.collection('areas').find({ type: 'building' }).toArray();
-    //let buildings = (await mongo.collection('values').aggregate([
-    //  { $sort: { time: 1 }},
-    //  { $group: { _id: '$point', value: { $last: '$$ROOT' }}},
-    //  { $replaceRoot: { newRoot: '$value' }},
-    //  { $group: { _id: { building: '$building', measurement: '$measurement' }, value: { $avg: '$value' }, time: { $max: '$time' }}},
-    //  { $group: { _id: '$_id.building', value: { $push: { measurement: '$_id.measurement', value: '$value', time: '$time' }}}},
-    //  { $lookup: { from: 'areas', localField: '_id', foreignField: '_id', as: 'building' }},
-    //  { $unwind: '$building' }
-    //]).toArray()).map(({ building, value }) => Object.assign(building, { data: value.reduce((a, v) => Object.assign(a, { [v.measurement]: v.value, time: v.time }), {}) }));
 
-    console.log('buildings...', buildings);
+    let buildings = await mongo.collection('areas').find(q).sort({ _id: 1 }).toArray();
+    await addBuildingData(buildings);
 
     res.json(buildings);
   });
@@ -242,8 +224,7 @@ module.exports = function (app, { mongo }, config) {
     let otherAreas = await mongo.collection('areas').aggregate(
       [
       // just rooms
-        { $match: { type: 'room', building: req.building._id }},
-      // find room ancestors (department, wing, building)
+        { $match: { type: 'room', building: req.building._id }}, // find room ancestors (department, wing, building)
         { $graphLookup: {
               from: 'areas',
               startWith: '$parent',
@@ -367,6 +348,50 @@ module.exports = function (app, { mongo }, config) {
     res.status(err.status || 500).json({ message: err.message, stack: err.stack });
   });
 
+  async function addBuildingData(buildings) {
+    let pipeline = [
+      // necessary for last
+      { $sort: { time: 1 }},
+      // get last value for each point
+      { $group: { _id: '$point', value: { $last: '$$ROOT' }}},
+      { $replaceRoot: { newRoot: '$value' }},
+      // get avg for each measurement, building combination
+      { $group: {
+        _id: { building: '$building', measurement: '$measurement' },
+        value: { $avg: '$value' },
+        time: { $max: '$time' }
+      }},
+      // create array of value, measurement, time objs
+      { $group: {
+        _id: '$_id.building',
+        value: { $push: { measurement: '$_id.measurement', value: '$value', time: '$time' }}
+      }},
+      // must match buildings sort
+      { $sort: { _id: 1 }}
+    ]
+    if (!Array.isArray(buildings)) {
+      pipeline.push({ $match: { _id: buildings._id }});
+      buildings = [buildings];
+    }
+    // probably already sorted this way
+    buildings.sort(sortById);
+    let values = await mongo.collection('values').aggregate(pipeline).toArray();
+    let j = 0;
+    for (let b of buildings) {
+      if (j >= values.length) {
+        break;
+        // or add b.data = null
+      } else if (values[j]._id.equals(b._id)) {
+        b.data = values[j].value.reduce((a, { measurement, value }) => Object.assign(a, { [measurement]: value }), {});
+      } else {
+        // value found for that building
+        j++;
+      }
+    }
+
+    return buildings;
+  }
+
   async function getApplications(user) {
     let applicationIds = user.applications || [];
     let groupIds = user.groups || [];
@@ -421,4 +446,8 @@ function createUser(props) {
     applications
   };
 
+}
+
+function sortById (a, b) {
+  return a._id > b._id ? 1 : b._id > a._id ? -1 : 0;
 }

@@ -4,7 +4,9 @@ const db = require('./db'),
 const floorNames = ['basement', 'ground', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth'];
 
 async function duplicateFloors(mongo, count=5, fact=0.001) {
+  if (typeof count !== 'number' || count < 1) throw new Error('invalid count');
   let buildings = await mongo.collection('areas').find({ type: 'building' }).toArray();
+
   for (let building of buildings) {
     let existingFloors = await mongo.collection('areas').find({ type: 'floor' }).toArray();
     let copyFrom = existingFloors[0];
@@ -12,7 +14,7 @@ async function duplicateFloors(mongo, count=5, fact=0.001) {
       let f = Object.assign({}, copyFrom);
       delete f._id;
       f.name = n[0].toUpperCase() + n.substring(1)
-      f.shortname = 'floor_' + n;
+      f.shortname = `floor_${ n }`;
       return f;
     });
 
@@ -64,6 +66,7 @@ async function duplicateFloors(mongo, count=5, fact=0.001) {
 }
 
 async function duplicateBuildings(mongo, count=9, fact=0.001) {
+  if (typeof count !== 'number' || count < 1) throw new Error('invalid count');
   let buildings = await mongo.collection('areas').find({ type: 'building' }).toArray();
 
   for (let building of buildings) {

@@ -1,27 +1,19 @@
-const express = require('express'),
-      app = express(),
-      path = require('path'),
-      bodyParser = require('body-parser'),
-      env = app.get('env') || 'development',
-      config = require('./config')[env],
-      initDatabases = require('./db'),
+const http = require('http'),
       routes = require('./routes'),
+      db = require('./db'),
       sockets = require('./sockets'),
       simulation = require('./simulation'),
-      http = require('http');
+      path = require('path');
+
+var app = require('./app');
+const env = app.get('env') || 'development',
+      config = require('./config')[env];
+var server = http.createServer(app)
 
 const port = 3000;
-app.set('trust proxy', true);
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 
-(async function() {
-  let dbs = await initDatabases(config);
-  console.log('config', config);
+module.exports = db(config).then(async function(dbs) {
   routes(app, dbs, config);
-
-  let server = http.createServer(app)
-
   sockets(server, dbs);
 
   await dbs.mongo.dropDatabase();
@@ -35,15 +27,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
     cancelSimulation();
   });
 
+  // allow for ctrl-c exit
   process.on('SIGINT', function() {
     dbs.mongo.close();
     server.close();
   });
-
-})();
+});
 
 if (env !== 'production') {
   process.on('unhandledRejection', r => console.log(r));
 }
-
-module.exports = app;
