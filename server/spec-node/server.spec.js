@@ -128,7 +128,7 @@ describe('server', async () => {
       .set('Authorization', 'JWT ' + token);
 
     res.body.should.be.an('array');
-    res.body.should.all.have.property('values');
+    res.body.should.all.have.property('data');
   });
 
   it ('should get building layers', async () => {
@@ -180,9 +180,7 @@ describe('server', async () => {
       .set('Authorization', 'JWT ' + token);
 
     res.body.should.be.an('array');
-    console.log(res.body[0]);
-
-    res.body.should.all.have.property('values');
+    res.body.should.all.have.property('data');
   });
 
   it ('should get a point for each area', async () => {

@@ -227,14 +227,16 @@ module.exports = function (app, { mongo }, config) {
 
     let areas = await mongo.collection('areas').find(Object.assign({ building: buildingId}, q)).sort({ _id: 1 }).toArray();
     if (values) {
-      let _areas = await mongo.collection('values').aggregate(pipeline).toArray();
-      let i = 0;
+      let areaValues = (await mongo.collection('values').aggregate(pipeline).toArray()).reduce(function(a, b) {
+        a[b._id.toString()] = b;
+        return a;
+      }, {});
       for (let area of areas) {
-        if (i < _areas.length && _areas[i]._id.equals(area._id)) {
-          area.values = _areas[i].values;
-          i++;
+        let v = areaValues[area._id.toString()];
+        if (v) {
+          area.data = v.values.reduce((a, { measurement, time, last }) => Object.assign(a, { [measurement]: last }), {});
         } else {
-          area.values = [];
+          area.data = {};
         }
       }
     }
@@ -323,7 +325,8 @@ module.exports = function (app, { mongo }, config) {
     let j = 0;
     for (let b of buildings) {
       if (j >= values.length) {
-        break;
+        //break;
+        b.data = {};
         // or add b.data = null
       } else if (values[j]._id.equals(b._id)) {
         b.data = values[j].value.reduce((a, { measurement, value }) => Object.assign(a, { [measurement]: value }), {});
