@@ -203,97 +203,41 @@ module.exports = function (app, { mongo }, config) {
   });
 
   app.get('/buildings/:id/areas', async function (req, res, next) {
-    let { layer, values } = req.query;
+    let { floor, layer, values } = req.query;
+    // handle floor id, shortname
+    if (floor) {
+      floor = await parseIdOrShortname(floor, 'areas');
+    }
+    values = (values == undefined || values == 'true' || values == '1') ? true : false;
     let buildingId = req.building._id;
-    let q = { building: buildingId };
+    let q = {};
+    if (layer) q.type = layer;
+    if (floor) q.floor = floor;
 
-    let points = await mongo.collection('values').aggregate([
-      { $sort: { time: 1 }},
-      { $group: { _id: '$point', value: { $last: '$$ROOT' }}},
-      { $replaceRoot: { newRoot: '$value' }},
-      { $project: { point: 1, time: 1, value: 1 }}
-    ]).toArray();
+    // will need this for areas without descendant points
+    //let areas = await mongo.collection('areas').find(q).toArray();
 
-    let pointMap = points.reduce((a, p) => {
-      let id = p.point;
-      delete p.point;
-      a[id] = p;
-      return a;
-    }, {});
+    // get the latest value for each point for each area for building
+    let pipeline = [
+      { $match: { building: buildingId }},
+      ...areaValuesPipeline
+    ];
+    pipeline.push({ $match: Object.assign({ building: buildingId }, q) });
+    pipeline.push({ $sort: { _id: 1 }});
 
-    let otherAreas = await mongo.collection('areas').aggregate(
-      [
-      // just rooms
-        { $match: { type: 'room', building: req.building._id }}, // find room ancestors (department, wing, building)
-        { $graphLookup: {
-              from: 'areas',
-              startWith: '$parent',
-              connectFromField: 'parent',
-              connectToField: '_id',
-              as: 'hierarchy'
-            }},
-      // create doc for each ancestor
-        { $unwind: '$hierarchy' },
-      // keep room, ancestor
-        { $project: { room: '$_id', _id: '$hierarchy._id' }},
-      // group room by ancestor
-        { $group: { _id: '$_id', children: { $push: '$room' }}},
-      // create doc for each ancestor, room pair
-        { $unwind: '$children' },
-        { $project: { child: '$children' }},
-      // lookup points for each room
-        { $lookup: {
-            from: 'points',
-            localField: 'child',
-            foreignField: 'room',
-            as: 'child'
-        }},
-      // create doc for each ancestor, room, point combination
-        { $unwind: '$child' },
-      // group by ancestor
-        { $group: { _id: '$_id', points: { $push: '$child' }}},
-      // add ancestor doc
-        { $lookup: {
-           from: 'areas',
-           localField: '_id',
-           foreignField: '_id',
-           as: 'object'
-        }},
-      // add points as attribute to ancestor doc
-        { $unwind: '$object' },
-        { $addFields: {
-            'object.points': '$points',
-        }},
-        { $replaceRoot: { newRoot: '$object' }}
-      ]
-    ).toArray();
-
-    let rooms = await mongo.collection('areas').aggregate(
-      [
-      // just rooms
-        { $match: { type: 'room', building: req.building._id }},
-      // find points for each room
-        { $lookup: {
-          from: 'points',
-          localField: '_id',
-          foreignField: 'room',
-          as: 'points'
-        }}
-      ]
-    ).toArray();
-
-    let areas = otherAreas.concat(rooms);
-
-    for (let area of areas) {
-      let temperature = area.points.reduce((a, b) => a + pointMap[b._id].value, 0) / area.points.length;
-      let time = area.points.reduce((a, b) => b.time > a ? b.time : a, 0);
-      area.data = { temperature, time };
+    let areas = await mongo.collection('areas').find(Object.assign({ building: buildingId}, q)).sort({ _id: 1 }).toArray();
+    if (values) {
+      let _areas = await mongo.collection('values').aggregate(pipeline).toArray();
+      let i = 0;
+      for (let area of areas) {
+        if (i < _areas.length && _areas[i]._id.equals(area._id)) {
+          area.values = _areas[i].values;
+          i++;
+        } else {
+          area.values = [];
+        }
+      }
     }
-
-    if (layer) {
-      areas = areas.filter(a => a.type == layer);
-    }
-
     res.json(areas);
   });
 
@@ -409,6 +353,13 @@ module.exports = function (app, { mongo }, config) {
     return applications;
   }
 
+  async function parseIdOrShortname(string, collection) {
+    let id = parseId(string);
+    if (id) return id;
+    if (typeof collection !== 'string') throw new Error('need collection!');
+    return ((await mongo.collection(collection).findOne({ shortname: string })) || {})._id;
+  }
+
   // for chaining
   return app;
 }
@@ -451,3 +402,45 @@ function createUser(props) {
 function sortById (a, b) {
   return a._id > b._id ? 1 : b._id > a._id ? -1 : 0;
 }
+
+const pointValuesPipeline = [
+  // get latest point values
+  { $sort: { time: -1 }},
+  { $group: { _id: '$point', value: { $first: { time: '$time', value: '$value'}}}},
+  // get point for each latest value
+  { $lookup: { from: 'points', localField: '_id', foreignField: '_id', as: 'point' }},
+  { $unwind: '$point' },
+  { $addFields: { 'point.last': '$value' }},
+  { $replaceRoot: { newRoot: '$point' }}
+];
+
+const areaValuesPipeline = pointValuesPipeline.concat([
+  { $addFields: { parent: '$room' }},
+  // find ancestors of each point
+  { $graphLookup: {
+    from: 'areas',
+    startWith: '$parent',
+    connectFromField: 'parent',
+    connectToField: '_id',
+    as: 'hierarchy'
+  }},
+  // duplicate point for each ancestor
+  { $unwind: '$hierarchy' },
+  { $sort: { 'last.time': -1 }}, // may be unnecessary
+  // group by ancestor, value.measurement for avg value, last time
+  { $group: {
+    _id: { parent: '$hierarchy._id', measurement: '$value' },
+    hierarchy: { $first: '$hierarchy' },
+    last: { $avg: '$last.value' },
+    time: { $first: '$last.time' }
+  }},
+  // group by ancestor
+  { $group: {
+    _id: '$_id.parent',
+    hierarchy: { $first: '$hierarchy' },
+    lasts: { $push: { measurement: '$_id.measurement', last: '$last', time: '$time' }}
+  }},
+  // cleanup
+  { $addFields: {'hierarchy.values': '$lasts' }},
+  { $replaceRoot: { newRoot: '$hierarchy' }}
+]);

@@ -111,6 +111,26 @@ describe('server', async () => {
     res.body.should.be.an('array');
   });
 
+  it ('should get filtered areas', async () => {
+    let res = await chai.request(app)
+      .get(`/buildings/${ encodeURIComponent(building._id) }/areas`)
+      .query({ layer: 'floor' })
+      .set('Authorization', 'JWT ' + token);
+
+    res.body.should.be.an('array');
+    res.body.should.have.lengthOf(3);
+    res.body.should.all.have.property('type', 'floor');
+    let floor = res.body[0];
+
+    res = await chai.request(app)
+      .get(`/buildings/${ encodeURIComponent(building._id) }/areas`)
+      .query({ floor: floor.shortname })
+      .set('Authorization', 'JWT ' + token);
+
+    res.body.should.be.an('array');
+    res.body.should.all.have.property('values');
+  });
+
   it ('should get building layers', async () => {
     let res = await chai.request(app)
       .get(`/buildings/${ encodeURIComponent(building._id) }/layers`)
@@ -159,7 +179,10 @@ describe('server', async () => {
       .query({ values: true })
       .set('Authorization', 'JWT ' + token);
 
-    res.body.should.all.have.property('data');
+    res.body.should.be.an('array');
+    console.log(res.body[0]);
+
+    res.body.should.all.have.property('values');
   });
 
   it ('should get a point for each area', async () => {
