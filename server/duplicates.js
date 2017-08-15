@@ -112,7 +112,7 @@ async function duplicateBuildings(mongo, count=9, fact=0.001) {
       for (let point of points) {
         let copy = Object.assign({}, point, {
           room: parentMap[point.room],
-          building: parentMap[point.room],
+          building: parentMap[point.building],
           feature: shift(point.feature, x*fact, y*fact)
         });
         delete copy._id;
