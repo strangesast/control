@@ -139,6 +139,7 @@ export class MapComponent implements OnInit {
   // zoom fn, used for transforms
   zoom;
   path;
+  center;
 
   constructor(private auth: AuthorizationService) {}
 
@@ -228,8 +229,27 @@ export class MapComponent implements OnInit {
 
       let moreAreas = await this.auth.get(`/buildings/${ building }/areas`, { search: qp }).toPromise();
       areas.push(...moreAreas);
+      let r = 180 - _building.feature.properties.gamma;
+      path.projection().rotate(this.center.map(i => i*-1).concat(r))
+
     } else {
       layer = 'building'
+
+      let fc = wrapCollection(areas.map(a => a.feature));
+      this.center = d3.geoCentroid(fc);
+      let projectionFn = d3.geoMercator()
+        .rotate(this.center.map(i => i*-1).concat(0) as [number, number, number])
+        .center([0, 0])
+        .scale(1)
+        .translate([0, 0]);
+      this.path = path = d3.geoPath().projection(projectionFn);
+      let b = path.bounds(fc);
+      let scale = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height);
+      let translate = [
+        (width - scale * (b[0][0] + b[0][0])) / 2,
+        (height - scale * (b[1][1] + b[0][1])) / 2
+      ] as [number, number];
+      projectionFn.scale(scale).translate(translate);
     }
 
     let byLayer: NestEntries<Area> = d3.nest()
@@ -244,24 +264,6 @@ export class MapComponent implements OnInit {
       .data(byLayer, (d:NestEntry<Area>) => d.key);
 
     let oldPath = path;
-    let r = building ? 180 - _building.feature.properties.gamma : 0;
-    let fc = wrapCollection(areas.map(a => a.feature));
-    let activeFeature = building ? _building.feature : fc;
-    let center = d3.geoCentroid(<any>activeFeature);
-    let projectionFn = d3.geoMercator()
-      .rotate(center.map(i => i*-1).concat(r) as [number, number, number])
-      .center([0, 0])
-      .scale(1)
-      .translate([0, 0]);
-    path = d3.geoPath().projection(projectionFn);
-    let b = path.bounds(fc);
-    let scale = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height);
-    let translate = [
-      (width - scale * (b[0][0] + b[0][0])) / 2,
-      (height - scale * (b[1][1] + b[0][1])) / 2
-    ] as [number, number];
-    projectionFn.scale(scale).translate(translate);
-
     let features = layersSelection.enter().append('g').classed('layer', true).merge(layersSelection)
       .selectAll('path.feature').data(d => d.values)
       // use old path function
@@ -297,15 +299,18 @@ export class MapComponent implements OnInit {
         return 1;
       });
 
-    let bounds = path.bounds(activeFeature),
-        dx = bounds[1][0] - bounds[0][0],
-        dy = bounds[1][1] - bounds[0][1],
-        x = (bounds[0][0] + bounds[1][0]) / 2,
-        y = (bounds[0][1] + bounds[1][1]) / 2,
-        bscale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
-        vt = [width / 2 - bscale * x, height / 2 - bscale * y];
-      
-    self.svg.transition(t).call( self.zoom.transform as any, d3.zoomIdentity.translate(vt[0],vt[1]).scale(bscale) );
+    //if (building) {
+    //  let bounds = path.bounds(_building.feature),
+    //      dx = bounds[1][0] - bounds[0][0],
+    //      dy = bounds[1][1] - bounds[0][1],
+    //      x = (bounds[0][0] + bounds[1][0]) / 2,
+    //      y = (bounds[0][1] + bounds[1][1]) / 2,
+    //      bscale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
+    //      vt = [width / 2 - bscale * x, height / 2 - bscale * y];
+    //    
+    //  bscale = d3.zoomTransform(self.svg.node()).k;
+    //  self.svg.transition(t).call( self.zoom.transform as any, d3.zoomIdentity.translate(vt[0],vt[1]).scale(bscale) );
+    //}
 
     /*
     let features = sel.selectAll('path.feature').data(buildings)
