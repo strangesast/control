@@ -16,7 +16,8 @@ export interface Area {
   type: string; // area/ room
   parent?: string; // parent area id
   feature: Feature; // whats the geometric representation
-  building: string;
+  building: string; // id of building
+  floor?: string; // id of floor
   data: { time: any, last: number };
 }
 

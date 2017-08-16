@@ -243,6 +243,12 @@ module.exports = function (app, { mongo }, config) {
     res.json(layers);
   });
 
+  app.get('/buildings/:id/floors', async function (req, res, next) {
+    let buildingId = req.building._id;
+    let floors = (await mongo.collection('areas').find({ building: buildingId, type: 'floor' }, { shortname: 1 }).toArray()).map(a => a.shortname);
+    res.json(floors);
+  });
+
   app.get('/buildings/:id/points', async function (req, res, next) {
     let { value } = req.query;
     let q = { building: req.building._id };

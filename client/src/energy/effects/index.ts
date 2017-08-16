@@ -15,6 +15,7 @@ export class EnergyEffects {
     .ofType(EnergyActions.DataRegisterRequest.typeString)
     .map(toPayload)
     .switchMap((id) => {
+      if (!id) return Observable.of([[], [], [], []]);
       return this.auth.get(`/buildings/${ id }`).flatMap(building => {
         if (!building) throw new Error('no building with that id');
         let params: URLSearchParams = new URLSearchParams();

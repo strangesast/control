@@ -37,6 +37,7 @@ export class EnergyComponent {
   activeContent: string = 'map'; // 'graph';
 
   constructor(public data: DataService) {
+    this.activeBuilding$ = data.building$;
     let strat = stratify().id((d: any) => d._id).parentId((d: any) => d.parent || d.room);
     let t = tree().nodeSize([0, 1]);
 

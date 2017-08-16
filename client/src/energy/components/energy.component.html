@@ -38,7 +38,10 @@
   <app-tree-list *ngSwitchCase="'layers'" [include-root]="false" [active]="layer$ | async" [tree]="layers$ | async" [radio]="true" (activeChange)="setActiveLayer($event)"></app-tree-list>
 </div>
 <div class="content" [ngClass]="activeContent">
-  <app-map #map class="map"></app-map>
+  <app-map #map class="map"
+    [init]="toast"
+    [building]="data.building$ | async"
+    (buildingChange)="data.setBuilding($event)"></app-map>
   <div class="graph">
     <svg class="placeholder">
       <line x1="0" y1="100%" x2="100%" y2="0" style="stroke:blue;stroke-width:2"/>

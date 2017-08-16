@@ -8,11 +8,23 @@ import * as d3 from 'd3';
 import * as d3Geo from 'd3-geo-projection';
 import * as d3ScaleChromatic from 'd3-scale-chromatic';
 
+interface NestEntry<T> {
+  key: string;
+  values: T[];
+}
+type NestEntries<T> = NestEntry<T>[];
+
 import { AuthorizationService } from '../../../app/services/authorization.service';
 
 import { Feature, FeatureCollection } from '../../models';
 const [ width, height ] = [100, 100];
 const offset = [width/2, height/2];
+
+const layerOrder = ['building', 'floor', 'wing', 'department', 'room', 'point'];
+function sortByLayer (a, b) {
+  return layerOrder.indexOf(a.key) > layerOrder.indexOf(b.key) ? 1 :
+    layerOrder.indexOf(b.key) > layerOrder.indexOf(a.key) ? -1 : 0;
+}
 
 @Component({
   selector: 'app-map',
@@ -48,8 +60,22 @@ export class MapComponent implements OnInit {
    * 'some_building'
    * url: /buildings/<this.building>
    */
-  @Input() building: string;
+  @Input() set building(_building: string|Area) {
+    if (typeof _building == 'string') {
+      this._buildingId = _building;
+    } else if (_building != null && typeof _building._id == 'string') {
+      this._building = _building;
+      this._buildingId = _building._id;
+    } else {
+      this._building = null;
+      this._buildingId = null;
+    }
+  };
+  get building() {
+    return this._buildingId;
+  }
   private _building: Area;
+  private _buildingId: string;
   @Output() buildingChange: EventEmitter<string> = new EventEmitter();
 
   /* area: id|short_name
@@ -110,46 +136,33 @@ export class MapComponent implements OnInit {
   valueParser; // last 'data.temperature' parsing fn
   colorScale; // last interpolation fn
   
-  constructor(private auth: AuthorizationService) {
-  }
-
-  ngOnChanges(changes: SimpleChanges) {}
-
   // zoom fn, used for transforms
   zoom;
+  path;
+
+  constructor(private auth: AuthorizationService) {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.value != null ||
+      this.valueParser == null) {
+      this.valueParser = parseValueString(this.value);
+    }
+    if (this.colorScale == null ||
+      changes.color != null ||
+      changes.min != null ||
+      changes.max != null) {
+      let { color, min, max } = this;
+      this.colorScale = createColorScale(color, min, max);
+    }
+    this.update();
+  }
 
   async ngOnInit() {
     let self = this;
-
-    let { floorplan, many, projection, building, area, floor, layer, color, min, max, value, init } = this;
-
-    this.valueParser = parseValueString(value);
-    this.colorScale = createColorScale(color, min, max);
-
-    let buildingAreas: Area[] = await this.auth.get(`/buildings`).toPromise();
-    let areas = buildingAreas;
-
-    if (building) {
-      let activeBuilding = `/buildings/${ building }`;
-
-      let params: URLSearchParams = new URLSearchParams();
-      // should layers be filtered?
-      if (many != 'layers' && layer != null) {
-        params.set('layer', layer);
-      }
-      if (many != 'floors' && floor != null) {
-        params.set('floor', floor);
-      }
-      let activeBuildingAreas = await this.auth.get(`/buildings/${ building }/areas`).toPromise();
-      areas.push(...activeBuildingAreas);
-    }
-
-    console.log('areas', areas);
-
     this.zoom = d3.zoom()
       .scaleExtent([1, 100])
       .on('zoom', zoomed);
-    
+
     this.svg = d3.select(this.el.nativeElement)
       .on('click', stopped, true);
 
@@ -157,39 +170,144 @@ export class MapComponent implements OnInit {
     function stopped() {
       if (d3.event.defaultPrevented) d3.event.stopPropagation();
     }
+
+     // disable zoom in on dblclick
+    this.svg.call(this.zoom).on('dblclick.zoom', null);
    
-    //this.svg.append('rect')
-    //  .attr('class', 'background')
-    //  .attr('opacity', 0)
-    //  .attr('width', width)
-    //  .attr('height', height)
-    //  //.on('click', reset);
+    this.svg.append('rect')
+      .attr('class', 'background')
+      .attr('opacity', 0)
+      .attr('width', width)
+      .attr('height', height)
+      .on('dblclick', reset);
     
 
     let g = this.svg.append('g').attr('id', 'container');
-
-    // disable zoom in on dblclick
-    this.svg.call(this.zoom).on('dblclick.zoom', null);
    
-    //function reset() {
-    //  active.classed('active', false);
-    //  active = d3.select(null);
-    //
-    //  let t = d3.transition(null).duration(750);
-    //  this.svg.transition(t).call( this.zoom.transform as any, d3.zoomIdentity );
-    //}
+    function reset() {
+      self.buildingChange.emit(null);
+      //active.classed('active', false);
+      //active = d3.select(null);
+    
+      let t = d3.transition(null).duration(750);
+      self.svg.transition(t).call( self.zoom.transform as any, d3.zoomIdentity );
+    }
     
     function zoomed() {
       g.style('stroke-width', 1.5 / d3.event.transform.k + 'px');
       g.attr('transform', d3.event.transform);
     }
-    
-    let buildings: Area[] = await this.auth.get(`/buildings`).toPromise();
+  }
 
-    let sel = this.svg.select('#container').selectAll('g.layer').data(['building']);
+  async update() {
+    let self = this;
+    let { path, floorplan, layer, _building, building, floor, many } = this;
 
-    sel = sel.enter().append('g').attr('class', 'layer').merge(sel);
+    let areas: Area[] = await this.auth.get(`/buildings`).toPromise();
 
+    if (building) {
+      if (!_building || _building._id != building) {
+        this._building = _building = await this.auth.get(`/buildings/${ building }`).toPromise();
+      }
+      if (typeof floor !== 'string') {
+        let floors = await this.auth.get(`/buildings/${ building }/floors`).toPromise();
+        this.floor = floor = floors[0];
+      }
+      if (typeof layer !== 'string') {
+        let layers = await this.auth.get(`/buildings/${ building }/layers`).toPromise();
+        this.layer = layer = 'room' //layers[0];
+      }
+
+      let qp = new URLSearchParams();
+      if (many != 'floors') {
+        qp.set('floor', floor);
+      }
+      if (many != 'layers') {
+        qp.set('layer', layer);
+      }
+
+      let moreAreas = await this.auth.get(`/buildings/${ building }/areas`, { search: qp }).toPromise();
+      areas.push(...moreAreas);
+    } else {
+      layer = 'building'
+    }
+
+    let byLayer: NestEntries<Area> = d3.nest()
+      .key(many == 'floors' ? (d:Area) => d.floor : (d:Area) => d.type)
+      .entries(areas)
+      .sort(sortByLayer)
+      // always render buildings, except when many
+      // render other layers if active
+      .filter(({ key }) => (key == 'building' && !many) || many == 'layers' || key == layer);
+
+    let layersSelection = this.svg.select('#container').selectAll('g.layer')
+      .data(byLayer, (d:NestEntry<Area>) => d.key);
+
+    let oldPath = path;
+    let r = building ? 180 - _building.feature.properties.gamma : 0;
+    let fc = wrapCollection(areas.map(a => a.feature));
+    let activeFeature = building ? _building.feature : fc;
+    let center = d3.geoCentroid(<any>activeFeature);
+    let projectionFn = d3.geoMercator()
+      .rotate(center.map(i => i*-1).concat(r) as [number, number, number])
+      .center([0, 0])
+      .scale(1)
+      .translate([0, 0]);
+    path = d3.geoPath().projection(projectionFn);
+    let b = path.bounds(fc);
+    let scale = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height);
+    let translate = [
+      (width - scale * (b[0][0] + b[0][0])) / 2,
+      (height - scale * (b[1][1] + b[0][1])) / 2
+    ] as [number, number];
+    projectionFn.scale(scale).translate(translate);
+
+    let features = layersSelection.enter().append('g').classed('layer', true).merge(layersSelection)
+      .selectAll('path.feature').data(d => d.values)
+      // use old path function
+      .attr('d', d => (oldPath || path)(d.feature));
+
+    let t = d3.transition(null).duration(750);
+    layersSelection.exit().transition(t).remove();
+    features.exit().transition(t).attr('d', (d:Area) => path(d.feature)).remove();
+
+    features = features.enter().append('path')
+      .classed('feature', true)
+      .attr('opacity', 0)
+      .on('dblclick', function(d) {
+        if (d.type == 'building') {
+          self.buildingChange.emit(d._id);
+        }
+      })
+      .merge(features)
+
+    features
+      .transition(t)
+      .attr('d', d => path(d.feature))
+      .attr('fill', (d) => {
+        if (building && (d.type == 'building' && d._id != building)) {
+          return 'darkgrey';
+        }
+        return self.colorScale(self.valueParser(d))
+      })
+      .attr('opacity', (d) => {
+        if (building && d.type == 'building') {
+          return d._id == building ? 0 : 0.5;
+        }
+        return 1;
+      });
+
+    let bounds = path.bounds(activeFeature),
+        dx = bounds[1][0] - bounds[0][0],
+        dy = bounds[1][1] - bounds[0][1],
+        x = (bounds[0][0] + bounds[1][0]) / 2,
+        y = (bounds[0][1] + bounds[1][1]) / 2,
+        bscale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
+        vt = [width / 2 - bscale * x, height / 2 - bscale * y];
+      
+    self.svg.transition(t).call( self.zoom.transform as any, d3.zoomIdentity.translate(vt[0],vt[1]).scale(bscale) );
+
+    /*
     let features = sel.selectAll('path.feature').data(buildings)
 
     features = features.enter().append('path')
@@ -199,6 +317,13 @@ export class MapComponent implements OnInit {
         let id = d._id;
         let [cx, cy] = d3.geoCentroid(d.feature);
         let r = d.feature.properties.gamma;
+
+        sel.selectAll('path.feature')
+          .interrupt()
+          .transition()
+          .duration(1000)
+          .ease(d3.easeLinear)
+          //.attrTween('d', projectionTween(projectionFn, projectionFn = calcProjection(d.feature, r)));
 
       })
       .on('dblclick', function(d) {
@@ -218,11 +343,39 @@ export class MapComponent implements OnInit {
     let center= d3.geoCentroid(fc as any);
 
     let scale = 2e6;
-    let projectionFn = d3.geoMercator().rotate(center.map(i => i*-1).concat(0) as [number, number, number]).scale(scale).translate(offset as [number, number]);
-    //let projectionFn = d3.geoOrthographic().rotate(center.map(i => i*-1).concat(0) as [number, number, number]).center([0, 0]).scale(scale).translate(offset as [number, number]);
-    let path = d3.geoPath().projection(projectionFn);
 
-    features.attr('d', (d) => path(d.feature));
+    let calcProjection = (feature, r=0, center?) => {
+      center = center || d3.geoCentroid(feature);
+      let projection = d3.geoMercator().scale(1).center([0, 0]).rotate(center.map(i => i*-1).concat(r) as [number, number, number]).translate([0, 0]);
+      let path = d3.geoPath().projection(projection);
+      let b = path.bounds(feature);
+      let s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height);
+      let t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2] as [number, number];
+      console.log(s, t);
+      return projection.scale(s).translate(t)
+    };
+
+    //let projectionFn = d3.geoMercator().scale(1).center([0, 0]).rotate(center.map(i => i*-1).concat(0) as [number, number, number]).translate([0, 0])//.scale(scale).translate(offset as [number, number]);
+    let projectionFn = calcProjection(fc);
+
+    let path = d3.geoPath().projection(projectionFn);
+    //var b = path.bounds(fc),
+    //    s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
+    //    t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2] as [number, number];
+
+    //console.log(...center, 'scale', s, 'translate', t);
+    //projectionFn
+    //    .scale(s)
+    //    .translate(t)
+
+    features//.attr('d', (d) => path(d.feature));
+          .interrupt()
+          .transition()
+          .duration(1000)
+          .ease(d3.easeLinear)
+          .attrTween('d', projectionTween(projectionFn, projectionFn = calcProjection(fc)));
+    */
+
   }
 
   ngOnDestroy() {}
@@ -457,5 +610,24 @@ function wrapCollection(features: Feature[]): FeatureCollection {
     type: 'FeatureCollection',
     crs: { type: 'name', properties: { name: 'urn:ogc:def:crs:OGC:1.3:CRS84' } },
     features
+  };
+}
+function projectionTween(projection0, projection1) {
+  return function(d) {
+    var t = 0;
+    var projection = d3.geoProjection(project)
+      .scale(1)
+      .center([0, 0])
+      .translate([width / 2, height / 2]);
+    var path = d3.geoPath(projection);
+    function project(λ, φ) {
+      λ *= 180 / Math.PI, φ *= 180 / Math.PI;
+      var p0 = projection0([λ, φ]), p1 = projection1([λ, φ]);
+      return [(1 - t) * p0[0] + t * p1[0], (1 - t) * -p0[1] + t * -p1[1]] as [number, number];
+    }
+    return function(_) {
+      t = _;
+      return path(d.feature);
+    };
   };
 }
