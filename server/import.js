@@ -13,8 +13,8 @@ async function importFromGeo(mongo, dir) {
   if (collectionNames.indexOf('areas') > -1) {
     await mongo.collection('areas').drop();
   }
-  mongo.collection('areas').ensureIndex({ 'feature.geometry': '2dsphere' });
-  mongo.collection('areas').ensureIndex({ shortname: 1 }, { unique: true }); 
+  mongo.collection('areas').createIndex({ 'feature.geometry': '2dsphere' });
+  mongo.collection('areas').createIndex({ building: 1, shortname: 1 }, { unique: true }); 
 
   if (collectionNames.indexOf('points') > -1) {
     await mongo.collection('points').drop();

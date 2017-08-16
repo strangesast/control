@@ -92,7 +92,7 @@ async function duplicateBuildings(mongo, count=9, fact=0.001) {
             floor: parentMap[parent.floor],
             building: parentMap[parent.building],
             parent: parentMap[parent.parent],
-            shortname: parent.shortname + `_${ i }`,
+            shortname: parent.shortname + (parent.type == 'building' ? `_${ i }` : ''),
             feature: shift(parent.feature, x*fact, y*fact)
           });
           delete copy._id;
