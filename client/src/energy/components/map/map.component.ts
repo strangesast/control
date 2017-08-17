@@ -140,7 +140,70 @@ export class MapComponent implements OnInit {
   path;
   center;
 
-  constructor(private auth: AuthorizationService) {}
+  inputs$ = new BehaviorSubject(this);
+  areas$
+  constructor(private auth: AuthorizationService) {
+    let path$ =       this.inputs$.pluck('path').distinctUntilChanged();
+    let floorplan$ =  this.inputs$.pluck('floorplan').distinctUntilChanged();
+    let projection$ = this.inputs$.pluck('projection').distinctUntilChanged();
+    let building$ =   this.inputs$.pluck('building').distinctUntilChanged();
+    let abuilding$ = building$.filter(b => !!b);
+    let floor$ = this.inputs$.pluck('floor')
+      .withLatestFrom(abuilding$)
+      .switchMap(([floor, building]) => typeof floor !== 'string' ? this.auth.get(`/buildings/${ building }/floors`).map(floors => this.floor = floors[0]) : Observable.of(floor))
+      .distinctUntilChanged();
+    let layer$ = this.inputs$.pluck('layer')
+      .withLatestFrom(abuilding$)
+      .switchMap(([layer, building]) => typeof layer !== 'string' ? this.auth.get(`/buildings/${ building }/layers`).map(layers => this.layer = 'room' || layers[0]) : Observable.of(layer))
+      .distinctUntilChanged();
+
+    let many$ =       this.inputs$.pluck('many').distinctUntilChanged();
+    let buildings$ =  this.auth.get(`/buildings`);
+
+    let areaCache = {};
+    let idCache = {};
+
+    let cacheOrGet = (many, building, floor, layer) => {
+      let key = [building, layer, floor, many].map(k => JSON.stringify(k)).join('-');
+      console.log('key', key);
+      let cached = idCache[key];
+      if (cached) {
+        return Observable.of(cached.map(id => areaCache[id]));
+      }
+      let qp = new URLSearchParams();
+      if (many != 'floors') {
+        qp.set('floor', floor);
+      }
+      if (many != 'layers') {
+        qp.set('layer', layer);
+      }
+
+      return this.auth.get(`/buildings/${ building }/areas`, { search: qp }).map(areas => {
+        idCache[key] = areas.map(area => {
+          let id = area._id;
+          areaCache[id] = area;
+          return id;
+        });
+        return areas;
+      });
+    }
+
+    this.areas$ = Observable.combineLatest(building$, buildings$).switchMap(([building, buildings]) => {
+      if (building) {
+        return Observable.combineLatest(floor$, layer$, many$).switchMap(([floor, layer, many]) => {
+          return cacheOrGet(many, building, floor, layer).map(areas => buildings.concat(areas));
+        });
+
+      } else {
+        this.layer = 'building'
+        return Observable.of(buildings);
+      }
+    });
+
+    this.areas$.subscribe(areas => this.update(areas));
+    // ehhhh
+    projection$.withLatestFrom(this.areas$).subscribe(([_, areas]) => this.update(areas))
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.value != null ||
@@ -154,9 +217,7 @@ export class MapComponent implements OnInit {
       let { color, min, max } = this;
       this.colorScale = createColorScale(color, min, max);
     }
-    if (this.svg) {
-      this.update();
-    }
+    this.inputs$.next(this);
   }
 
   async ngOnInit() {
@@ -199,43 +260,12 @@ export class MapComponent implements OnInit {
 
     let projectionFn = d3.geoMercator()
     this.path = d3.geoPath().projection(projectionFn);
-    this.update();
+    this.inputs$.next(this);
   }
 
-  async update() {
+  async update(areas) {
     let self = this;
     let { path, floorplan, projection, layer, _building, building, floor, many } = this;
-
-    let areas: Area[] = await this.auth.get(`/buildings`).toPromise();
-
-    if (building) {
-      if (!_building || _building._id != building) {
-        this._building = _building = await this.auth.get(`/buildings/${ building }`).toPromise();
-      }
-      if (typeof floor !== 'string') {
-        let floors = await this.auth.get(`/buildings/${ building }/floors`).toPromise();
-        this.floor = floor = floors[0];
-      }
-      if (typeof layer !== 'string') {
-        let layers = await this.auth.get(`/buildings/${ building }/layers`).toPromise();
-        this.layer = layer = 'room' //layers[0];
-      }
-
-      let qp = new URLSearchParams();
-      if (many != 'floors') {
-        qp.set('floor', floor);
-      }
-      if (many != 'layers') {
-        qp.set('layer', layer);
-      }
-
-      let moreAreas = await this.auth.get(`/buildings/${ building }/areas`, { search: qp }).toPromise();
-      console.log(moreAreas);
-      areas.push(...moreAreas);
-
-    } else {
-      layer = 'building'
-    }
 
     let byLayer: NestEntries<Area> = d3.nest()
       .key(many == 'floors' ? (d:Area) => d.floor : (d:Area) => d.type)
@@ -291,7 +321,7 @@ export class MapComponent implements OnInit {
       return transform;
     })
 
-    let featuresSelection = layersSelection.selectAll('path.feature').data(d => d.values);
+    let featuresSelection = layersSelection.selectAll('path.feature').data(d => d.values, (d: Area|Building) => d._id);
     
     let r = building ? _building.feature.properties.gamma : 0;
     let activeFeature: any = building ? _building.feature : wrapCollection(byLayer.find(e => e.key == 'building').values.map(a => a.feature));
