@@ -233,6 +233,12 @@ export class MapComponent implements OnInit {
       g.attr('transform', d3.event.transform);
     }
 
+    //let perspectiveTransform = d3.geoTransform({
+    //  point: function(x, y) {
+    //    this.stream.point(a * x + b * y + tx, c * x + d * y + ty);
+    //  }
+    //});
+
     let projectionFn = d3.geoMercator()
     this.path = d3.geoPath().projection(projectionFn);
     this.inputs$.next(this);
@@ -473,25 +479,6 @@ function wrapCollection(features: Feature[]): FeatureCollection {
     type: 'FeatureCollection',
     crs: { type: 'name', properties: { name: 'urn:ogc:def:crs:OGC:1.3:CRS84' } },
     features
-  };
-}
-function projectionTween(projection0, projection1) {
-  return function(d) {
-    var t = 0;
-    var projection = d3.geoProjection(project)
-      .scale(1)
-      .center([0, 0])
-      .translate([width / 2, height / 2]);
-    var path = d3.geoPath(projection);
-    function project(λ, φ) {
-      λ *= 180 / Math.PI, φ *= 180 / Math.PI;
-      var p0 = projection0([λ, φ]), p1 = projection1([λ, φ]);
-      return [(1 - t) * p0[0] + t * p1[0], (1 - t) * -p0[1] + t * -p1[1]] as [number, number];
-    }
-    return function(_) {
-      t = _;
-      return path(d.feature);
-    };
   };
 }
 
