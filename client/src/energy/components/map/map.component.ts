@@ -20,6 +20,9 @@ import { Feature, FeatureCollection } from '../../models';
 const [ width, height ] = [100, 100];
 const offset = [width/2, height/2];
 
+const skewAngle = 30;
+const rotAngle = -30;
+
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -249,10 +252,11 @@ export class MapComponent implements OnInit {
     let transition = d3.transition(null).duration(750);
 
     layersSelection.exit().transition(transition)
-      .attr('transform', (d) => {
+      .attr('transform', (d: NestEntry<Area>) => {
         let transform = `translate(0, 0)`
         if (projection=='perspective'){
-          return `${ transform }rotate(-30)skewX(30)`
+          let b = path.bounds(wrapCollection(d.values.map(a => a.feature)));
+          return `${ transform }translate(${ b[0].join(',') })rotate(${ rotAngle })skewX(${ skewAngle })translate(${ b[0].map(i => i*-1).join(',') })`;
         }
         return transform;
       })
@@ -264,7 +268,8 @@ export class MapComponent implements OnInit {
       .attr('transform', (d) => {
         let transform = `translate(0, 0)`
         if (projection=='perspective'){
-          return `${ transform }rotate(-30)skewX(30)`
+          let b = path.bounds(wrapCollection(d.values.map(a => a.feature)));
+          return `${ transform }translate(${ b[0].join(',') })rotate(${ rotAngle })skewX(${ skewAngle })translate(${ b[0].map(i => i*-1).join(',') })`;
         }
         return transform;
       })
@@ -275,11 +280,12 @@ export class MapComponent implements OnInit {
       if (many) {
         let dy = _building[many || 'layers'].indexOf(many == 'layers' ? layer : floor) - _building[many || 'layers'].indexOf(d.key);
         //let bounds = path.bounds(wrapCollection(d.values.map(a => a.feature)));
-        transform = `translate(0, ${ dy*30 })`;
+        transform = `translate(0, ${ dy*(projection == 'perspective' ? 28 : 24) })`;
       }
 
       if (projection == 'perspective') {
-        transform = `${ transform }rotate(-30)skewX(30)`
+        let b = path.bounds(wrapCollection(d.values.map(a => a.feature)));
+        transform = `${ transform }translate(${ b[0].join(',') })rotate(${ rotAngle })skewX(${ skewAngle })translate(${ b[0].map(i => i*-1).join(',') })`;
       }
 
       return transform;

@@ -47,8 +47,8 @@ export class EnergyComponent {
       floorplan: true,
       many: new FormControl({ value: '', disabled: true })
     });
+    // whew, ugly
     noBuilding$.subscribe(b => [this.mapControls.get('projection'), this.mapControls.get('many')].map(c => b ? c.disable() : c.enable()));
-    this.mapControls.valueChanges.subscribe(console.log.bind(console))
     let strat = stratify().id((d: any) => d._id).parentId((d: any) => d.parent || d.room);
     let t = tree().nodeSize([0, 1]);
 
