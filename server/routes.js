@@ -204,12 +204,12 @@ module.exports = function (app, { mongo }, config) {
 
   app.get('/buildings/:id/areas', async function (req, res, next) {
     let { floor, layer, values } = req.query;
+    let buildingId = req.building._id;
     // handle floor id, shortname
     if (floor) {
-      floor = await parseIdOrShortname(floor, 'areas');
+      floor = await parseIdOrShortname(floor, buildingId, 'areas');
     }
     values = (values == undefined || values == 'true' || values == '1') ? true : false;
-    let buildingId = req.building._id;
     let q = {};
     if (layer) q.type = layer;
     if (floor) q.floor = floor;
@@ -349,11 +349,11 @@ module.exports = function (app, { mongo }, config) {
     return applications;
   }
 
-  async function parseIdOrShortname(string, collection) {
+  async function parseIdOrShortname(string, buildingId, collection) {
     let id = parseId(string);
     if (id) return id;
     if (typeof collection !== 'string') throw new Error('need collection!');
-    return ((await mongo.collection(collection).findOne({ shortname: string })) || {})._id;
+    return ((await mongo.collection(collection).findOne({ building: buildingId, shortname: string })) || {})._id;
   }
 
   // for chaining
