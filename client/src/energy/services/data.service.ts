@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, URLSearchParams } from '@angular/http';
 import { Store } from '@ngrx/store';
 import { Observable, BehaviorSubject, Subject } from 'rxjs';
 
@@ -17,6 +17,9 @@ export class DataService {
   active$: Observable<Area|Point>;
 
   buildings$: Observable<Area[]>
+  areaCache = {};
+  idCache = {};
+
 
   constructor(private auth: AuthorizationService, private store: Store<fromRoot.DataState>, private http: Http) {
     this.building$ = this.store.select(fromRoot.selectDataBuilding);
@@ -69,4 +72,27 @@ export class DataService {
     return this.auth.get(`/assets/floorplans/${ building.shortname }_floorplan.geojson`, null, false);
   }
 
+  cacheOrGet(many, building, floor, layer): Observable<Area[]> {
+    let key = [building, layer, floor, many].map(k => JSON.stringify(k)).join('-');
+    let cached = this.idCache[key];
+    if (cached) {
+      return Observable.of(cached.map(id => this.areaCache[id]));
+    }
+    let qp = new URLSearchParams();
+    if (many != 'floors') {
+      qp.set('floor', floor);
+    }
+    if (many != 'layers') {
+      qp.set('layer', layer);
+    }
+
+    return this.auth.get(`/buildings/${ building }/areas`, { search: qp }).map(areas => {
+      this.idCache[key] = areas.map(area => {
+        let id = area._id;
+        this.areaCache[id] = area;
+        return id;
+      });
+      return areas;
+    });
+  }
 }

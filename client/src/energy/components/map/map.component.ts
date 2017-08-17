@@ -8,6 +8,8 @@ import * as d3 from 'd3';
 import * as d3Geo from 'd3-geo-projection';
 import * as d3ScaleChromatic from 'd3-scale-chromatic';
 
+import { DataService } from '../../services/data.service';
+
 interface NestEntry<T> {
   key: string;
   values: T[];
@@ -142,7 +144,7 @@ export class MapComponent implements OnInit {
 
   inputs$ = new BehaviorSubject(this);
   areas$
-  constructor(private auth: AuthorizationService) {
+  constructor(private auth: AuthorizationService, private data: DataService) {
     let path$ =       this.inputs$.pluck('path').distinctUntilChanged();
     let floorplan$ =  this.inputs$.pluck('floorplan').distinctUntilChanged();
     let projection$ = this.inputs$.pluck('projection').distinctUntilChanged();
@@ -160,38 +162,11 @@ export class MapComponent implements OnInit {
     let many$ =       this.inputs$.pluck('many').distinctUntilChanged();
     let buildings$ =  this.auth.get(`/buildings`);
 
-    let areaCache = {};
-    let idCache = {};
-
-    let cacheOrGet = (many, building, floor, layer) => {
-      let key = [building, layer, floor, many].map(k => JSON.stringify(k)).join('-');
-      console.log('key', key);
-      let cached = idCache[key];
-      if (cached) {
-        return Observable.of(cached.map(id => areaCache[id]));
-      }
-      let qp = new URLSearchParams();
-      if (many != 'floors') {
-        qp.set('floor', floor);
-      }
-      if (many != 'layers') {
-        qp.set('layer', layer);
-      }
-
-      return this.auth.get(`/buildings/${ building }/areas`, { search: qp }).map(areas => {
-        idCache[key] = areas.map(area => {
-          let id = area._id;
-          areaCache[id] = area;
-          return id;
-        });
-        return areas;
-      });
-    }
-
+    // determine areas based on building, floor, layer, & many
     this.areas$ = Observable.combineLatest(building$, buildings$).switchMap(([building, buildings]) => {
       if (building) {
         return Observable.combineLatest(floor$, layer$, many$).switchMap(([floor, layer, many]) => {
-          return cacheOrGet(many, building, floor, layer).map(areas => buildings.concat(areas));
+          return this.data.cacheOrGet(many, building, floor, layer).map(areas => buildings.concat(areas));
         });
 
       } else {
@@ -202,7 +177,7 @@ export class MapComponent implements OnInit {
 
     this.areas$.subscribe(areas => this.update(areas));
     // ehhhh
-    projection$.withLatestFrom(this.areas$).subscribe(([_, areas]) => this.update(areas))
+    //projection$.withLatestFrom(this.areas$).subscribe(([_, areas]) => this.update(areas))
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -281,7 +256,9 @@ export class MapComponent implements OnInit {
 
     let transition = d3.transition(null).duration(750);
 
-    layersSelection.exit().transition(transition)
+    let layersSelectionExiting = layersSelection.exit();
+
+    layersSelectionExiting.transition(transition)
       .attr('transform', (d: NestEntry<Area>) => {
         let transform = `translate(0, 0)`
         if (projection=='perspective'){
@@ -289,6 +266,19 @@ export class MapComponent implements OnInit {
           return calcPerspectiveTransform(transform, b);
         }
         return transform;
+      })
+      .attr('opacity', 0)
+      .remove();
+
+    layersSelectionExiting.selectAll('path.feature').transition(transition)
+      .attrTween('d', function(_d: Area) {
+        let center = d3.geoCentroid(activeFeature);
+        let rot = d3.interpolate(path.projection().rotate(), center.concat(r).map(i => i*-1));
+
+        return function(t) {
+          path.projection().rotate(rot(t) as [number, number, number])
+          return path(_d.feature);
+        }
       })
       .attr('opacity', 0)
       .remove();
@@ -319,7 +309,7 @@ export class MapComponent implements OnInit {
       }
 
       return transform;
-    })
+    });
 
     let featuresSelection = layersSelection.selectAll('path.feature').data(d => d.values, (d: Area|Building) => d._id);
     
@@ -330,8 +320,6 @@ export class MapComponent implements OnInit {
     if (path.projection().rotate().slice(0, 2).every(n => n == 0)) {
       path.projection().rotate(center.concat(r).map(i => i*-1) as [number, number, number]).fitSize([100, 100], activeFeature);
     }
-
-    let featuresSelectionExiting = featuresSelection.exit()
 
     featuresSelection = featuresSelection.enter().append('path').classed('feature', true)
       .on('click', function(d) {
@@ -365,7 +353,7 @@ export class MapComponent implements OnInit {
       })
       .merge(featuresSelection);
 
-    featuresSelection.merge(featuresSelectionExiting as any).transition(transition)
+    featuresSelection.transition(transition)
       .attr('fill', d => {
         if (building && d.type == 'building') {
           return 'darkgrey';
@@ -400,7 +388,6 @@ export class MapComponent implements OnInit {
         self.svg.transition(transition).call( self.zoom.transform as any, d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale) );
       });
 
-    featuresSelectionExiting.transition(transition).attr('opacity', 0).remove();
   }
 
   ngOnDestroy() {}
