@@ -256,7 +256,7 @@ export class MapComponent implements OnInit {
         let transform = `translate(0, 0)`
         if (projection=='perspective'){
           let b = path.bounds(wrapCollection(d.values.map(a => a.feature)));
-          return `${ transform }translate(${ b[0].join(',') })rotate(${ rotAngle })skewX(${ skewAngle })translate(${ b[0].map(i => i*-1).join(',') })`;
+          return calcPerspectiveTransform(transform, b);
         }
         return transform;
       })
@@ -269,7 +269,7 @@ export class MapComponent implements OnInit {
         let transform = `translate(0, 0)`
         if (projection=='perspective'){
           let b = path.bounds(wrapCollection(d.values.map(a => a.feature)));
-          return `${ transform }translate(${ b[0].join(',') })rotate(${ rotAngle })skewX(${ skewAngle })translate(${ b[0].map(i => i*-1).join(',') })`;
+          return calcPerspectiveTransform(transform, b);
         }
         return transform;
       })
@@ -285,7 +285,7 @@ export class MapComponent implements OnInit {
 
       if (projection == 'perspective') {
         let b = path.bounds(wrapCollection(d.values.map(a => a.feature)));
-        transform = `${ transform }translate(${ b[0].join(',') })rotate(${ rotAngle })skewX(${ skewAngle })translate(${ b[0].map(i => i*-1).join(',') })`;
+        transform = calcPerspectiveTransform(transform, b);
       }
 
       return transform;
@@ -477,3 +477,10 @@ function projectionTween(projection0, projection1) {
     };
   };
 }
+
+function calcPerspectiveTransform (transform, bounds) {
+  let [[x0, y0], [xi, yi]] = bounds;
+  let offy = Math.sqrt(3)*(yi-y0)/2; // <-- lil trig
+  return `${ transform }translate(0,${ offy })translate(${ x0 },${ y0 })rotate(${ rotAngle })skewX(${ skewAngle })translate(${ -x0 },${ -y0 })`;
+}
+
