@@ -325,8 +325,25 @@ module.exports = function (app, { mongo }, config) {
       return a;
     }, {});
 
+    let fn = (a, { _id, values }) => Object.assign(a, { [_id.toString()]: values });
+    let floorsByBuilding = (await mongo.collection('areas').aggregate([
+        { $group: { _id: { type: '$floor', building: '$building' }}},
+        { $match: { '_id.building': { $ne: null }, '_id.type': { $ne: null }}},
+        { $lookup: { from: 'areas', localField: '_id.type', foreignField: '_id', as: 'value' }},
+        { $unwind: '$value' },
+        { $group: { _id: '$_id.building', values: { $push: '$value.shortname' }}}
+    ]).toArray()).reduce(fn, {});
+    let layersByBuilding = (await mongo.collection('areas').aggregate([
+        { $group: { _id: { type: '$type', building: '$building' }}},
+        { $match: { '_id.building': { $ne: null }, '_id.type': { $ne: null }}},
+        { $group: { _id: '$_id.building', values: { $push: '$_id.type' }}}
+    ]).toArray()).reduce(fn, {});
+
     for (let b of buildings) {
-      b.data = valueMap[b._id.toString()] || {};
+      let id = b._id.toString();
+      b.data = valueMap[id] || {};
+      b.floors = floorsByBuilding[id];
+      b.layers = layersByBuilding[id];
     }
 
     return buildings;
