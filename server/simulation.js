@@ -126,7 +126,7 @@ module.exports = async function({ mongo }, dataDir, settings={}) {
           }
         }
 
-        console.log(updates.length);
+        //console.log(updates.length);
         if (updates.length > 0) {
           await mongo.collection('values').insertMany(updates);
         }
