@@ -2,7 +2,7 @@ import { SimpleChanges, EventEmitter, ViewChild, ElementRef, Output, Input, Comp
 import { URLSearchParams } from '@angular/http';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 //import * as topojson from 'topojson';
-import { Point, Area } from '../../models';
+import { Point, Area, Building } from '../../models';
 import { Selection } from 'd3';
 import * as d3 from 'd3';
 import * as d3Geo from 'd3-geo-projection';
@@ -19,12 +19,6 @@ import { AuthorizationService } from '../../../app/services/authorization.servic
 import { Feature, FeatureCollection } from '../../models';
 const [ width, height ] = [100, 100];
 const offset = [width/2, height/2];
-
-const layerOrder = ['building', 'floor', 'wing', 'department', 'room', 'point'];
-function sortByLayer (a, b) {
-  return layerOrder.indexOf(a.key) > layerOrder.indexOf(b.key) ? 1 :
-    layerOrder.indexOf(b.key) > layerOrder.indexOf(a.key) ? -1 : 0;
-}
 
 @Component({
   selector: 'app-map',
@@ -60,7 +54,7 @@ export class MapComponent implements OnInit {
    * 'some_building'
    * url: /buildings/<this.building>
    */
-  @Input() set building(_building: string|Area) {
+  @Input() set building(_building: string|Building) {
     if (typeof _building == 'string') {
       this._buildingId = _building;
     } else if (_building != null && typeof _building._id == 'string') {
@@ -74,7 +68,7 @@ export class MapComponent implements OnInit {
   get building() {
     return this._buildingId;
   }
-  private _building: Area;
+  private _building: Building;
   private _buildingId: string;
   @Output() buildingChange: EventEmitter<string> = new EventEmitter();
 
@@ -144,6 +138,7 @@ export class MapComponent implements OnInit {
   constructor(private auth: AuthorizationService) {}
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log('changes', changes);
     if (changes.value != null ||
       this.valueParser == null) {
       this.valueParser = parseValueString(this.value);
@@ -208,7 +203,7 @@ export class MapComponent implements OnInit {
 
   async update() {
     let self = this;
-    let { path, floorplan, layer, _building, building, floor, many } = this;
+    let { path, floorplan, projection, layer, _building, building, floor, many } = this;
 
     let areas: Area[] = await this.auth.get(`/buildings`).toPromise();
 
@@ -234,8 +229,6 @@ export class MapComponent implements OnInit {
       }
 
       let moreAreas = await this.auth.get(`/buildings/${ building }/areas`, { search: qp }).toPromise();
-      console.log(building, floor, layer);
-      console.log(moreAreas);
       areas.push(...moreAreas);
 
     } else {
@@ -245,19 +238,56 @@ export class MapComponent implements OnInit {
     let byLayer: NestEntries<Area> = d3.nest()
       .key(many == 'floors' ? (d:Area) => d.floor : (d:Area) => d.type)
       .entries(areas)
-      .sort(sortByLayer)
+      .sort((a, b) => _building[many || 'layers'].indexOf(a.key) > _building[many || 'layers'].indexOf(b.key) ? -1 : 1)
       // always render buildings, except when many
       // render other layers if active
-      .filter(({ key }) => (key == 'building' && !many) || many == 'layers' || key == layer);
+      .filter(({ key }) => key != 'null' && (key == 'building' ? !many : (many || key == layer)))
+      .map(e => Object.assign(e, { floorplan: e.key == 'building' || e.key == layer }));
 
     let layersSelection = this.svg.select('#container').selectAll('g.layer')
       .data(byLayer, (d:NestEntry<Area>) => d.key);
 
     let transition = d3.transition(null).duration(750);
 
-    layersSelection.exit().remove();
+    layersSelection.exit().transition(transition)
+      .attr('transform', (d) => {
+        let transform = `translate(0, 0)`
+        if (projection=='perspective'){
+          return `${ transform }rotate(-30)skewX(30)`
+        }
+        return transform;
+      })
+      .attr('opacity', 0)
+      .remove();
 
-    let featuresSelection = layersSelection.enter().append('g').classed('layer', true).merge(layersSelection).selectAll('path.feature').data(d => d.values)
+    layersSelection = layersSelection.enter().append('g').classed('layer', true)
+      .attr('opacity', 1)
+      .attr('transform', (d) => {
+        let transform = `translate(0, 0)`
+        if (projection=='perspective'){
+          return `${ transform }rotate(-30)skewX(30)`
+        }
+        return transform;
+      })
+      .merge(layersSelection)
+
+    layersSelection.transition(transition).attr('transform', d => {
+      let transform = `translate(0, 0)`
+      if (many) {
+        let dy = _building[many || 'layers'].indexOf(many == 'layers' ? layer : floor) - _building[many || 'layers'].indexOf(d.key);
+        console.log(dy);
+        //let bounds = path.bounds(wrapCollection(d.values.map(a => a.feature)));
+        transform = `translate(0, ${ dy*30 })`;
+      }
+
+      if (projection == 'perspective') {
+        transform = `${ transform }rotate(-30)skewX(30)`
+      }
+
+      return transform;
+    })
+
+    let featuresSelection = layersSelection.selectAll('path.feature').data(d => d.values);
     
     let r = building ? _building.feature.properties.gamma : 0;
     let activeFeature: any = building ? _building.feature : wrapCollection(byLayer.find(e => e.key == 'building').values.map(a => a.feature));
@@ -308,7 +338,7 @@ export class MapComponent implements OnInit {
         if (d.type == 'building') {
           self.buildingChange.emit(d._id);
         } else {
-          console.log(layerOrder.indexOf(d.type));
+          console.log(_building.layers.indexOf(d.type));
         }
       })
       .merge(featuresSelection);
@@ -322,7 +352,7 @@ export class MapComponent implements OnInit {
       })
       .attr('opacity', d => {
         if (building && d.type == 'building') {
-          return building == d._id ? 0 : 0.5;
+          return building == d._id ? 0 : projection == 'orthographic' ? 0.5: 0;
         } else if (d.type != 'building' && d.building != building) {
           return 0;
         }
@@ -349,7 +379,6 @@ export class MapComponent implements OnInit {
       });
 
     featuresSelectionExiting.transition(transition).attr('opacity', 0).remove();
-
 
 
     //if (building) {

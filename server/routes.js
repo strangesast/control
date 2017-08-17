@@ -8,6 +8,8 @@ const mongodb = require('mongodb'),
       upload = multer();
 
 const precision = 10;
+const layerOrder = ['building', 'floor', 'wing', 'department', 'room', 'point'];
+const floorOrder = ['basement', 'ground', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth'];
 
 module.exports = function (app, { mongo }, config) {
   let { secret } = config;
@@ -245,7 +247,7 @@ module.exports = function (app, { mongo }, config) {
 
   app.get('/buildings/:id/floors', async function (req, res, next) {
     let buildingId = req.building._id;
-    let floors = (await mongo.collection('areas').find({ building: buildingId, type: 'floor' }, { shortname: 1 }).toArray()).map(a => a.shortname);
+    let floors = (await mongo.collection('areas').find({ building: buildingId, type: 'floor' }, { shortname: 1 }).toArray()).map(a => a._id);
     res.json(floors);
   });
 
@@ -331,7 +333,7 @@ module.exports = function (app, { mongo }, config) {
         { $match: { '_id.building': { $ne: null }, '_id.type': { $ne: null }}},
         { $lookup: { from: 'areas', localField: '_id.type', foreignField: '_id', as: 'value' }},
         { $unwind: '$value' },
-        { $group: { _id: '$_id.building', values: { $push: '$value.shortname' }}}
+        { $group: { _id: '$_id.building', values: { $push: { shortname: '$value.shortname', _id: '$value._id' }}}}
     ]).toArray()).reduce(fn, {});
     let layersByBuilding = (await mongo.collection('areas').aggregate([
         { $group: { _id: { type: '$type', building: '$building' }}},
@@ -342,8 +344,16 @@ module.exports = function (app, { mongo }, config) {
     for (let b of buildings) {
       let id = b._id.toString();
       b.data = valueMap[id] || {};
-      b.floors = floorsByBuilding[id];
-      b.layers = layersByBuilding[id];
+      b.floors = floorsByBuilding[id].sort((a, b) => {
+        let i = floorOrder.findIndex(f => a.shortname.includes(f));
+        let j = floorOrder.findIndex(f => b.shortname.includes(f));
+        return i > j ? 1 : i < j ? -1 : 0;
+      }).map(f => f._id);
+      b.layers = layersByBuilding[id].sort((a, b) => {
+        let i = layerOrder.indexOf(a);
+        let j = layerOrder.indexOf(b);
+        return i > j ? 1 : i < j ? -1 : 0;
+      });
     }
 
     return buildings;

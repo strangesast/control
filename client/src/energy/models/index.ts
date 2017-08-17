@@ -21,6 +21,11 @@ export interface Area {
   data: { time: any, last: number };
 }
 
+export interface Building extends Area {
+  floors: string[]; // sorted array of floor ids
+  layers: string[]; // sorted array of layers
+}
+
 export type Layer = string;
 export type Layers = Layer[];
 

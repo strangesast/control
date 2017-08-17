@@ -32,14 +32,23 @@
       <span>Layers</span>
     </div>
   </div>
-  <button (click)="map.changeProjection()">Toggle Ortho</button>
-  <button (click)="map.updateMapVisibilityState()">Toggle Opacity</button>
+  <form [formGroup]="mapControls">
+    <label><input type="radio" name='projection' value='orthographic' formControlName='projection'>Orthographic</label>
+    <label><input type="radio" name='projection' value='perspective' formControlName='projection'>Perspective</label>
+    <label><input type="radio" name='many' value='' formControlName='many'>Single</label>
+    <label><input type="radio" name='many' value='layers' formControlName='many'>Layers</label>
+    <label><input type="radio" name='many' value='floors' formControlName='many'>Floors</label>
+    <label><input type="checkbox" name='floorplan' value='checked' formControlName='floorplan'>Floorplan</label>
+  </form>
   <app-tree-list *ngSwitchCase="'features'" [include-root]="false" [active]="active$ | async" [tree]="tree$ | async" (activeChange)="setActive($event)"></app-tree-list>
   <app-tree-list *ngSwitchCase="'layers'" [include-root]="false" [active]="layer$ | async" [tree]="layers$ | async" [radio]="true" (activeChange)="setActiveLayer($event)"></app-tree-list>
 </div>
 <div class="content" [ngClass]="activeContent">
   <app-map #map class="map"
     [init]="toast"
+    [floorplan]="mapControls.get('floorplan').value"
+    [projection]="mapControls.get('projection').value"
+    [many]="mapControls.get('many').value"
     [building]="data.building$ | async"
     (buildingChange)="data.setBuilding($event)"></app-map>
   <div class="graph">

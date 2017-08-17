@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 //import { routerTransition } from '../../catalog/directives/router.animations';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 import { tree, stratify, hierarchy, HierarchyNode } from 'd3';
 import { FeatureCollection, Feature, Area, Point } from '../models';
@@ -36,8 +37,18 @@ export class EnergyComponent {
   activeSide: boolean = false;
   activeContent: string = 'map'; // 'graph';
 
-  constructor(public data: DataService) {
+  mapControls: FormGroup;
+
+  constructor(public data: DataService, private fb: FormBuilder) {
     this.activeBuilding$ = data.building$;
+    let noBuilding$ = data.building$.map(b => !b).distinctUntilChanged();
+    this.mapControls = fb.group({
+      projection: new FormControl({ value: 'orthographic', disabled: true }),
+      floorplan: true,
+      many: new FormControl({ value: '', disabled: true })
+    });
+    noBuilding$.subscribe(b => [this.mapControls.get('projection'), this.mapControls.get('many')].map(c => b ? c.disable() : c.enable()));
+    this.mapControls.valueChanges.subscribe(console.log.bind(console))
     let strat = stratify().id((d: any) => d._id).parentId((d: any) => d.parent || d.room);
     let t = tree().nodeSize([0, 1]);
 
