@@ -64,6 +64,8 @@ export class MapComponent implements OnInit {
       this._building = null;
       this._buildingId = null;
     }
+    this.floor = null;
+    this.layer = null;
   };
   get building() {
     return this._buildingId;
@@ -138,7 +140,6 @@ export class MapComponent implements OnInit {
   constructor(private auth: AuthorizationService) {}
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('changes', changes);
     if (changes.value != null ||
       this.valueParser == null) {
       this.valueParser = parseValueString(this.value);
@@ -184,9 +185,6 @@ export class MapComponent implements OnInit {
    
     function reset() {
       self.buildingChange.emit(null);
-      //active.classed('active', false);
-      //active = d3.select(null);
-    
       let t = d3.transition(null).duration(750);
       self.svg.transition(t).call( self.zoom.transform as any, d3.zoomIdentity );
     }
@@ -229,6 +227,7 @@ export class MapComponent implements OnInit {
       }
 
       let moreAreas = await this.auth.get(`/buildings/${ building }/areas`, { search: qp }).toPromise();
+      console.log(moreAreas);
       areas.push(...moreAreas);
 
     } else {
@@ -275,7 +274,6 @@ export class MapComponent implements OnInit {
       let transform = `translate(0, 0)`
       if (many) {
         let dy = _building[many || 'layers'].indexOf(many == 'layers' ? layer : floor) - _building[many || 'layers'].indexOf(d.key);
-        console.log(dy);
         //let bounds = path.bounds(wrapCollection(d.values.map(a => a.feature)));
         transform = `translate(0, ${ dy*30 })`;
       }
@@ -306,18 +304,6 @@ export class MapComponent implements OnInit {
         if (d.type == 'building' && building == d._id) {
           return;
         }
-        //  self.svg.transition(transition).call( self.zoom.transform as any, d3.zoomIdentity );
-        //  featuresSelection.transition(transition).delay((d, i) => i*10).attrTween('d', function(_d) {
-        //    let nrot = d3.geoCentroid(d.feature).concat(d.feature.properties.gamma);
-        //    let rot = d3.interpolate(path.projection().rotate(), center.map(i => i*-1));
-
-        //    return function(t) {
-        //      path.projection().rotate(rot(t) as [number, number, number])
-        //      return path(_d.feature);
-        //    }
-        //  });
-        //} else {
-        
         var bounds = path.bounds(d.feature),
             dx = bounds[1][0] - bounds[0][0],
             dy = bounds[1][1] - bounds[0][1],
@@ -331,8 +317,6 @@ export class MapComponent implements OnInit {
           .scale(scale);
 
         self.svg.transition(transition).duration(750).call(self.zoom.transform, transform);
-
-        //}
       })
       .on('dblclick', function(d) {
         let trans = d3.zoomTransform(self.svg.node())
@@ -381,244 +365,9 @@ export class MapComponent implements OnInit {
       });
 
     featuresSelectionExiting.transition(transition).attr('opacity', 0).remove();
-
-
-    //if (building) {
-    //  let bounds = path.bounds(_building.feature),
-    //      dx = bounds[1][0] - bounds[0][0],
-    //      dy = bounds[1][1] - bounds[0][1],
-    //      x = (bounds[0][0] + bounds[1][0]) / 2,
-    //      y = (bounds[0][1] + bounds[1][1]) / 2,
-    //      bscale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
-    //      vt = [width / 2 - bscale * x, height / 2 - bscale * y];
-    //    
-    //  bscale = d3.zoomTransform(self.svg.node()).k;
-    //  self.svg.transition(t).call( self.zoom.transform as any, d3.zoomIdentity.translate(vt[0],vt[1]).scale(bscale) );
-    //}
-
-    /*
-    let features = sel.selectAll('path.feature').data(buildings)
-
-    features = features.enter().append('path')
-      .attr('class', 'feature')
-      .attr('fill', (d) => this.colorScale(this.valueParser(d)))
-      .on('click', function(d) {
-        let id = d._id;
-        let [cx, cy] = d3.geoCentroid(d.feature);
-        let r = d.feature.properties.gamma;
-
-        sel.selectAll('path.feature')
-          .interrupt()
-          .transition()
-          .duration(1000)
-          .ease(d3.easeLinear)
-          //.attrTween('d', projectionTween(projectionFn, projectionFn = calcProjection(d.feature, r)));
-
-      })
-      .on('dblclick', function(d) {
-        console.log(d);
-      })
-      .on('mouseover', function() {
-        (<any>this).parentNode.appendChild(this);
-      })
-      .on('mouseleave', function() {
-        //if (self.activeSelection) {
-        //  (<any>this).parentNode.appendChild(self.activeSelection.node());
-        //}
-      })
-      .merge(features)
-
-    let fc = wrapCollection(buildings.map(b => b.feature));
-    let center= d3.geoCentroid(fc as any);
-
-    let scale = 2e6;
-
-    let calcProjection = (feature, r=0, center?) => {
-      center = center || d3.geoCentroid(feature);
-      let projection = d3.geoMercator().scale(1).center([0, 0]).rotate(center.map(i => i*-1).concat(r) as [number, number, number]).translate([0, 0]);
-      let path = d3.geoPath().projection(projection);
-      let b = path.bounds(feature);
-      let s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height);
-      let t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2] as [number, number];
-      console.log(s, t);
-      return projection.scale(s).translate(t)
-    };
-
-    //let projectionFn = d3.geoMercator().scale(1).center([0, 0]).rotate(center.map(i => i*-1).concat(0) as [number, number, number]).translate([0, 0])//.scale(scale).translate(offset as [number, number]);
-    let projectionFn = calcProjection(fc);
-
-    let path = d3.geoPath().projection(projectionFn);
-    //var b = path.bounds(fc),
-    //    s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
-    //    t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2] as [number, number];
-
-    //console.log(...center, 'scale', s, 'translate', t);
-    //projectionFn
-    //    .scale(s)
-    //    .translate(t)
-
-    features//.attr('d', (d) => path(d.feature));
-          .interrupt()
-          .transition()
-          .duration(1000)
-          .ease(d3.easeLinear)
-          .attrTween('d', projectionTween(projectionFn, projectionFn = calcProjection(fc)));
-    */
-
   }
 
   ngOnDestroy() {}
-
-  /*
-  updateFeatures(fc: FeatureCollection, t?) {
-    let self = this;
-    let { features } = fc || { features: [] };
-    let g = this.svg.select('g');
-    let selection = this.selection.data(features, (d) => d.properties.id);
-
-    if (this.path == null) {
-      ({ path: this.path, transforms: this.transforms } = centerFeatures(fc));
-      this.projection = this.path.projection();
-    }
-
-    t = t || d3.transition(null).duration(200);
-
-    selection.exit().transition(t).attr('opacity', 0).remove();
-
-    let entering = selection.enter().append('path')
-      .attr('fill', (d) => d.properties.data ? this.color(d.properties.data.last) : 'darkgrey')
-      .attr('class', 'feature')
-      .attr('opacity', 0)
-
-    entering.filter(d => d.properties.id == this.active).each(function() {
-      self.styleActive(this);
-    });
-
-    entering
-      .on('click', function(d) {
-        let id = d.properties.id;
-        if (d.properties.type === 'building') {
-          self.buildingChange.emit(id);
-        } else {
-          self.activeChange.emit(id);
-        }
-        self.updateActive(id);
-        //if (active.node() === this) {
-        //  return reset();
-        //} else {
-        //  self.updateActive(d);
-        //}
-      })
-      .on('dblclick', function(d) {
-        console.log(d);
-      })
-      .on('mouseover', function() {
-        (<any>this).parentNode.appendChild(this);
-      })
-      .on('mouseleave', function() {
-        if (self.activeSelection) {
-          (<any>this).parentNode.appendChild(self.activeSelection.node());
-        }
-      })
-
-    this.selection = entering.merge(selection)
-      .attr('d', this.path)
-
-    this.selection
-      .transition(t)
-      .attr('opacity', 0.8);
-
-    return t;
-  }
-
-  updateMapVisibilityState(visible?) {
-    visible = visible != null ? visible : !(this.hideMap = !this.hideMap);
-    let t = d3.transition(null).duration(750);
-    this.mapSelection.transition(t).attr('opacity', visible ? 1 : 0);
-    //this.selection
-    //  .transition(t)
-    //  .attr('opacity', visible ? 0.8 : 0.8);
-  }
-
-  changeProjection() {
-    let t0 = d3.transition(null).duration(1000);
-    let t1 = t0.transition().duration(1000);
-    if (this.transformed = !this.transformed) {
-      this.svg.select('g').selectAll('g').transition(t0).attr('transform', 'rotate(-20, 0,100) skewX(60)');
-      this.svg.select('g').selectAll('g').transition(t1).attr('transform', (d, i) => `translate(0, ${ i *10 }) rotate(-20, 0,100) skewX(60)`);
-    } else {
-      this.svg.select('g').selectAll('g').transition(t0).attr('transform', (d, i) => `translate(0, 0) rotate(-20, 0,100) skewX(60)`);
-      this.svg.select('g').selectAll('g').transition(t1).attr('transform', 'rotate(0, 0,100) skewX(0)');
-    }
-  }
-
-  // set projection
-  // highlight, center active
-  updateActive(id: string, t?) {
-    let self = this;
-    t = t || d3.transition(null).duration(200);
-    this.selection.classed('active', false).transition(t).attr('d', self.path).filter(d => d.properties.id == id).on('start', function() {
-      self.styleActive(this)
-    }).on('end', function(d) {
-      let { center, scale, offset } = self.transforms;
-      //let center = d3.geoCentroid(d);
-      let gamma = d.properties.gamma;
-      self.projection.rotate(center.map(i => i*-1).concat(-gamma) as [number, number, number]).center([0, 0])
-      self.path.projection(self.projection);
-
-      let t = d3.transition(null).duration(200);
-      self.selection.transition(t).attr('d', self.path);
-      self.mapSelection.transition(t).attr('d', self.path);
-
-      let [ width, height ] = [100, 100];
-
-      var bounds = self.path.bounds(d),
-          dx = bounds[1][0] - bounds[0][0],
-          dy = bounds[1][1] - bounds[0][1],
-          x = (bounds[0][0] + bounds[1][0]) / 2,
-          y = (bounds[0][1] + bounds[1][1]) / 2,
-          bscale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
-          translate = [width / 2 - bscale * x, height / 2 - bscale * y];
-        
-      //self.svg.transition(d3.active(this)).call( self.zoom.transform as any, d3.zoomIdentity.translate(translate[0],translate[1]).scale(bscale) );
-    });
-  }
-
-  styleActive (el): void {
-    this.activeSelection = d3.select(el).classed('active', true);
-    el.parentNode.appendChild(el);
-  }
-
-  updateMap(fc: FeatureCollection) {
-    this.mapSelection.datum(fc).attr('d', this.path);
-  }
-  */
-}
-
-function centerFeatures(fc) {
-  let [ width, height ] = [ 100, 100 ];
-  let center = d3.geoCentroid(fc);
-  let offset = [width/2, height/2];
-  let scale = 1;
-
-  let projection = d3.geoMercator().rotate([0, 0, 0]).center(center as [number, number]).scale(scale).translate(offset as [number, number]);
-  
-  let path = d3.geoPath().projection(projection)
-  
-  let bounds = path.bounds(fc);
-  let hscale = scale*width  / (bounds[1][0] - bounds[0][0]);
-  let vscale = scale*height / (bounds[1][1] - bounds[0][1]);
-  scale = (hscale < vscale) ? hscale : vscale;
-  offset = [
-    width - (bounds[0][0] + bounds[1][0])/2,
-    height - (bounds[0][1] + bounds[1][1])/2
-  ];
-  projection = d3.geoMercator().rotate([0, 0, 0]).center(center as [number, number]);
-  scale = Math.min(2e6, scale)
-  projection.scale(scale).translate(offset as [number, number]);
-  path.projection(projection);
-  let transforms = { center, scale, offset };
-  return { path, transforms };
 }
 
 function createColorScale (str: string, min?, max?) {
@@ -678,6 +427,7 @@ function applyKeys (obj, keys) {
   return keys.reduce((a, key) => (a && a[key]) || null, obj);
 }
 
+/*
 (function test() {
   let obj = { '1': { '1': 1 }, '2': 2, '3': 3, '4': 4 };
   let value = '1.1+2-4*3/2';
@@ -693,6 +443,7 @@ function applyKeys (obj, keys) {
   res = fn(obj);
   if (res !== 1) throw new Error('failed test');
 })();
+*/
 
 function wrapCollection(features: Feature[]): FeatureCollection {
   return {
