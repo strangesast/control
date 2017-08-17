@@ -238,7 +238,7 @@ export class MapComponent implements OnInit {
     let byLayer: NestEntries<Area> = d3.nest()
       .key(many == 'floors' ? (d:Area) => d.floor : (d:Area) => d.type)
       .entries(areas)
-      .sort((a, b) => _building[many || 'layers'].indexOf(a.key) > _building[many || 'layers'].indexOf(b.key) ? -1 : 1)
+      .sort((a, b) => _building[many || 'layers'].indexOf(a.key) > _building[many || 'layers'].indexOf(b.key) ? 1 : -1)
       // always render buildings, except when many
       // render other layers if active
       .filter(({ key }) => key != 'null' && (key == 'building' ? !many : (many || key == layer)))
@@ -303,7 +303,9 @@ export class MapComponent implements OnInit {
       .on('click', function(d) {
         let transition = d3.transition(null).duration(750);
 
-        //if (d.type == 'building' && building != d._id) {
+        if (d.type == 'building' && building == d._id) {
+          return;
+        }
         //  self.svg.transition(transition).call( self.zoom.transform as any, d3.zoomIdentity );
         //  featuresSelection.transition(transition).delay((d, i) => i*10).attrTween('d', function(_d) {
         //    let nrot = d3.geoCentroid(d.feature).concat(d.feature.properties.gamma);
