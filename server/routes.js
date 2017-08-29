@@ -151,12 +151,12 @@ module.exports = function (app, { mongo }, config) {
   
   // map building / areas / layers
   app.use([
-    '/buildings/:id',
-    '/buildings/:id/areas',
-    '/buildings/:id/layers',
-    '/buildings/:id/points'
+    '/buildings/:building',
+    '/buildings/:building/areas',
+    '/buildings/:building/layers',
+    '/buildings/:building/points'
   ], async function (req, res, next) {
-    let { id } = req.params;
+    let { building: id } = req.params;
     let _id = parseId(id);
     let q = { type: 'building' };
     q[_id ? '_id' : 'shortname'] = _id || id;
@@ -200,11 +200,11 @@ module.exports = function (app, { mongo }, config) {
     res.json(buildings);
   });
 
-  app.get('/buildings/:id', async function (req, res, next) {
+  app.get('/buildings/:building', async function (req, res, next) {
     res.json(req.building);
   });
 
-  app.get('/buildings/:id/areas', async function (req, res, next) {
+  app.get('/buildings/:building/areas', async function (req, res, next) {
     let { floor, layer, values } = req.query;
     let buildingId = req.building._id;
     // handle floor id, shortname
@@ -222,10 +222,10 @@ module.exports = function (app, { mongo }, config) {
     // get the latest value for each point for each area for building
     let pipeline = [
       { $match: { building: buildingId }},
-      ...areaValuesPipeline
+      ...areaValuesPipeline,
+      { $match: Object.assign({ building: buildingId }, q) },
+      { $sort: { _id: 1 }}
     ];
-    pipeline.push({ $match: Object.assign({ building: buildingId }, q) });
-    pipeline.push({ $sort: { _id: 1 }});
 
     let areas = await mongo.collection('areas').find(Object.assign({ building: buildingId}, q)).sort({ _id: 1 }).toArray();
     if (values) {
@@ -240,18 +240,18 @@ module.exports = function (app, { mongo }, config) {
     res.json(areas);
   });
 
-  app.get('/buildings/:id/layers', async function (req, res, next) {
+  app.get('/buildings/:building/layers', async function (req, res, next) {
     let layers = await mongo.collection('areas').distinct('type', { building: req.building._id });
     res.json(layers);
   });
 
-  app.get('/buildings/:id/floors', async function (req, res, next) {
+  app.get('/buildings/:building/floors', async function (req, res, next) {
     let buildingId = req.building._id;
     let floors = (await mongo.collection('areas').find({ building: buildingId, type: 'floor' }, { shortname: 1 }).toArray()).map(a => a._id);
     res.json(floors);
   });
 
-  app.get('/buildings/:id/points', async function (req, res, next) {
+  app.get('/buildings/:building/points', async function (req, res, next) {
     let { value } = req.query;
     let q = { building: req.building._id };
     if (value) q['value'] = value;
@@ -259,9 +259,43 @@ module.exports = function (app, { mongo }, config) {
 
     res.json(points);
   });
+
+  app.get('/buildings/:building/areas/:id', async function (req, res, next) {
+    let buildingId = req.building._id;
+    let { id } = req.params;
+    let _id = await parseIdOrShortname(id, buildingId, 'areas');
+    let q = { building: buildingId, _id };
+
+    let area = await mongo.collection('areas').findOne(q);
+
+    res.json(area);
+
+  });
+
+  app.get('/buildings/:building/points/:id', async function (req, res, next) {
+    let buildingId = req.building._id;
+    let { id } = req.params;
+    let _id  = await parseIdOrShortname(id, buildingId, 'points');
+    let q = { building: buildingId, _id };
+    let point = await mongo.collection('points').findOne(q);
+
+    let history = await mongo.collection('values').aggregate([
+      { $match: { point: point._id }},
+      { $sort: { time: -1 }},
+      { $project: { _id: 0, time: 1, value: 1 }}
+    ], { allowDiskUse: true }).toArray();
+
+    point.data = history[0];
+    point.history = history;
+
+    res.json(point);
+  });
   
   app.get('/points', async function (req, res, next) {
-    let points = await mongo.collection('values').aggregate([
+    let { measurement } = req.query;
+    let q = {};
+
+    let pipeline = [
       { $sort: { time: 1 }},
       { $group: { _id: '$point', value: { $last: '$$ROOT' }}},
       { $project: { 'value._id': 1, 'value.time': 1, 'value.value': 1 }},
@@ -269,7 +303,15 @@ module.exports = function (app, { mongo }, config) {
       { $unwind: '$point' },
       { $addFields: { 'point.data': '$value' }},
       { $replaceRoot: { newRoot: '$point' }}
-    ], { allowDiskUse: true }).toArray();
+    ];
+
+    if (measurement) q.measurement = measurement;
+
+    if (Object.keys(q).length > 0) {
+      pipeline.unshift({ $match: q });
+    }
+
+    let points = await mongo.collection('values').aggregate(pipeline, { allowDiskUse: true }).toArray();
 
     res.json(points);
   });
@@ -279,6 +321,7 @@ module.exports = function (app, { mongo }, config) {
     let _id = parseId(id)
     if (_id == null) throw new Error('invalid id');
     let point = await mongo.collection('points').findOne({ _id });
+
     let history = await mongo.collection('values').aggregate([
       { $match: { point: _id }},
       { $sort: { time: -1 }},

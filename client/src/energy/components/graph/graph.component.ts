@@ -67,25 +67,21 @@ export class GraphComponent implements OnInit {
         .attr("class", "context")
         .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
     
-    d3.csv("sp500.csv", type, function(error, data) {
-      if (error) throw error;
+    x.domain(d3.extent(data, function(d) { return d.date; }));
+    y.domain([0, d3.max(data, function(d) { return d.price; })+200]);
+    x2.domain(x.domain());
+    y2.domain(y.domain());
     
-      x.domain(d3.extent(data, function(d) { return d.date; }));
-      y.domain([0, d3.max(data, function(d) { return d.price; })+200]);
-      x2.domain(x.domain());
-      y2.domain(y.domain());
-    
-    // append scatter plot to main chart area 
-     var dots = focus.append("g");
-        dots.attr("clip-path", "url(#clip)");
-        dots.selectAll("dot")
-            .data(data)
-            .enter().append("circle")
-            .attr('class', 'dot')
-            .attr("r",5)
-            .style("opacity", .5)
-            .attr("cx", function(d) { return x(d.date); })
-            .attr("cy", function(d) { return y(d.price); })
+    var dots = focus.append("g");
+       dots.attr("clip-path", "url(#clip)");
+       dots.selectAll("dot")
+           .data(data)
+           .enter().append("circle")
+           .attr('class', 'dot')
+           .attr("r",5)
+           .style("opacity", .5)
+           .attr("cx", function(d) { return x(d.date); })
+           .attr("cy", function(d) { return y(d.price); })
             
     focus.append("g")
           .attr("class", "axis axis--x")
@@ -112,16 +108,16 @@ export class GraphComponent implements OnInit {
           .text("Date");
           
     // append scatter plot to brush chart area      
-     var dots = context.append("g");
-         dots.attr("clip-path", "url(#clip)");
-         dots.selectAll("dot")
-            .data(data)
-            .enter().append("circle")
-            .attr('class', 'dotContext')
-            .attr("r",3)
-            .style("opacity", .5)
-            .attr("cx", function(d) { return x2(d.date); })
-            .attr("cy", function(d) { return y2(d.price); })
+    var dots = context.append("g");
+        dots.attr("clip-path", "url(#clip)");
+        dots.selectAll("dot")
+           .data(data)
+           .enter().append("circle")
+           .attr('class', 'dotContext')
+           .attr("r",3)
+           .style("opacity", .5)
+           .attr("cx", function(d) { return x2(d.date); })
+           .attr("cy", function(d) { return y2(d.price); })
             
     context.append("g")
           .attr("class", "axis axis--x")
@@ -132,9 +128,7 @@ export class GraphComponent implements OnInit {
           .attr("class", "brush")
           .call(brush)
           .call(brush.move, x.range());
-    
-    });
-    
+
     //create brush function redraw scatterplot with selection
     function brushed() {
       var selection = d3.event.selection;
@@ -151,7 +145,5 @@ export class GraphComponent implements OnInit {
       d.price = +d.price;
       return d;
     }
-
   }
-
 }

@@ -8,8 +8,7 @@ const chai = require('chai'),
       simulation = require('../simulation'),
       db = require('../db'),
       config = require('../config')['test'],
-      should = chai.should();
-
+      should = chai.should(); 
 chai.use(chaiThings)
 chai.use(chaiHttp)
 const expect = chai.expect;
@@ -202,4 +201,44 @@ describe('server', async () => {
 
     res.body.should.have.property('history');
   });
+
+  it ('should get point history', async () => {
+    let res = await chai.request(app)
+      .get(`/points`)
+      .query({ measurement: 'temperature' })
+      .set('Authorization', 'JWT ' + token);
+
+    res.body.should.be.an('array');
+    res.body.should.have.lengthOf.at.least(1);
+
+    let point = res.body[0];
+
+    res = await chai.request(app)
+     .get(`/buildings/${ point.building }/points/${ point._id }`)
+     .set('Authorization', 'JWT ' + token);
+   
+    point = res.body;
+    point.should.have.property('history');
+    point.should.have.property('data');
+    point.history.should.be.an('array');
+    point.history.should.all.have.property('value');
+  });
+
+  it ('should get area history', async () => {
+    let res = await chai.request(app)
+      .get(`/buildings/${ building._id }/areas`)
+      .set('Authorization', 'JWT ' + token);
+
+    res.body.should.be.an('array');
+    res.body.should.have.lengthOf.at.least(1);
+
+    let area = res.body[0];
+
+    res = await chai.request(app)
+      .get(`/buildings/${ building._id }/areas/${ area._id }`)
+      .set('Authorization', 'JWT ' + token);
+
+    console.log(res.body);
+  });
+
 });

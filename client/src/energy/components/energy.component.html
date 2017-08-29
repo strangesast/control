@@ -1,67 +1,40 @@
-<div class="photo">
-  <img *ngIf="active$ | async as active" src="/assets/img/area_{{ active.shortname }}.png"/>
-</div>
-<div class="header">
-  <div *ngIf="active$ | async as active">
-    <span class="name">{{ active.name }}</span>
-    <span class="type">{{ active.type }}</span>
+<header>
+  <span class="brand">Energy Console</span>
+  <div class="side">
+    <div class="dropdown">
+      <span tabindex=-1 class="icon fa fa-fw fa-lg fa-cog"></span>
+      <div>
+        <a routerLinkActive="active" [routerLink]="['profile']">Settings</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <span tabindex=-1 class="icon fa fa-fw fa-lg fa-user-o"></span>
+      <div>
+        <a routerLinkActive="active" [routerLink]="['profile']">User Profile</a>
+        <a>Log Out</a>
+      </div>
+    </div>
   </div>
-</div>
-<div (click)="toggleSide()" class="tab">
-  <span class="fa fa-fw fa-angle-right" [class.fa-rotate-180]="!activeSide"></span>
-</div>
-<div class="description">
-  <div *ngIf="active$ | async as active">
-    {{ active.name }} ({{ active.shortname }})
+</header>
+<div>
+  <div class="map">
+    <app-map #map class="map"
+      [init]="toast"
+      [floorplan]="mapControls.get('floorplan').value"
+      [projection]="mapControls.get('projection').value"
+      [many]="mapControls.get('many').value"
+      [building]="data.building$ | async"
+      (buildingChange)="data.setBuilding($event)"></app-map>
+    <span class="expand-collapse icon fa fa-fw fa-lg fa-external-link fa-flip-horizontal"></span>
   </div>
-  <div>Layer: {{ layer$ | async }}</div>
-</div>
-<div [ngSwitch]="activeTreeView" class="tree">
   <div class="tabs">
-    <div class="tab" (click)="activeTreeView = 'features'" [class.active]="activeTreeView == 'features'">
-      <span class="fa fa-fw fa-lg fa-align-right fa-rotate-180"></span><span>Areas</span>
-    </div>
-    <div class="tab" (click)="activeTreeView = 'layers'" [class.active]="activeTreeView == 'layers'">
-      <span class="fa fa-fw fa-stack fa-rotate-90">
-        <i class="fa fa-stop fa-layers fa-stack-1x" style="left: 0;"></i>
-        <i class="fa fa-stop fa-layers fa-stack-1x" style="left: -.15em;color:#fff;"></i>
-        <i class="fa fa-stop fa-layers fa-stack-1x" style="left: -.3em;"></i>
-        <i class="fa fa-stop fa-layers fa-stack-1x" style="left: -.45em;color:#fff;"></i>
-        <i class="fa fa-stop fa-layers fa-stack-1x" style="left: -.6em;"></i>
-      </span>
-      <span>Layers</span>
-    </div>
+    <span class="tab">Weather</span>
+    <span class="tab">Areas</span>
+    <span class="tab">Layers</span>
   </div>
-  <form [formGroup]="mapControls">
-    <label><input type="radio" name='projection' value='orthographic' formControlName='projection'>Orthographic</label>
-    <label><input type="radio" name='projection' value='perspective' formControlName='projection'>Perspective</label>
-    <label><input type="radio" name='many' value='' formControlName='many'>Single</label>
-    <label><input type="radio" name='many' value='layers' formControlName='many'>Layers</label>
-    <label><input type="radio" name='many' value='floors' formControlName='many'>Floors</label>
-    <label><input type="checkbox" name='floorplan' value='checked' formControlName='floorplan'>Floorplan</label>
-  </form>
-  <app-tree-list *ngSwitchCase="'features'" [include-root]="false" [active]="active$ | async" [tree]="tree$ | async" (activeChange)="setActive($event)"></app-tree-list>
-  <app-tree-list *ngSwitchCase="'layers'" [include-root]="false" [active]="layer$ | async" [tree]="layers$ | async" [radio]="true" (activeChange)="setActiveLayer($event)"></app-tree-list>
+  <app-tree-list [include-root]="false" [active]="active$ | async" [tree]="tree$ | async" (activeChange)="setActive($event)"></app-tree-list>
+  <app-graph></app-graph>
 </div>
-<div class="content" [ngClass]="activeContent">
-  <app-map #map class="map"
-    [init]="toast"
-    [floorplan]="mapControls.get('floorplan').value"
-    [projection]="mapControls.get('projection').value"
-    [many]="mapControls.get('many').value"
-    [building]="data.building$ | async"
-    (buildingChange)="data.setBuilding($event)"></app-map>
-  <div class="graph">
-    <svg class="placeholder">
-      <line x1="0" y1="100%" x2="100%" y2="0" style="stroke:blue;stroke-width:2"/>
-      <line x1="0" y1="0" x2="100%" y2="100%" style="stroke:blue;stroke-width:2"/>
-    </svg>
-  </div>
-</div>
-<div class="side"></div>
-<div (click)="toggleSide(false)" class="shade"></div>
-<div class="footer">
-  <span [class.active]="" (click)="toggleSide()" class="fa fa-fw fa-lg fa-list-ul"></span>
-  <span [class.active]="activeContent == 'map'" (click)="toggleActiveContent('map')" class="fa fa-fw fa-lg fa-map"></span>
-  <span [class.active]="activeContent == 'graph'" (click)="toggleActiveContent('graph')" class="fa fa-fw fa-lg fa-pie-chart"></span>
-</div>
+<footer>
+  <span>Day Automation</span>
+</footer>

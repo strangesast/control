@@ -1,45 +1,119 @@
 @hover-color: rgba(0, 0, 0, 0.10);
 @active-color: rgba(0, 0, 0, 0.05);
 @border-color: #bdbdbd;
+@background: white;
+@arrow-size: 8px;
+
+@keyframes slidein {
+  from {
+    transform: translate(0, -10px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
 
 .dropdown {
-  z-index: 2;
   position: relative;
   display: inline-block;
   & > span {
+    padding: 10px;
+    cursor: pointer;
+    &:active, &:focus {
+      border-top: 1px solid transparent;
+    }
     &:hover {
       background-color: @hover-color;
     }
     &:focus {
       outline: none;
-      background-color: @active-color;
-    }
-    &:focus + div {
-      display: flex;
+      //background-color: @active-color;
     }
   }
+  &:not(.nofocus) > span:focus + div, &.hover:hover > div, &.stay > div:hover, & > div:active {
+    display: flex;
+  }
+  & > span.fa {
+    & + div:after {
+      right: 20.563px - @arrow-size;
+    }
+    & + div:before {
+      right: 20.563px - (@arrow-size + sqrt(2));
+    }
+  }
+
+  & > span.fa-lg {
+    & + div:after {
+      right: 23.711px - @arrow-size;
+    }
+    & + div:before {
+      right: 23.711px - (@arrow-size + sqrt(2));
+    }
+  }
+
   & > div {
+    animation-name: slidein;
+    animation-duration: 0.2s;
+    border: 1px solid @border-color;
+    z-index: 10;
+    &::after, &::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+    }
+
+    &:after {
+      top:-@arrow-size;
+      border-left: @arrow-size solid transparent;
+      border-right: @arrow-size solid transparent;
+      border-bottom: @arrow-size solid @background;
+    }
+
+    &:before {
+      top:-(@arrow-size + sqrt(2));
+      border-left: (@arrow-size + sqrt(2)) solid transparent;
+      border-right: (@arrow-size + sqrt(2)) solid transparent;
+      border-bottom: (@arrow-size + sqrt(2)) solid @border-color;
+    }
+
     position: absolute;
     display: none;
-    &:hover {
-      display: flex;
-    }
-    top: ~"calc(100% + 4px)";
+    top: ~"calc(100% + " (@arrow-size/2) ~")";
     right: 0;
-    min-width: 120px;
-    background-color: white;
+    background-color: @background;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    border: 1px solid @border-color;
-    padding: 8px 0;
     border-radius: 2px;
     flex-direction: column;
     & > * {
+      &:not(.nopad) {
+        padding: 8px 12px;
+      }
+      &:first-child {
+        margin-top: 8px;
+      }
+      &:last-child {
+        margin-bottom: 8px;
+      }
+      white-space: nowrap;
       color: inherit;
       text-decoration: none;
-      padding: 8px 12px;
+
       cursor: pointer;
       &:hover {
         background-color: @hover-color;
+      }
+
+      &.inactive {
+        color: grey;
+      }
+      &.inactive, &.nohover {
+        cursor: default;
+        &:hover {
+          background-color: inherit;
+        }
       }
     }
   }

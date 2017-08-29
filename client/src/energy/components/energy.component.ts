@@ -11,7 +11,12 @@ const layerOrder = ['building', 'wing', 'department', 'room', 'point'];
 @Component({
   selector: 'app-energy',
   templateUrl: './energy.component.html',
-  styleUrls: ['./energy.component.less', './ful.less', './mid.less', './mob.less'],
+  styleUrls: [
+    './energy.component.less',
+  //  './ful.less',
+  //  './mid.less',
+  //  './mob.less'
+  ],
   host: {
     '[class.side-active]': 'activeSide'
   }
