@@ -27,7 +27,7 @@ export class GraphComponent implements OnInit {
     }
   }
 
-  build(data) {
+  build(data: any[]) {
     var margin = {top: 20, right: 20, bottom: 110, left: 50},
         margin2 = {top: 430, right: 20, bottom: 30, left: 40},
         width = 960 - margin.left - margin.right,
