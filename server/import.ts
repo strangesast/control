@@ -1,6 +1,6 @@
-const fs = require('fs'),
-      path = require('path'),
-      db = require('./db');
+import { readFileSync } from 'fs';
+import * as path from 'path';
+import connectDatabase from './db';
 
 const order = ['building', 'floor', 'wing', 'department', 'room'];
 
@@ -8,7 +8,7 @@ function sortOrder (a, b) { return order.findIndex((o) => a.includes(o)) > order
 function ncat (cat) { return `group_${ cat }.geojson` };
 function read (f) { return JSON.parse(fs.readFileSync(f)) };
 
-async function importFromGeo(mongo, dir) {
+export async function importFromGeo(mongo, dir) {
   let collectionNames = (await mongo.listCollections().toArray()).map(c => c.name);
   if (collectionNames.indexOf('areas') > -1) {
     await mongo.collection('areas').drop();
@@ -30,7 +30,7 @@ async function importFromGeo(mongo, dir) {
   let findParents = (ids) => features
     .filter(feature => ids.indexOf(feature.properties.parent) > -1);
   
-  parents = findParents([null])
+  let parents = findParents([null])
   let buildingId;
   let buildingIndex;
   let buildingGamma;

@@ -1,9 +1,9 @@
-const db = require('./db'),
-      { ObjectId } = require('mongodb');
+import connectDatabase from './db';
+import { ObjectId } from 'mongodb';
 
 const floorNames = ['basement', 'ground', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth'];
 
-async function duplicateFloors(mongo, count=5, fact=0.001) {
+export async function duplicateFloors(mongo, count=5, fact=0.001) {
   if (typeof count !== 'number' || count < 1) throw new Error('invalid count');
   let buildings = await mongo.collection('areas').find({ type: 'building' }).toArray();
 
@@ -65,7 +65,7 @@ async function duplicateFloors(mongo, count=5, fact=0.001) {
   }
 }
 
-async function duplicateBuildings(mongo, count=9, fact=0.001) {
+export async function duplicateBuildings(mongo, count=9, fact=0.001) {
   if (typeof count !== 'number' || count < 1) throw new Error('invalid count');
   let buildings = await mongo.collection('areas').find({ type: 'building' }).toArray();
 
@@ -77,7 +77,7 @@ async function duplicateBuildings(mongo, count=9, fact=0.001) {
 
     let areas = (await mongo.collection('areas').find({ building: building._id }).toArray()).concat(building);
 
-    for (let [x, y, i] of g) {
+    for (let [x, y, i] of g as any) {
       let parents = areas.filter(a => a.parent == null);
 
       let parentMap = {};

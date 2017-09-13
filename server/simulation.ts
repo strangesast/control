@@ -1,9 +1,18 @@
-const path = require('path'),
-      fs = require('fs'),
-      { duplicateFloors, duplicateBuildings } = require('./duplicates'),
-      { importFromGeo } = require('./import');
+import * as path from 'path';
+import { statSync, readFile } from 'fs';
+import { duplicateFloors, duplicateBuildings } from './duplicates';
+import { importFromGeo } from './import';
 
-var defaultSettings = {
+interface Settings {
+  recalcInterval: number;
+  initTemp: number;
+  initTempSpread: number;
+  precision: number;
+  buildings: number;
+  floors: number;
+}
+
+const defaultSettings: Settings = {
   recalcInterval: 2000,
   initTemp: 70.0,
   initTempSpread: 4.0,
@@ -56,11 +65,11 @@ const collections = [
 // }
 
 
-module.exports = async function({ mongo }, dataDir, settings={}) {
+module.exports = async function({ mongo }, dataDir, settings: Partial<Settings>={}) {
   if (typeof dataDir !== 'string' || !fs.statSync(dataDir).isDirectory()) {
     throw new Error('invalid data dir');
   }
-  settings = Object.assign({}, defaultSettings, settings);
+  settings = {...defaultSettings, ...settings };
   await mongo.dropDatabase();
   // create collections
   for (let { name, config, indicies } of collections) {

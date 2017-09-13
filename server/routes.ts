@@ -1,66 +1,49 @@
-const mongodb = require('mongodb'),
-      ObjectID = mongodb.ObjectID,
-      passport = require('passport'),
-      jwt = require('jsonwebtoken'),
-      JwtStrategy = require('passport-jwt').Strategy,
-      ExtractJwt = require('passport-jwt').ExtractJwt,
-      multer = require('multer'),
-      upload = multer();
+import { Router } from 'express';
+import { ObjectID } from 'mongodb';
+import * as passport from 'passport';
+import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
+import * as jwt from 'jsonwebtoken';
+import * as multer from 'multer'; 
+const upload = multer();
+
+import * as authController from './controllers/authentication.controller';
 
 const precision = 10;
 const layerOrder = ['building', 'floor', 'wing', 'department', 'room', 'point'];
 const floorOrder = ['basement', 'ground', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth'];
 
-module.exports = function (app, { mongo }, config) {
+export default function (mongo, config) {
   let { secret } = config;
 
-  const params = {
+  const opts = {
     secretOrKey: secret,
     // use Authorization: Bearer header from request
-    jwtFromRequest: ExtractJwt.fromAuthHeader()
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
   };
-
-  const strategy = new JwtStrategy(params, async function(payload, next) {
+ 
+  const strategy = new JwtStrategy(opts, async function(payload, next) {
     let username = payload.username;
     let user = username && await mongo.collection('users').findOne({ username }, { password: 0 });
     if (user) {
       let { _id, username } = user;
       next(null, { id: _id, username });
     } else {
-      let err = new Error('No user found');
+      let err: any = new Error('No user found');
       err.status = 401;
       next(err, null);
     }
   });
+
+
+  const router = Router();
+
   passport.use(strategy);
   
-  app.use(passport.initialize());
+  router.use(passport.initialize());
  
-  app.route('/login').post(async function(req, res, next) {
-    let { username, password } = req.body;
-    if (!username || !password) {
-      res.status(400).json({ message: 'missing username or password' });
-      return;
-    }
-    let user = await mongo.collection('users').findOne({ username });
-    if (!user) {
-      res.status(401).json({ message: 'invalid username' });
+  router.route('/login').post()
   
-    } else if (user.password == password) {
-      let payload = { id: user['_id'], username };
-      let token = jwt.sign(payload, secret, { expiresIn: '1d' });
-
-      let applications = await getApplications(user);
-  
-      res.json({ token, user, applications });
-  
-    } else {
-      res.status(401).json({ message: 'invalid password' });
-  
-    }
-  })
-  
-  app.route('/register').post(upload.array(), async function(req, res, next) {
+  router.route('/register').post(upload.array(), async function(req, res, next) {
     let body = req.body;
     let users = mongo.collection('users');
     let user;
@@ -96,7 +79,7 @@ module.exports = function (app, { mongo }, config) {
     res.json({ token, user, applications });
   });
 
-  app.delete('/unregister', async function(req, res, next) {
+  router.delete('/unregister', async function(req, res, next) {
     if (req.user) {
       let result;
       try {
@@ -118,16 +101,16 @@ module.exports = function (app, { mongo }, config) {
     }
   });
   
-  app.all('/logout', function(req, res, next) {
+  router.all('/logout', function(req, res, next) {
     req.logout();
     res.send();
   });
 
-  app.get('/status', function(req, res, next) {
+  router.get('/status', function(req, res, next) {
     res.send();
   });
 
-  app.route('/users')
+  router.route('/users')
   .get(async function(req, res, next) {
     //let users = await mongo.collection('users').find({}, { password: 0 }).toArray();
     let users = await mongo.collection('users').find({}).toArray();
@@ -135,14 +118,14 @@ module.exports = function (app, { mongo }, config) {
   });
 
   // should replace with call to next on failed auth
-  app.use(passport.authenticate('jwt', { session: false }));
+  router.use(passport.authenticate('jwt', { session: false }));
  
   // routes
-  app.get('/', function(req, res, next) {
+  router.get('/', function(req, res, next) {
     res.json({ user: req.user });
   });
  
-  app.get('/applications', async function(req, res, next) {
+  router.get('/applications', async function(req, res, next) {
     let username = req.user['username'];
     let user = await mongo.collection('users').findOne({ username });
     let applications = await getApplications(user);
@@ -150,7 +133,7 @@ module.exports = function (app, { mongo }, config) {
   });
   
   // map building / areas / layers
-  app.use([
+  router.use([
     '/buildings/:building',
     '/buildings/:building/areas',
     '/buildings/:building/layers',
@@ -167,13 +150,13 @@ module.exports = function (app, { mongo }, config) {
       next();
 
     } else {
-      let err = new Error('no building with that id found');
+      let err: any = new Error('no building with that id found');
       err.status = 404;
       next(err);
     }
   });
 
-  app.get('/buildings', async function (req, res, next) {
+  router.get('/buildings', async function (req, res, next) {
     let { lat, lon, building: nearBuildingId } = req.query;
     nearBuildingId = parseId(nearBuildingId) || nearBuildingId;
     let nearBuilding;
@@ -200,11 +183,11 @@ module.exports = function (app, { mongo }, config) {
     res.json(buildings);
   });
 
-  app.get('/buildings/:building', async function (req, res, next) {
+  router.get('/buildings/:building', async function (req, res, next) {
     res.json(req.building);
   });
 
-  app.get('/buildings/:building/areas', async function (req, res, next) {
+  router.get('/buildings/:building/areas', async function (req, res, next) {
     let { floor, layer, values } = req.query;
     let buildingId = req.building._id;
     // handle floor id, shortname
@@ -212,7 +195,7 @@ module.exports = function (app, { mongo }, config) {
       floor = await parseIdOrShortname(floor, buildingId, 'areas');
     }
     values = (values == undefined || values == 'true' || values == '1') ? true : false;
-    let q = {};
+    let q: any = {};
     if (layer) q.type = layer;
     if (floor) q.floor = floor;
 
@@ -240,18 +223,18 @@ module.exports = function (app, { mongo }, config) {
     res.json(areas);
   });
 
-  app.get('/buildings/:building/layers', async function (req, res, next) {
+  router.get('/buildings/:building/layers', async function (req, res, next) {
     let layers = await mongo.collection('areas').distinct('type', { building: req.building._id });
     res.json(layers);
   });
 
-  app.get('/buildings/:building/floors', async function (req, res, next) {
+  router.get('/buildings/:building/floors', async function (req, res, next) {
     let buildingId = req.building._id;
     let floors = (await mongo.collection('areas').find({ building: buildingId, type: 'floor' }, { shortname: 1 }).toArray()).map(a => a._id);
     res.json(floors);
   });
 
-  app.get('/buildings/:building/points', async function (req, res, next) {
+  router.get('/buildings/:building/points', async function (req, res, next) {
     let { value } = req.query;
     let q = { building: req.building._id };
     if (value) q['value'] = value;
@@ -260,7 +243,7 @@ module.exports = function (app, { mongo }, config) {
     res.json(points);
   });
 
-  app.get('/buildings/:building/areas/:id', async function (req, res, next) {
+  router.get('/buildings/:building/areas/:id', async function (req, res, next) {
     let buildingId = req.building._id;
     let { id } = req.params;
     let _id = await parseIdOrShortname(id, buildingId, 'areas');
@@ -272,7 +255,7 @@ module.exports = function (app, { mongo }, config) {
 
   });
 
-  app.get('/buildings/:building/points/:id', async function (req, res, next) {
+  router.get('/buildings/:building/points/:id', async function (req, res, next) {
     let buildingId = req.building._id;
     let { id } = req.params;
     let _id  = await parseIdOrShortname(id, buildingId, 'points');
@@ -291,11 +274,11 @@ module.exports = function (app, { mongo }, config) {
     res.json(point);
   });
   
-  app.get('/points', async function (req, res, next) {
+  router.get('/points', async function (req, res, next) {
     let { measurement } = req.query;
-    let q = {};
+    let q: any = {};
 
-    let pipeline = [
+    let pipeline: any[] = [
       { $sort: { time: 1 }},
       { $group: { _id: '$point', value: { $last: '$$ROOT' }}},
       { $project: { 'value._id': 1, 'value.time': 1, 'value.value': 1 }},
@@ -316,7 +299,7 @@ module.exports = function (app, { mongo }, config) {
     res.json(points);
   });
   
-  app.get('/points/:id', async function (req, res, next) {
+  router.get('/points/:id', async function (req, res, next) {
     let { id } = req.params;
     let _id = parseId(id)
     if (_id == null) throw new Error('invalid id');
@@ -335,13 +318,13 @@ module.exports = function (app, { mongo }, config) {
   });
   
   // catch-all error handler
-  app.use(function(err, req, res, next) {
+  router.use(function(err, req, res, next) {
     //res.status(400)
     res.status(err.status || 500).json({ message: err.message, stack: err.stack });
   });
 
   async function addBuildingData(buildings) {
-    let pipeline = [
+    let pipeline: any[] = [
       // get last value for each point
       { $sort: { time: -1 }},
       { $group: { _id: '$point', value: { $first: '$$ROOT' }}},
@@ -426,8 +409,7 @@ module.exports = function (app, { mongo }, config) {
     return ((await mongo.collection(collection).findOne({ building: buildingId, shortname: string })) || {})._id;
   }
 
-  // for chaining
-  return app;
+  return router;
 }
 
 function parseId(string) {
@@ -484,7 +466,8 @@ const pointValuesPipeline = [
   { $replaceRoot: { newRoot: '$point' }}
 ];
 
-const areaValuesPipeline = pointValuesPipeline.concat([
+const areaValuesPipeline = [
+  ...pointValuesPipeline,
   { $addFields: { parent: '$room' }},
   // find ancestors of each point
   { $graphLookup: {
@@ -513,4 +496,4 @@ const areaValuesPipeline = pointValuesPipeline.concat([
   // cleanup
   { $addFields: {'hierarchy.values': '$lasts' }},
   { $replaceRoot: { newRoot: '$hierarchy' }}
-]);
+];

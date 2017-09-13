@@ -5,7 +5,7 @@
   },
   "apps": [
     {
-      "root": "src",
+      "root": "client",
       "outDir": "dist",
       "assets": [
         "assets",
@@ -19,10 +19,10 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css",
-        "dropdown.less",
-        "tree.less",
-        "../node_modules/font-awesome/css/font-awesome.min.css"
+        "styles.scss",
+        "dropdown.scss",
+        "tree.scss",
+        "../node_modules/font-awesome/scss/font-awesome.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
@@ -39,10 +39,10 @@
   },
   "lint": [
     {
-      "project": "src/tsconfig.app.json"
+      "project": "client/tsconfig.app.json"
     },
     {
-      "project": "src/tsconfig.spec.json"
+      "project": "client/tsconfig.spec.json"
     },
     {
       "project": "e2e/tsconfig.e2e.json"
@@ -50,11 +50,11 @@
   ],
   "test": {
     "karma": {
-      "config": "./karma.conf.js"
+      "config": "./karma.client.conf.js"
     }
   },
   "defaults": {
-    "styleExt": "less",
+    "styleExt": "sass",
     "component": {}
   }
 }
