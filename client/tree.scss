@@ -1,24 +1,24 @@
-@hover-color: rgba(0, 0, 0, 0.10);
-@active-color: rgba(0, 0, 0, 0.05);
-@border-color: #bdbdbd;
-@element-height: 40px;
+$hover-color: rgba(0, 0, 0, 0.10);
+$active-color: rgba(0, 0, 0, 0.05);
+$border-color: #bdbdbd;
+$element-height: 40px;
 
 .tree {
   display: flex;
   flex-direction: column;
   // style tree roots, items
   & > .tree > div, & > span, & > a {
-    height: @element-height;
+    height: $element-height;
     display: flex;
     align-items: center;
     padding: 8px;
     box-sizing: border-box;
     flex-shrink: 0;
     &:hover {
-      background-color: @hover-color;
+      background-color: $hover-color;
     }
     &.active {
-      background-color: @active-color;
+      background-color: $active-color;
       font-style: italic;
     }
   }
@@ -44,7 +44,7 @@
       // dropdown
       & > .icon {
         position: relative;
-        width: @element-height;
+        width: $element-height;
         padding: 4px;
         box-sizing: border-box;
         & > span {
@@ -53,10 +53,10 @@
           padding-bottom: 100%;
           cursor: pointer;
           text-align: center;
-          line-height: @element-height - 8px;
+          line-height: ($element-height - 8px);
           border-radius: 50%;
           &:hover {
-            background: @active-color;
+            background: $active-color;
           }
         }
       }

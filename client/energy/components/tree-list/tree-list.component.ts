@@ -1,5 +1,5 @@
 import { SimpleChanges, ElementRef, Input, Output, Component, OnChanges, EventEmitter } from '@angular/core';
-import { hierarchy, HierarchyNode } from 'd3';
+import { hierarchy, HierarchyNode } from 'd3-hierarchy';
 
 @Component({
   selector: 'app-tree-list',

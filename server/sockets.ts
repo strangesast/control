@@ -1,11 +1,11 @@
-const http = require('http'),
-      WebSocket = require('ws'),
-      { Observable, Subject, BehaviorSubject, ReplaySubject } = require('rxjs');
+import * as http from 'http';
+import { Server as WebsocketServer } from 'ws';
+import { Observable, Subject, BehaviorSubject, ReplaySubject } from 'rxjs';
 
-module.exports = function(server, { mongo, influx }) {
+export default function(server, mongo) {
 
-  var wss = new WebSocket.Server({ server });
-  var connections = Observable.fromEvent(wss, 'connection', 'data', (ws, req) => ({ ws, req }));
+  var wss = new WebsocketServer({ server });
+  var connections = Observable.fromEvent(wss, 'connection', 'data' as any, (ws, req) => ({ ws, req }));
   
   connections.flatMap(({ ws, req }) => {
     let messages = Observable.fromEvent(ws, 'message')

@@ -1,8 +1,8 @@
-@hover-color: rgba(0, 0, 0, 0.10);
-@active-color: rgba(0, 0, 0, 0.05);
-@border-color: #bdbdbd;
-@background: white;
-@arrow-size: 8px;
+$hover-color: rgba(0, 0, 0, 0.10);
+$active-color: rgba(0, 0, 0, 0.05);
+$border-color: #bdbdbd;
+$background: white;
+$arrow-size: 8px;
 
 @keyframes slidein {
   from {
@@ -25,11 +25,11 @@
       border-top: 1px solid transparent;
     }
     &:hover {
-      background-color: @hover-color;
+      background-color: $hover-color;
     }
     &:focus {
       outline: none;
-      //background-color: @active-color;
+      //background-color: $active-color;
     }
   }
   &:not(.nofocus) > span:focus + div, &.hover:hover > div, &.stay > div:hover, & > div:active {
@@ -37,26 +37,26 @@
   }
   & > span.fa {
     & + div:after {
-      right: 20.563px - @arrow-size;
+      right: 20.563px - $arrow-size;
     }
     & + div:before {
-      right: 20.563px - (@arrow-size + sqrt(2));
+      right: 20.563px - ($arrow-size + sqrt(2));
     }
   }
 
   & > span.fa-lg {
     & + div:after {
-      right: 23.711px - @arrow-size;
+      right: 23.711px - $arrow-size;
     }
     & + div:before {
-      right: 23.711px - (@arrow-size + sqrt(2));
+      right: 23.711px - ($arrow-size + sqrt(2));
     }
   }
 
   & > div {
     animation-name: slidein;
     animation-duration: 0.2s;
-    border: 1px solid @border-color;
+    border: 1px solid $border-color;
     z-index: 10;
     &::after, &::before {
       content: '';
@@ -66,24 +66,24 @@
     }
 
     &:after {
-      top:-@arrow-size;
-      border-left: @arrow-size solid transparent;
-      border-right: @arrow-size solid transparent;
-      border-bottom: @arrow-size solid @background;
+      top: -$arrow-size;
+      border-left: $arrow-size solid transparent;
+      border-right: $arrow-size solid transparent;
+      border-bottom: $arrow-size solid $background;
     }
 
     &:before {
-      top:-(@arrow-size + sqrt(2));
-      border-left: (@arrow-size + sqrt(2)) solid transparent;
-      border-right: (@arrow-size + sqrt(2)) solid transparent;
-      border-bottom: (@arrow-size + sqrt(2)) solid @border-color;
+      top:-($arrow-size + sqrt(2));
+      border-left: ($arrow-size + sqrt(2)) solid transparent;
+      border-right: ($arrow-size + sqrt(2)) solid transparent;
+      border-bottom: ($arrow-size + sqrt(2)) solid $border-color;
     }
 
     position: absolute;
     display: none;
-    top: ~"calc(100% + " (@arrow-size/2) ~")";
+    top: calc(100% + #{ $arrow-size / 2 });
     right: 0;
-    background-color: @background;
+    background-color: $background;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     border-radius: 2px;
     flex-direction: column;
@@ -103,7 +103,7 @@
 
       cursor: pointer;
       &:hover {
-        background-color: @hover-color;
+        background-color: $hover-color;
       }
 
       &.inactive {

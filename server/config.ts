@@ -3,7 +3,8 @@ const testing = {
   host: 'localhost',
   databaseName: 'testing',
 };
-module.exports = {
+
+const config = {
   production: {
     secret: 'toastToastTOAST',
     host: 'localhost',
@@ -16,4 +17,6 @@ module.exports = {
     host: 'localhost',
     databaseName: 'topview',
   }
-}
+};
+
+export default config;

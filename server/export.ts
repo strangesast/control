@@ -1,6 +1,6 @@
-const db = require('./db'),
-      path = require('path'),
-      fs = require('fs');
+import { connection } from './db';
+import * as path from 'path';
+import * as fs from 'fs';
 
 if (require.main === module) {
   (async function main() {

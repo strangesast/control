@@ -1,6 +1,14 @@
 import { MongoClient } from 'mongodb';
 
-export default function(cb: Function, config) {
+var _db = null;
+
+export default async function(config) {
   let { host, databaseName } = config;
-  MongoClient.connect(`mongodb://${ host }:27017/${ databaseName }`, cb);
+  let cs = `mongodb://${ host }:27017/${ databaseName }`
+  console.log('cs', cs);
+  return _db = await MongoClient.connect(cs);
 };
+
+export function connection() {
+  return _db;
+}

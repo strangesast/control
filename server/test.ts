@@ -1,3 +1,4 @@
+/*
 describe('users', () => {
   const defaultParams = { credentials: 'same-origin', headers: new Headers({ 'Content-Type': 'application/json' }) };
   const userParams = { username: 'toast', password: 'toasttoasttoasdt' };
@@ -125,3 +126,4 @@ function test(run) {
     );
   };
 }
+?*/

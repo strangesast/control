@@ -2,23 +2,23 @@ import { createServer } from 'http';
 import * as path from 'path';
 
 import app from './app';
-import setupRoutes from './routes';
-import connectDatabase from './db';
+import routes from './routes';
+import connect from './db';
 import sockets from './sockets';
-import simulation from './simulation';
+//import simulation from './simulation';
 
-const env = app.get('env') || 'development',
-      config = require('./config')[env];
+import config from './config';
+const env = app.get('env') || 'development';
 
 const server = createServer(app)
 
 const port = 3000;
 
-connectDatabase(function(err, db) {
+(async function() {
 
-  let router = setupRoutes(db, config);
+  await connect(config[env]);
 
-  app.use('/api', router);
+  app.use('/api', routes);
 
   server.listen(port, function() {
     console.log(`listening on port ${ port }`);
@@ -33,7 +33,7 @@ connectDatabase(function(err, db) {
     server.close();
   });
 
-}, config);
+})();
 
 if (env !== 'production') {
   process.on('unhandledRejection', r => console.log(r));
